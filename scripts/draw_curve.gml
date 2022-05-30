@@ -1,4 +1,4 @@
-///draw_curve(x1,y1,x2,y2,direction,detail)
+///draw_curve(x1,y1,x2,y2,direction,width,detail)
 {
     var x1, y1, x2, y2, start_angle, detail, dist, dist_ang, inc, draw_x, draw_y;
     x1 = argument[0];
@@ -6,7 +6,7 @@
     x2 = argument[2];
     y2 = argument[3];
     start_angle = argument[4];
-    detail = argument[5];
+    detail = argument[6];
  
     dist = point_distance(x1,y1,x2,y2);
     dist_ang = angle_difference(point_direction(x1,y1,x2,y2),start_angle);
@@ -25,7 +25,7 @@
     for (i=0; i<1+inc; i+=inc) {
         drawx = x1 + (lengthdir_x(i * dist, i * dist_ang + start_angle));
         drawy = y1 + (lengthdir_y(i * dist, i * dist_ang + start_angle));
-        draw_line_width(startx,starty,drawx,drawy,5);
+        draw_line_width(startx,starty,drawx,drawy,argument[5]);
         var startx=drawx
         var starty=drawy
     }

@@ -121,6 +121,39 @@ image_speed=0
         </arguments>
       </action>
     </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//draw curve line when selected
+if IsSelected{
+draw_set_colour(c_blue)
+var _x=view_wview[0]/view_wport[0]*(x-view_xview[0])
+var _y=view_hview[0]/view_hport[0]*(y-view_yview[0])
+var _x2=view_wview[0]/view_wport[0]*(mouse_x-view_xview[0])
+var _y2=view_hview[0]/view_hport[0]*(mouse_y-view_yview[0])
+draw_curve(_x,_y,_x2,_y2,90,5,10)
+draw_set_colour(c_white)
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -154,7 +187,7 @@ if CardID=0{exit;}
 draw_self()
 var _x=x-sprite_get_width(sprite_index)*image_xscale/2
 var _y=y-sprite_get_height(sprite_index)*image_yscale/2
-quad(sprite_get_texture(spr_cardholder,0),
+draw_quad_vector(sprite_get_texture(spr_cardholder,0),
     _x-25,_y,
     _x,_y-25,
     _x,_y+25,
@@ -164,7 +197,7 @@ draw_text(_x,_y,Stats[? "Hp"])
 
 var _x=x-sprite_get_width(sprite_index)*image_xscale/4
 var _y=y-sprite_get_height(sprite_index)*image_yscale/2
-quad(sprite_get_texture(spr_cardholder,0),
+draw_quad_vector(sprite_get_texture(spr_cardholder,0),
     _x-25,_y,
     _x,_y-25,
     _x,_y+25,
@@ -172,12 +205,12 @@ quad(sprite_get_texture(spr_cardholder,0),
     )
 draw_text(_x,_y,Stats[? "Atk"])
 
-
-if IsSelected{
+/*if IsSelected{
 draw_set_colour(c_blue)
-draw_curve(x,y,mouse_x,mouse_y,90,10)
+draw_curve(x,y,mouse_x,mouse_y,90,5,10)
 draw_set_colour(c_white)
-}
+}*/
+
 </string>
           </argument>
         </arguments>

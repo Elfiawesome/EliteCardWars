@@ -196,7 +196,7 @@
       <script>scripts\update_Turnstage.gml</script>
     </scripts>
     <script>scripts\inherit_svrclt_create.gml</script>
-    <script>scripts\quad.gml</script>
+    <script>scripts\draw_quad_vector.gml</script>
     <script>scripts\scr_ConBattlefieldSize.gml</script>
     <script>scripts\scr_ValidAttackSpot.gml</script>
     <script>scripts\draw_curve.gml</script>
