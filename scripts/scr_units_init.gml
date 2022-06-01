@@ -11,6 +11,13 @@ enum UnitID{
     FanFron_FantasticDragon,
     UnitID_MAX,
 }
+enum UnitAttackType{
+    CrossAtk,
+    SpreadAtk,
+    Sweep_Atk,
+    Pierce_Atk,
+    Sp_Atk,
+}
 
 
 global.UnitDataMap=ds_map_create()

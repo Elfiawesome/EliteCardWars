@@ -171,8 +171,7 @@ draw_set_colour(c_white)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-//draw_text(x,y,"HP: "+string(Stats[? "Hp"])+"/"+string(Stats[? "Base_Hp"]))
+            <string>//draw_text(x,y,"HP: "+string(Stats[? "Hp"])+"/"+string(Stats[? "Base_Hp"]))
 //draw_text(x,y+30,"ATK: "+string(Stats[? "Atk"])+"/"+string(Stats[? "Base_Atk"]))
 if CardID=0{
     if global.SelectedCard!=noone{
