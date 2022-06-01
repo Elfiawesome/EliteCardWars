@@ -116,6 +116,21 @@ image_speed=0
         image_index=0
     }
 }
+
+//animating example
+if keyboard_check_pressed(ord("T")){
+    var animator=instance_create(0,0,obj_animator)
+    with(animator){
+        AnimatingOrderList[| 0]=ani_move_lerp
+        
+        var tempMap=ds_map_create();
+        tempMap[? "Object"]=other.id
+        tempMap[? "x"]=0
+        tempMap[? "y"]=0
+        tempMap[? "Amt"]=0.7
+        AnimatingOrderListMap[| 0]=json_encode_destroy(tempMap)
+    }
+}
 </string>
           </argument>
         </arguments>

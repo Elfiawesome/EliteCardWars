@@ -30,13 +30,13 @@ scr_units_init_func(Cur,"Goblin",10,6,3,spr_cards,Cur-1)
 var Cur=UnitID.D2_Harpy
 scr_units_init_func(Cur,"Harpy",3,1,1,spr_cards,Cur-1)
 var Cur=UnitID.D2_Hobgoblin
-scr_units_init_func(Cur,"Hobgoblin",8,15,12,spr_cards,Cur-1)
+scr_units_init_func(Cur,"Hobgoblin",8,15,12,spr_cards,Cur-1);global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
 var Cur=UnitID.D2_Psion
-scr_units_init_func(Cur,"Psion",5,15,12,spr_cards,Cur-1)
+scr_units_init_func(Cur,"Psion",5,15,12,spr_cards,Cur-1);global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
 var Cur=UnitID.D2_Servitor
 scr_units_init_func(Cur,"Servitor",14,10,18,spr_cards,Cur-1)
 var Cur=UnitID.D2_Wyvern
-scr_units_init_func(Cur,"Wyvern",25,15,14,spr_cards,Cur-1)
+scr_units_init_func(Cur,"Wyvern",25,15,14,spr_cards,Cur-1);global.UnitDat_AttackType[Cur,UnitAttackType.Sweep_Atk]=true
 
 var Cur=UnitID.FanFron_AppleBat
 scr_units_init_func(Cur,"Apple Bat",5,1,1,spr_cards,Cur-1)

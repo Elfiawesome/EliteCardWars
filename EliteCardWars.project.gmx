@@ -195,6 +195,9 @@
       <script>scripts\create_AllCardHolders.gml</script>
       <script>scripts\update_Turnstage.gml</script>
     </scripts>
+    <scripts name="grp_AnimatorSys">
+      <script>scripts\ani_move_lerp.gml</script>
+    </scripts>
     <script>scripts\inherit_svrclt_create.gml</script>
     <script>scripts\draw_quad_vector.gml</script>
     <script>scripts\scr_ConBattlefieldSize.gml</script>
@@ -207,6 +210,8 @@
       <object>objects\obj_server</object>
       <object>objects\obj_client</object>
       <object>objects\obj_player_con</object>
+      <object>objects\obj_animator_sys</object>
+      <object>objects\obj_animator</object>
     </objects>
     <objects name="grp_game">
       <object>objects\obj_card</object>
