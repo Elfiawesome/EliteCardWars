@@ -140,12 +140,25 @@ image_speed=0
             <kind>1</kind>
             <string>//draw curve line when selected
 if IsSelected{
-draw_set_colour(c_blue)
-var _x=view_wview[0]/view_wport[0]*(x-view_xview[0])
-var _y=view_hview[0]/view_hport[0]*(y-view_yview[0])
-var _x2=view_wview[0]/view_wport[0]*(mouse_x-view_xview[0])
-var _y2=view_hview[0]/view_hport[0]*(mouse_y-view_yview[0])
-draw_curve(_x,_y,_x2,_y2,90,5,10)
+draw_set_colour(c_maroon)
+var pointx=mouse_x
+var pointy=mouse_y
+if position_meeting(mouse_x,mouse_y,obj_cardholder){
+var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
+if _cardholder.CardID!=0 &amp;&amp; _cardholder.mysocket!=mysocket &amp;&amp; global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket].Team!=global.NetworkObj.socket_to_instanceid[? mysocket].Team{
+draw_set_colour(c_lime)
+var pointx=_cardholder.x
+var pointy=_cardholder.y
+}
+}
+
+var xscale=view_wview[0]/view_wport[0]
+var yscale=view_hview[0]/view_hport[0]
+var _x=xscale*(x-view_xview[0])
+var _y=yscale*(y-view_yview[0])
+var _x2=xscale*(pointx-view_xview[0])
+var _y2=yscale*(pointy-view_yview[0])
+draw_curve(_x,_y,_x2,_y2,100,5,10)
 draw_set_colour(c_white)
 }
 
