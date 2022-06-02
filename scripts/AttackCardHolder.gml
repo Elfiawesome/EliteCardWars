@@ -16,7 +16,8 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
     with(VictimObj){
         Stats[? "Hp"]-=AttackObj.Stats[? "Atk"]
     }
-    
+    //animation
+    ani_AttackSet_basic(AttackObj,VictimObj)
     
     //remove atkalrdy
     AttackObj.Stats[? "AtkAlrdy"]=true

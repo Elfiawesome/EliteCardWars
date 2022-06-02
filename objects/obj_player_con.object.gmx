@@ -364,14 +364,12 @@ if global.IsGame{
                     var AttackingList=ds_list_create()
                     for(var i=0;i&lt;ds_list_size(global.NetworkObj.SelectedCardHolders);i++){
                         var _o=global.NetworkObj.SelectedCardHolders[| i];
-                        if !scr_ValidAttackSpot(_o,_cardholder){break;}
+                        if !scr_ValidAttackSpot(_o,_cardholder){continue;}
                         var _map=ds_map_create();
                         _map[? "Id"]=_o.CardID
                         _map[? "Pos"]=_o.Pos
                         _map[? "Socket"]=_o.mysocket
                         AttackingList[| i]=json_encode_destroy(_map)
-                        //setup its animation
-                        ani_AttackSet_basic(global.NetworkObj.SelectedCardHolders[| i],_cardholder)
                     }
                     var AttackingListString=ds_list_write(AttackingList);
                     ds_list_destroy(AttackingList)

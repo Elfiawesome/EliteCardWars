@@ -33,6 +33,9 @@ CardID=0
 IsEnemy=false
 Pos=0
 IsSelected=false
+ShakeAmt=0
+Shakex=x
+Shakey=y
 Stats=ds_map_create()
 Stats[? "Base_Hp"]=0
 Stats[? "Hp"]=0
@@ -98,7 +101,8 @@ image_speed=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if CardID!=0{
+            <string>//Change of sprites
+if CardID!=0{
     sprite_index=global.UnitDat_Sprite[CardID]
     image_index=global.UnitDat_Image[CardID]
     if IsSelected{
@@ -116,9 +120,19 @@ image_speed=0
         image_index=0
     }
 }
-
-//animating example
-if keyboard_check_pressed(ord("T")){
+//shake
+if ShakeAmt&gt;0{
+    x=Shakex+random_range(-ShakeAmt,ShakeAmt)
+    y=Shakey+random_range(-ShakeAmt,ShakeAmt)
+    ShakeAmt-=0.5
+    if ShakeAmt&lt;=0{
+        ShakeAmt=0;
+        x=Shakex
+        y=Shakey
+    }
+}else{
+    Shakex=x
+    Shakey=y
 }
 </string>
           </argument>

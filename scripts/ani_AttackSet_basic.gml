@@ -18,6 +18,12 @@ with(animator){
     tempMap[? "Amt"]=0.3
     AnimatingOrderListMap[| n]=json_encode_destroy(tempMap);n++
     
+    AnimatingOrderList[| n]=ani_shake
+    var tempMap=ds_map_create();
+    tempMap[? "Object"]=Victim.id
+    tempMap[? "Amt"]=10
+    AnimatingOrderListMap[| n]=json_encode_destroy(tempMap);n++
+    
     AnimatingOrderList[| n]=ani_rotate_lerp
     var tempMap=ds_map_create();
     tempMap[? "Object"]=Attacker.id
