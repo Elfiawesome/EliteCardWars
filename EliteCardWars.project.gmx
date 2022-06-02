@@ -197,6 +197,12 @@
     </scripts>
     <scripts name="grp_AnimatorSys">
       <script>scripts\ani_move_lerp.gml</script>
+      <script>scripts\ani_rotate_lerp.gml</script>
+      <script>scripts\ani_depth.gml</script>
+      <script>scripts\ani_shake.gml</script>
+      <scripts name="animation sets">
+        <script>scripts\ani_AttackSet_basic.gml</script>
+      </scripts>
     </scripts>
     <script>scripts\inherit_svrclt_create.gml</script>
     <script>scripts\draw_quad_vector.gml</script>

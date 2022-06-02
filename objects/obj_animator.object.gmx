@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>AnimatingOrderList=ds_list_create()
 AnimatingOrderListMap=ds_list_create()
+Animating=false
+FinishedAnimating=false
 </string>
           </argument>
         </arguments>
@@ -73,15 +75,16 @@ ds_list_destroy(AnimatingOrderListMap)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if !ds_list_empty(AnimatingOrderList){
+            <string>if Animating=false{exit};
+if !ds_list_empty(AnimatingOrderList){
 var ani=script_execute(AnimatingOrderList[| 0],AnimatingOrderListMap[| 0])
 if ani=true{
     ds_list_delete(AnimatingOrderList,0)
     ds_list_delete(AnimatingOrderListMap,0)
 }
 }else{
-    //kys :&gt;
-    instance_destroy()
+    //kys :&gt; or let the controller kill me
+    FinishedAnimating=true
 }
 </string>
           </argument>

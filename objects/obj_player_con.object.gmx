@@ -370,6 +370,8 @@ if global.IsGame{
                         _map[? "Pos"]=_o.Pos
                         _map[? "Socket"]=_o.mysocket
                         AttackingList[| i]=json_encode_destroy(_map)
+                        //setup its animation
+                        ani_AttackSet_basic(global.NetworkObj.SelectedCardHolders[| i],_cardholder)
                     }
                     var AttackingListString=ds_list_write(AttackingList);
                     ds_list_destroy(AttackingList)

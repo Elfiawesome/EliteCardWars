@@ -75,6 +75,10 @@
             <string>if !ds_list_empty(AnimatingOrderList){
 with(AnimatingOrderList[| 0]){
     Animating=true
+    if FinishedAnimating{
+        instance_destroy()
+        ds_list_delete(other.AnimatingOrderList,0)
+    }
 }
 }
 </string>

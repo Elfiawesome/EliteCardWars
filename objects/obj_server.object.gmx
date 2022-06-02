@@ -185,6 +185,7 @@ switch(type){
             <kind>1</kind>
             <string>///Debugging
 draw_text(0,0,mysocket)
+draw_text(100,100,"Animator Count: "+string(instance_number(obj_animator)))
 for(var i=0;i&lt;ds_list_size(socketlist);i++){
     draw_text(20,20+(i*20),string(socketlist[| i])+": "+string(socket_to_instanceid[? socketlist[| i]].name))
     draw_text(200,20+(i*20),"Ping: "+string(socket_to_instanceid[? socketlist[| i]].Ping))
