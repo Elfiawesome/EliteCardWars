@@ -189,8 +189,25 @@ if global.SelectedCard=noone{
     global.ShowHands=false
 }
 
-view_xview[0]+=(keyboard_check(ord("D"))-keyboard_check(ord("A")))*10
-view_yview[0]+=(keyboard_check(ord("S"))-keyboard_check(ord("W")))*10
+//old code:
+//view_xview[0]+=(keyboard_check(ord("D"))-keyboard_check(ord("A")))*10
+//view_yview[0]+=(keyboard_check(ord("S"))-keyboard_check(ord("W")))*10
+//camera movement
+if global.NetworkObj.Turn=-1{//during attacking turn
+    var amt=10
+    if abs(view_xview[0]-mouse_x)&lt;100{view_xview[0]-=amt}
+    if abs((view_xview[0]+view_wview[0])-mouse_x)&lt;100{view_xview[0]+=amt}
+    if abs(view_yview[0]-mouse_y)&lt;100{view_yview[0]-=amt}
+    if abs((view_yview[0]+view_hview[0])-mouse_y)&lt;200{view_yview[0]+=amt}
+}
+if global.NetworkObj.Turn!=-1{//during player's turn
+    var amt=50
+    if abs(view_xview[0]-mouse_x)&lt;100{view_xview[0]-=amt}
+    if abs((view_xview[0]+view_wview[0])-mouse_x)&lt;100{view_xview[0]+=amt}
+    if abs(view_yview[0]-mouse_y)&lt;100{view_yview[0]-=amt}
+    if abs((view_yview[0]+view_hview[0])-mouse_y)&lt;200{view_yview[0]+=amt}
+}
+
 }
 </string>
           </argument>
