@@ -255,19 +255,7 @@ if keyboard_check_pressed(ord("Q")){
     }
 }
 }
-/*if keyboard_check_pressed(vk_enter){
-    //only if client
-    if global.NetworkObj.object_index=obj_client{
-        with(global.NetworkObj){
-            //send server an example packet
-            buffer=buffer_create(1024,buffer_fixed,1)
-            buffer_write(buffer,buffer_s16,NETWORKPKT.EXAMPLEPACKET)
-            buffer_write(buffer,buffer_string,"S")
-            network_send_packet(client,buffer,buffer_tell(buffer))
-            buffer_delete(buffer)
-        }
-    }
-}
+
 
 
 </string>
@@ -338,9 +326,10 @@ if global.IsGame{
             <kind>1</kind>
             <string>///When Attacking Phase
 if global.IsGame{
-    if IsLocal &amp;&amp; global.NetworkObj.Turn=-1{
+    //if IsLocal &amp;&amp; global.NetworkObj.Turn=-1{
+    if IsLocal &amp;&amp; global.GameStage=GAMESTAGE.ATTACKINGTURN{
         //readying myself
-        if keyboard_check_pressed(vk_space){
+        /*if keyboard_check_pressed(vk_space){
             with(global.NetworkObj){
             if ds_list_find_index(ReadySocket,mysocket)=-1{
                 if global.NetworkObj.object_index=obj_server{
@@ -354,7 +343,7 @@ if global.IsGame{
                 }
             }
             }
-        }
+        }*/
         //selecting cardholders
         if mouse_check_button_pressed(mb_left){
             if position_meeting(mouse_x,mouse_y,obj_cardholder){
