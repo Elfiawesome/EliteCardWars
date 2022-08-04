@@ -49,7 +49,8 @@ Stats[? "SpreadAtk"]=false
 Stats[? "Sweep_Atk"]=false
 Stats[? "Pierce_Atk"]=false
 Stats[? "Sp_Atk"]=false
-
+//Hidden stats
+Stats[? "IsAbilityStun"]=false
 
 //appearance
 image_xscale=0.2

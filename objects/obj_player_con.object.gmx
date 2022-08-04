@@ -190,13 +190,7 @@ if global.SelectedCard=noone{
 }
 
 //camera movement
-if global.NetworkObj.Turn=-1{//during attacking turn
-    var amt=10
-    if abs(view_xview[0]-mouse_x)&lt;100{view_xview[0]-=amt}
-    if abs((view_xview[0]+view_wview[0])-mouse_x)&lt;100{view_xview[0]+=amt}
-    if abs(view_yview[0]-mouse_y)&lt;100{view_yview[0]-=amt}
-    if abs((view_yview[0]+view_hview[0])-mouse_y)&lt;200{view_yview[0]+=amt}
-}
+
 if global.NetworkObj.Turn!=-1{//during player's turn
     var amt=50
     if abs(view_xview[0]-mouse_x)&lt;100{view_xview[0]-=amt}
@@ -277,7 +271,7 @@ if keyboard_check_pressed(ord("Q")){
             <kind>1</kind>
             <string>///When Your Turn
 if global.IsGame{
-    if IsLocal &amp;&amp; global.NetworkObj.Turn&gt;=0{
+    if IsLocal{// &amp;&amp; global.NetworkObj.Turn&gt;=0{
         with(global.NetworkObj){
             //camera follow person's battlefield
             var _con=socket_to_instanceid[? Turnstage[Turn]];

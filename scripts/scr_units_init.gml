@@ -9,6 +9,7 @@ enum UnitID{
     
     FanFron_AppleBat,
     FanFron_FantasticDragon,
+    FanFron_ForestWalker,
     UnitID_MAX,
 }
 enum UnitAttackType{
@@ -17,6 +18,17 @@ enum UnitAttackType{
     Sweep_Atk,
     Pierce_Atk,
     Sp_Atk,
+}
+enum AbilityTrigger{
+    Default,//default not used
+    Passive,//not sure what this supposed to do
+    Activate,
+    ActivateTarget,
+    Intrinsic,//activated when summoned and updated on every start of the round
+    Deathwish,//activated when dead
+    Warcry,//activated when Summoned [Not yet implemented]
+    Kill,//activated Each kill [Not yet implemented]
+    
 }
 
 
@@ -42,4 +54,8 @@ var Cur=UnitID.FanFron_AppleBat
 scr_units_init_func(Cur,"Apple Bat",5,1,1,spr_cards,Cur-1)
 var Cur=UnitID.FanFron_FantasticDragon
 scr_units_init_func(Cur,"Apple Bat",5,1,1,spr_cards,Cur-1)
+var Cur=UnitID.FanFron_ForestWalker
+scr_units_init_func(Cur,"Apple Bat",15,5,8,spr_cards,Cur-1)
+
+
 

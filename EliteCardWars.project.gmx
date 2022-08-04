@@ -189,6 +189,9 @@
     <scripts name="grp_inits">
       <script>scripts\scr_units_init.gml</script>
       <script>scripts\scr_units_init_func.gml</script>
+      <scripts name="grp_ability_scr">
+        <script>scripts\scr_ability_none.gml</script>
+      </scripts>
     </scripts>
     <scripts name="grp_setup_battlefield">
       <script>scripts\update_json_TeamMap.gml</script>

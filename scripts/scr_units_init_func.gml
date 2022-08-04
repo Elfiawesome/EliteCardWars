@@ -13,3 +13,6 @@ global.UnitDat_AttackType[argument0,UnitAttackType.Sweep_Atk]=false
 global.UnitDat_AttackType[argument0,UnitAttackType.Pierce_Atk]=false
 global.UnitDat_AttackType[argument0,UnitAttackType.Sp_Atk]=false
 
+//ability
+global.UnitDat_AbilityTrigger[argument0]=AbilityTrigger.Default
+global.UnitDat_AbilityScript[argument0]=scr_ability_none
