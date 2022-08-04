@@ -4,7 +4,6 @@ if Turn>=0{
         Turn++
         //global.GameStage=GAMESTAGE.PLAYERTURNS
     }else{
-        //Turn=-1
         //global.GameStage=GAMESTAGE.ATTACKINGTURN
     switch(global.GameStage){
         case GAMESTAGE.PLAYERTURNS:
@@ -20,9 +19,4 @@ if Turn>=0{
     }
     
 }
-/*else{
-    EndOfAttackingTurnChecks()
-    global.GameStage=GAMESTAGE.PLAYERTURNS
-    ds_list_clear(ReadySocket)
-    Turn=0
-}
+

@@ -189,9 +189,6 @@ if global.SelectedCard=noone{
     global.ShowHands=false
 }
 
-//old code:
-//view_xview[0]+=(keyboard_check(ord("D"))-keyboard_check(ord("A")))*10
-//view_yview[0]+=(keyboard_check(ord("S"))-keyboard_check(ord("W")))*10
 //camera movement
 if global.NetworkObj.Turn=-1{//during attacking turn
     var amt=10
@@ -328,22 +325,6 @@ if global.IsGame{
 if global.IsGame{
     //if IsLocal &amp;&amp; global.NetworkObj.Turn=-1{
     if IsLocal &amp;&amp; global.GameStage=GAMESTAGE.ATTACKINGTURN{
-        //readying myself
-        /*if keyboard_check_pressed(vk_space){
-            with(global.NetworkObj){
-            if ds_list_find_index(ReadySocket,mysocket)=-1{
-                if global.NetworkObj.object_index=obj_server{
-                    svr_AttackingPhaseIsReady(mysocket)
-                }
-                if global.NetworkObj.object_index=obj_client{
-                    buffer=buffer_create(1024,buffer_fixed,1)
-                    buffer_write(buffer,buffer_s16,NETWORKPKT.ATTACKINGPHASEISREADY)
-                    network_send_packet(client,buffer,buffer_tell(buffer))
-                    buffer_delete(buffer)
-                }
-            }
-            }
-        }*/
         //selecting cardholders
         if mouse_check_button_pressed(mb_left){
             if position_meeting(mouse_x,mouse_y,obj_cardholder){
