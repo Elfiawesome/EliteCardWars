@@ -41,6 +41,8 @@ var Cur=UnitID.D2_Goblin
 scr_units_init_func(Cur,"Goblin",10,6,3,spr_cards,Cur-1)
 var Cur=UnitID.D2_Harpy
 scr_units_init_func(Cur,"Harpy",3,1,1,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur]=scr_ability_SPImmune
 var Cur=UnitID.D2_Hobgoblin
 scr_units_init_func(Cur,"Hobgoblin",8,15,12,spr_cards,Cur-1);global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
 global.UnitDat_AbilityTrigger[Cur]=AbilityTrigger.Damaged

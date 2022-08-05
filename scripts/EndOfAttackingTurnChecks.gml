@@ -35,7 +35,9 @@ for(var i=0;i<ds_list_size(socketlist);i++){
                 //reducing stats timer
                 if Stats[? "IsFrozen"]!=0{Stats[? "IsFrozen"]-=1}
                 if Stats[? "IsImmune"]!=0{Stats[? "IsImmune"]-=1}
-                if Stats[? "AbilityCooldown"]{Stats[? "AbilityCooldown"]-=1}
+                if Stats[? "AbilityCooldown"]!=0{Stats[? "AbilityCooldown"]-=1}
+                if Stats[? "IsSPImmune"]!=0{Stats[? "IsSPImmune"]-=1}
+                if Stats[? "IsBAImmune"]!=0{Stats[? "IsBAImmune"]-=1}
             }
         }
     }

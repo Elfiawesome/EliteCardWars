@@ -10,4 +10,11 @@ with(argument0){
     Stats[? "SpreadAtk"]=global.UnitDat_AttackType[CardID,UnitAttackType.SpreadAtk]
     Stats[? "Sweep_Atk"]=global.UnitDat_AttackType[CardID,UnitAttackType.Sweep_Atk]
     Stats[? "Pierce_Atk"]=global.UnitDat_AttackType[CardID,UnitAttackType.Pierce_Atk]
+    
+    //Activate Intrinsic Ability
+    if Stats[? "IsAbilityStun"]=false{
+        if global.UnitDat_AbilityTrigger[CardID]=AbilityTrigger.Intrinsic{
+            script_execute(global.UnitDat_AbilityScript[CardID],"")
+        }
+    }
 }

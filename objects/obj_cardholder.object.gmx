@@ -53,6 +53,8 @@ Stats[? "Sp_Atk"]=false
 //Character states
 Stats[? "IsFrozen"]=0
 Stats[? "IsImmune"]=0
+Stats[? "IsSPImmune"]=0
+Stats[? "IsBAImmune"]=0
 
 //Hidden stats
 Stats[? "IsAbilityStun"]=false
@@ -172,7 +174,11 @@ if Stats[? "IsAbilityStun"]=false{
         script_execute(global.UnitDat_AbilityScript[CardID],"")
     }
 }
-
+if keyboard_check_pressed(ord("I")){
+    if position_meeting(mouse_x,mouse_y,id){
+        show_message(json_encode(Stats))
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -251,9 +257,9 @@ if CardID=0{
     }
 }
 
-
 if CardID=0{exit;}
 draw_self()
+draw_text(x,y,IsSPAtk(Stats))
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
 var _x=x-sprite_get_width(sprite_index)*image_xscale/2

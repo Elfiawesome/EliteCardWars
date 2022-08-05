@@ -208,6 +208,7 @@
       <scripts name="grp_ability_scr">
         <script>scripts\scr_ability_none.gml</script>
         <script>scripts\scr_ability_D2_Hobgoblin.gml</script>
+        <script>scripts\scr_ability_SPImmune.gml</script>
         <script>scripts\scr_ability_instakill.gml</script>
       </scripts>
       <scripts name="grp_cardholders_event">
@@ -220,6 +221,7 @@
     <script>scripts\draw_quad_vector.gml</script>
     <script>scripts\scr_ConBattlefieldSize.gml</script>
     <script>scripts\scr_ValidAttackSpot.gml</script>
+    <script>scripts\IsSPAtk.gml</script>
     <script>scripts\draw_curve.gml</script>
   </scripts>
   <fonts name="fonts">
