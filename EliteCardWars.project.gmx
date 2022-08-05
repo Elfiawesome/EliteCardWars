@@ -213,6 +213,7 @@
       <scripts name="grp_cardholders_event">
         <script>scripts\GameEvent_cardholders_Damaged.gml</script>
         <script>scripts\GameEvent_cardholders_DealDamage.gml</script>
+        <script>scripts\GameEvent_cardholders_Deeath.gml</script>
       </scripts>
     </scripts>
     <script>scripts\inherit_svrclt_create.gml</script>
