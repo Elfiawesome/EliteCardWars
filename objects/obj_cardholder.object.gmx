@@ -174,6 +174,7 @@ if Stats[? "IsAbilityStun"]=false{
         script_execute(global.UnitDat_AbilityScript[CardID],"")
     }
 }
+//debug
 if keyboard_check_pressed(ord("I")){
     if position_meeting(mouse_x,mouse_y,id){
         show_message(json_encode(Stats))
@@ -247,8 +248,7 @@ draw_set_colour(c_white)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//draw_text(x,y,"HP: "+string(Stats[? "Hp"])+"/"+string(Stats[? "Base_Hp"]))
-//draw_text(x,y+30,"ATK: "+string(Stats[? "Atk"])+"/"+string(Stats[? "Base_Atk"]))
+            <string>///draw card details
 if CardID=0{
     if global.SelectedCard!=noone{
         image_alpha=(sin(current_time/100)+1)/2

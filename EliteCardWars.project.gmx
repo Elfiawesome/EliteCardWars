@@ -205,6 +205,10 @@
       </scripts>
     </scripts>
     <scripts name="grp_game">
+      <scripts name="grp_draw_functions">
+        <script>scripts\draw_quad_vector.gml</script>
+        <script>scripts\draw_curve.gml</script>
+      </scripts>
       <scripts name="grp_ability_scr">
         <script>scripts\scr_ability_none.gml</script>
         <script>scripts\scr_ability_D2_Hobgoblin.gml</script>
@@ -218,11 +222,9 @@
       </scripts>
     </scripts>
     <script>scripts\inherit_svrclt_create.gml</script>
-    <script>scripts\draw_quad_vector.gml</script>
     <script>scripts\scr_ConBattlefieldSize.gml</script>
     <script>scripts\scr_ValidAttackSpot.gml</script>
     <script>scripts\IsSPAtk.gml</script>
-    <script>scripts\draw_curve.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_number</font>
