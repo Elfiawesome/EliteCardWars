@@ -28,6 +28,7 @@
             <string>NextRoomInit=0
 ExecuteShellOpenwindow()
 randomize()
+draw_set_font(ft_number)
 global.PlayerOnlineName=choose(
     "Hawthtrone",
     "Player 1",

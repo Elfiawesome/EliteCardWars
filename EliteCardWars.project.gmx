@@ -221,6 +221,9 @@
     <script>scripts\scr_ValidAttackSpot.gml</script>
     <script>scripts\draw_curve.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\ft_number</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_menu</object>
     <objects name="grp_network">
