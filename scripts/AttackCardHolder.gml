@@ -12,13 +12,18 @@ ds_list_read(AttackingList,AttackMap[? "AttackingList"])
 for(var i=0;i<ds_list_size(AttackingList);i++){
     var _m=json_decode(AttackingList[| i])
     var AttackObj=socket_to_instanceid[? real(_m[? "Socket"])].Cardholderlist[| real(_m[? "Pos"])];
+    //Listing out of victims
+    var _list=scr_ListVictimsByAttackersSPAtkTypes(VictimObj,AttackObj)
     //deduction of health
-    with(VictimObj){
-        //execute Dealing Damage Event
-        GameEvent_cardholders_DealDamage(id,AttackObj)
-        //execute Damaged Event
-        GameEvent_cardholders_Damaged(AttackObj)
+    for(var ii=0;ii<ds_list_size(_list);ii+=1){
+        with(_list[| ii]){
+            //execute Dealing Damage Event
+            GameEvent_cardholders_DealDamage(id,AttackObj)
+            //execute Damaged Event
+            GameEvent_cardholders_Damaged(AttackObj)
+        }
     }
+    ds_list_destroy(_list)
     //animation
     ani_AttackSet_basic(AttackObj,VictimObj)
     
