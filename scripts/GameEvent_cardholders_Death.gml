@@ -1,4 +1,4 @@
-///GameEvent_cardholders_Deeath
+///GameEvent_cardholders_Death
 CardID=0
 IsSelected=false
 Stats[? "Base_Hp"]=0

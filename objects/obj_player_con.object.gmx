@@ -271,7 +271,7 @@ if keyboard_check_pressed(ord("Q")){
             <kind>1</kind>
             <string>///When Your Turn
 if global.IsGame{
-    if IsLocal{// &amp;&amp; global.NetworkObj.Turn&gt;=0{
+    if IsLocal{
         with(global.NetworkObj){
             //camera follow person's battlefield
             var _con=socket_to_instanceid[? Turnstage[Turn]];
@@ -291,6 +291,37 @@ if global.IsGame{
                     }
                 }
             } 
+        }
+        if global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
+            if keyboard_check_pressed(ord("A")){
+                if position_meeting(mouse_x,mouse_y,obj_cardholder){
+                    var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
+                    //targetting other enemies
+                    if global.UnitDat_AbilityTrigger[_cardholder.CardID]=AbilityTrigger.ActivateTarget{
+                        if !ds_list_empty(global.NetworkObj.SelectedCardHolders_Ability){
+                            var _o=global.NetworkObj.SelectedCardHolders_Ability[| 0];
+                            var _map=ds_map_create();
+                            _map[? "Victim"]=_cardholder
+                            script_execute(global.UnitDat_AbilityScript[_o.CardID],_map)
+                        }
+                        //selecting my untis
+                        if _cardholder.CardID!=0{
+                        if _cardholder.mysocket=mysocket &amp;&amp; _cardholder.Stats[? "AbilityAlrdy"]=false{
+                            if ds_list_find_index(Cardholderlist,_cardholder)!=-1{
+                            if ds_list_find_index(global.NetworkObj.SelectedCardHolders_Ability,_cardholder)=-1{
+                                ds_list_clear(global.NetworkObj.SelectedCardHolders_Ability)
+                                ds_list_add(global.NetworkObj.SelectedCardHolders_Ability,_cardholder)
+                                _cardholder.IsSelected=true
+                            }else{
+                                ds_list_delete(global.NetworkObj.SelectedCardHolders_Ability,ds_list_find_index(global.NetworkObj.SelectedCardHolders_Ability,_cardholder))
+                                _cardholder.IsSelected=false
+                            }
+                            }
+                        }
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -317,8 +348,7 @@ if global.IsGame{
             <kind>1</kind>
             <string>///When Attacking Phase
 if global.IsGame{
-    //if IsLocal &amp;&amp; global.NetworkObj.Turn=-1{
-    if IsLocal &amp;&amp; global.GameStage=GAMESTAGE.ATTACKINGTURN{
+    if IsLocal &amp;&amp; global.GameStage=GAMESTAGE.ATTACKINGTURN &amp;&amp; global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
         //selecting cardholders
         if mouse_check_button_pressed(mb_left){
             if position_meeting(mouse_x,mouse_y,obj_cardholder){
@@ -342,6 +372,7 @@ if global.IsGame{
                     var DatMap=ds_map_create()
                     //writing All Attacking Units
                     var AttackingList=ds_list_create()
+                    var AttackingObjects=ds_list_create()
                     for(var i=0;i&lt;ds_list_size(global.NetworkObj.SelectedCardHolders);i++){
                         var _o=global.NetworkObj.SelectedCardHolders[| i];
                         if !scr_ValidAttackSpot(_o,_cardholder){continue;}
@@ -350,7 +381,9 @@ if global.IsGame{
                         _map[? "Pos"]=_o.Pos
                         _map[? "Socket"]=_o.mysocket
                         AttackingList[| i]=json_encode_destroy(_map)
+                        ds_list_add(AttackingObjects,_o)
                     }
+                    
                     var AttackingListString=ds_list_write(AttackingList);
                     ds_list_destroy(AttackingList)
                     DatMap[? "AttackingList"]=AttackingListString
@@ -379,14 +412,15 @@ if global.IsGame{
                         }
                     }
                     
+
                     //Making cardholders not selected
-                    for(var i=0;i&lt;ds_list_size(global.NetworkObj.SelectedCardHolders);i++){
-                        with(global.NetworkObj.SelectedCardHolders[| i]){
+                    for(var i=0;i&lt;ds_list_size(AttackingObjects);i++){
+                        with(AttackingObjects[| i]){
                             IsSelected=false
                         }
+                        ds_list_delete(global.NetworkObj.SelectedCardHolders,ds_list_find_index(global.NetworkObj.SelectedCardHolders,AttackingObjects[| i]))
                     }
-                    //clearing Selected cardholders list
-                    ds_list_clear(global.NetworkObj.SelectedCardHolders)
+                    ds_list_destroy(AttackingObjects)
                 }
                 }
             }

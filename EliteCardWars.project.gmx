@@ -212,13 +212,15 @@
       <scripts name="grp_ability_scr">
         <script>scripts\scr_ability_none.gml</script>
         <script>scripts\scr_ability_D2_Hobgoblin.gml</script>
+        <script>scripts\scr_ability_D2_Psion.gml</script>
         <script>scripts\scr_ability_SPImmune.gml</script>
+        <script>scripts\scr_ability_BAImmune.gml</script>
         <script>scripts\scr_ability_instakill.gml</script>
       </scripts>
       <scripts name="grp_cardholders_event">
         <script>scripts\GameEvent_cardholders_Damaged.gml</script>
         <script>scripts\GameEvent_cardholders_DealDamage.gml</script>
-        <script>scripts\GameEvent_cardholders_Deeath.gml</script>
+        <script>scripts\GameEvent_cardholders_Death.gml</script>
       </scripts>
       <script>scripts\scr_ListVictimsByAttackersSPAtkTypes.gml</script>
     </scripts>
