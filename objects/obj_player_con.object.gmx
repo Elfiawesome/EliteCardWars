@@ -323,7 +323,7 @@ if global.IsGame{
         if mouse_check_button_pressed(mb_left){
             if position_meeting(mouse_x,mouse_y,obj_cardholder){
                 var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
-                //Selecting MY a unit
+                //Selecting MY unit
                 if _cardholder.CardID!=0{
                 if _cardholder.mysocket=mysocket &amp;&amp; _cardholder.Stats[? "AtkAlrdy"]=false{
                     if ds_list_find_index(Cardholderlist,_cardholder)!=-1{
@@ -338,7 +338,6 @@ if global.IsGame{
                 }
                 //attacking Enemy unit
                 if _cardholder.mysocket!=mysocket &amp;&amp; !ds_list_empty(global.NetworkObj.SelectedCardHolders) &amp;&amp; global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket].Team!=Team{
-                    
                     //Setting all Attacking data into a json called 'DatMap'
                     var DatMap=ds_map_create()
                     //writing All Attacking Units
@@ -360,7 +359,6 @@ if global.IsGame{
                     _map[? "Id"]=_cardholder.CardID
                     _map[? "Pos"]=_cardholder.Pos
                     _map[? "Socket"]=_cardholder.mysocket
-                    //DatMap[? "Victim"]=json_encode_destroy(_map)
                     ds_map_add_map(DatMap,"Victim",_map)
                     //wrapping up the DatMapString
                     var DatMapString=json_encode_destroy(DatMap)
@@ -392,7 +390,6 @@ if global.IsGame{
                 }
                 }
             }
-            
         }
         
     }

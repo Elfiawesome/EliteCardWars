@@ -14,7 +14,10 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
     var AttackObj=socket_to_instanceid[? real(_m[? "Socket"])].Cardholderlist[| real(_m[? "Pos"])];
     //deduction of health
     with(VictimObj){
-        Stats[? "Hp"]-=AttackObj.Stats[? "Atk"]
+        //execute Dealing Damage Event
+        GameEvent_cardholders_DealDamage(id,AttackObj)
+        //execute Damaged Event
+        GameEvent_cardholders_Damaged(AttackObj)
     }
     //animation
     ani_AttackSet_basic(AttackObj,VictimObj)

@@ -28,7 +28,7 @@ enum AbilityTrigger{
     Deathwish,//activated when dead
     Warcry,//activated when Summoned [Not yet implemented]
     Kill,//activated Each kill [Not yet implemented]
-    
+    Damaged,//activated when damaged
 }
 
 

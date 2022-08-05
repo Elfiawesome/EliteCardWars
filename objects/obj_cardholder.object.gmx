@@ -49,8 +49,16 @@ Stats[? "SpreadAtk"]=false
 Stats[? "Sweep_Atk"]=false
 Stats[? "Pierce_Atk"]=false
 Stats[? "Sp_Atk"]=false
+//Character states
+Stats[? "IsFrozen"]=0
+Stats[? "IsImmune"]=0
+
 //Hidden stats
 Stats[? "IsAbilityStun"]=false
+Stats[? "AbilityLifespan"]=0
+Stats[? "AbilityContstantRun"]=false
+
+LastAttackedBy=noone
 
 //appearance
 image_xscale=0.2
@@ -102,7 +110,8 @@ image_speed=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Change of sprites
+            <string>///Visual Changes
+//Change of sprites
 if CardID!=0{
     sprite_index=global.UnitDat_Sprite[CardID]
     image_index=global.UnitDat_Image[CardID]
@@ -135,6 +144,33 @@ if ShakeAmt&gt;0{
     Shakex=x
     Shakey=y
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Abilities
+if Stats[? "IsAbilityStun"]=false{
+    if Stats[? "AbilityContstantRun"]{
+        script_execute(global.UnitDat_AbilityScript[CardID],"")
+    }
+}
+
 </string>
           </argument>
         </arguments>
@@ -216,6 +252,8 @@ if CardID=0{
 
 if CardID=0{exit;}
 draw_self()
+draw_set_halign(fa_center)
+draw_set_valign(fa_middle)
 var _x=x-sprite_get_width(sprite_index)*image_xscale/2
 var _y=y-sprite_get_height(sprite_index)*image_yscale/2
 draw_quad_vector(sprite_get_texture(spr_cardholder,0),
@@ -235,7 +273,8 @@ draw_quad_vector(sprite_get_texture(spr_cardholder,0),
     _x+25,_y,
     )
 draw_text(_x,_y,Stats[? "Atk"])
-
+draw_set_halign(fa_left)
+draw_set_valign(fa_top)
 /*if IsSelected{
 draw_set_colour(c_blue)
 draw_curve(x,y,mouse_x,mouse_y,90,5,10)

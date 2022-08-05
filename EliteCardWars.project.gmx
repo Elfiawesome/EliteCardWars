@@ -189,9 +189,6 @@
     <scripts name="grp_inits">
       <script>scripts\scr_units_init.gml</script>
       <script>scripts\scr_units_init_func.gml</script>
-      <scripts name="grp_ability_scr">
-        <script>scripts\scr_ability_none.gml</script>
-      </scripts>
     </scripts>
     <scripts name="grp_setup_battlefield">
       <script>scripts\update_json_TeamMap.gml</script>
@@ -205,6 +202,17 @@
       <script>scripts\ani_shake.gml</script>
       <scripts name="animation sets">
         <script>scripts\ani_AttackSet_basic.gml</script>
+      </scripts>
+    </scripts>
+    <scripts name="grp_game">
+      <scripts name="grp_ability_scr">
+        <script>scripts\scr_ability_none.gml</script>
+        <script>scripts\scr_ability_D2_Hobgoblin.gml</script>
+        <script>scripts\scr_ability_instakill.gml</script>
+      </scripts>
+      <scripts name="grp_cardholders_event">
+        <script>scripts\GameEvent_cardholders_Damaged.gml</script>
+        <script>scripts\GameEvent_cardholders_DealDamage.gml</script>
       </scripts>
     </scripts>
     <script>scripts\inherit_svrclt_create.gml</script>
