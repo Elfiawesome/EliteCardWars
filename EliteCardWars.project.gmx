@@ -143,6 +143,7 @@
         <script>scripts\SummonCard.gml</script>
         <script>scripts\AttackCardHolder.gml</script>
         <script>scripts\EndOfAttackingTurnChecks.gml</script>
+        <script>scripts\ActivateAbilityTarget.gml</script>
       </scripts>
       <scripts name="grp_server">
         <scripts name="grp_scripts">
@@ -151,6 +152,7 @@
           <script>scripts\svr_AttackingPhaseIsReady.gml</script>
           <script>scripts\svr_SummonCard.gml</script>
           <script>scripts\svr_AttackCardHolder.gml</script>
+          <script>scripts\svr_ActivateAbilityTarget.gml</script>
         </scripts>
         <script>scripts\scr_svr_rp.gml</script>
         <script>scripts\scr_svr_connect.gml</script>
@@ -161,6 +163,7 @@
         <script>scripts\scr_svr_ATTACKINGPHASEISREADY.gml</script>
         <script>scripts\scr_svr_SUMMONCARD.gml</script>
         <script>scripts\scr_svr_ATTACKCARDHOLDER.gml</script>
+        <script>scripts\scr_svr_ACTIVATEABILITYTARGET.gml</script>
       </scripts>
       <scripts name="grp_client">
         <script>scripts\scr_clt_rp.gml</script>
@@ -174,6 +177,7 @@
         <script>scripts\scr_clt_ATTACKINGPHASEISREADY.gml</script>
         <script>scripts\scr_clt_SUMMONCARD.gml</script>
         <script>scripts\scr_clt_ATTACKCARDHOLDER.gml</script>
+        <script>scripts\scr_clt_ACTIVATEABILITYTARGET.gml</script>
       </scripts>
       <scripts name="functions">
         <script>scripts\scr_init_player.gml</script>
@@ -221,6 +225,7 @@
         <script>scripts\GameEvent_cardholders_Damaged.gml</script>
         <script>scripts\GameEvent_cardholders_DealDamage.gml</script>
         <script>scripts\GameEvent_cardholders_Death.gml</script>
+        <script>scripts\GameEvent_cardholders_Clear.gml</script>
       </scripts>
       <script>scripts\scr_ListVictimsByAttackersSPAtkTypes.gml</script>
     </scripts>

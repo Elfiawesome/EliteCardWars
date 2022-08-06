@@ -33,6 +33,7 @@ CardID=0
 IsEnemy=false
 Pos=0
 IsSelected=false
+IsSelected_Ability=false
 ShakeAmt=0
 Shakex=x
 Shakey=y
@@ -119,7 +120,7 @@ image_speed=0
 if CardID!=0{
     sprite_index=global.UnitDat_Sprite[CardID]
     image_index=global.UnitDat_Image[CardID]
-    if IsSelected{
+    if IsSelected || IsSelected_Ability{
         image_xscale=0.2+(sin(current_time/100)/100)
         image_yscale=0.2+(sin(current_time/100)/100)
     }else{
@@ -203,19 +204,28 @@ if keyboard_check_pressed(ord("I")){
           <argument>
             <kind>1</kind>
             <string>//draw curve line when selected
-if IsSelected{
+if IsSelected || IsSelected_Ability{
 draw_set_colour(c_maroon)
 var pointx=mouse_x
 var pointy=mouse_y
 if position_meeting(mouse_x,mouse_y,obj_cardholder){
-var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
-if _cardholder.CardID!=0 &amp;&amp; _cardholder.mysocket!=mysocket &amp;&amp; global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket].Team!=global.NetworkObj.socket_to_instanceid[? mysocket].Team{
-    if scr_ValidAttackSpot(id,_cardholder){
-        draw_set_colour(c_lime)
+    //normal attacking
+    var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
+    if IsSelected{
+    if _cardholder.CardID!=0 &amp;&amp; _cardholder.mysocket!=mysocket &amp;&amp; global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket].Team!=global.NetworkObj.socket_to_instanceid[? mysocket].Team{
+        if scr_ValidAttackSpot(id,_cardholder){
+            draw_set_colour(c_lime)
+        }
+        var pointx=_cardholder.x
+        var pointy=_cardholder.y
     }
-    var pointx=_cardholder.x
-    var pointy=_cardholder.y
-}
+    }
+    //ability attacking
+    if IsSelected_Ability{
+        draw_set_colour(c_lime)
+        var pointx=_cardholder.x
+        var pointy=_cardholder.y
+    }
 }
 
 var xscale=view_wview[0]/view_wport[0]
@@ -261,7 +271,6 @@ if CardID=0{
 
 if CardID=0{exit;}
 draw_self()
-draw_text(x,y,IsSPAtk(Stats))
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
 var _x=x-sprite_get_width(sprite_index)*image_xscale/2

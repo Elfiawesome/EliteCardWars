@@ -33,5 +33,8 @@ switch(type){
     case NETWORKPKT.ATTACKCARDHOLDER:
         scr_clt_ATTACKCARDHOLDER(buffer)
     break;
+    case NETWORKPKT.ACTIVATEABILITYTARGET:
+        scr_clt_ACTIVATEABILITYTARGET(buffer)
+    break;
 }
 
