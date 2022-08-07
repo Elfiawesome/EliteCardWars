@@ -1,6 +1,7 @@
 ///ani_AttackSet_basic()
 var Attacker=argument0
-var Victim=argument1
+var VictimList=argument1
+var Victim=VictimList[| 0]
 var animator=instance_create(0,0,obj_animator)
 with(animator){
     var n=0;
@@ -18,11 +19,13 @@ with(animator){
     tempMap[? "Amt"]=0.3
     AnimatingOrderListMap[| n]=json_encode_destroy(tempMap);n++
     
+    for(var i=0;i<ds_list_size(VictimList);i++){
     AnimatingOrderList[| n]=ani_shake
     var tempMap=ds_map_create();
-    tempMap[? "Object"]=Victim.id
+    tempMap[? "Object"]=VictimList[| i].id
     tempMap[? "Amt"]=10
     AnimatingOrderListMap[| n]=json_encode_destroy(tempMap);n++
+    }
     
     AnimatingOrderList[| n]=ani_rotate_lerp
     var tempMap=ds_map_create();

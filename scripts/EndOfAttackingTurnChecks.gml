@@ -6,6 +6,8 @@ for(var i=0;i<ds_list_size(socketlist);i++){
             with(Cardholderlist[| ii]){
                 //reset atk already
                 Stats[? "AtkAlrdy"]=false
+                //reset ability already
+                Stats[? "AbilityAlrdy"]=false
                 
                 //Activate Intrinsic Ability
                 if Stats[? "IsAbilityStun"]=false{

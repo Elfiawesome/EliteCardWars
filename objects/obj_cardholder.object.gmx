@@ -63,7 +63,8 @@ Stats[? "AbilityLifespan"]=0
 Stats[? "AbilityCooldown"]=0//how many rounds till ability can be used again
 Stats[? "AbilityContstantRun"]=false
 
-LastAttackedBy=noone
+Stats[? "LastAttackedBy"]=noone
+
 
 //appearance
 image_xscale=0.2
@@ -99,6 +100,38 @@ image_speed=0
       </action>
     </event>
     <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Abilities
+if Stats[? "IsAbilityStun"]=false{
+    if Stats[? "AbilityContstantRun"]{
+        script_execute(global.UnitDat_AbilityScript[CardID],"")
+    }
+}
+//debug
+if keyboard_check_pressed(ord("I")){
+    if position_meeting(mouse_x,mouse_y,id){
+        show_message(json_encode(Stats))
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -153,38 +186,6 @@ if ShakeAmt&gt;0{
           </argument>
         </arguments>
       </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Abilities
-if Stats[? "IsAbilityStun"]=false{
-    if Stats[? "AbilityContstantRun"]{
-        script_execute(global.UnitDat_AbilityScript[CardID],"")
-    }
-}
-//debug
-if keyboard_check_pressed(ord("I")){
-    if position_meeting(mouse_x,mouse_y,id){
-        show_message(json_encode(Stats))
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -222,7 +223,7 @@ if position_meeting(mouse_x,mouse_y,obj_cardholder){
     }
     //ability attacking
     if IsSelected_Ability{
-        draw_set_colour(c_lime)
+        draw_set_colour(c_purple)
         var pointx=_cardholder.x
         var pointy=_cardholder.y
     }
@@ -271,6 +272,8 @@ if CardID=0{
 
 if CardID=0{exit;}
 draw_self()
+draw_text(x,y,IsSelected)
+draw_text(x,y+20,IsSelected_Ability)
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
 var _x=x-sprite_get_width(sprite_index)*image_xscale/2

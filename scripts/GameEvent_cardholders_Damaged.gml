@@ -1,3 +1,3 @@
 ///GameEvent_cardholders_Damaged(Obj)
-LastAttackedBy=argument0
+Stats[? "LastAttackedBy"]=argument0
 

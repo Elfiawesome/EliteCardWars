@@ -296,6 +296,7 @@ if global.IsGame{
             if keyboard_check_pressed(ord("A")){
                 if position_meeting(mouse_x,mouse_y,obj_cardholder){
                     var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
+                    if ds_list_find_index(global.NetworkObj.SelectedCardHolders,_cardholder)!=-1{exit;}
                     //targetting other enemies
                     if global.UnitDat_AbilityTrigger[_cardholder.CardID]=AbilityTrigger.ActivateTarget{
                         if !ds_list_empty(global.NetworkObj.SelectedCardHolders_Ability){
@@ -368,6 +369,7 @@ if global.IsGame{
         if mouse_check_button_pressed(mb_left){
             if position_meeting(mouse_x,mouse_y,obj_cardholder){
                 var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
+                if ds_list_find_index(global.NetworkObj.SelectedCardHolders_Ability,_cardholder)!=-1{exit;}
                 //Selecting MY unit
                 if _cardholder.CardID!=0{
                 if _cardholder.mysocket=mysocket &amp;&amp; _cardholder.Stats[? "AtkAlrdy"]=false{

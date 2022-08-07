@@ -23,9 +23,9 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
             GameEvent_cardholders_Damaged(AttackObj)
         }
     }
-    ds_list_destroy(_list)
     //animation
-    ani_AttackSet_basic(AttackObj,VictimObj)
+    ani_AttackSet_basic(AttackObj,_list)//VictimObj)
+    ds_list_destroy(_list)
     
     //remove atkalrdy
     AttackObj.Stats[? "AtkAlrdy"]=true
