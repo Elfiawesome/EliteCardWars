@@ -1,6 +1,5 @@
 ///svr_ActivateAbilityTarget(map)
 for(var i=0;i<ds_list_size(socketlist);i++){
-    if socketlist[| i]!=argument1{}
     buffer=buffer_create(2048,buffer_fixed,1)
     buffer_write(buffer,buffer_s16,NETWORKPKT.ACTIVATEABILITYTARGET)
     buffer_write(buffer,buffer_string,argument0)

@@ -309,7 +309,7 @@ if global.IsGame{
                             
                             with(global.NetworkObj){
                                 if global.NetworkObj.object_index=obj_server{
-                                    svr_ActivateAbilityTarget(_mapstr,mysocket)
+                                    svr_ActivateAbilityTarget(_mapstr)
                                 }
                                 if global.NetworkObj.object_index=obj_client{
                                     buffer=buffer_create(1024,buffer_fixed,1)
