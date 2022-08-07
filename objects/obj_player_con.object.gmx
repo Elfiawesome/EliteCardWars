@@ -125,8 +125,8 @@ ds_list_destroy(Cardholderlist)
             <string>///Managing of Hand Cards
 if IsLocal{
 if keyboard_check_pressed(vk_enter){
-    //GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
-    GameEvent_draw_specific_card(UnitID.D2_Psion)
+    GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
+    //GameEvent_draw_specific_card(UnitID.D2_Psion)
 }
 if global.SelectedCard=noone{
     if position_meeting(mouse_x,mouse_y,obj_card){

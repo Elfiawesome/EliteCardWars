@@ -1,4 +1,4 @@
-///ani_AttackSet_basic()
+///ani_AttackSet_basic(attacker,victimlist)
 var Attacker=argument0
 var VictimList=argument1
 var Victim=VictimList[| 0]

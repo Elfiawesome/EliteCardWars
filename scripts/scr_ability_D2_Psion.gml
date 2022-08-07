@@ -5,11 +5,16 @@ var atkr=MapStr[? "Attacker"]
 var stid=global.NetworkObj.socket_to_instanceid
 if global.GameStage=GAMESTAGE.PLAYERTURNS{
 if vict.mysocket!=atkr.mysocket && stid[? vict.mysocket].Team!=stid[? atkr.mysocket].Team{
+    //run animation of ability
+    var victimList=ds_list_create()
+    ds_list_add(victimList,vict)
+    ani_AttackSet_basic(atkr,victimList)
+    ds_list_destroy(victimList)
+    
     //refund the card if you are the victim
     if vict.mysocket=global.NetworkObj.mysocket{
         with(stid[? vict.mysocket]){
             GameEvent_draw_specific_card(vict.CardID)
-            show_message(vict.CardID)
         }
     }
     //clear that card
