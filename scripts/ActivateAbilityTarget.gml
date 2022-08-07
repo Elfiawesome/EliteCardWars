@@ -7,7 +7,8 @@ map[? "Attacker"] = socket_to_instanceid[? real(map[? "AttackerSock"])].Cardhold
 
 //run ability
 with(map[? "Attacker"]){
-    script_execute(global.UnitDat_AbilityScript[map[? "Attacker"].CardID],map)
+    var _no=IsAbilityTrigger(map[? "Attacker"].CardID,AbilityTrigger.ActivateTarget)
+    script_execute(global.UnitDat_AbilityScript[map[? "Attacker"].CardID,_no],map)
 }
 
 

@@ -283,11 +283,12 @@ if global.IsGame{
             if keyboard_check_pressed(ord("A")){
                 if position_meeting(mouse_x,mouse_y,obj_cardholder){
                     var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
+                    //only if no attacking selected
                     if ds_list_find_index(global.NetworkObj.SelectedCardHolders,_cardholder)!=-1{exit;}
                     //targetting other enemies
-                    if global.UnitDat_AbilityTrigger[_cardholder.CardID]=AbilityTrigger.ActivateTarget{
-                        if !ds_list_empty(global.NetworkObj.SelectedCardHolders_Ability){
-                            var _attacker=global.NetworkObj.SelectedCardHolders_Ability[| 0];
+                    if !ds_list_empty(global.NetworkObj.SelectedCardHolders_Ability){
+                        var _attacker=global.NetworkObj.SelectedCardHolders_Ability[| 0];
+                        if IsAbilityTrigger(_attacker.CardID,AbilityTrigger.ActivateTarget)!=-1{
                             var _map=ds_map_create();
                             _map[? "VictimPos"]=_cardholder.Pos
                             _map[? "VictimSock"]=_cardholder.mysocket
@@ -308,7 +309,9 @@ if global.IsGame{
                                 }
                             }
                         }
-                        //selecting my untis
+                    }
+                    //selecting my untis
+                    if IsAbilityTrigger(_cardholder.CardID,AbilityTrigger.ActivateTarget)!=-1{
                         if _cardholder.CardID!=0{
                         if _cardholder.mysocket=mysocket &amp;&amp; _cardholder.Stats[? "AbilityAlrdy"]=false{
                             if ds_list_find_index(Cardholderlist,_cardholder)!=-1{
@@ -323,6 +326,7 @@ if global.IsGame{
                         }
                         }
                     }
+                    
                 }
             }
         }

@@ -62,6 +62,7 @@ Stats[? "IsAbilityStun"]=false
 Stats[? "AbilityLifespan"]=0
 Stats[? "AbilityCooldown"]=0//how many rounds till ability can be used again
 Stats[? "AbilityContstantRun"]=false
+Stats[? "AbilityConstantTarget"]=noone
 
 Stats[? "LastAttackedBy"]=noone
 
@@ -119,7 +120,7 @@ image_speed=0
             <string>///Abilities
 if Stats[? "IsAbilityStun"]=false{
     if Stats[? "AbilityContstantRun"]{
-        script_execute(global.UnitDat_AbilityScript[CardID],"")
+        //script_execute(global.UnitDat_AbilityScript[CardID],"")
     }
 }
 //debug
@@ -272,8 +273,7 @@ if CardID=0{
 
 if CardID=0{exit;}
 draw_self()
-draw_text(x,y,IsSelected)
-draw_text(x,y+20,IsSelected_Ability)
+draw_text(x,y,Stats[? "IsImmune"])
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
 var _x=x-sprite_get_width(sprite_index)*image_xscale/2

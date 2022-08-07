@@ -217,6 +217,8 @@
         <script>scripts\scr_ability_none.gml</script>
         <script>scripts\scr_ability_D2_Hobgoblin.gml</script>
         <script>scripts\scr_ability_D2_Psion.gml</script>
+        <script>scripts\scr_ability_D2_Servitor_ActivateTarget.gml</script>
+        <script>scripts\scr_ability_D2_Servitor_Intrinsic.gml</script>
         <script>scripts\scr_ability_SPImmune.gml</script>
         <script>scripts\scr_ability_BAImmune.gml</script>
         <script>scripts\scr_ability_instakill.gml</script>
@@ -227,12 +229,14 @@
         <script>scripts\GameEvent_cardholders_Death.gml</script>
         <script>scripts\GameEvent_cardholders_Clear.gml</script>
         <script>scripts\GameEvent_draw_specific_card.gml</script>
+        <script>scripts\GameEvent_cardholders_ReceiveImmunity.gml</script>
       </scripts>
       <script>scripts\scr_ListVictimsByAttackersSPAtkTypes.gml</script>
     </scripts>
     <script>scripts\inherit_svrclt_create.gml</script>
     <script>scripts\scr_ConBattlefieldSize.gml</script>
     <script>scripts\scr_ValidAttackSpot.gml</script>
+    <script>scripts\IsAbilityTrigger.gml</script>
     <script>scripts\IsSPAtk.gml</script>
   </scripts>
   <fonts name="fonts">

@@ -41,18 +41,22 @@ var Cur=UnitID.D2_Goblin
 scr_units_init_func(Cur,"Goblin",10,6,3,spr_cards,Cur-1)
 var Cur=UnitID.D2_Harpy
 scr_units_init_func(Cur,"Harpy",3,1,1,spr_cards,Cur-1)
-global.UnitDat_AbilityTrigger[Cur]=AbilityTrigger.Intrinsic
-global.UnitDat_AbilityScript[Cur]=scr_ability_SPImmune
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SPImmune
 var Cur=UnitID.D2_Hobgoblin
 scr_units_init_func(Cur,"Hobgoblin",8,15,12,spr_cards,Cur-1);global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
-global.UnitDat_AbilityTrigger[Cur]=AbilityTrigger.Damaged
-global.UnitDat_AbilityScript[Cur]=scr_ability_D2_Hobgoblin
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Damaged
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_D2_Hobgoblin
 var Cur=UnitID.D2_Psion
 scr_units_init_func(Cur,"Psion",5,15,12,spr_cards,Cur-1);global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
-global.UnitDat_AbilityTrigger[Cur]=AbilityTrigger.ActivateTarget
-global.UnitDat_AbilityScript[Cur]=scr_ability_D2_Psion
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_D2_Psion
 var Cur=UnitID.D2_Servitor
 scr_units_init_func(Cur,"Servitor",14,10,18,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_D2_Servitor_ActivateTarget
+global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,1]=scr_ability_D2_Servitor_Intrinsic
 var Cur=UnitID.D2_Wyvern
 scr_units_init_func(Cur,"Wyvern",25,15,14,spr_cards,Cur-1);global.UnitDat_AttackType[Cur,UnitAttackType.Sweep_Atk]=true
 
