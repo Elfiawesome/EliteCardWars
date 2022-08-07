@@ -226,6 +226,7 @@
         <script>scripts\GameEvent_cardholders_DealDamage.gml</script>
         <script>scripts\GameEvent_cardholders_Death.gml</script>
         <script>scripts\GameEvent_cardholders_Clear.gml</script>
+        <script>scripts\GameEvent_draw_specific_card.gml</script>
       </scripts>
       <script>scripts\scr_ListVictimsByAttackersSPAtkTypes.gml</script>
     </scripts>

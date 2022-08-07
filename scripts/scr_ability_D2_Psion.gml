@@ -5,9 +5,18 @@ var atkr=MapStr[? "Attacker"]
 var stid=global.NetworkObj.socket_to_instanceid
 if global.GameStage=GAMESTAGE.PLAYERTURNS{
 if vict.mysocket!=atkr.mysocket && stid[? vict.mysocket].Team!=stid[? atkr.mysocket].Team{
+    //refund the card if you are the victim
+    if vict.mysocket=global.NetworkObj.mysocket{
+        with(stid[? vict.mysocket]){
+            GameEvent_draw_specific_card(vict.CardID)
+            show_message(vict.CardID)
+        }
+    }
+    //clear that card
     with(vict){
         GameEvent_cardholders_Clear()
     }
+    //Ability alrdy done
     atkr.Stats[? "AbilityAlrdy"]=true
     
     //remove from selected
@@ -17,5 +26,6 @@ if vict.mysocket!=atkr.mysocket && stid[? vict.mysocket].Team!=stid[? atkr.mysoc
     MapStr[? "Attacker"].IsSelected_Ability=false
 }
 }
+
 ds_map_destroy(MapStr)
 
