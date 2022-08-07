@@ -1,5 +1,13 @@
 ///scr_ability_D2_Servitor_Intrinsic()
-///scr_ability_SPImmune()
 var MapStr=argument0;
-Stats[? "Hp"]=30000
+
+
+if Stats[? "AbilityConstantTarget"]!=noone{
+    if Stats[? "Hp"]>0{
+        with(Stats[? "AbilityConstantTarget"]){
+            Stats[? "IsImmune"]=clamp(Stats[? "IsImmune"]+1,1,2)
+        }
+        Stats[? "AbilityAlrdy"]=false
+    }
+}
 

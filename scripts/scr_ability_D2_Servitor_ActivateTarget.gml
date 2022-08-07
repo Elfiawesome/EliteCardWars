@@ -12,7 +12,12 @@ if stid[? vict.mysocket].Team=stid[? atkr.mysocket].Team && atkr!=vict{
     ds_list_destroy(victimList)
     //Immune that card
     with(vict){
-        GameEvent_cardholders_ReceiveImmunity(atkr)
+        //GameEvent_cardholders_ReceiveImmunity()
+        Stats[? "IsImmune"]=clamp(Stats[? "IsImmune"]+1,1,2)
+    }
+    with(atkr){
+        Stats[? "AbilityConstantTarget"]=vict
+        Stats[? "AbilityAlrdy"]=false
     }
     //remove from selected
     if ds_list_find_index(global.NetworkObj.SelectedCardHolders_Ability,MapStr[? "Attacker"])!=-1{

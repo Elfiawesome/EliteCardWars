@@ -1,2 +1,3 @@
-///GameEvent_cardholders_ReceiveImmunity(Immunner)
+///GameEvent_cardholders_ReceiveImmunity()
 Stats[? "IsImmune"]+=1
+
