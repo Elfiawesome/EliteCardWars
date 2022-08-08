@@ -132,6 +132,9 @@
     <sprite>sprites\spr_cards</sprite>
     <sprite>sprites\spr_cardsback</sprite>
     <sprite>sprites\spr_cardholder</sprite>
+    <sprite>sprites\spr_Heroes</sprite>
+    <sprite>sprites\spr_CardValBackground</sprite>
+    <sprite>sprites\spr_AttackType</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -144,6 +147,7 @@
         <script>scripts\AttackCardHolder.gml</script>
         <script>scripts\EndOfAttackingTurnChecks.gml</script>
         <script>scripts\ActivateAbilityTarget.gml</script>
+        <script>scripts\AttackHero.gml</script>
       </scripts>
       <scripts name="grp_server">
         <scripts name="grp_scripts">
@@ -153,6 +157,7 @@
           <script>scripts\svr_SummonCard.gml</script>
           <script>scripts\svr_AttackCardHolder.gml</script>
           <script>scripts\svr_ActivateAbilityTarget.gml</script>
+          <script>scripts\svr_AttackHero.gml</script>
         </scripts>
         <script>scripts\scr_svr_rp.gml</script>
         <script>scripts\scr_svr_connect.gml</script>
@@ -164,6 +169,7 @@
         <script>scripts\scr_svr_SUMMONCARD.gml</script>
         <script>scripts\scr_svr_ATTACKCARDHOLDER.gml</script>
         <script>scripts\scr_svr_ACTIVATEABILITYTARGET.gml</script>
+        <script>scripts\scr_svr_ATTACKHERO.gml</script>
       </scripts>
       <scripts name="grp_client">
         <script>scripts\scr_clt_rp.gml</script>
@@ -178,6 +184,7 @@
         <script>scripts\scr_clt_SUMMONCARD.gml</script>
         <script>scripts\scr_clt_ATTACKCARDHOLDER.gml</script>
         <script>scripts\scr_clt_ACTIVATEABILITYTARGET.gml</script>
+        <script>scripts\scr_clt_ATTACKHERO.gml</script>
       </scripts>
       <scripts name="functions">
         <script>scripts\scr_init_player.gml</script>
@@ -193,6 +200,7 @@
     <scripts name="grp_inits">
       <script>scripts\scr_units_init.gml</script>
       <script>scripts\scr_units_init_func.gml</script>
+      <script>scripts\scr_hero_init_func.gml</script>
     </scripts>
     <scripts name="grp_setup_battlefield">
       <script>scripts\update_json_TeamMap.gml</script>
@@ -214,6 +222,11 @@
         <script>scripts\draw_curve.gml</script>
       </scripts>
       <scripts name="grp_ability_scr">
+        <scripts name="grp_Ability">
+          <script>scripts\Activate_Intrinsic_Ability.gml</script>
+          <script>scripts\Activate_Deathwish_Ability.gml</script>
+          <script>scripts\Activate_Damaged_Ability.gml</script>
+        </scripts>
         <scripts name="grp_Checks">
           <script>scripts\scr_ability_Checks_none.gml</script>
           <script>scripts\scr_ability_Checks_OnlyEnemy.gml</script>
@@ -259,6 +272,7 @@
     <objects name="grp_game">
       <object>objects\obj_card</object>
       <object>objects\obj_cardholder</object>
+      <object>objects\obj_heroholder</object>
     </objects>
   </objects>
   <rooms name="rooms">

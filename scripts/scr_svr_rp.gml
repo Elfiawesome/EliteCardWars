@@ -28,5 +28,8 @@ switch(type){
     case NETWORKPKT.ACTIVATEABILITYTARGET:
         scr_svr_ACTIVATEABILITYTARGET(socket,buffer)
     break;
+    case NETWORKPKT.ATTACKHERO:
+        scr_svr_ATTACKHERO(socket,buffer)
+    break;
 }
 

@@ -63,7 +63,6 @@ Stats[? "AbilityLifespan"]=0
 Stats[? "AbilityCooldown"]=0//how many rounds till ability can be used again
 Stats[? "AbilityContstantRun"]=false
 Stats[? "AbilityConstantTarget"]=noone
-
 Stats[? "LastAttackedBy"]=noone
 
 
@@ -235,7 +234,14 @@ if position_meeting(mouse_x,mouse_y,obj_cardholder){
         }
     }
 }
-
+if position_meeting(mouse_x,mouse_y,obj_heroholder){
+    var _cardholder=instance_position(mouse_x,mouse_y,obj_heroholder)
+    if scr_ConBattlefieldSize(global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket])&lt;1{
+        draw_set_colour(c_green)
+        var pointx=_cardholder.x
+        var pointy=_cardholder.y
+    }
+}
 var xscale=view_wview[0]/view_wport[0]
 var yscale=view_hview[0]/view_hport[0]
 var _x=xscale*(x-view_xview[0])
@@ -284,7 +290,7 @@ draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
 var _x=x-sprite_get_width(sprite_index)*image_xscale/2
 var _y=y-sprite_get_height(sprite_index)*image_yscale/2
-draw_quad_vector(sprite_get_texture(spr_cardholder,0),
+draw_quad_vector(sprite_get_texture(spr_CardValBackground,0),
     _x-25,_y,
     _x,_y-25,
     _x,_y+25,
@@ -294,7 +300,7 @@ draw_text(_x,_y,Stats[? "Hp"])
 
 var _x=x-sprite_get_width(sprite_index)*image_xscale/4
 var _y=y-sprite_get_height(sprite_index)*image_yscale/2
-draw_quad_vector(sprite_get_texture(spr_cardholder,0),
+draw_quad_vector(sprite_get_texture(spr_CardValBackground,1),
     _x-25,_y,
     _x,_y-25,
     _x,_y+25,
@@ -303,11 +309,51 @@ draw_quad_vector(sprite_get_texture(spr_cardholder,0),
 draw_text(_x,_y,Stats[? "Atk"])
 draw_set_halign(fa_left)
 draw_set_valign(fa_top)
-/*if IsSelected{
-draw_set_colour(c_blue)
-draw_curve(x,y,mouse_x,mouse_y,90,5,10)
-draw_set_colour(c_white)
-}*/
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///drawing attack types
+if Stats[? "CrossAtk"]{
+    var _x=x-sprite_get_width(sprite_index)*image_xscale/2
+    var _y=y+sprite_get_height(sprite_index)*image_yscale/2
+    draw_sprite_ext(spr_AttackType,0,_x,_y,0.03,0.03,0,c_white,1)
+}
+if Stats[? "PierceAtk"]{
+    var _x=x-sprite_get_width(sprite_index)*image_xscale/2+50
+    var _y=y+sprite_get_height(sprite_index)*image_yscale/2
+    draw_sprite_ext(spr_AttackType,1,_x,_y,0.03,0.03,0,c_white,1)
+}
+if Stats[? "Sweep_Atk"]{
+    var _x=x-sprite_get_width(sprite_index)*image_xscale/2+100
+    var _y=y+sprite_get_height(sprite_index)*image_yscale/2
+    draw_sprite_ext(spr_AttackType,2,_x,_y,0.03,0.03,0,c_white,1)
+}
+if Stats[? "SpreadAtk"]{
+    var _x=x-sprite_get_width(sprite_index)*image_xscale/2+150
+    var _y=y+sprite_get_height(sprite_index)*image_yscale/2
+    draw_sprite_ext(spr_AttackType,3,_x,_y,0.03,0.03,0,c_white,1)
+}
+
+
 
 </string>
           </argument>

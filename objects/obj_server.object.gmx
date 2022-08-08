@@ -185,23 +185,24 @@ switch(type){
             <kind>1</kind>
             <string>///Debugging
 draw_text(0,0,mysocket)
-draw_text(100,100,"Animator Count: "+string(instance_number(obj_animator)))
+draw_text(0,30,"Animator Count: "+string(instance_number(obj_animator)))
 for(var i=0;i&lt;ds_list_size(socketlist);i++){
-    draw_text(20,20+(i*20),string(socketlist[| i])+": "+string(socket_to_instanceid[? socketlist[| i]].name))
-    draw_text(200,20+(i*20),"Ping: "+string(socket_to_instanceid[? socketlist[| i]].Ping))
+    draw_text(0,60+(i*20),string(socketlist[| i])+": "+string(socket_to_instanceid[? socketlist[| i]].name))
+    draw_text(180,60+(i*20),"Ping: "+string(socket_to_instanceid[? socketlist[| i]].Ping))
 }
+
 if global.GameStage=GAMESTAGE.PLAYERTURNS{
 _t="Prepping Turn"
 }else{
 _t="Attacking Turn"
 }
-draw_text(20,200,"GAMESTAGE "+string(_t))
+draw_text(0,90+(i*20),"GAMESTAGE "+string(_t))
 
 if Turn&gt;=0{
-draw_text(view_wport[0]/2,100,"Turn: "+string(Turnstage[Turn]))
-draw_text(view_wport[0]/2,130,string(mysocket))
+    draw_text(view_wport[0]/2,100,"Turn: "+string(Turnstage[Turn]))
+    draw_text(view_wport[0]/2,130,string(mysocket))
 }else{
-draw_text(view_wport[0]/2,100,string(ds_list_size(ReadySocket))+"/"+string(array_length_1d(Turnstage))+" is ready")
+    draw_text(view_wport[0]/2,100,string(ds_list_size(ReadySocket))+"/"+string(array_length_1d(Turnstage))+" is ready")
 }
 
 

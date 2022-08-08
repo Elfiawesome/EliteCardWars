@@ -12,6 +12,12 @@ enum UnitID{
     FanFron_ForestWalker,
     UnitID_MAX,
 }
+enum HeroID{
+    Unturned_CaptainSydney=1,
+    RA3_PremierAnatolyIlychCherdenko,
+    D2_Zavala,
+    HeroID_MAX,
+}
 enum UnitAttackType{
     CrossAtk,
     SpreadAtk,
@@ -74,4 +80,11 @@ var Cur=UnitID.FanFron_ForestWalker
 scr_units_init_func(Cur,"Apple Bat",15,5,8,spr_cards,Cur-1)
 
 
+//Heroes
+var Cur=HeroID.Unturned_CaptainSydney
+scr_hero_init_func(Cur,"Captain Sydney",10,0,spr_Heroes,Cur-1)
+var Cur=HeroID.RA3_PremierAnatolyIlychCherdenko
+scr_hero_init_func(Cur,"Premier AnatolyIlych Cherdenko",10,0,spr_Heroes,Cur-1)
+var Cur=HeroID.D2_Zavala
+scr_hero_init_func(Cur,"Zavala",10,0,spr_Heroes,Cur-1)
 

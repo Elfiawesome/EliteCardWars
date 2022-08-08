@@ -13,7 +13,6 @@ if scr_ability_Checks_OnlyAllies(vict,atkr){
     ds_list_destroy(victimList)
     //Immune that card
     with(vict){
-        //GameEvent_cardholders_ReceiveImmunity()
         Stats[? "IsImmune"]=clamp(Stats[? "IsImmune"]+1,1,2)
     }
     with(atkr){

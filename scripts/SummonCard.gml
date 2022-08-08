@@ -12,10 +12,6 @@ with(argument0){
     Stats[? "Pierce_Atk"]=global.UnitDat_AttackType[CardID,UnitAttackType.Pierce_Atk]
     
     //Activate Intrinsic Ability
-    if Stats[? "IsAbilityStun"]=false{
-        var _no=IsAbilityTrigger(CardID,AbilityTrigger.Intrinsic)
-        if _no!=-1{
-            script_execute(global.UnitDat_AbilityScript[CardID,_no],"")
-        }
-    }
+    Activate_Intrinsic_Ability()
+
 }

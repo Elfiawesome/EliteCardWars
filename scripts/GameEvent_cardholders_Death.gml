@@ -25,4 +25,5 @@ Stats[? "IsAbilityStun"]=false
 Stats[? "AbilityLifespan"]=0
 Stats[? "AbilityCooldown"]=0
 Stats[? "AbilityContstantRun"]=false
-
+Stats[? "AbilityConstantTarget"]=noone
+Stats[? "LastAttackedBy"]=noone
