@@ -11,8 +11,8 @@ for(var i=0;i<ds_list_size(socketlist);i++){
                 
                 //Activate Intrinsic Ability
                 if Stats[? "IsAbilityStun"]=false{
-                    if IsAbilityTrigger(CardID,AbilityTrigger.Intrinsic)!=-1{
-                        var _no=IsAbilityTrigger(CardID,AbilityTrigger.Intrinsic)
+                    var _no=IsAbilityTrigger(CardID,AbilityTrigger.Intrinsic)
+                    if _no!=-1{
                         script_execute(global.UnitDat_AbilityScript[CardID,_no],"")
                     }
                 }
@@ -21,8 +21,8 @@ for(var i=0;i<ds_list_size(socketlist);i++){
                 if Stats[? "Hp"]<1{
                     //Activate Deathwish Ability
                     if Stats[? "IsAbilityStun"]=false{
-                        if IsAbilityTrigger(CardID,AbilityTrigger.Deathwish)!=-1{
-                            var _no=IsAbilityTrigger(CardID,AbilityTrigger.Deathwish)
+                        var _no=IsAbilityTrigger(CardID,AbilityTrigger.Deathwish)
+                        if _no!=-1{
                             script_execute(global.UnitDat_AbilityScript[CardID,_no],"")//insert last killer here
                         }
                     }

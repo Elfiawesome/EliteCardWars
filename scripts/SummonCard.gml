@@ -13,8 +13,8 @@ with(argument0){
     
     //Activate Intrinsic Ability
     if Stats[? "IsAbilityStun"]=false{
-        if IsAbilityTrigger(CardID,AbilityTrigger.Intrinsic)!=-1{
-            var _no=IsAbilityTrigger(CardID,AbilityTrigger.Intrinsic)
+        var _no=IsAbilityTrigger(CardID,AbilityTrigger.Intrinsic)
+        if _no!=-1{
             script_execute(global.UnitDat_AbilityScript[CardID,_no],"")
         }
     }

@@ -15,4 +15,5 @@ global.UnitDat_AttackType[argument0,UnitAttackType.Sp_Atk]=false
 
 //ability
 global.UnitDat_AbilityTrigger[argument0,0]=AbilityTrigger.Default
+global.UnitDat_AbilityTargetCheck[argument0,0]=scr_ability_Checks_none
 global.UnitDat_AbilityScript[argument0,0]=scr_ability_none

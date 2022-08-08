@@ -214,6 +214,11 @@
         <script>scripts\draw_curve.gml</script>
       </scripts>
       <scripts name="grp_ability_scr">
+        <scripts name="grp_Checks">
+          <script>scripts\scr_ability_Checks_none.gml</script>
+          <script>scripts\scr_ability_Checks_OnlyEnemy.gml</script>
+          <script>scripts\scr_ability_Checks_OnlyAllies.gml</script>
+        </scripts>
         <script>scripts\scr_ability_none.gml</script>
         <script>scripts\scr_ability_D2_Hobgoblin.gml</script>
         <script>scripts\scr_ability_D2_Psion.gml</script>

@@ -4,7 +4,8 @@ var vict=MapStr[? "Victim"]
 var atkr=MapStr[? "Attacker"]
 var stid=global.NetworkObj.socket_to_instanceid
 if global.GameStage=GAMESTAGE.PLAYERTURNS{
-if vict.mysocket!=atkr.mysocket && stid[? vict.mysocket].Team!=stid[? atkr.mysocket].Team{
+//if vict.CardID!=0 && vict.mysocket!=atkr.mysocket && stid[? vict.mysocket].Team!=stid[? atkr.mysocket].Team{
+if scr_ability_Checks_OnlyEnemy(vict,atkr){
     //run animation of ability
     var victimList=ds_list_create()
     ds_list_add(victimList,vict)

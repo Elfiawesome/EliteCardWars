@@ -2,9 +2,10 @@
 var MapStr=argument0;
 var vict=MapStr[? "Victim"]
 var atkr=MapStr[? "Attacker"]
-var stid=global.NetworkObj.socket_to_instanceid
-if global.GameStage=GAMESTAGE.PLAYERTURNS{
-if stid[? vict.mysocket].Team=stid[? atkr.mysocket].Team && atkr!=vict{
+
+//if global.GameStage=GAMESTAGE.PLAYERTURNS
+{
+if scr_ability_Checks_OnlyAllies(vict,atkr){
     //run animation of ability
     var victimList=ds_list_create()
     ds_list_add(victimList,vict)
@@ -17,7 +18,7 @@ if stid[? vict.mysocket].Team=stid[? atkr.mysocket].Team && atkr!=vict{
     }
     with(atkr){
         Stats[? "AbilityConstantTarget"]=vict
-        Stats[? "AbilityAlrdy"]=false
+        Stats[? "AbilityAlrdy"]=true
     }
     //remove from selected
     if ds_list_find_index(global.NetworkObj.SelectedCardHolders_Ability,MapStr[? "Attacker"])!=-1{

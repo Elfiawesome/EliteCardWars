@@ -207,7 +207,8 @@ if ShakeAmt&gt;0{
             <kind>1</kind>
             <string>//draw curve line when selected
 if IsSelected || IsSelected_Ability{
-draw_set_colour(c_maroon)
+if IsSelected{draw_set_colour(c_maroon)}
+if IsSelected_Ability{draw_set_colour(c_yellow)}
 var pointx=mouse_x
 var pointy=mouse_y
 if position_meeting(mouse_x,mouse_y,obj_cardholder){
@@ -224,9 +225,14 @@ if position_meeting(mouse_x,mouse_y,obj_cardholder){
     }
     //ability attacking
     if IsSelected_Ability{
-        draw_set_colour(c_purple)
-        var pointx=_cardholder.x
-        var pointy=_cardholder.y
+        var _no=IsAbilityTrigger(CardID,AbilityTrigger.ActivateTarget)
+        if _no!=-1{
+            if script_execute(global.UnitDat_AbilityTargetCheck[CardID,_no],_cardholder,id){
+                draw_set_colour(c_purple)
+                var pointx=_cardholder.x
+                var pointy=_cardholder.y
+            }
+        }
     }
 }
 

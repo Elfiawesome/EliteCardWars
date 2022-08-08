@@ -7,7 +7,7 @@ if Stats[? "AbilityConstantTarget"]!=noone{
         with(Stats[? "AbilityConstantTarget"]){
             Stats[? "IsImmune"]=clamp(Stats[? "IsImmune"]+1,1,2)
         }
-        Stats[? "AbilityAlrdy"]=false
+        Stats[? "AbilityAlrdy"]=true
     }
 }
 
