@@ -141,6 +141,7 @@
   <scripts name="scripts">
     <scripts name="grp_network">
       <script>scripts\scr_init_network.gml</script>
+      <script>scripts\inherit_svrclt_create.gml</script>
       <scripts name="grp_ClientServer_scripts">
         <script>scripts\TurnstageMoveOn.gml</script>
         <script>scripts\SummonCard.gml</script>
@@ -249,13 +250,12 @@
         <script>scripts\GameEvent_draw_specific_card.gml</script>
         <script>scripts\GameEvent_cardholders_ReceiveImmunity.gml</script>
       </scripts>
+      <script>scripts\scr_ValidAttackSpot.gml</script>
+      <script>scripts\IsSPAtk.gml</script>
+      <script>scripts\IsAbilityTrigger.gml</script>
+      <script>scripts\scr_ConBattlefieldSize.gml</script>
       <script>scripts\scr_ListVictimsByAttackersSPAtkTypes.gml</script>
     </scripts>
-    <script>scripts\inherit_svrclt_create.gml</script>
-    <script>scripts\scr_ConBattlefieldSize.gml</script>
-    <script>scripts\scr_ValidAttackSpot.gml</script>
-    <script>scripts\IsAbilityTrigger.gml</script>
-    <script>scripts\IsSPAtk.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_number</font>

@@ -12,3 +12,5 @@ enum GAMESTAGE{
 global.GameStage=GAMESTAGE.PLAYERTURNS
 Turn=0
 Turnstage[0]=0
+
+IsDebug=false
