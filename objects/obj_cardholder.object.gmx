@@ -234,12 +234,14 @@ if position_meeting(mouse_x,mouse_y,obj_cardholder){
         }
     }
 }
-if position_meeting(mouse_x,mouse_y,obj_heroholder){
-    var _cardholder=instance_position(mouse_x,mouse_y,obj_heroholder)
-    if scr_ConBattlefieldSize(global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket])&lt;1{
-        draw_set_colour(c_green)
-        var pointx=_cardholder.x
-        var pointy=_cardholder.y
+if IsSelected{
+    if position_meeting(mouse_x,mouse_y,obj_heroholder){
+        var _cardholder=instance_position(mouse_x,mouse_y,obj_heroholder)
+        if scr_ConBattlefieldSize(global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket])&lt;1{
+            draw_set_colour(c_green)
+            var pointx=_cardholder.x
+            var pointy=_cardholder.y
+        }
     }
 }
 var xscale=view_wview[0]/view_wport[0]
