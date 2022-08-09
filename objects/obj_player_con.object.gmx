@@ -97,8 +97,8 @@ for(var i=0;i&lt;ds_list_size(Cardholderlist);i++){
     with(Cardholderlist[| i]){instance_destroy()}
 }
 ds_list_destroy(Cardholderlist)
-
-
+//destroy hero
+with(Hero){instance_destroy()}
 </string>
           </argument>
         </arguments>
@@ -514,6 +514,8 @@ if global.IsGame{
             <kind>1</kind>
             <string>//draw event
 draw_text(x,y,name+": "+string(Team))
+
+
 
 
 

@@ -27,6 +27,10 @@ if Turn>=0{
             case GAMESTAGE.ATTACKINGTURN:
                 Turn=0
                 EndOfAttackingTurnChecks()
+                GameLifespan++
+                socket_to_instanceid[? mysocket].Points=global.TurnPointArray[
+                clamp(GameLifespan,0,array_length_1d(global.TurnPointArray)-1)
+                ]
                 global.GameStage=GAMESTAGE.PLAYERTURNS
             break;
         }

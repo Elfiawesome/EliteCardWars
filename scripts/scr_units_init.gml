@@ -88,3 +88,15 @@ scr_hero_init_func(Cur,"Premier AnatolyIlych Cherdenko",10,0,spr_Heroes,Cur-1)
 var Cur=HeroID.D2_Zavala
 scr_hero_init_func(Cur,"Zavala",10,0,spr_Heroes,Cur-1)
 
+
+//how many points at a turn
+global.TurnPointArray[0]=5
+global.TurnPointArray[1]=6
+global.TurnPointArray[2]=8
+global.TurnPointArray[3]=11
+global.TurnPointArray[4]=15
+global.TurnPointArray[5]=20
+global.TurnPointArray[6]=26
+global.TurnPointArray[7]=33
+global.TurnPointArray[8]=41
+global.TurnPointArray[9]=50
