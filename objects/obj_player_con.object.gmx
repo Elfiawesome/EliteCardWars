@@ -144,6 +144,8 @@ if global.SelectedCard!=noone{
             var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
             if mysocket=_cardholder.mysocket &amp;&amp; _cardholder.CardID=0{
             if global.GameStage=GAMESTAGE.PLAYERTURNS &amp;&amp; global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
+            if Points&gt;=global.UnitDat_Pt[global.SelectedCard.CardID]{
+                Points-=global.UnitDat_Pt[global.SelectedCard.CardID]
                 with(global.NetworkObj){
                     if global.NetworkObj.object_index=obj_server{
                         svr_SummonCard(mysocket,_cardholder.Pos,global.SelectedCard.CardID)
@@ -159,6 +161,7 @@ if global.SelectedCard!=noone{
                 }
             instance_destroy(global.SelectedCard)
             ds_list_delete(cardList,ds_list_find_index(cardList,global.SelectedCard))
+            }
             }
             }
         }
@@ -225,7 +228,8 @@ if keyboard_check_pressed(ord("Q")){
                 buffer_write(buffer,buffer_string,json_encode(TeamMap))
                 network_send_packet(socketlist[| i],buffer,buffer_tell(buffer))
                 buffer_delete(buffer)
-            }
+            //reimburse points
+            GameEvent_Con_ReimbursePoints()}
             //set the game to ready
             global.IsGame=true
         }

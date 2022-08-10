@@ -249,6 +249,7 @@
         <script>scripts\GameEvent_cardholders_Clear.gml</script>
         <script>scripts\GameEvent_draw_specific_card.gml</script>
         <script>scripts\GameEvent_cardholders_ReceiveImmunity.gml</script>
+        <script>scripts\GameEvent_Con_ReimbursePoints.gml</script>
       </scripts>
       <script>scripts\scr_ValidAttackSpot.gml</script>
       <script>scripts\IsSPAtk.gml</script>

@@ -10,4 +10,5 @@ ds_map_destroy(Map)
 create_AllCardHolders(TeamMap)
 update_Turnstage(TeamMap)
 
+GameEvent_Con_ReimbursePoints()
 global.IsGame=true
