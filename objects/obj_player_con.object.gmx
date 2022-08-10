@@ -378,7 +378,7 @@ if global.IsGame{
                     }
                 }
                 //attacking Enemy unit
-                if _cardholder.mysocket!=mysocket &amp;&amp; !ds_list_empty(global.NetworkObj.SelectedCardHolders) &amp;&amp; global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket].Team!=Team{
+                if _cardholder.mysocket!=mysocket &amp;&amp; _cardholder.Stats[? "HP"]&gt;0 &amp;&amp; !ds_list_empty(global.NetworkObj.SelectedCardHolders) &amp;&amp; global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket].Team!=Team{
                     //Setting all Attacking data into a json called 'DatMap'
                     var DatMap=ds_map_create()
                     //writing All Attacking Units

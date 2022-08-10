@@ -286,7 +286,10 @@ if CardID=0{
 }
 
 if CardID=0{exit;}
+if Stats[? "AtkAlrdy"]{draw_set_alpha(0.5)}else{draw_set_alpha(1)}
 draw_self()
+draw_set_alpha(1)
+
 draw_text(x,y,Stats[? "IsImmune"])
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)

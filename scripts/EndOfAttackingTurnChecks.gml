@@ -12,10 +12,8 @@ for(var i=0;i<ds_list_size(socketlist);i++){
                 //Activate Intrinsic Ability
                 Activate_Intrinsic_Ability()
                 
-                //if death
-                if Stats[? "Hp"]<1{
-                    Activate_Deathwish_Ability()
-                }
+                //Activate Deathwish Ability
+                if Stats[? "Hp"]<1{Activate_Deathwish_Ability()}
             }
         }
     }
