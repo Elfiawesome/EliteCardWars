@@ -30,6 +30,7 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
     //remove atkalrdy
     AttackObj.Stats[? "AtkAlrdy"]=true
     ds_map_destroy(_m)
+    if VictimObj.Stats[? "Hp"]<1{break;}
 }
 ds_list_destroy(AttackingList)
 
