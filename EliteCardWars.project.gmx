@@ -135,6 +135,7 @@
     <sprite>sprites\spr_Heroes</sprite>
     <sprite>sprites\spr_CardValBackground</sprite>
     <sprite>sprites\spr_AttackType</sprite>
+    <sprite>sprites\spr_EndgameAnnouncement</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -186,6 +187,8 @@
         <script>scripts\scr_clt_ATTACKCARDHOLDER.gml</script>
         <script>scripts\scr_clt_ACTIVATEABILITYTARGET.gml</script>
         <script>scripts\scr_clt_ATTACKHERO.gml</script>
+        <script>scripts\scr_clt_PLAYERELIMINATEED.gml</script>
+        <script>scripts\scr_clt_PLAYERWIN.gml</script>
       </scripts>
       <scripts name="functions">
         <script>scripts\scr_init_player.gml</script>
@@ -250,6 +253,7 @@
         <script>scripts\GameEvent_draw_specific_card.gml</script>
         <script>scripts\GameEvent_cardholders_ReceiveImmunity.gml</script>
         <script>scripts\GameEvent_Con_ReimbursePoints.gml</script>
+        <script>scripts\GameEvent_Con_HeroDeath.gml</script>
       </scripts>
       <script>scripts\scr_ValidAttackSpot.gml</script>
       <script>scripts\IsSPAtk.gml</script>
@@ -274,6 +278,7 @@
       <object>objects\obj_card</object>
       <object>objects\obj_cardholder</object>
       <object>objects\obj_heroholder</object>
+      <object>objects\obj_GameEndAnnouncement</object>
     </objects>
   </objects>
   <rooms name="rooms">

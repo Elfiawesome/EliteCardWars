@@ -30,6 +30,7 @@ scr_units_init()
 cardList=ds_list_create()
 Cardholderlist=ds_list_create()
 Points=0
+IsSpectating=false
 global.HoveredCard=noone
 global.ShowHands=false
 global.SelectedCard=noone
@@ -122,6 +123,7 @@ with(Hero){instance_destroy()}
           <argument>
             <kind>1</kind>
             <string>///Managing of Hand Cards
+if IsSpectating{exit;}
 if IsLocal{
 if keyboard_check_pressed(vk_enter){
     GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
@@ -260,6 +262,7 @@ if keyboard_check_pressed(ord("Q")){
           <argument>
             <kind>1</kind>
             <string>///When Your Turn
+if IsSpectating{exit;}
 if global.IsGame{
     if IsLocal{
         with(global.NetworkObj){
@@ -357,6 +360,7 @@ if global.IsGame{
           <argument>
             <kind>1</kind>
             <string>///When Attacking Phase
+if IsSpectating{exit;}
 if global.IsGame{
     if IsLocal &amp;&amp; global.GameStage=GAMESTAGE.ATTACKINGTURN &amp;&amp; global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
         //selecting cardholders
@@ -378,7 +382,7 @@ if global.IsGame{
                     }
                 }
                 //attacking Enemy unit
-                if _cardholder.mysocket!=mysocket &amp;&amp; _cardholder.Stats[? "HP"]&gt;0 &amp;&amp; !ds_list_empty(global.NetworkObj.SelectedCardHolders) &amp;&amp; global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket].Team!=Team{
+                if _cardholder.mysocket!=mysocket &amp;&amp; _cardholder.Stats[? "Hp"]&gt;0 &amp;&amp; !ds_list_empty(global.NetworkObj.SelectedCardHolders) &amp;&amp; global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket].Team!=Team{
                     //Setting all Attacking data into a json called 'DatMap'
                     var DatMap=ds_map_create()
                     //writing All Attacking Units

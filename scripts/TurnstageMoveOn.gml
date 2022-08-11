@@ -33,6 +33,5 @@ if Turn>=0{
             break;
         }
     }
-    
 }
 

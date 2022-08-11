@@ -39,5 +39,13 @@ switch(type){
     case NETWORKPKT.ATTACKHERO:
         scr_clt_ATTACKHERO(buffer)
     break;
+    
+    //end game
+    case NETWORKPKT.PLAYERELIMINATEED:
+        scr_clt_PLAYERELIMINATEED(buffer)
+    break;
+    case NETWORKPKT.PLAYERWIN:
+        scr_clt_PLAYERWIN(buffer)
+    break;
 }
 
