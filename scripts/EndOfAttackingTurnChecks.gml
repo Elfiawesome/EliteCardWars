@@ -2,8 +2,10 @@
 for(var i=0;i<ds_list_size(socketlist);i++){
     with(socket_to_instanceid[? socketlist[| i]]){
         for(var ii=0;ii<ds_list_size(Cardholderlist);ii++){
+            var _ch=Cardholderlist[| ii]
+            if _ch.CardID=0{continue;}
             //going through every cardholder
-            with(Cardholderlist[| ii]){
+            with(_ch){
                 //reset atk already
                 Stats[? "AtkAlrdy"]=false
                 //reset ability already
@@ -13,7 +15,25 @@ for(var i=0;i<ds_list_size(socketlist);i++){
                 Activate_Intrinsic_Ability()
                 
                 //Activate Deathwish Ability
-                if Stats[? "Hp"]<1{Activate_Deathwish_Ability()}
+                if Stats[? "Hp"]<1{
+                    //activate my death
+                    Activate_Deathwish_Ability()
+                }
+            }
+            //activate my friends death
+            if _ch.Stats[? "Hp"]<1{
+            for(var i3=0;i3<ds_list_size(Cardholderlist);i3++){
+                if _ch!=Cardholderlist[| i3]{
+                    with(Cardholderlist[| i3]){
+                        if Stats[? "IsAbilityStun"]=false{
+                            if IsAbilityTrigger(CardID,AbilityTrigger.FriendDeath)!=-1{
+                                var _no=IsAbilityTrigger(CardID,AbilityTrigger.FriendDeath)
+                                script_execute(global.UnitDat_AbilityScript[CardID,_no],other.id)
+                            }
+                        }
+                    }
+                }
+            }
             }
         }
     }
@@ -43,7 +63,7 @@ if global.NetworkObj.object_index=obj_server{
         ds_list_read(_l,TeamMap[? k])
         var cntr=0
         for(var i=0;i<ds_list_size(_l);i++){
-            if socket_to_instanceid[? real(_l[| i])].Hero.Stats[? "Hp"]<0{
+            if socket_to_instanceid[? real(_l[| i])].Hero.Stats[? "Hp"]<=0{
                 cntr+=1
             }
         }
@@ -55,6 +75,7 @@ if global.NetworkObj.object_index=obj_server{
         ds_list_destroy(_l)
     }
     if Tcntr=ds_map_size(TeamMap)-1{
+        show_message("WE HAVE A WINNER")
         if socket_to_instanceid[? mysocket].Team=real(winnerTeam){
             var gea=instance_create(0,0,obj_GameEndAnnouncement);
             gea.image_index=0

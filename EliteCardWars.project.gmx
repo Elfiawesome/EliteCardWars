@@ -203,6 +203,7 @@
     </scripts>
     <scripts name="grp_inits">
       <script>scripts\scr_units_init.gml</script>
+      <script>scripts\scr_units_init_all.gml</script>
       <script>scripts\scr_units_init_func.gml</script>
       <script>scripts\scr_hero_init_func.gml</script>
     </scripts>
@@ -230,6 +231,7 @@
           <script>scripts\Activate_Intrinsic_Ability.gml</script>
           <script>scripts\Activate_Deathwish_Ability.gml</script>
           <script>scripts\Activate_Damaged_Ability.gml</script>
+          <script>scripts\Activate_FriendDeath_Ability.gml</script>
         </scripts>
         <scripts name="grp_Checks">
           <script>scripts\scr_ability_Checks_none.gml</script>
@@ -241,6 +243,8 @@
         <script>scripts\scr_ability_D2_Psion.gml</script>
         <script>scripts\scr_ability_D2_Servitor_ActivateTarget.gml</script>
         <script>scripts\scr_ability_D2_Servitor_Intrinsic.gml</script>
+        <script>scripts\scr_ability_MadnessCombat_Auditor_FriendDeath.gml</script>
+        <script>scripts\scr_ability_MadnessCombat_HankJwimbleton_Deathwish.gml</script>
         <script>scripts\scr_ability_SPImmune.gml</script>
         <script>scripts\scr_ability_BAImmune.gml</script>
         <script>scripts\scr_ability_instakill.gml</script>

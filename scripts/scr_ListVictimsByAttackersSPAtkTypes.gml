@@ -11,8 +11,10 @@ if Atkr.Stats[? "SpreadAtk"]{
     }
 }
 if Atkr.Stats[? "Sweep_Atk"]{
-    for(var i=0;i<3;i++){
-        if ds_list_find_index(_l,battlefield[| i])=-1{ds_list_add(_l,battlefield[| i])}
+    if (Vict.Pos<3){
+        for(var i=0;i<3;i++){
+            if ds_list_find_index(_l,battlefield[| i])=-1{ds_list_add(_l,battlefield[| i])}
+        }
     }
 }
 if Atkr.Stats[? "Pierce_Atk"]{
