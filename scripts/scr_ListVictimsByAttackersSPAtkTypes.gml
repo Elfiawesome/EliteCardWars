@@ -16,8 +16,10 @@ if Atkr.Stats[? "Sweep_Atk"]{
     }
 }
 if Atkr.Stats[? "Pierce_Atk"]{
-    if ds_list_find_index(_l,battlefield[| 4])=-1{ds_list_add(_l,battlefield[| 4])}
-    if ds_list_find_index(_l,battlefield[| 2])=-1{ds_list_add(_l,battlefield[| 2])}
+    if (Vict.Pos=1) || (Vict.Pos=3){
+        if ds_list_find_index(_l,battlefield[| 3])=-1{ds_list_add(_l,battlefield[| 3])}
+        if ds_list_find_index(_l,battlefield[| 1])=-1{ds_list_add(_l,battlefield[| 1])}
+    }
 }
 
 

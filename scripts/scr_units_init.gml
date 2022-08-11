@@ -75,9 +75,10 @@ scr_units_init_func(Cur,"Wyvern",25,15,14,spr_cards,Cur-1);global.UnitDat_Attack
 var Cur=UnitID.FanFron_AppleBat
 scr_units_init_func(Cur,"Apple Bat",5,1,1,spr_cards,Cur-1)
 var Cur=UnitID.FanFron_FantasticDragon
-scr_units_init_func(Cur,"Apple Bat",5,1,1,spr_cards,Cur-1)
+scr_units_init_func(Cur,"Fantastic Dragon",25,10,18,spr_cards,Cur-1)
+global.UnitDat_AttackType[Cur,UnitAttackType.Pierce_Atk]=true
 var Cur=UnitID.FanFron_ForestWalker
-scr_units_init_func(Cur,"Apple Bat",15,5,8,spr_cards,Cur-1)
+scr_units_init_func(Cur,"Forest Walker",15,5,8,spr_cards,Cur-1)
 
 
 //Heroes
