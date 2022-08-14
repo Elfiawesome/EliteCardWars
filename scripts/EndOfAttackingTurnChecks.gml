@@ -75,7 +75,6 @@ if global.NetworkObj.object_index=obj_server{
         ds_list_destroy(_l)
     }
     if Tcntr=ds_map_size(TeamMap)-1{
-        show_message("WE HAVE A WINNER")
         if socket_to_instanceid[? mysocket].Team=real(winnerTeam){
             var gea=instance_create(0,0,obj_GameEndAnnouncement);
             gea.image_index=0
