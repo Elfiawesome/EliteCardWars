@@ -13,7 +13,7 @@ for (var k=ds_map_find_first(TeamMap);!is_undefined(k);k=ds_map_find_next(TeamMa
                 Homex=view_wview[0]/2
                 Homey=-view_hview[0]/2+200
                 create_cardholders(Homex,Homey,IsEnemy)
-                var _hero=instance_create(Homex,Homey-230,obj_heroholder);
+                var _hero=instance_create(Homex,Homey-400,obj_heroholder);
                 _hero.mysocket=mysocket
                 _hero.IsEnemy=IsEnemy
                 Hero=_hero
@@ -21,7 +21,7 @@ for (var k=ds_map_find_first(TeamMap);!is_undefined(k);k=ds_map_find_next(TeamMa
                 Homex=view_wview[0]/2
                 Homey=view_hview[0]/2-200
                 create_cardholders(Homex,Homey,IsEnemy)
-                var _hero=instance_create(Homex,Homey+230,obj_heroholder);
+                var _hero=instance_create(Homex,Homey+400,obj_heroholder);
                 _hero.mysocket=mysocket
                 _hero.IsEnemy=IsEnemy
                 Hero=_hero
