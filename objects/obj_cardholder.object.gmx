@@ -274,7 +274,7 @@ draw_set_colour(c_white)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///draw card details
+            <string>///draw card
 if CardID=0{
     if global.SelectedCard!=noone{
         image_alpha=(sin(current_time/100)+1)/2
@@ -284,10 +284,32 @@ if CardID=0{
 }
 
 if CardID=0{exit;}
-if Stats[? "AtkAlrdy"]{draw_set_alpha(0.5)}else{draw_set_alpha(1)}
-draw_self()
-draw_set_alpha(1)
+//draw Card
+var alpha=1;
+if Stats[? "AtkAlrdy"]{alpha=0.8}
+draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,alpha)
 
+//drawing cooldown
+if Stats[? "AbilityCooldownMax"]&gt;0{
+draw_set_alpha(0.4)
+draw_set_color(c_black)
+var wid=sprite_get_width(sprite_index)*image_xscale
+var hei=sprite_get_height(sprite_index)*image_yscale
+
+var newhei=lengthdir_y(y+hei/2-hei*(Stats[? "AbilityCooldown"]/Stats[? "AbilityCooldownMax"]),image_angle)
+Visual_CooldownY = lerp(Visual_CooldownY,newhei,0.2)
+draw_rectangle(
+    x-lengthdir_x(wid/2,image_angle),
+    y+lengthdir_y(hei/2,image_angle),
+    x+lengthdir_x(wid/2,image_angle),
+    Visual_CooldownY,
+false)
+draw_set_alpha(1)
+draw_set_color(c_white)
+}
+
+//draw details
+draw_set_alpha(1)
 draw_text(x,y,Stats[? "IsImmune"])
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
@@ -313,24 +335,6 @@ draw_text(_x,_y,Stats[? "Atk"])
 draw_set_halign(fa_left)
 draw_set_valign(fa_top)
 
-//drawing cooldown
-if Stats[? "AbilityCooldownMax"]&gt;0{
-draw_set_alpha(0.4)
-draw_set_color(c_black)
-var wid=sprite_get_width(sprite_index)*image_xscale
-var hei=sprite_get_height(sprite_index)*image_yscale
-
-var newhei=y+hei/2-hei*(Stats[? "AbilityCooldown"]/Stats[? "AbilityCooldownMax"])
-Visual_CooldownY = lerp(Visual_CooldownY,newhei,0.2)
-draw_rectangle(
-    x-wid/2,
-    y+hei/2,
-    x+wid/2,
-    Visual_CooldownY,
-false)
-draw_set_alpha(1)
-draw_set_color(c_white)
-}
 
 
 </string>

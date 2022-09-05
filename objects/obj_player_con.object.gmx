@@ -31,6 +31,7 @@ cardList=ds_list_create()
 Cardholderlist=ds_list_create()
 Points=0
 IsSpectating=false
+CameraFocus=-1//still not sure about the camera?
 global.HoveredCard=noone
 global.ShowHands=false
 global.SelectedCard=noone
@@ -181,7 +182,6 @@ if global.SelectedCard=noone{
 }
 
 //camera movement
-
 if global.NetworkObj.Turn!=-1{//during player's turn
     var amt=50
     if abs(view_xview[0]-mouse_x)&lt;100{view_xview[0]-=amt}
@@ -269,9 +269,9 @@ if !IsLocal{exit;}
 //Camera Position
 with(global.NetworkObj){
     //camera follow person's battlefield
-    var _con=socket_to_instanceid[? Turnstage[Turn]];
-    view_xview[0]=lerp(view_xview[0],_con.Homex-view_wview[0]/2,0.07)
-    view_yview[0]=lerp(view_yview[0],_con.Homey-view_hview[0]/2,0.07)
+    CameraFocus=socket_to_instanceid[? Turnstage[Turn]];
+    view_xview[0]=lerp(view_xview[0],CameraFocus.Homex-view_wview[0]/2,0.07)
+    view_yview[0]=lerp(view_yview[0],CameraFocus.Homey-view_hview[0]/2,0.07)
     //if my turn
     if Turnstage[Turn]=mysocket{
         if keyboard_check_pressed(vk_space){
