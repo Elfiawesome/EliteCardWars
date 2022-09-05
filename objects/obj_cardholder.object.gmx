@@ -296,12 +296,17 @@ draw_set_color(c_black)
 var wid=sprite_get_width(sprite_index)*image_xscale
 var hei=sprite_get_height(sprite_index)*image_yscale
 
-var newhei=y+hei/2-hei*(Stats[? "AbilityCooldown"]/Stats[? "AbilityCooldownMax"])
-Visual_CooldownY = lerp(Visual_CooldownY,newhei,0.2)
+var proportion = (Stats[? "AbilityCooldown"]/Stats[? "AbilityCooldownMax"])
+if proportion=0{
+    Visual_CooldownY=y-hei/2+hei*proportion
+}else{
+    var newhei=y-hei/2+hei*proportion
+    Visual_CooldownY = lerp(Visual_CooldownY,newhei,0.2)
+}
 draw_rectangle(
-    x-wid/2,
+    x+wid/2+10,
     y+hei/2,
-    x+wid/2,
+    x+wid/2+20,
     Visual_CooldownY,
 false)
 draw_set_alpha(1)
