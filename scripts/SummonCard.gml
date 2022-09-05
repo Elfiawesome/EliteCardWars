@@ -11,6 +11,9 @@ with(argument0){
     Stats[? "Sweep_Atk"]=global.UnitDat_AttackType[CardID,UnitAttackType.Sweep_Atk]
     Stats[? "Pierce_Atk"]=global.UnitDat_AttackType[CardID,UnitAttackType.Pierce_Atk]
     
+    Stats[? "AbilityCooldown"]=global.UnitDat_CooldownMax[CardID]
+    Stats[? "AbilityCooldownMax"]=global.UnitDat_CooldownMax[CardID]
+    
     //Activate Intrinsic Ability
     Activate_Intrinsic_Ability()
 

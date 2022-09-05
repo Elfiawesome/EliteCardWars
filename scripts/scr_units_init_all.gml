@@ -18,6 +18,7 @@ scr_units_init_func(Cur,"Psion",5,15,12,spr_cards,Cur-1);global.UnitDat_AttackTy
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
 global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_OnlyEnemy
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_D2_Psion
+global.UnitDat_CooldownMax[Cur]=2
 
 var Cur=UnitID.D2_Servitor
 scr_units_init_func(Cur,"Servitor",14,10,18,spr_cards,Cur-1)

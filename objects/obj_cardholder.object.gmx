@@ -61,7 +61,8 @@ Stats[? "IsBAImmune"]=0
 Stats[? "IsAbilityStun"]=false
 Stats[? "AbilityLifespan"]=0
 Stats[? "AbilityCooldown"]=0//how many rounds till ability can be used again
-Stats[? "AbilityContstantRun"]=false
+Stats[? "AbilityCooldownMax"]=0
+
 Stats[? "AbilityConstantTarget"]=noone
 Stats[? "LastAttackedBy"]=noone
 
@@ -70,6 +71,7 @@ Stats[? "LastAttackedBy"]=noone
 image_xscale=0.2
 image_yscale=0.2
 image_speed=0
+Visual_CooldownY=0
 
 </string>
           </argument>
@@ -117,11 +119,7 @@ image_speed=0
           <argument>
             <kind>1</kind>
             <string>///Abilities
-if Stats[? "IsAbilityStun"]=false{
-    if Stats[? "AbilityContstantRun"]{
-        //script_execute(global.UnitDat_AbilityScript[CardID],"")
-    }
-}
+
 //debug
 if keyboard_check_pressed(ord("I")){
     if position_meeting(mouse_x,mouse_y,id){
@@ -314,6 +312,25 @@ draw_quad_vector(sprite_get_texture(spr_CardValBackground,1),
 draw_text(_x,_y,Stats[? "Atk"])
 draw_set_halign(fa_left)
 draw_set_valign(fa_top)
+
+//drawing cooldown
+if Stats[? "AbilityCooldownMax"]&gt;0{
+draw_set_alpha(0.4)
+draw_set_color(c_black)
+var wid=sprite_get_width(sprite_index)*image_xscale
+var hei=sprite_get_height(sprite_index)*image_yscale
+
+var newhei=y+hei/2-hei*(Stats[? "AbilityCooldown"]/Stats[? "AbilityCooldownMax"])
+Visual_CooldownY = lerp(Visual_CooldownY,newhei,0.2)
+draw_rectangle(
+    x-wid/2,
+    y+hei/2,
+    x+wid/2,
+    Visual_CooldownY,
+false)
+draw_set_alpha(1)
+draw_set_color(c_white)
+}
 
 
 </string>

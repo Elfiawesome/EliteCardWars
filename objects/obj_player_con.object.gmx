@@ -287,6 +287,7 @@ if global.IsGame{
         }
         if global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
             if keyboard_check_pressed(ord("A")){
+                
                 if position_meeting(mouse_x,mouse_y,obj_cardholder){
                     var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
                     //only if no attacking selected
@@ -317,7 +318,7 @@ if global.IsGame{
                         }
                     }
                     //selecting my untis
-                    if IsAbilityTrigger(_cardholder.CardID,AbilityTrigger.ActivateTarget)!=-1{
+                    if IsAbilityTrigger(_cardholder.CardID,AbilityTrigger.ActivateTarget)!=-1 &amp;&amp; _cardholder.Stats[? "AbilityCooldown"]=0{
                         if _cardholder.CardID!=0{
                         if _cardholder.mysocket=mysocket &amp;&amp; _cardholder.Stats[? "AbilityAlrdy"]=false{
                             if ds_list_find_index(Cardholderlist,_cardholder)!=-1{
@@ -332,7 +333,6 @@ if global.IsGame{
                         }
                         }
                     }
-                    
                 }
             }
         }

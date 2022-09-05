@@ -24,6 +24,7 @@ if scr_ability_Checks_OnlyEnemy(vict,atkr){
     }
     //Ability alrdy done
     atkr.Stats[? "AbilityAlrdy"]=true
+    atkr.Stats[? "AbilityCooldown"]=atkr.Stats[? "AbilityCooldownMax"]
     
     //remove from selected
     if ds_list_find_index(global.NetworkObj.SelectedCardHolders_Ability,MapStr[? "Attacker"])!=-1{
