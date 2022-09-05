@@ -30,6 +30,8 @@ global.UnitDat_AbilityScript[Cur,1]=scr_ability_D2_Servitor_Intrinsic
 
 var Cur=UnitID.D2_Wyvern
 scr_units_init_func(Cur,"Wyvern",25,15,14,spr_cards,Cur-1);global.UnitDat_AttackType[Cur,UnitAttackType.Sweep_Atk]=true
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Activate
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_D2_Wyvern_Activate
 
 //Fantastic Frontier
 var Cur=UnitID.FanFron_AppleBat

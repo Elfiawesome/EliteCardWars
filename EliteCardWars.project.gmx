@@ -149,6 +149,7 @@
         <script>scripts\AttackCardHolder.gml</script>
         <script>scripts\EndOfAttackingTurnChecks.gml</script>
         <script>scripts\ActivateAbilityTarget.gml</script>
+        <script>scripts\ActivateAbility.gml</script>
         <script>scripts\AttackHero.gml</script>
       </scripts>
       <scripts name="grp_server">
@@ -159,6 +160,7 @@
           <script>scripts\svr_SummonCard.gml</script>
           <script>scripts\svr_AttackCardHolder.gml</script>
           <script>scripts\svr_ActivateAbilityTarget.gml</script>
+          <script>scripts\svr_ActivateAbility.gml</script>
           <script>scripts\svr_AttackHero.gml</script>
         </scripts>
         <script>scripts\scr_svr_rp.gml</script>
@@ -171,6 +173,7 @@
         <script>scripts\scr_svr_SUMMONCARD.gml</script>
         <script>scripts\scr_svr_ATTACKCARDHOLDER.gml</script>
         <script>scripts\scr_svr_ACTIVATEABILITYTARGET.gml</script>
+        <script>scripts\scr_svr_ACTIVATEABILITY.gml</script>
         <script>scripts\scr_svr_ATTACKHERO.gml</script>
       </scripts>
       <scripts name="grp_client">
@@ -186,6 +189,7 @@
         <script>scripts\scr_clt_SUMMONCARD.gml</script>
         <script>scripts\scr_clt_ATTACKCARDHOLDER.gml</script>
         <script>scripts\scr_clt_ACTIVATEABILITYTARGET.gml</script>
+        <script>scripts\scr_clt_ACTIVATEABILITY.gml</script>
         <script>scripts\scr_clt_ATTACKHERO.gml</script>
         <script>scripts\scr_clt_PLAYERELIMINATEED.gml</script>
         <script>scripts\scr_clt_PLAYERWIN.gml</script>
@@ -242,6 +246,7 @@
         <script>scripts\scr_ability_D2_Hobgoblin.gml</script>
         <script>scripts\scr_ability_D2_Psion.gml</script>
         <script>scripts\scr_ability_D2_Servitor_ActivateTarget.gml</script>
+        <script>scripts\scr_ability_D2_Wyvern_Activate.gml</script>
         <script>scripts\scr_ability_D2_Servitor_Intrinsic.gml</script>
         <script>scripts\scr_ability_MadnessCombat_Auditor_FriendDeath.gml</script>
         <script>scripts\scr_ability_MadnessCombat_HankJwimbleton_Deathwish.gml</script>

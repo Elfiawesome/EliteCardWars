@@ -287,7 +287,6 @@ if global.IsGame{
         }
         if global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
             if keyboard_check_pressed(ord("A")){
-                
                 if position_meeting(mouse_x,mouse_y,obj_cardholder){
                     var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
                     //only if no attacking selected
@@ -317,7 +316,7 @@ if global.IsGame{
                             }
                         }
                     }
-                    //selecting my untis
+                    //selecting my units
                     if IsAbilityTrigger(_cardholder.CardID,AbilityTrigger.ActivateTarget)!=-1 &amp;&amp; _cardholder.Stats[? "AbilityCooldown"]=0{
                         if _cardholder.CardID!=0{
                         if _cardholder.mysocket=mysocket &amp;&amp; _cardholder.Stats[? "AbilityAlrdy"]=false{
@@ -333,6 +332,33 @@ if global.IsGame{
                         }
                         }
                     }
+                    
+                    //Activate non Target Ability
+                    if IsAbilityTrigger(_cardholder.CardID,AbilityTrigger.Activate)!=-1 &amp;&amp; _cardholder.Stats[? "AbilityCooldown"]=0{
+                        if _cardholder.CardID!=0{
+                        if _cardholder.mysocket=mysocket &amp;&amp; _cardholder.Stats[? "AbilityAlrdy"]=false{
+                            var _map=ds_map_create();
+                            _map[? "AttackerPos"]=_cardholder.Pos
+                            _map[? "AttackerSock"]=_cardholder.mysocket
+                            var _mapstr=json_encode_destroy(_map)
+                            
+                            with(global.NetworkObj){
+                                if global.NetworkObj.object_index=obj_server{
+                                    svr_ActivateAbility(_mapstr)
+                                }
+                                if global.NetworkObj.object_index=obj_client{
+                                    buffer=buffer_create(1024,buffer_fixed,1)
+                                    buffer_write(buffer,buffer_s16,NETWORKPKT.ACTIVATEABILITY)
+                                    buffer_write(buffer,buffer_string,_mapstr)
+                                    network_send_packet(client,buffer,buffer_tell(buffer))
+                                    buffer_delete(buffer)
+                                }
+                            }
+                        }
+                        }
+                    }
+                    
+                    
                 }
             }
         }
