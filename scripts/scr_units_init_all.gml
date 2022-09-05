@@ -64,3 +64,17 @@ scr_units_init_func(Cur,"Mag Agent",25,20,15,spr_cards,Cur-1)
 var Cur=UnitID.MadnessCombat_TheSavior
 scr_units_init_func(Cur,"The Savior",20,15,12,spr_cards,Cur-1)
 
+//Plant VS Zombies
+var Cur=UnitID.PlantVsZombies_AstroVera
+scr_units_init_func(Cur,"Astro Vera",10,10,10,spr_cards,Cur-1)
+var Cur=UnitID.PlantVsZombies_CobCannon
+scr_units_init_func(Cur,"Astro Vera",20,20,20,spr_cards,Cur-1)
+var Cur=UnitID.PlantVsZombies_DoubledMint
+scr_units_init_func(Cur,"Astro Vera",2,1,2,spr_cards,Cur-1)
+var Cur=UnitID.PlantVsZombies_Imitator
+scr_units_init_func(Cur,"Astro Vera",1,0,1,spr_cards,Cur-1)
+var Cur=UnitID.PlantVsZombies_MagnifyingGrass
+scr_units_init_func(Cur,"Astro Vera",1,0,5,spr_cards,Cur-1)
+var Cur=UnitID.PlantVsZombies_Seedling
+scr_units_init_func(Cur,"Astro Vera",1,0,2,spr_cards,Cur-1)
+

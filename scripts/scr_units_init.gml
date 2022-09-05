@@ -21,6 +21,13 @@ enum UnitID{
     MadnessCombat_MagHank,
     MadnessCombat_TheSavior,
     
+    PlantVsZombies_AstroVera,
+    PlantVsZombies_CobCannon,
+    PlantVsZombies_DoubledMint,
+    PlantVsZombies_Imitator,
+    PlantVsZombies_MagnifyingGrass,
+    PlantVsZombies_Seedling,
+    
     UnitID_MAX,
 }
 enum HeroID{
@@ -65,7 +72,7 @@ scr_hero_init_func(Cur,"Zavala",10,0,spr_Heroes,Cur-1)
 
 //how many points at a turn
 global.TurnPointArray[0]=1000
-/*global.TurnPointArray[0]=5
+global.TurnPointArray[0]=5
 global.TurnPointArray[1]=6
 global.TurnPointArray[2]=8
 global.TurnPointArray[3]=11
