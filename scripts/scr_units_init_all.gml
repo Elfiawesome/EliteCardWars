@@ -61,7 +61,6 @@ var Cur=UnitID.MadnessCombat_MagAgent
 scr_units_init_func(Cur,"Mag Agent",25,15,10,spr_cards,Cur-1)
 var Cur=UnitID.MadnessCombat_MagHank
 scr_units_init_func(Cur,"Mag Agent",25,20,15,spr_cards,Cur-1)
-
 var Cur=UnitID.MadnessCombat_TheSavior
 scr_units_init_func(Cur,"The Savior",20,15,12,spr_cards,Cur-1)
 

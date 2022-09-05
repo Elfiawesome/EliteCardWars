@@ -39,8 +39,8 @@ enum UnitAttackType{
 enum AbilityTrigger{
     Default,//default not used
     Passive,//not sure what this supposed to do
-    Activate,
-    ActivateTarget,
+    Activate,//activated when pressed "A" on unit
+    ActivateTarget,//activated when pressed then pressed another on another unit
     Intrinsic,//activated when summoned and updated on every start of the round
     Deathwish,//activated when dead
     FriendDeath,//Activated when cardholder friend is dead
