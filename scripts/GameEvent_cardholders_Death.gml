@@ -24,6 +24,8 @@ Stats[? "IsBAImmune"]=0
 Stats[? "IsAbilityStun"]=false
 Stats[? "AbilityLifespan"]=0
 Stats[? "AbilityCooldown"]=0
-Stats[? "AbilityContstantRun"]=false
+Stats[? "AbilityCooldownMax"]=0
+
 Stats[? "AbilityConstantTarget"]=noone
 Stats[? "LastAttackedBy"]=noone
+Stats[? "Lifespan"]=0

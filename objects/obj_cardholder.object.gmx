@@ -65,6 +65,7 @@ Stats[? "AbilityCooldownMax"]=0
 
 Stats[? "AbilityConstantTarget"]=noone
 Stats[? "LastAttackedBy"]=noone
+Stats[? "Lifespan"]=0
 
 
 //appearance

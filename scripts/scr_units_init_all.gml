@@ -75,6 +75,8 @@ var Cur=UnitID.PlantVsZombies_CobCannon
 scr_units_init_func(Cur,"Cob Cannon",20,20,20,spr_cards,Cur-1);global.UnitDat_AttackType[Cur,UnitAttackType.SpreadAtk]=true
 var Cur=UnitID.PlantVsZombies_DoubledMint
 scr_units_init_func(Cur,"Doubled Mint",2,1,2,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_PlantVsZombies_DoubledMint_Intrinsic
 var Cur=UnitID.PlantVsZombies_Imitator
 scr_units_init_func(Cur,"Imitator",1,0,1,spr_cards,Cur-1)
 var Cur=UnitID.PlantVsZombies_MagnifyingGrass

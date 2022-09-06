@@ -128,8 +128,8 @@ with(Hero){instance_destroy()}
 if IsSpectating{exit;}
 if IsLocal{
 if keyboard_check_pressed(vk_enter){
-    //GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
-    GameEvent_draw_specific_card(UnitID.PlantVsZombies_AstroVera)
+    GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
+    //GameEvent_draw_specific_card(UnitID.PlantVsZombies_DoubledMint)
 }
 if global.SelectedCard=noone{
     if position_meeting(mouse_x,mouse_y,obj_card){
