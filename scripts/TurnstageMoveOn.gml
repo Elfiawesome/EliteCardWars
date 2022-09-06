@@ -16,12 +16,12 @@ if Turn>=0{
     //switching turn types
     if Turn<(array_length_1d(Turnstage)-1){
         Turn++
-        //global.GameStage=GAMESTAGE.PLAYERTURNS
+        CameraFocusNo=Turn
     }else{
-        //global.GameStage=GAMESTAGE.ATTACKINGTURN
         switch(global.GameStage){
             case GAMESTAGE.PLAYERTURNS:
                 Turn=0
+                CameraFocusNo=Turn
                 global.GameStage=GAMESTAGE.ATTACKINGTURN
             break;
             case GAMESTAGE.ATTACKINGTURN:
