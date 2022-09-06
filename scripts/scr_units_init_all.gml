@@ -81,6 +81,8 @@ var Cur=UnitID.PlantVsZombies_Imitator
 scr_units_init_func(Cur,"Imitator",1,0,1,spr_cards,Cur-1)
 var Cur=UnitID.PlantVsZombies_MagnifyingGrass
 scr_units_init_func(Cur,"Magnifying Grass",1,0,5,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Warcry
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_PlantVsZombies_MagnifyingGrass_Warcry
 var Cur=UnitID.PlantVsZombies_Seedling
 scr_units_init_func(Cur,"Seedling",1,0,2,spr_cards,Cur-1)
 

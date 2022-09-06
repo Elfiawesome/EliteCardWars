@@ -28,6 +28,7 @@ if Turn>=0{
                 Turn=0
                 EndOfAttackingTurnChecks()
                 GameLifespan++
+                //reimburse all the players points
                 GameEvent_Con_ReimbursePoints()
                 global.GameStage=GAMESTAGE.PLAYERTURNS
             break;

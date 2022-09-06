@@ -254,6 +254,7 @@
         <script>scripts\scr_ability_PlantVsZombies_AstroVera_Warcry.gml</script>
         <script>scripts\scr_ability_PlantVsZombies_AstroVera_Intrinsic.gml</script>
         <script>scripts\scr_ability_PlantVsZombies_DoubledMint_Intrinsic.gml</script>
+        <script>scripts\scr_ability_PlantVsZombies_MagnifyingGrass_Warcry.gml</script>
         <script>scripts\scr_ability_SPImmune.gml</script>
         <script>scripts\scr_ability_BAImmune.gml</script>
         <script>scripts\scr_ability_instakill.gml</script>

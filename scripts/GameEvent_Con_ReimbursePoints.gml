@@ -1,7 +1,14 @@
 ///GameEvent_Con_ReimbursePoints
-
-var newAmt=global.TurnPointArray[clamp(GameLifespan,0,array_length_1d(global.TurnPointArray)-1)]
-with(socket_to_instanceid[? mysocket].Hero){
-    Stats[? "TotaledReimbursedPoints"]=newAmt-other.socket_to_instanceid[? other.mysocket].Points
+for(var i=0;i<ds_list_size(socketlist);i++){
+    var _con=socket_to_instanceid[? socketlist[| i]]
+    with(_con){
+        var newAmt=global.TurnPointArray[
+                clamp(other.GameLifespan,0,array_length_1d(global.TurnPointArray)-1)
+            ]
+        var Inc=newAmt-Points
+        Points=newAmt
+        with(Hero){
+            Stats[? "TotaledReimbursedPoints"]=Inc
+        }
+    }
 }
-socket_to_instanceid[? mysocket].Points=newAmt
