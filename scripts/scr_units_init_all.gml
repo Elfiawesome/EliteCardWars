@@ -67,6 +67,10 @@ scr_units_init_func(Cur,"The Savior",20,15,12,spr_cards,Cur-1)
 //Plant VS Zombies
 var Cur=UnitID.PlantVsZombies_AstroVera
 scr_units_init_func(Cur,"Astro Vera",10,10,10,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Warcry
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_PlantVsZombies_AstroVera_Warcry
+global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,1]=scr_ability_PlantVsZombies_AstroVera_Intrinsic
 var Cur=UnitID.PlantVsZombies_CobCannon
 scr_units_init_func(Cur,"Cob Cannon",20,20,20,spr_cards,Cur-1)
 var Cur=UnitID.PlantVsZombies_DoubledMint

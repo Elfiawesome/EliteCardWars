@@ -14,7 +14,8 @@ with(argument0){
     Stats[? "AbilityCooldown"]=global.UnitDat_CooldownMax[CardID]
     Stats[? "AbilityCooldownMax"]=global.UnitDat_CooldownMax[CardID]
     
+    //Activate Warcry Ability
+    Activate_Warcry_Ability()
     //Activate Intrinsic Ability
     Activate_Intrinsic_Ability()
-
 }

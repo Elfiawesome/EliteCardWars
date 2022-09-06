@@ -1,4 +1,4 @@
-///scr_ability_D2_Servitor_Intrinsic()
+///scr_ability_D2_Servitor_()
 var MapStr=argument0;
 
 

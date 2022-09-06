@@ -233,6 +233,7 @@
       <scripts name="grp_ability_scr">
         <scripts name="grp_Ability">
           <script>scripts\Activate_Intrinsic_Ability.gml</script>
+          <script>scripts\Activate_Warcry_Ability.gml</script>
           <script>scripts\Activate_Deathwish_Ability.gml</script>
           <script>scripts\Activate_Damaged_Ability.gml</script>
           <script>scripts\Activate_FriendDeath_Ability.gml</script>
@@ -250,6 +251,8 @@
         <script>scripts\scr_ability_D2_Servitor_Intrinsic.gml</script>
         <script>scripts\scr_ability_MadnessCombat_Auditor_FriendDeath.gml</script>
         <script>scripts\scr_ability_MadnessCombat_HankJwimbleton_Deathwish.gml</script>
+        <script>scripts\scr_ability_PlantVsZombies_AstroVera_Warcry.gml</script>
+        <script>scripts\scr_ability_PlantVsZombies_AstroVera_Intrinsic.gml</script>
         <script>scripts\scr_ability_SPImmune.gml</script>
         <script>scripts\scr_ability_BAImmune.gml</script>
         <script>scripts\scr_ability_instakill.gml</script>
