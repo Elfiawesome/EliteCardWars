@@ -125,8 +125,7 @@ with(Hero){instance_destroy()}
           <argument>
             <kind>1</kind>
             <string>///Managing of Hand Cards
-if IsSpectating{exit;}
-if IsLocal{
+if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
 if keyboard_check_pressed(vk_enter){
     GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
     //GameEvent_draw_specific_card(UnitID.PlantVsZombies_DoubledMint)
@@ -190,8 +189,8 @@ if global.NetworkObj.Turn!=-1{//during player's turn
     if abs(view_yview[0]-mouse_y)&lt;100{view_yview[0]-=amt}
     if abs((view_yview[0]+view_hview[0])-mouse_y)&lt;200{view_yview[0]+=amt}
 }
-
 }
+
 </string>
           </argument>
         </arguments>
@@ -213,7 +212,8 @@ if global.NetworkObj.Turn!=-1{//during player's turn
           <argument>
             <kind>1</kind>
             <string>///Pressing Q to start game
-if IsLocal{
+if IsLocal &amp;&amp; !global.IsGame{
+
 if keyboard_check_pressed(ord("Q")){
     //only if server
     if global.NetworkObj.object_index=obj_server{
@@ -239,8 +239,8 @@ if keyboard_check_pressed(ord("Q")){
         }
     }
 }
-}
 
+}
 
 
 </string>
@@ -264,10 +264,7 @@ if keyboard_check_pressed(ord("Q")){
           <argument>
             <kind>1</kind>
             <string>///When Your Turn
-if IsSpectating{exit;}
-if !global.IsGame{exit;}
-if !IsLocal{exit;}
-
+if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
 //Camera Position
 with(global.NetworkObj){
     //camera follow person's battlefield
@@ -388,7 +385,7 @@ if global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
         }
     }
 }
-
+}
 
 </string>
           </argument>
@@ -572,7 +569,25 @@ if global.IsGame{
           <argument>
             <kind>1</kind>
             <string>//draw event
-draw_text(x,y,name+": "+string(Team))
+if IsLocal &amp;&amp; !global.IsGame{
+var sl=global.NetworkObj.socketlist
+var stid=global.NetworkObj.socket_to_instanceid
+
+with(global.NetworkObj){update_json_TeamMap()}
+var _map=global.NetworkObj.TeamMap
+var ii=0
+for(var k=ds_map_find_first(_map);!is_undefined(k);k=ds_map_find_next(_map,k)){
+    var v=_map[? k];
+    var _l=ds_list_create();
+    ds_list_read(_l,v)
+    for(var i=0;i&lt;ds_list_size(_l);i++){
+        draw_text(100+ii*200,100+i*30,stid[? real(_l[| i])].name)
+    }
+    ds_list_destroy(_l)
+    ii++
+}
+
+}
 
 
 

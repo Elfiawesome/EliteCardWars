@@ -25,20 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>scr_init_network()
+            <string>///Game variables
+inherit_svrclt_create()
 
-
-global.NetworkObj=id
-//create client socket
-var type=network_socket_tcp
-var port=3115
-var socket=network_create_socket(type)
-client=network_connect(socket,"127.0.0.1",port)
-if client&lt;0{
-    show_message("Failed to connect")
-}
-
-//my player object is only created when I receive PLAYERINIT from the server
 </string>
           </argument>
         </arguments>
@@ -59,9 +48,20 @@ if client&lt;0{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Game variables
-inherit_svrclt_create()
+            <string>scr_init_network()
 
+
+global.NetworkObj=id
+//create client socket
+var type=network_socket_tcp
+var port=3115
+var socket=network_create_socket(type)
+client=network_connect(socket,"127.0.0.1",port)
+if client&lt;0{
+    show_message("Failed to connect")
+}
+
+//my player object is only created when I receive PLAYERINIT from the server
 </string>
           </argument>
         </arguments>

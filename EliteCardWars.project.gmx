@@ -231,17 +231,17 @@
         <script>scripts\draw_curve.gml</script>
       </scripts>
       <scripts name="grp_ability_scr">
+        <scripts name="grp_Checks">
+          <script>scripts\scr_ability_Checks_none.gml</script>
+          <script>scripts\scr_ability_Checks_OnlyEnemy.gml</script>
+          <script>scripts\scr_ability_Checks_OnlyAllies.gml</script>
+        </scripts>
         <scripts name="grp_Ability">
           <script>scripts\Activate_Intrinsic_Ability.gml</script>
           <script>scripts\Activate_Warcry_Ability.gml</script>
           <script>scripts\Activate_Deathwish_Ability.gml</script>
           <script>scripts\Activate_Damaged_Ability.gml</script>
           <script>scripts\Activate_FriendDeath_Ability.gml</script>
-        </scripts>
-        <scripts name="grp_Checks">
-          <script>scripts\scr_ability_Checks_none.gml</script>
-          <script>scripts\scr_ability_Checks_OnlyEnemy.gml</script>
-          <script>scripts\scr_ability_Checks_OnlyAllies.gml</script>
         </scripts>
         <script>scripts\scr_ability_none.gml</script>
         <script>scripts\scr_ability_D2_Hobgoblin.gml</script>
