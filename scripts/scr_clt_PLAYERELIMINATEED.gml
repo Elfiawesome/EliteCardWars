@@ -8,3 +8,5 @@ if real(sock)=mysocket{
     var gea=instance_create(0,0,obj_GameEndAnnouncement);
     gea.image_index=1
 }
+update_json_TeamMap()
+update_Turnstage(TeamMap)

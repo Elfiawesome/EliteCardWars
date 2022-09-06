@@ -148,6 +148,7 @@
         <script>scripts\SummonCard.gml</script>
         <script>scripts\AttackCardHolder.gml</script>
         <script>scripts\EndOfAttackingTurnChecks.gml</script>
+        <script>scripts\CheckingForVictoryOrEliminations.gml</script>
         <script>scripts\ActivateAbilityTarget.gml</script>
         <script>scripts\ActivateAbility.gml</script>
         <script>scripts\AttackHero.gml</script>

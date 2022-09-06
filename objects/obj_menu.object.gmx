@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>NextRoomInit=0
-ExecuteShellOpenwindow()
+repeat(3){ExecuteShellOpenwindow()}
 randomize()
 draw_set_font(ft_number)
 global.PlayerOnlineName=choose(

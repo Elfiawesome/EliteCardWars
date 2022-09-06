@@ -7,4 +7,5 @@ for(var i=0;i<ds_list_size(Cardholderlist);i++){
 ds_list_clear(Cardholderlist)
 //destroy hero
 with(Hero){instance_destroy()}
+Hero=-1
 IsSpectating=true

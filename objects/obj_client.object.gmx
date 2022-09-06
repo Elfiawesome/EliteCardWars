@@ -119,6 +119,7 @@ switch(type){
             <kind>1</kind>
             <string>///Debugging
 if keyboard_check_pressed(ord("P")){IsDebug=!IsDebug}
+
 if !IsDebug{exit;}
 draw_text(0,0,mysocket)
 draw_text(0,30,"Animator Count: "+string(instance_number(obj_animator)))

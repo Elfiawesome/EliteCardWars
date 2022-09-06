@@ -13,6 +13,8 @@ if Turn>=0{
     }
     ds_list_clear(global.NetworkObj.SelectedCardHolders_Ability)
     ds_list_clear(global.NetworkObj.SelectedCardHolders)
+    
+    
     //switching turn types
     if Turn<(array_length_1d(Turnstage)-1){
         Turn++
