@@ -3,8 +3,8 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
-  <persistent>-1</persistent>
+  <depth>-10</depth>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,20 +25,52 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>NextRoomInit=0
-ExecuteShellOpenwindow()
-randomize()
-draw_set_font(ft_number)
-global.PlayerOnlineName=choose(
-    "Hawthtrone",
-    "Player 1",
-    "Player 2",
-    "Player 3",
-    "2",
-    "500",
-    "No ping",
-    "Namesr",
-)
+            <string>scr_units_init()//pls remove this later
+cardlist=ds_list_create()
+Objlist=ds_list_create()
+HorCardsMax=5//max number of cards horizontally
+AnimationStage=0
+//starting position
+x=-view_wport[0]
+y=0
+backtgtx=0
+//scrolling
+scrolamt=0
+scrollbarY=0
+
+//testing cardlist
+repeat(7){
+ds_list_add(cardlist,irandom_range(1,UnitID.UnitID_MAX-1))
+}
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//destroy ds
+ds_list_destroy(cardlist)
+ds_list_destroy(Objlist)
+
 </string>
           </argument>
         </arguments>
@@ -61,26 +93,79 @@ global.PlayerOnlineName=choose(
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if keyboard_check_pressed(ord("S")){
-    //server
-    NextRoomInit=obj_server
-    room_goto(rm_online)
+            <string>///animation stage checks
+switch(AnimationStage){
+    case 0://bring black background
+        if x &gt; (-view_wview[0]/4*3){
+            AnimationStage=1
+        }
+    break;
+    case 1://create the cards
+        var sepx=view_wview[0]/(HorCardsMax+1)
+        var sepy=400
+        var xi=0;
+        var yi=0;
+        for(var i=0;i&lt;ds_list_size(cardlist);i++){
+            var _child=instance_create(0,0,obj_cardselection);
+            _child.IsControl=false
+            _child.CardID=cardlist[| i]
+            ds_list_add(Objlist,_child)
+            _child.tgtx = sepx+sepx*xi
+            _child.tgty = 250+sepy*yi
+            //add to variable
+            xi++
+            if xi&gt;(HorCardsMax-1){xi=0;yi++}
+        }
+        AnimationStage=2
+    break;
+    case 3://pack up all
+        backtgtx=-view_wview[0]
+        for(var i=0;i&lt;ds_list_size(Objlist);i++){
+            Objlist[| i].tgtx=-200
+        }
+        if abs(x-backtgtx)&lt;0.1{
+            AnimationStage=4
+        }
+    break;
+    case 4://destroy
+        for(var i=0;i&lt;ds_list_size(Objlist);i++){
+            with(Objlist[| i]){instance_destroy()}
+        }
+        instance_destroy()
+    break;
 }
-if keyboard_check_pressed(ord("C")){
-    //Connect to server as client
-    NextRoomInit=obj_client
-    room_goto(rm_online)
-}
-if keyboard_check_pressed(vk_f1){
-    //open new window
-    ExecuteShellOpenwindow()
+
+//keep background
+x=lerp(x,backtgtx,0.2)
+
+if AnimationStage&lt;3{
+    //scrolling
+    var amt=5
+    scrollbarY=lerp(scrollbarY,scrolamt,0.6)
+    if mouse_wheel_down(){
+        if scrolamt&gt;(-((ds_list_size(Objlist) div HorCardsMax)*8)){//idk what this mean but it works :/
+            scrolamt--
+        }
+    }
+    if mouse_wheel_up(){
+        if scrolamt&lt;0{
+            scrolamt++
+        }
+    }
+    for(var i=0;i&lt;ds_list_size(Objlist);i++){
+        Objlist[| i].y+=scrolamt*amt
+    }
+    //exit out of gui
+    if keyboard_check_pressed(vk_escape){
+        AnimationStage=3
+    }
 }
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="4">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -97,33 +182,19 @@ if keyboard_check_pressed(vk_f1){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if NextRoomInit!=0{
-    var _o=instance_create(0,0,NextRoomInit)
-    instance_destroy()
-}
+            <string>draw_set_alpha(0.2)
+draw_set_color(c_black)
+//draw black background
+draw_rectangle(x,y,x+view_wport[0],y+view_hport[0],false)
+
+//draw scrollbar
+draw_set_alpha(0.2)
+var proportion=abs( (scrollbarY-1) / ((ds_list_size(Objlist) div HorCardsMax)*8) )
+draw_rectangle(x+view_wview[0]-30,0,x+view_wport[0],view_hport[0]*proportion,false)
+
+draw_set_alpha(1)
+draw_set_color(c_white)
 </string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string></string>
           </argument>
         </arguments>
       </action>

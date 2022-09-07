@@ -183,8 +183,40 @@ switch(type){
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///scalling
+//need add some kind of scalling feature
+if keyboard_check_pressed(ord("S")){
+screen_width = display_get_width();
+screen_height = display_get_height();
+surface_resize(application_surface, screen_width, screen_height)
+display_set_gui_size(screen_width, screen_height)
+window_set_size(screen_width, screen_height);
+window_set_fullscreen(true);
+
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Debugging
 if keyboard_check_pressed(ord("P")){IsDebug=!IsDebug}
+if keyboard_check_pressed(ord("R")){instance_create(0,0,obj_cardselector_control)}
 if !IsDebug{exit;}
 var CurY=0
 draw_text(0,CurY,mysocket);CurY+=30

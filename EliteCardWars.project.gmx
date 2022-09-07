@@ -230,6 +230,7 @@
       <scripts name="grp_draw_functions">
         <script>scripts\draw_quad_vector.gml</script>
         <script>scripts\draw_curve.gml</script>
+        <script>scripts\draw_sprite_ext_if_mouse_hover.gml</script>
       </scripts>
       <scripts name="grp_ability_scr">
         <scripts name="grp_Checks">
@@ -294,6 +295,10 @@
       <object>objects\obj_cardholder</object>
       <object>objects\obj_heroholder</object>
       <object>objects\obj_GameEndAnnouncement</object>
+      <objects name="selection">
+        <object>objects\obj_cardselection</object>
+        <object>objects\obj_cardselector_control</object>
+      </objects>
     </objects>
   </objects>
   <rooms name="rooms">
