@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>CardID=0
+Parent=-1
 //scalling
 OriScale=0.3
 scale=OriScale
@@ -70,6 +71,11 @@ if point_in_rectangle(msx,msy,
     y+sprite_get_height(sprite)/2*scale,
 ){
     scale = OriScale + sin(current_time/100)*0.01
+    if mouse_check_button_pressed(mb_left){
+        if Parent!=-1{
+            Parent.SelectedCardID=CardID
+        }
+    }
 }else{
     scale = OriScale
 }

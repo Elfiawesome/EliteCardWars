@@ -216,7 +216,6 @@ window_set_fullscreen(true);
             <kind>1</kind>
             <string>///Debugging
 if keyboard_check_pressed(ord("P")){IsDebug=!IsDebug}
-if keyboard_check_pressed(ord("R")){instance_create(0,0,obj_cardselector_control)}
 if !IsDebug{exit;}
 var CurY=0
 draw_text(0,CurY,mysocket);CurY+=30

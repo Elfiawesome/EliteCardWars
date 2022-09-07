@@ -28,6 +28,7 @@
             <string>scr_units_init()//pls remove this later
 cardlist=ds_list_create()
 Objlist=ds_list_create()
+SelectedCardID=0//current selection of card
 HorCardsMax=5//max number of cards horizontally
 AnimationStage=0
 //starting position
@@ -37,13 +38,6 @@ backtgtx=0
 //scrolling
 scrolamt=0
 scrollbarY=0
-
-//testing cardlist
-repeat(7){
-ds_list_add(cardlist,irandom_range(1,UnitID.UnitID_MAX-1))
-}
-
-
 
 </string>
           </argument>
@@ -107,11 +101,11 @@ switch(AnimationStage){
         var yi=0;
         for(var i=0;i&lt;ds_list_size(cardlist);i++){
             var _child=instance_create(0,0,obj_cardselection);
-            _child.IsControl=false
+            ds_list_add(Objlist,_child)//add to obj list
             _child.CardID=cardlist[| i]
-            ds_list_add(Objlist,_child)
             _child.tgtx = sepx+sepx*xi
             _child.tgty = 250+sepy*yi
+            _child.Parent=id
             //add to variable
             xi++
             if xi&gt;(HorCardsMax-1){xi=0;yi++}
@@ -154,6 +148,10 @@ if AnimationStage&lt;3{
     }
     for(var i=0;i&lt;ds_list_size(Objlist);i++){
         Objlist[| i].y+=scrolamt*amt
+    }
+    //selection
+    if SelectedCardID&gt;0{
+        AnimationStage=3
     }
     //exit out of gui
     if keyboard_check_pressed(vk_escape){
