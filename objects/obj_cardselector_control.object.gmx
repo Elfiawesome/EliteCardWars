@@ -28,6 +28,7 @@
             <string>scr_units_init()//pls remove this later
 cardlist=ds_list_create()
 Objlist=ds_list_create()
+CardHolderInitiator=-1//the cardholder whom started this
 SelectedCardID=0//current selection of card
 HorCardsMax=5//max number of cards horizontally
 AnimationStage=0

@@ -151,6 +151,7 @@
         <script>scripts\CheckingForVictoryOrEliminations.gml</script>
         <script>scripts\ActivateAbilityTarget.gml</script>
         <script>scripts\ActivateAbility.gml</script>
+        <script>scripts\ActivateAfterCardSelection.gml</script>
         <script>scripts\AttackHero.gml</script>
       </scripts>
       <scripts name="grp_server">
@@ -162,6 +163,7 @@
           <script>scripts\svr_AttackCardHolder.gml</script>
           <script>scripts\svr_ActivateAbilityTarget.gml</script>
           <script>scripts\svr_ActivateAbility.gml</script>
+          <script>scripts\svr_ActivateAfterCardSelection.gml</script>
           <script>scripts\svr_AttackHero.gml</script>
         </scripts>
         <script>scripts\scr_svr_rp.gml</script>
@@ -169,13 +171,16 @@
         <script>scripts\scr_svr_disconnect.gml</script>
         <script>scripts\scr_svr_PLAYERINIT.gml</script>
         <script>scripts\scr_svr_PING.gml</script>
-        <script>scripts\scr_svr_TURNMOVEON.gml</script>
-        <script>scripts\scr_svr_ATTACKINGPHASEISREADY.gml</script>
-        <script>scripts\scr_svr_SUMMONCARD.gml</script>
-        <script>scripts\scr_svr_ATTACKCARDHOLDER.gml</script>
-        <script>scripts\scr_svr_ACTIVATEABILITYTARGET.gml</script>
-        <script>scripts\scr_svr_ACTIVATEABILITY.gml</script>
-        <script>scripts\scr_svr_ATTACKHERO.gml</script>
+        <scripts name="grp_tfr [Useless scripts]">
+          <script>scripts\scr_svr_TURNMOVEON.gml</script>
+          <script>scripts\scr_svr_ATTACKINGPHASEISREADY.gml</script>
+          <script>scripts\scr_svr_SUMMONCARD.gml</script>
+          <script>scripts\scr_svr_ATTACKCARDHOLDER.gml</script>
+          <script>scripts\scr_svr_ACTIVATEABILITYTARGET.gml</script>
+          <script>scripts\scr_svr_ACTIVATEABILITY.gml</script>
+          <script>scripts\scr_svr_ACTIVATEAFTERCARDSELECTION.gml</script>
+          <script>scripts\scr_svr_ATTACKHERO.gml</script>
+        </scripts>
       </scripts>
       <scripts name="grp_client">
         <script>scripts\scr_clt_rp.gml</script>
@@ -185,15 +190,18 @@
         <script>scripts\scr_clt_PLAYERDISCONNECT.gml</script>
         <script>scripts\scr_clt_PING.gml</script>
         <script>scripts\scr_clt_STARTGAME.gml</script>
-        <script>scripts\scr_clt_TURNMOVEON.gml</script>
-        <script>scripts\scr_clt_ATTACKINGPHASEISREADY.gml</script>
-        <script>scripts\scr_clt_SUMMONCARD.gml</script>
-        <script>scripts\scr_clt_ATTACKCARDHOLDER.gml</script>
-        <script>scripts\scr_clt_ACTIVATEABILITYTARGET.gml</script>
-        <script>scripts\scr_clt_ACTIVATEABILITY.gml</script>
-        <script>scripts\scr_clt_ATTACKHERO.gml</script>
-        <script>scripts\scr_clt_PLAYERELIMINATEED.gml</script>
-        <script>scripts\scr_clt_PLAYERWIN.gml</script>
+        <scripts name="grp_tfr [Useless scripts]">
+          <script>scripts\scr_clt_TURNMOVEON.gml</script>
+          <script>scripts\scr_clt_ATTACKINGPHASEISREADY.gml</script>
+          <script>scripts\scr_clt_SUMMONCARD.gml</script>
+          <script>scripts\scr_clt_ATTACKCARDHOLDER.gml</script>
+          <script>scripts\scr_clt_ACTIVATEABILITYTARGET.gml</script>
+          <script>scripts\scr_clt_ACTIVATEABILITY.gml</script>
+          <script>scripts\scr_clt_ACTIVATEAFTERCARDSELECTION.gml</script>
+          <script>scripts\scr_clt_ATTACKHERO.gml</script>
+          <script>scripts\scr_clt_PLAYERELIMINATEED.gml</script>
+          <script>scripts\scr_clt_PLAYERWIN.gml</script>
+        </scripts>
       </scripts>
       <scripts name="functions">
         <script>scripts\scr_init_player.gml</script>
@@ -256,6 +264,8 @@
         <script>scripts\scr_ability_PlantVsZombies_AstroVera_Warcry.gml</script>
         <script>scripts\scr_ability_PlantVsZombies_AstroVera_Intrinsic.gml</script>
         <script>scripts\scr_ability_PlantVsZombies_DoubledMint_Intrinsic.gml</script>
+        <script>scripts\scr_ability_PlantVsZombies_Imitator_Warcry.gml</script>
+        <script>scripts\scr_ability_PlantVsZombies_Imitator_AfterCardSelection.gml</script>
         <script>scripts\scr_ability_PlantVsZombies_MagnifyingGrass_Warcry.gml</script>
         <script>scripts\scr_ability_SPImmune.gml</script>
         <script>scripts\scr_ability_BAImmune.gml</script>
@@ -265,11 +275,17 @@
         <script>scripts\GameEvent_cardholders_Damaged.gml</script>
         <script>scripts\GameEvent_cardholders_DealDamage.gml</script>
         <script>scripts\GameEvent_cardholders_Death.gml</script>
+        <script>scripts\GameEvent_cardholders_Transform.gml</script>
         <script>scripts\GameEvent_cardholders_Clear.gml</script>
         <script>scripts\GameEvent_draw_specific_card.gml</script>
         <script>scripts\GameEvent_cardholders_ReceiveImmunity.gml</script>
         <script>scripts\GameEvent_Con_ReimbursePoints.gml</script>
         <script>scripts\GameEvent_Con_HeroDeath.gml</script>
+      </scripts>
+      <scripts name="grp_con_scripts">
+        <script>scripts\player_con_CameraPosition.gml</script>
+        <script>scripts\player_con_AbilitySelection.gml</script>
+        <script>scripts\player_con_CardSelectorControl.gml</script>
       </scripts>
       <script>scripts\scr_ValidAttackSpot.gml</script>
       <script>scripts\IsSPAtk.gml</script>

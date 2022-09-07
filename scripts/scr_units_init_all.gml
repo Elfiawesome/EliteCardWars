@@ -79,6 +79,10 @@ global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_PlantVsZombies_DoubledMint_Intrinsic
 var Cur=UnitID.PlantVsZombies_Imitator
 scr_units_init_func(Cur,"Imitator",1,0,1,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Warcry
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_PlantVsZombies_Imitator_Warcry
+global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.AfterCardSelection
+global.UnitDat_AbilityScript[Cur,1]=scr_ability_PlantVsZombies_Imitator_AfterCardSelection
 var Cur=UnitID.PlantVsZombies_MagnifyingGrass
 scr_units_init_func(Cur,"Magnifying Grass",1,0,5,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Warcry

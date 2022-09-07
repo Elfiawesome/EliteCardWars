@@ -31,6 +31,9 @@ switch(type){
     case NETWORKPKT.ACTIVATEABILITY:
         scr_svr_ACTIVATEABILITY(socket,buffer)
     break;
+    case NETWORKPKT.ACTIVATEAFTERCARDSELECTION:
+        scr_svr_ACTIVATEAFTERCARDSELECTION(socket,buffer)
+    break;
     case NETWORKPKT.ATTACKHERO:
         scr_svr_ATTACKHERO(socket,buffer)
     break;
