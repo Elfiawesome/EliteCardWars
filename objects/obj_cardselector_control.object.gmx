@@ -186,6 +186,25 @@ draw_set_color(c_black)
 //draw black background
 draw_rectangle(x,y,x+view_wport[0],y+view_hport[0],false)
 
+//drawing all the cards
+for(var i=0;i&lt;ds_list_size(Objlist);i++){
+    with(Objlist[| i]){
+        if CardID!=0{
+        draw_sprite_ext(
+            global.UnitDat_Sprite[CardID],
+            global.UnitDat_Image[CardID],
+            x,y,scale,scale,0,c_white,1
+        )
+        }
+    }
+}
+
+//draw title
+draw_set_halign(fa_center)
+draw_text(x+view_wport[0]/2,y+10,"Select Card")
+draw_text(x+view_wport[0]/2,y+25,"Press 'esc' to cancel")
+draw_set_valign(fa_left)
+
 //draw scrollbar
 draw_set_alpha(0.2)
 var proportion=abs( (scrollbarY-1) / ((ds_list_size(Objlist) div HorCardsMax)*8) )

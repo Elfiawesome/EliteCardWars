@@ -301,8 +301,6 @@ draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_ang
 
 //drawing cooldown
 if Stats[? "AbilityCooldownMax"]&gt;0{
-draw_set_alpha(0.4)
-draw_set_color(c_black)
 var wid=sprite_get_width(sprite_index)*image_xscale
 var hei=sprite_get_height(sprite_index)*image_yscale
 
@@ -310,7 +308,17 @@ var proportion = (Stats[? "AbilityCooldown"]/Stats[? "AbilityCooldownMax"])
 var newhei=y-hei/2+hei*proportion
 Visual_CooldownY = lerp(Visual_CooldownY,newhei,0.15)
 
-draw_rectangle(
+draw_set_alpha(0.2)
+draw_set_color(c_white)
+draw_rectangle(//back rectangle
+    x+wid/2+10,
+    y+hei/2,
+    x+wid/2+11,
+    y-hei/2,
+false)
+draw_set_alpha(0.4)
+draw_set_color(c_black)
+draw_rectangle(//front rectangle
     x+wid/2+10,
     y+hei/2,
     x+wid/2+20,
