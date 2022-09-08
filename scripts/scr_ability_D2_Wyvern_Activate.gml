@@ -3,18 +3,21 @@ var MapStr=argument0;
 
 var atkr=MapStr[? "Attacker"]
 
-
 with(atkr){
-    switch(Stats[? "CrossAtk"]){
+    var _mCA=Stats[? "Multi_CrossAtk"];
+    var _mSwA=Stats[? "Multi_Sweep_Atk"];
+    
+    switch(ds_map_exists(_mCA,string(id))){
         case true:
-            Stats[? "CrossAtk"]=false
-            Stats[? "Sweep_Atk"]=true
+            _mCA[? string(id)]=false
+            _mSwA[? string(id)]=true
         break;
         case false:
-            Stats[? "CrossAtk"]=true
-            Stats[? "Sweep_Atk"]=false
+            _mCA[? string(id)]=true
+            _mSwA[? string(id)]=false
         break;
     }
+    player_con_CardholdersUpdateMultiStats()
 }
 ds_map_destroy(MapStr)
 

@@ -47,9 +47,13 @@ Stats[? "Pt"]=0
 Stats[? "AtkAlrdy"]=false
 Stats[? "AbilityAlrdy"]=false
 //attack types
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_CrossAtk",m);
 Stats[? "CrossAtk"]=false
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_SpreadAtk",m);
 Stats[? "SpreadAtk"]=false
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_Sweep_Atk",m);
 Stats[? "Sweep_Atk"]=false
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_Pierce_Atk",m);
 Stats[? "Pierce_Atk"]=false
 Stats[? "Sp_Atk"]=false
 //Character states
@@ -371,7 +375,7 @@ if Stats[? "CrossAtk"]{
     var _y=y+sprite_get_height(sprite_index)*image_yscale/2
     draw_sprite_ext(spr_AttackType,0,_x,_y,0.03,0.03,0,c_white,1)
 }
-if Stats[? "PierceAtk"]{
+if Stats[? "Pierce_Atk"]{
     var _x=x-sprite_get_width(sprite_index)*image_xscale/2+50
     var _y=y+sprite_get_height(sprite_index)*image_yscale/2
     draw_sprite_ext(spr_AttackType,1,_x,_y,0.03,0.03,0,c_white,1)

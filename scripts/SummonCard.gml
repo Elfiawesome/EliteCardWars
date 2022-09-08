@@ -6,10 +6,11 @@ with(argument0){
     Stats[? "Base_Atk"]=global.UnitDat_Atk[CardID]
     Stats[? "Atk"]=Stats[? "Base_Atk"]
     
-    Stats[? "CrossAtk"]=global.UnitDat_AttackType[CardID,UnitAttackType.CrossAtk]
-    Stats[? "SpreadAtk"]=global.UnitDat_AttackType[CardID,UnitAttackType.SpreadAtk]
-    Stats[? "Sweep_Atk"]=global.UnitDat_AttackType[CardID,UnitAttackType.Sweep_Atk]
-    Stats[? "Pierce_Atk"]=global.UnitDat_AttackType[CardID,UnitAttackType.Pierce_Atk]
+    
+    var ms=Stats[? "Multi_CrossAtk"];ms[? string(id)]=global.UnitDat_AttackType[CardID,UnitAttackType.CrossAtk]
+    var ms=Stats[? "Multi_SpreadAtk"];ms[? string(id)]=global.UnitDat_AttackType[CardID,UnitAttackType.SpreadAtk]
+    var ms=Stats[? "Multi_Sweep_Atk"];ms[? string(id)]=global.UnitDat_AttackType[CardID,UnitAttackType.Sweep_Atk]
+    var ms=Stats[? "Multi_Pierce_Atk"];ms[? string(id)]=global.UnitDat_AttackType[CardID,UnitAttackType.Pierce_Atk]
     
     Stats[? "AbilityCooldown"]=global.UnitDat_CooldownMax[CardID]
     Stats[? "AbilityCooldownMax"]=global.UnitDat_CooldownMax[CardID]
@@ -18,4 +19,6 @@ with(argument0){
     Activate_Warcry_Ability()
     //Activate Intrinsic Ability
     Activate_Intrinsic_Ability()
+    
+    player_con_CardholdersUpdateMultiStats()
 }

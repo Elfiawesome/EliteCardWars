@@ -15,6 +15,8 @@ if scr_ability_Checks_OnlyAllies(vict,atkr){
     with(vict){
         var _mii=Stats[? "Multi_IsImmune"];
         _mii[? string(atkr)]=1
+        var _mii=Stats[? "Multi_CrossAtk"];
+        _mii[? string(atkr)]=1
         player_con_CardholdersUpdateMultiStats()
     }
     with(atkr){
