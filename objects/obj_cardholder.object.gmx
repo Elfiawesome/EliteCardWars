@@ -53,9 +53,13 @@ Stats[? "Sweep_Atk"]=false
 Stats[? "Pierce_Atk"]=false
 Stats[? "Sp_Atk"]=false
 //Character states
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsFrozen",m);
 Stats[? "IsFrozen"]=0
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsImmune",m);
 Stats[? "IsImmune"]=0
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsSPImmune",m);
 Stats[? "IsSPImmune"]=0
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsBAImmune",m);
 Stats[? "IsBAImmune"]=0
 
 //Hidden stats

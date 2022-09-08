@@ -15,6 +15,8 @@ for(var k=ds_map_find_first(_map);!is_undefined(k);k=ds_map_find_next(_map,k)){
         var _cardholderObj=_con.Cardholderlist[| l];///get controller's cardholder list
         _cardholderObj.CardID=NewStats[? "CardID"]
         ds_map_delete(NewStats,"CardID")
+        ds_map_destroy(_cardholderObj.Stats)
+        _cardholderObj.Stats = ds_map_create()
         ds_map_copy(_cardholderObj.Stats,NewStats)
     }
 }

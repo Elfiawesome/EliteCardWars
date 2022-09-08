@@ -45,11 +45,17 @@ for(var i=0;i<ds_list_size(socketlist);i++){
         for(var ii=0;ii<ds_list_size(Cardholderlist);ii++){
             with(Cardholderlist[| ii]){
                 //reducing stats timer
-                if Stats[? "IsFrozen"]!=0{Stats[? "IsFrozen"]-=1}
-                if Stats[? "IsImmune"]!=0{Stats[? "IsImmune"]-=1}
+                var _m=Stats[? "Multi_IsFrozen"];
+                for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;}else{ds_map_delete(_m,k)}}
+                var _m=Stats[? "Multi_IsImmune"];
+                for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;}else{ds_map_delete(_m,k)}}
+                var _m=Stats[? "Multi_IsSPImmune"];
+                for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;}else{ds_map_delete(_m,k)}}
+                var _m=Stats[? "Multi_IsBAImmune"];
+                for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;}else{ds_map_delete(_m,k)}}
+                player_con_CardholdersUpdateMultiStats()
+                
                 if Stats[? "AbilityCooldown"]!=0{Stats[? "AbilityCooldown"]-=1}
-                if Stats[? "IsSPImmune"]!=0{Stats[? "IsSPImmune"]-=1}
-                if Stats[? "IsBAImmune"]!=0{Stats[? "IsBAImmune"]-=1}
                 if Stats[? "Hp"]<1{GameEvent_cardholders_Death()}
             }
         }

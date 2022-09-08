@@ -13,7 +13,9 @@ if scr_ability_Checks_OnlyAllies(vict,atkr){
     ds_list_destroy(victimList)
     //Immune that card
     with(vict){
-        Stats[? "IsImmune"]=clamp(Stats[? "IsImmune"]+1,1,2)
+        var _mii=Stats[? "Multi_IsImmune"];
+        _mii[? string(atkr)]=1
+        player_con_CardholdersUpdateMultiStats()
     }
     with(atkr){
         Stats[? "AbilityConstantTarget"]=vict

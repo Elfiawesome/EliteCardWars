@@ -264,8 +264,9 @@
         <script>scripts\scr_ability_D2_Hobgoblin.gml</script>
         <script>scripts\scr_ability_D2_Psion.gml</script>
         <script>scripts\scr_ability_D2_Servitor_ActivateTarget.gml</script>
-        <script>scripts\scr_ability_D2_Wyvern_Activate.gml</script>
         <script>scripts\scr_ability_D2_Servitor_Intrinsic.gml</script>
+        <script>scripts\scr_ability_D2_Servitor_Damaged.gml</script>
+        <script>scripts\scr_ability_D2_Wyvern_Activate.gml</script>
         <script>scripts\scr_ability_MadnessCombat_Auditor_FriendDeath.gml</script>
         <script>scripts\scr_ability_MadnessCombat_HankJwimbleton_Deathwish.gml</script>
         <script>scripts\scr_ability_PlantVsZombies_AstroVera_Warcry.gml</script>
@@ -294,6 +295,7 @@
         <script>scripts\player_con_CameraPosition.gml</script>
         <script>scripts\player_con_AbilitySelection.gml</script>
         <script>scripts\player_con_CardSelectorControl.gml</script>
+        <script>scripts\player_con_CardholdersUpdateMultiStats.gml</script>
       </scripts>
       <script>scripts\scr_ValidAttackSpot.gml</script>
       <script>scripts\IsSPAtk.gml</script>

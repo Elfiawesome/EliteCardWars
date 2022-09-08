@@ -17,7 +17,9 @@ for(var i=0;i<ds_list_size(socketlist);i++){
     for(var ii=0;ii<ds_list_size(_con.Cardholderlist);ii++){
         var cardholder=_con.Cardholderlist[| ii];//getting cardholder
         var _cardholderStats=ds_map_create()//creating a copy of cardholder's Stats json
-        ds_map_copy(_cardholderStats,cardholder.Stats)//copying over
+        var _str=json_encode(cardholder.Stats)
+        var _nm=json_decode(_str)
+        ds_map_copy(_cardholderStats,_nm)//copying over
         _cardholderStats[? "CardID"]=cardholder.CardID
         ds_map_add_map(_cardholderlist,ii,_cardholderStats)
     }

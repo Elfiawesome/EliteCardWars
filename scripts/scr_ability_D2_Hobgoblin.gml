@@ -3,7 +3,10 @@ var MapStr=argument0;
 
 if Stats[? "AbilityCooldown"]=0{
     Stats[? "Hp"]+=4
-    Stats[? "IsImmune"]=1
-    Stats[? "IsFrozen"]=1
+    var _mii=Stats[? "Multi_IsImmune"];
+    _mii[? string(id)]=1
+    var _mii=Stats[? "Multi_IsFrozen"];
+    _mii[? string(id)]=1
     Stats[? "AbilityCooldown"]=-1
+    player_con_CardholdersUpdateMultiStats()
 }
