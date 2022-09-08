@@ -20,6 +20,8 @@ if scr_ability_Checks_OnlyEnemy(vict,atkr){
     }
     //clear that card
     with(vict){
+        Stats[? "Hp"]=0//for servitors
+        Activate_Damaged_Ability()
         GameEvent_cardholders_Clear()
     }
     //Ability alrdy done

@@ -1,5 +1,6 @@
 ///GameEvent_cardholders_Death
-CardID=0
+GameEvent_cardholders_Clear()
+/*CardID=0
 IsSelected=false
 Stats[? "Base_Hp"]=0
 Stats[? "Hp"]=0
