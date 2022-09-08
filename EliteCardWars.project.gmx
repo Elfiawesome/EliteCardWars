@@ -155,6 +155,7 @@
         <script>scripts\AttackHero.gml</script>
       </scripts>
       <scripts name="grp_server">
+        <script>scripts\svr_ForceBattlefieldUpdate.gml</script>
         <scripts name="grp_scripts">
           <script>scripts\create_cardholders.gml</script>
           <script>scripts\svr_TurnstageMoveOn.gml</script>
@@ -165,6 +166,7 @@
           <script>scripts\svr_ActivateAbility.gml</script>
           <script>scripts\svr_ActivateAfterCardSelection.gml</script>
           <script>scripts\svr_AttackHero.gml</script>
+          <script>scripts\BattlefieldUpdate.gml</script>
         </scripts>
         <script>scripts\scr_svr_rp.gml</script>
         <script>scripts\scr_svr_connect.gml</script>
@@ -201,6 +203,7 @@
           <script>scripts\scr_clt_ATTACKHERO.gml</script>
           <script>scripts\scr_clt_PLAYERELIMINATEED.gml</script>
           <script>scripts\scr_clt_PLAYERWIN.gml</script>
+          <script>scripts\scr_clt_BATTLEFIELDUPDATE.gml</script>
         </scripts>
       </scripts>
       <scripts name="functions">
