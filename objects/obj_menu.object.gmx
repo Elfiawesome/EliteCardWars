@@ -123,7 +123,12 @@ if keyboard_check_pressed(vk_f1){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>draw_set_font(ft_number)
+draw_text_transformed(0,0,"Ultra Card Wars Demo",5,5,0)
+draw_text_transformed(0,120,"Press 's' to create server",3,3,0)
+draw_text_transformed(0,200,"Press 'c' to connect server",3,3,0)
+
+</string>
           </argument>
         </arguments>
       </action>
