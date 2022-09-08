@@ -6,6 +6,8 @@ var _ID=buffer_read(buffer,buffer_s16)
 
 SummonCard(socket_to_instanceid[? socket].Cardholderlist[| Pos],_ID)
 //deduct points
-with(socket_to_instanceid[? socket]){
-    Points-=global.UnitDat_Pt[_ID]
+if global.NetworkObj.mysocket!=socket{
+    with(socket_to_instanceid[? socket]){
+        Points-=global.UnitDat_Pt[_ID]
+    }
 }
