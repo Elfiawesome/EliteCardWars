@@ -8,6 +8,7 @@ mysocket=socket
 var map=ds_map_create();
 map[? "Name"]=global.PlayerOnlineName
 map[? "Team"]=1
+map[? "Deck"]=ds_list_write(global.PlayerDeck)
 var str=json_encode_destroy(map)
 
 //send my Player Init Data to server

@@ -202,7 +202,7 @@ for(var i=0;i&lt;ds_list_size(Objlist);i++){
 //draw title
 draw_set_halign(fa_center)
 draw_text(x+view_wport[0]/2,y+10,"Select Card")
-draw_text(x+view_wport[0]/2,y+25,"Press 'esc' to cancel")
+draw_text(x+view_wport[0]/2,y+30,"Press 'esc' to cancel")
 draw_set_valign(fa_left)
 
 //draw scrollbar

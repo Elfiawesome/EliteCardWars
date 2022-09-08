@@ -39,6 +39,12 @@ global.PlayerOnlineName=choose(
     "No ping",
     "Namesr",
 )
+
+scr_units_init()
+global.PlayerDeck=ds_list_create()
+repeat(20){
+    ds_list_add(global.PlayerDeck,irandom_range(1,UnitID.UnitID_MAX))
+}
 </string>
           </argument>
         </arguments>
