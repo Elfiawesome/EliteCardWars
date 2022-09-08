@@ -55,33 +55,13 @@ tgty=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if CardID!=0{
+            <string>///movement
+if CardID!=0{
 //lerping coordinate values
 x=lerp(x,tgtx,0.1)
 y=lerp(y,tgty,0.1)
-
-//if mouse hovering
-var msx=device_mouse_x_to_gui(0)
-var msy=device_mouse_y_to_gui(0)
-var sprite=global.UnitDat_Sprite[CardID]
-if point_in_rectangle(msx,msy,
-    x-sprite_get_width(sprite)/2*scale,
-    y-sprite_get_height(sprite)/2*scale,
-    x+sprite_get_width(sprite)/2*scale,
-    y+sprite_get_height(sprite)/2*scale,
-){
-    scale = OriScale + sin(current_time/100)*0.01
-    if mouse_check_button_pressed(mb_left){
-        if Parent!=-1{
-            Parent.SelectedCardID=CardID
-        }
-    }
-}else{
-    scale = OriScale
 }
 
-
-}
 </string>
           </argument>
         </arguments>
@@ -111,6 +91,49 @@ draw_sprite_ext(
     global.UnitDat_Image[CardID],
     x,y,scale,scale,0,c_white,1
 )
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//Mouse Hovering
+if CardID!=0{
+//if mouse hovering
+var msx=device_mouse_x_to_gui(0)
+var msy=device_mouse_y_to_gui(0)
+var sprite=global.UnitDat_Sprite[CardID]
+if point_in_rectangle(msx,msy,
+    x-sprite_get_width(sprite)/2*scale,
+    y-sprite_get_height(sprite)/2*scale,
+    x+sprite_get_width(sprite)/2*scale,
+    y+sprite_get_height(sprite)/2*scale,
+){
+    scale = OriScale + sin(current_time/100)*0.01
+    if mouse_check_button_pressed(mb_left){
+        if Parent!=-1{
+            Parent.SelectedCardID=CardID
+        }
+    }
+}else{
+    scale = OriScale
+}
+
 }
 </string>
           </argument>

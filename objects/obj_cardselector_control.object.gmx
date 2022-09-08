@@ -96,7 +96,7 @@ switch(AnimationStage){
         }
     break;
     case 1://create the cards
-        var sepx=view_wview[0]/(HorCardsMax+1)
+        var sepx=view_wport[0]/(HorCardsMax+1)
         var sepy=400
         var xi=0;
         var yi=0;
@@ -104,8 +104,8 @@ switch(AnimationStage){
             var _child=instance_create(0,0,obj_cardselection);
             ds_list_add(Objlist,_child)//add to obj list
             _child.CardID=cardlist[| i]
-            _child.tgtx = sepx+sepx*xi
-            _child.tgty = 250+sepy*yi
+            _child.tgtx = sepx+sepx*xi;
+            _child.tgty = 250+sepy*yi;
             _child.Parent=id
             //add to variable
             xi++
