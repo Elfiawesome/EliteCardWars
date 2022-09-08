@@ -14,6 +14,9 @@ if CardSelectorControl!=noone{
                 _map[? "AttackerSock"]=_attacker.mysocket
                 _map[? "SelectionID"]=CardSelectorControl.SelectedCardID
                 var _mapstr=json_encode_destroy(_map)
+                //Remove controller from me
+                CardSelectorControl=noone
+                
                 //Send to other clients
                 with(global.NetworkObj){
                     if global.NetworkObj.object_index=obj_server{
@@ -27,8 +30,6 @@ if CardSelectorControl!=noone{
                         buffer_delete(buffer)
                     }
                 }
-            //End this... [Remove Selector control from this basically]
-            CardSelectorControl=noone
         }
     }
 }
