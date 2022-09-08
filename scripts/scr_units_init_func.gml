@@ -13,6 +13,7 @@ global.UnitDat_AttackType[argument0,UnitAttackType.Sweep_Atk]=false
 global.UnitDat_AttackType[argument0,UnitAttackType.Pierce_Atk]=false
 global.UnitDat_AttackType[argument0,UnitAttackType.Sp_Atk]=false
 global.UnitDat_CooldownMax[argument0]=0
+global.UnitDat_ImmuneCapable[argument0]=false
 
 //ability
 global.UnitDat_AbilityTrigger[argument0,0]=AbilityTrigger.Default

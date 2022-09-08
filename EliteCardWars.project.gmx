@@ -252,6 +252,7 @@
           <script>scripts\scr_ability_Checks_none.gml</script>
           <script>scripts\scr_ability_Checks_OnlyEnemy.gml</script>
           <script>scripts\scr_ability_Checks_OnlyAllies.gml</script>
+          <script>scripts\scr_ability_Checks_OnlyAllies_NoImmuneCapable.gml</script>
         </scripts>
         <scripts name="grp_Ability">
           <script>scripts\Activate_Intrinsic_Ability.gml</script>

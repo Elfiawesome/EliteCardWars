@@ -5,7 +5,7 @@ var atkr=MapStr[? "Attacker"]
 
 //if global.GameStage=GAMESTAGE.PLAYERTURNS
 {
-if scr_ability_Checks_OnlyAllies(vict,atkr){
+if scr_ability_Checks_OnlyAllies_NoImmuneCapable(vict,atkr){
     //run animation of ability
     var victimList=ds_list_create()
     ds_list_add(victimList,vict)
