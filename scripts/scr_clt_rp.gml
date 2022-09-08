@@ -48,6 +48,9 @@ switch(type){
     case NETWORKPKT.BATTLEFIELDUPDATE:
         scr_clt_BATTLEFIELDUPDATE(buffer)
     break;
+    case NETWORKPKT.ROLLADIE:
+        scr_clt_ROLLADIE(buffer)
+    break;
     
     //end game
     case NETWORKPKT.PLAYERELIMINATEED:

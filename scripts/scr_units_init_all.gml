@@ -1,5 +1,5 @@
 //Destiny 2
-var Cur=UnitID.D2_AtheonTimesConflux
+var Cur=UnitID.D2_AtheonTimesConflux//**Ability not yet done!
 scr_units_init_func(Cur,"Atheon Time's Conflux",45,25,24,spr_cards,Cur-1)
 var Cur=UnitID.D2_Goblin
 scr_units_init_func(Cur,"Goblin",10,6,3,spr_cards,Cur-1)
@@ -20,7 +20,7 @@ global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_OnlyEnemy
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_D2_Psion
 global.UnitDat_CooldownMax[Cur]=2
 
-var Cur=UnitID.D2_Servitor
+var Cur=UnitID.D2_Servitor//**Ability NEED TO CHANGE
 scr_units_init_func(Cur,"Servitor",14,10,18,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
 global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_OnlyAllies
@@ -51,18 +51,16 @@ var Cur=UnitID.MadnessCombat_Auditor
 scr_units_init_func(Cur,"Auditor",35,25,20,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.FriendDeath
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_MadnessCombat_Auditor_FriendDeath
-
 var Cur=UnitID.MadnessCombat_HankJwimbleton
 scr_units_init_func(Cur,"Hank J. Wimbleton",10,5,3,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Deathwish
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_MadnessCombat_HankJwimbleton_Deathwish
-
 var Cur=UnitID.MadnessCombat_MagAgent
 scr_units_init_func(Cur,"Mag Agent",25,15,10,spr_cards,Cur-1)
 var Cur=UnitID.MadnessCombat_MagHank
 scr_units_init_func(Cur,"Mag Agent",25,20,15,spr_cards,Cur-1)
 var Cur=UnitID.MadnessCombat_TheSavior
-scr_units_init_func(Cur,"The Savior",20,15,12,spr_cards,Cur-1)
+scr_units_init_func(Cur,"The Savior",20,15,12,spr_cards,Cur-1)//**Ability not yet done!
 
 //Plant VS Zombies
 var Cur=UnitID.PlantVsZombies_AstroVera
@@ -89,4 +87,6 @@ global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Warcry
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_PlantVsZombies_MagnifyingGrass_Warcry
 var Cur=UnitID.PlantVsZombies_Seedling
 scr_units_init_func(Cur,"Seedling",1,0,2,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_PlantVsZombies_Seedling_Intrinsic
 

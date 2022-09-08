@@ -37,5 +37,8 @@ switch(type){
     case NETWORKPKT.ATTACKHERO:
         scr_svr_ATTACKHERO(socket,buffer)
     break;
+    case NETWORKPKT.ROLLADIE:
+        scr_svr_ROLLADIE(socket,buffer)
+    break;
 }
 

@@ -37,6 +37,7 @@ IsSelected_Ability=false
 ShakeAmt=0
 Shakex=x
 Shakey=y
+RollADieNumber=0
 Stats=ds_map_create()
 Stats[? "Base_Hp"]=0
 Stats[? "Hp"]=0

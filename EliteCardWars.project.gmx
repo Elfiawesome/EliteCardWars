@@ -153,6 +153,8 @@
         <script>scripts\ActivateAbility.gml</script>
         <script>scripts\ActivateAfterCardSelection.gml</script>
         <script>scripts\AttackHero.gml</script>
+        <script>scripts\BattlefieldUpdate.gml</script>
+        <script>scripts\RollADie.gml</script>
       </scripts>
       <scripts name="grp_server">
         <script>scripts\svr_ForceBattlefieldUpdate.gml</script>
@@ -166,7 +168,7 @@
           <script>scripts\svr_ActivateAbility.gml</script>
           <script>scripts\svr_ActivateAfterCardSelection.gml</script>
           <script>scripts\svr_AttackHero.gml</script>
-          <script>scripts\BattlefieldUpdate.gml</script>
+          <script>scripts\svr_RollADie.gml</script>
         </scripts>
         <script>scripts\scr_svr_rp.gml</script>
         <script>scripts\scr_svr_connect.gml</script>
@@ -182,6 +184,7 @@
           <script>scripts\scr_svr_ACTIVATEABILITY.gml</script>
           <script>scripts\scr_svr_ACTIVATEAFTERCARDSELECTION.gml</script>
           <script>scripts\scr_svr_ATTACKHERO.gml</script>
+          <script>scripts\scr_svr_ROLLADIE.gml</script>
         </scripts>
       </scripts>
       <scripts name="grp_client">
@@ -204,6 +207,7 @@
           <script>scripts\scr_clt_PLAYERELIMINATEED.gml</script>
           <script>scripts\scr_clt_PLAYERWIN.gml</script>
           <script>scripts\scr_clt_BATTLEFIELDUPDATE.gml</script>
+          <script>scripts\scr_clt_ROLLADIE.gml</script>
         </scripts>
       </scripts>
       <scripts name="functions">
@@ -270,6 +274,7 @@
         <script>scripts\scr_ability_PlantVsZombies_Imitator_Warcry.gml</script>
         <script>scripts\scr_ability_PlantVsZombies_Imitator_AfterCardSelection.gml</script>
         <script>scripts\scr_ability_PlantVsZombies_MagnifyingGrass_Warcry.gml</script>
+        <script>scripts\scr_ability_PlantVsZombies_Seedling_Intrinsic.gml</script>
         <script>scripts\scr_ability_SPImmune.gml</script>
         <script>scripts\scr_ability_BAImmune.gml</script>
         <script>scripts\scr_ability_instakill.gml</script>
