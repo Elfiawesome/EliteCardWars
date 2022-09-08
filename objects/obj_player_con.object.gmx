@@ -149,10 +149,10 @@ if global.SelectedCard!=noone{
             if mysocket=_cardholder.mysocket &amp;&amp; _cardholder.CardID=0{
             if global.GameStage=GAMESTAGE.PLAYERTURNS &amp;&amp; global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
             if Points&gt;=global.UnitDat_Pt[global.SelectedCard.CardID]{
-                Points-=global.UnitDat_Pt[global.SelectedCard.CardID]
                 with(global.NetworkObj){
                     if global.NetworkObj.object_index=obj_server{
                         svr_SummonCard(mysocket,_cardholder.Pos,global.SelectedCard.CardID)
+                        Points-=global.UnitDat_Pt[global.SelectedCard.CardID]
                     }
                     if global.NetworkObj.object_index=obj_client{
                         buffer=buffer_create(1024,buffer_fixed,1)
