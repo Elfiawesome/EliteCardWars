@@ -65,6 +65,10 @@ if server&lt;0{
 LastServerPinged=current_time
 alarm[0]=60
 
+//Battlefield Update Timer
+BattlefieldUpdateTimer=160
+BattlefieldUpdateTimerMax=160
+
 //create myself -&gt; (server player object)
 var _inst=instance_create(100,100,obj_player_con);
 _inst.name="SERVER OWNER"
@@ -118,6 +122,63 @@ socket_to_instanceid[? 0].Ping=0
 //reset new last server got pinged
 LastServerPinged=current_time
 alarm[0]=60
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Battlefield Update Timer
+if BattlefieldUpdateTimer&gt;0{
+    BattlefieldUpdateTimer--
+}else{
+    BattlefieldUpdateTimer=BattlefieldUpdateTimerMax
+    var _map=ds_map_create()
+    for(var i=0;i&lt;ds_list_size(socketlist);i++){
+        //create map for each socket
+        var _socketmap=ds_map_create();
+        //for each unit
+        var _sock=socketlist[| i];
+        var _con=socket_to_instanceid[? _sock];
+        
+        //players name etc
+        _socketmap[? "Name"]=_con.name
+        _socketmap[? "Team"]=_con.Team
+        _socketmap[? "Points"]=_con.Points
+        
+        //run through all cardholders
+        var _cardholderlist=ds_map_create()
+        for(var ii=0;ii&lt;ds_list_size(_con.Cardholderlist);ii++){
+            var cardholder=_con.Cardholderlist[| ii];//getting cardholder
+            var _cardholderStats=ds_map_create()//creating a copy of cardholder's Stats json
+            ds_map_copy(_cardholderStats,cardholder.Stats)//copying over
+            _cardholderStats[? "CardID"]=cardholder.CardID
+            ds_map_add_map(_cardholderlist,ii,_cardholderStats)
+        }
+        ds_map_add_map(_socketmap,"Cardholders",_cardholderlist)
+        
+        //wrap up
+        ds_map_add_map(_map,_sock,_socketmap)
+    }
+    var _mapstr=json_encode_destroy(_map)
+    show_debug_message(_mapstr)
+}
 </string>
           </argument>
         </arguments>
