@@ -39,8 +39,8 @@ DeckImage[0]=0
 DeckScale[0]=DeckBaseScale
 DeckHover[0]=false
 
-DeckSprite[1]=spr_cards
-DeckImage[1]=5
+DeckSprite[1]=spr_cardsback
+DeckImage[1]=1
 DeckScale[1]=DeckBaseScale
 DeckHover[1]=false
 </string>
