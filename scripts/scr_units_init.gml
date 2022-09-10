@@ -54,6 +54,7 @@ enum AbilityTrigger{
     Warcry,//activated when Summoned [Not yet implemented]
     Kill,//activated Each kill [Not yet implemented]
     Damaged,//activated when damaged
+    AfterDamaged,//activated after damaged calculation
     AfterCardSelection,//activated after con has finished selecting a card
 }
 

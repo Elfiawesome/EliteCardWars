@@ -259,6 +259,7 @@
           <script>scripts\Activate_Warcry_Ability.gml</script>
           <script>scripts\Activate_Deathwish_Ability.gml</script>
           <script>scripts\Activate_Damaged_Ability.gml</script>
+          <script>scripts\Activate_AfterDamaged_Ability.gml</script>
           <script>scripts\Activate_FriendDeath_Ability.gml</script>
         </scripts>
         <script>scripts\scr_ability_none.gml</script>
@@ -284,6 +285,7 @@
       <scripts name="grp_cardholders_event">
         <script>scripts\GameEvent_cardholders_Damaged.gml</script>
         <script>scripts\GameEvent_cardholders_DealDamage.gml</script>
+        <script>scripts\GameEvent_cardholders_AfterDamaged.gml</script>
         <script>scripts\GameEvent_cardholders_Death.gml</script>
         <script>scripts\GameEvent_cardholders_Transform.gml</script>
         <script>scripts\GameEvent_cardholders_Clear.gml</script>

@@ -23,6 +23,11 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
             GameEvent_cardholders_Damaged(AttackObj)
         }
     }
+    for(var ii=0;ii<ds_list_size(_list);ii+=1){
+        with(_list[| ii]){
+            GameEvent_cardholders_AfterDamaged(_list[| ii])
+        }
+    }
     //animation
     ani_AttackSet_basic(AttackObj,_list)//VictimObj)
     ds_list_destroy(_list)

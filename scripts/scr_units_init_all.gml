@@ -27,7 +27,7 @@ global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_OnlyAllies_NoImmuneC
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_D2_Servitor_ActivateTarget
 global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.Intrinsic
 global.UnitDat_AbilityScript[Cur,1]=scr_ability_D2_Servitor_Intrinsic
-global.UnitDat_AbilityTrigger[Cur,2]=AbilityTrigger.Damaged
+global.UnitDat_AbilityTrigger[Cur,2]=AbilityTrigger.AfterDamaged
 global.UnitDat_AbilityScript[Cur,2]=scr_ability_D2_Servitor_Damaged
 
 var Cur=UnitID.D2_Wyvern
