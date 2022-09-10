@@ -28,7 +28,7 @@ global.UnitDat_AbilityScript[Cur,0]=scr_ability_D2_Servitor_ActivateTarget
 global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.Intrinsic
 global.UnitDat_AbilityScript[Cur,1]=scr_ability_D2_Servitor_Intrinsic
 global.UnitDat_AbilityTrigger[Cur,2]=AbilityTrigger.AfterDamaged
-global.UnitDat_AbilityScript[Cur,2]=scr_ability_D2_Servitor_Damaged
+global.UnitDat_AbilityScript[Cur,2]=scr_ability_D2_Servitor_AfterDamaged
 
 var Cur=UnitID.D2_Wyvern
 scr_units_init_func(Cur,"Wyvern",25,15,14,spr_cards,Cur-1);global.UnitDat_AttackType[Cur,UnitAttackType.Sweep_Atk]=true

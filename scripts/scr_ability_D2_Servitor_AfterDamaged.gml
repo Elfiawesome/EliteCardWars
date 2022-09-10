@@ -1,4 +1,4 @@
-///scr_ability_D2_Servitor_Damaged()
+///scr_ability_D2_Servitor_AfterDamaged()
 var MapStr=argument0;
 
 if Stats[? "Hp"]<1{
