@@ -65,17 +65,23 @@ DeckHover[1]=false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>switch(AnimationStage){
+            <string>if ControlParent.GUIObjectOrder[| 0]!=id{exit;}
+switch(AnimationStage){
     case 0://bring black background
         if x &gt; (-view_wport[0]/4*3){
             AnimationStage=1
         }
     break;
     case 1://how to exit
-        if keyboard_check_pressed(vk_escape){AnimationStage=3}
+        if keyboard_check_pressed(vk_escape){
+            AnimationStage=3
+            ds_list_delete(ControlParent.GUIObjectOrder,0)
+        }
         if Draws&lt;1 || ds_list_empty(ControlParent.DeckList){// || ds_list_empty(ControlParent."Spells") [Not yet implemented]
             AnimationStage=3
+            ds_list_delete(ControlParent.GUIObjectOrder,0)
         }
+        
     break;
     case 3://pack up all
         backtgtx=-view_wport[0]
@@ -114,7 +120,8 @@ x=lerp(x,backtgtx,0.2)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_alpha(0.2)
+            <string>if ControlParent.GUIObjectOrder[| 0]!=id{exit;}
+draw_set_alpha(0.2)
 draw_set_color(c_black)
 //draw black background
 draw_rectangle(x,y,x+view_wport[0],y+view_hport[0],false)

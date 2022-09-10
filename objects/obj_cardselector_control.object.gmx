@@ -35,6 +35,7 @@ AnimationStage=0
 x=-view_wport[0]
 y=0
 backtgtx=0
+ControlParent=0
 //scrolling
 scrolamt=0
 scrollbarY=0
@@ -88,6 +89,7 @@ ds_list_destroy(Objlist)
           <argument>
             <kind>1</kind>
             <string>///animation stage checks
+if ControlParent.GUIObjectOrder[| 0]!=id{exit;}
 switch(AnimationStage){
     case 0://bring black background
         if x &gt; (-view_wview[0]/4*3){
@@ -180,7 +182,8 @@ if AnimationStage&lt;3{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_alpha(0.2)
+            <string>if ControlParent.GUIObjectOrder[| 0]!=id{exit;}
+draw_set_alpha(0.2)
 draw_set_color(c_black)
 //draw black background
 draw_rectangle(x,y,x+view_wport[0],y+view_hport[0],false)

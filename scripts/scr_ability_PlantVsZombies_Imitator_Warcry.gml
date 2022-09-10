@@ -12,5 +12,6 @@ if mysocket=global.NetworkObj.mysocket{
         }
     }
     _o.CardHolderInitiator=id
-    _con.CardSelectorControl=_o
+    _o.ControlParent=_con
+    ds_list_add(_con.GUIObjectOrder,_o)
 }

@@ -34,7 +34,7 @@ Points=0
 IsSpectating=false
 CameraFocus=-1//still not sure about the camera?
 CameraFocusNo=0
-CardSelectorControl=noone
+GUIObjectOrder=ds_list_create()
 CardDrawerControl=noone
 global.HoveredCard=noone
 global.ShowHands=false
@@ -99,6 +99,7 @@ Team=-1
             <kind>1</kind>
             <string>ds_list_destroy(cardList)
 ds_list_destroy(DeckList)
+ds_list_destroy(GUIObjectOrder)
 //destroy all of my card holders
 for(var i=0;i&lt;ds_list_size(Cardholderlist);i++){
     with(Cardholderlist[| i]){instance_destroy()}
@@ -129,7 +130,7 @@ with(Hero){instance_destroy()}
           <argument>
             <kind>1</kind>
             <string>///Managing of Hand Cards
-if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating &amp;&amp; CardSelectorControl=noone{
+if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating &amp;&amp; ds_list_empty(GUIObjectOrder){
 if keyboard_check_pressed(vk_enter){
     GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
     GameEvent_draw_specific_card(UnitID.PlantVsZombies_Imitator)
@@ -270,7 +271,7 @@ if keyboard_check_pressed(ord("Q")){
             <kind>1</kind>
             <string>///When Your Turn
 if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
-if CardSelectorControl=noone{
+if ds_list_empty(GUIObjectOrder){
     //Camera Position
     player_con_CameraPosition()
     
@@ -303,7 +304,7 @@ player_con_CardSelectorControl()
             <kind>1</kind>
             <string>///When Attacking Phase
 if IsSpectating{exit;}
-if global.IsGame &amp;&amp; CardSelectorControl=noone{
+if global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
     if IsLocal &amp;&amp; global.GameStage=GAMESTAGE.ATTACKINGTURN &amp;&amp; global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
         //selecting cardholders
         if mouse_check_button_pressed(mb_left){
@@ -482,11 +483,6 @@ for(var k=ds_map_find_first(_map);!is_undefined(k);k=ds_map_find_next(_map,k)){
 }
 
 }
-
-
-
-
-
 </string>
           </argument>
         </arguments>

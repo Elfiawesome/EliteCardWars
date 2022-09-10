@@ -324,8 +324,8 @@
       <object>objects\obj_heroholder</object>
       <object>objects\obj_GameEndAnnouncement</object>
       <objects name="selection">
-        <object>objects\obj_cardselection</object>
         <object>objects\obj_cardselector_control</object>
+        <object>objects\obj_cardselection</object>
       </objects>
       <object>objects\obj_carddrawer_control</object>
     </objects>
