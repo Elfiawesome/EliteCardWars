@@ -62,7 +62,7 @@ enum AbilityTrigger{
 global.UnitDataMap=ds_map_create()
 ds_map_destroy(global.UnitDataMap)
 scr_units_init_all()
-
+scr_spells_init_all()
 //Heroes
 var Cur=HeroID.Unturned_CaptainSydney
 scr_hero_init_func(Cur,"Captain Sydney",10,0,spr_Heroes,Cur-1)

@@ -130,6 +130,7 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_cards</sprite>
+    <sprite>sprites\spr_spells</sprite>
     <sprite>sprites\spr_cardsback</sprite>
     <sprite>sprites\spr_cardholder</sprite>
     <sprite>sprites\spr_Heroes</sprite>
@@ -225,6 +226,8 @@
       <script>scripts\scr_units_init.gml</script>
       <script>scripts\scr_units_init_all.gml</script>
       <script>scripts\scr_units_init_func.gml</script>
+      <script>scripts\scr_spells_init_all.gml</script>
+      <script>scripts\scr_spells_init_func.gml</script>
       <script>scripts\scr_hero_init_func.gml</script>
     </scripts>
     <scripts name="grp_setup_battlefield">

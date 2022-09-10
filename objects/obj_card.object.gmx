@@ -31,6 +31,7 @@ image_index=0
 image_speed=0
 
 EntranceAnimation=1
+CardType=0
 CardID=-1
 CardPos=0
 Homex=x
@@ -68,9 +69,20 @@ if EntranceAnimation&gt;0{
     switch(EntranceAnimation){
         case 1:
             image_xscale-=0.05
+            if CardType=0{
+                image_index=0
+            }else{
+                image_index=1
+            }
             if image_xscale&lt;0{
-                sprite_index=global.UnitDat_Sprite[CardID]
-                image_index=global.UnitDat_Image[CardID]
+                if CardType=0{
+                    sprite_index=global.UnitDat_Sprite[CardID]
+                    image_index=global.UnitDat_Image[CardID]
+                }else{
+                    sprite_index=global.SpellDat_Sprite[CardID]
+                    image_index=global.SpellDat_Image[CardID]
+                    
+                }
                 EntranceAnimation=2
             }
         break;

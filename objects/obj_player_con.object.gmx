@@ -148,7 +148,7 @@ if global.SelectedCard=noone{
 if global.SelectedCard!=noone{
     if mouse_check_button_released(mb_left){
         //Placing card down
-        if position_meeting(mouse_x,mouse_y,obj_cardholder){
+        if position_meeting(mouse_x,mouse_y,obj_cardholder) &amp;&amp; global.SelectedCard.CardType=0{
             var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
             if mysocket=_cardholder.mysocket &amp;&amp; _cardholder.CardID=0{
             if global.GameStage=GAMESTAGE.PLAYERTURNS &amp;&amp; global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
