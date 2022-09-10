@@ -36,5 +36,6 @@ if Turn>=0{
             break;
         }
     }
+    GameEvent_Con_CardDrawed()
 }
 

@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-10</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,46 +25,24 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>cardlist=ds_list_create()
-Objlist=ds_list_create()
-CardHolderInitiator=-1//the cardholder whom started this
-SelectedCardID=0//current selection of card
-HorCardsMax=5//max number of cards horizontally
-AnimationStage=0
+            <string>AnimationStage=0
 //starting position
 x=-view_wport[0]
 y=0
 backtgtx=0
-//scrolling
-scrolamt=0
-scrollbarY=0
+ControlParent=0
+Draws=2
+//selectable decks
+DeckBaseScale=0.4
+DeckSprite[0]=spr_cardsback
+DeckImage[0]=0
+DeckScale[0]=DeckBaseScale
+DeckHover[0]=false
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="1" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//destroy ds
-ds_list_destroy(cardlist)
-ds_list_destroy(Objlist)
-
+DeckSprite[1]=spr_cards
+DeckImage[1]=5
+DeckScale[1]=DeckBaseScale
+DeckHover[1]=false
 </string>
           </argument>
         </arguments>
@@ -87,77 +65,33 @@ ds_list_destroy(Objlist)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///animation stage checks
-switch(AnimationStage){
+            <string>switch(AnimationStage){
     case 0://bring black background
-        if x &gt; (-view_wview[0]/4*3){
+        if x &gt; (-view_wport[0]/4*3){
             AnimationStage=1
         }
     break;
-    case 1://create the cards
-        var sepx=view_wport[0]/(HorCardsMax+1)
-        var sepy=400
-        var xi=0;
-        var yi=0;
-        for(var i=0;i&lt;ds_list_size(cardlist);i++){
-            var _child=instance_create(0,0,obj_cardselection);
-            ds_list_add(Objlist,_child)//add to obj list
-            _child.CardID=cardlist[| i]
-            _child.tgtx = sepx+sepx*xi;
-            _child.tgty = 250+sepy*yi;
-            _child.Parent=id
-            //add to variable
-            xi++
-            if xi&gt;(HorCardsMax-1){xi=0;yi++}
+    case 1://how to exit
+        if keyboard_check_pressed(vk_escape){AnimationStage=3}
+        if Draws&lt;1 || ds_list_empty(ControlParent.DeckList){// || ds_list_empty(ControlParent."Spells") [Not yet implemented]
+            AnimationStage=3
         }
-        AnimationStage=2
     break;
     case 3://pack up all
-        backtgtx=-view_wview[0]
-        for(var i=0;i&lt;ds_list_size(Objlist);i++){
-            Objlist[| i].tgtx=-200
-        }
+        backtgtx=-view_wport[0]
         if abs(x-backtgtx)&lt;0.1{
             AnimationStage=4
         }
     break;
-    case 4://destroy
-        for(var i=0;i&lt;ds_list_size(Objlist);i++){
-            with(Objlist[| i]){instance_destroy()}
-        }
+    case 4:
         instance_destroy()
     break;
 }
 
-//keep background
+//Lerping the background
 x=lerp(x,backtgtx,0.2)
 
-if AnimationStage&lt;3{
-    //scrolling
-    var amt=5
-    scrollbarY=lerp(scrollbarY,scrolamt,0.6)
-    if mouse_wheel_down(){
-        if scrolamt&gt;(-((ds_list_size(Objlist) div HorCardsMax)*8)){//idk what this mean but it works :/
-            scrolamt--
-        }
-    }
-    if mouse_wheel_up(){
-        if scrolamt&lt;0{
-            scrolamt++
-        }
-    }
-    for(var i=0;i&lt;ds_list_size(Objlist);i++){
-        Objlist[| i].y+=scrolamt*amt
-    }
-    //selection
-    if SelectedCardID&gt;0{
-        AnimationStage=3
-    }
-    //exit out of gui
-    if keyboard_check_pressed(vk_escape){
-        AnimationStage=3
-    }
-}
+
 </string>
           </argument>
         </arguments>
@@ -184,30 +118,64 @@ if AnimationStage&lt;3{
 draw_set_color(c_black)
 //draw black background
 draw_rectangle(x,y,x+view_wport[0],y+view_hport[0],false)
+//draw title
+draw_set_halign(fa_center)
+draw_text(x+view_wport[0]/2,y+10,"Select Deck to Draw")
+draw_text(x+view_wport[0]/2,y+30,"Press 'esc' to cancel")
+draw_set_valign(fa_left)
 
-//drawing all the cards
-for(var i=0;i&lt;ds_list_size(Objlist);i++){
-    with(Objlist[| i]){
-        if CardID!=0{
-        draw_sprite_ext(
-            global.UnitDat_Sprite[CardID],
-            global.UnitDat_Image[CardID],
-            x,y,scale,scale,0,c_white,1
-        )
+//Selectable decks
+var msx=device_mouse_x_to_gui(0)
+var msy=device_mouse_y_to_gui(0)
+for(var i=0;i&lt;array_length_1d(DeckSprite);i++){
+    var canDraw=true
+    if Draws&lt;1{canDraw=false}
+    if i=0 &amp;&amp; ds_list_empty(ControlParent.DeckList){canDraw=false}//if unit deck is empty
+    if i=1 {canDraw=false}//if spell deck is empty [Not implemented]
+    
+    //draw sprite
+    var _clr=c_white
+    if !canDraw{_clr=c_gray}
+    var _x=view_wport[0]/(array_length_1d(DeckSprite)+1)*(i+1)
+    var _y=view_hport[0]/2
+    draw_sprite_ext(DeckSprite[i],DeckImage[i],_x+x,_y+y,DeckScale[i],DeckScale[i],0,_clr,1)
+    
+    
+    //checking for collision
+    if !canDraw{continue;}
+    DeckHover[i]=false
+    if point_in_rectangle(msx,msy,
+        _x+x-sprite_get_width(DeckSprite[i])/2*DeckScale[i],
+        _y+y-sprite_get_height(DeckSprite[i])/2*DeckScale[i],
+        _x+x+sprite_get_width(DeckSprite[i])/2*DeckScale[i],
+        _y+y+sprite_get_height(DeckSprite[i])/2*DeckScale[i],
+    ){DeckHover[i]=true}
+    //do the selection animatiion
+    if DeckHover[i]=true{
+        DeckScale[i]=DeckBaseScale+sin(current_time/100)*0.01
+        //clicking of card
+        if mouse_check_button_pressed(mb_left){
+            switch(i){
+                case 0://draw unit card
+                    CardID=ControlParent.DeckList[| 0]
+                    ds_list_delete(ControlParent.DeckList,0)
+                    with(global.NetworkObj.socket_to_instanceid[? global.NetworkObj.mysocket]){
+                        var _card=GameEvent_draw_specific_card(other.CardID);
+                        _card.x=_x
+                        _card.y=_y
+                    }
+                    //reduce number of draws available
+                    Draws--
+                break;
+                case 1://draw spell card [not yet implemented]
+                
+                break;
+            }
         }
     }
 }
 
-//draw title
-draw_set_halign(fa_center)
-draw_text(x+view_wport[0]/2,y+10,"Select Card")
-draw_text(x+view_wport[0]/2,y+30,"Press 'esc' to cancel")
-draw_set_valign(fa_left)
 
-//draw scrollbar
-draw_set_alpha(0.2)
-var proportion=abs( (scrollbarY-1) / ((ds_list_size(Objlist) div HorCardsMax)*8) )
-draw_rectangle(x+view_wview[0]-30,0,x+view_wport[0],view_hport[0]*proportion,false)
 
 draw_set_alpha(1)
 draw_set_color(c_white)

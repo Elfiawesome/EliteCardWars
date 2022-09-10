@@ -11,4 +11,5 @@ create_AllCardHolders(TeamMap)
 update_Turnstage(TeamMap)
 
 GameEvent_Con_ReimbursePoints()
+GameEvent_Con_CardDrawed()
 global.IsGame=true

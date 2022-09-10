@@ -288,6 +288,7 @@
         <script>scripts\GameEvent_cardholders_Transform.gml</script>
         <script>scripts\GameEvent_cardholders_Clear.gml</script>
         <script>scripts\GameEvent_draw_specific_card.gml</script>
+        <script>scripts\GameEvent_Con_CardDrawed.gml</script>
         <script>scripts\GameEvent_cardholders_ReceiveImmunity.gml</script>
         <script>scripts\GameEvent_Con_ReimbursePoints.gml</script>
         <script>scripts\GameEvent_Con_HeroDeath.gml</script>
@@ -326,6 +327,7 @@
         <object>objects\obj_cardselection</object>
         <object>objects\obj_cardselector_control</object>
       </objects>
+      <object>objects\obj_carddrawer_control</object>
     </objects>
   </objects>
   <rooms name="rooms">

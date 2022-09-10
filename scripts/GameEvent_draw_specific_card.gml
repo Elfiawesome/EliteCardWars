@@ -14,3 +14,4 @@ for(var i=0;i<ds_list_size(cardList);i+=1){
     cardList[| i].CardPos=i
     cardList[| i].HomeDepth=-1-1/i
 }
+return _card

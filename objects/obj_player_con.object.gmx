@@ -35,6 +35,7 @@ IsSpectating=false
 CameraFocus=-1//still not sure about the camera?
 CameraFocusNo=0
 CardSelectorControl=noone
+CardDrawerControl=noone
 global.HoveredCard=noone
 global.ShowHands=false
 global.SelectedCard=noone
@@ -128,7 +129,7 @@ with(Hero){instance_destroy()}
           <argument>
             <kind>1</kind>
             <string>///Managing of Hand Cards
-if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating &amp;&amp; CardSelectorControl=noone{s
+if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating &amp;&amp; CardSelectorControl=noone{
 if keyboard_check_pressed(vk_enter){
     GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
     GameEvent_draw_specific_card(UnitID.PlantVsZombies_Imitator)
@@ -237,6 +238,7 @@ if keyboard_check_pressed(ord("Q")){
             }
             //reimburse points
             GameEvent_Con_ReimbursePoints()
+            GameEvent_Con_CardDrawed()
             //set the game to ready
             global.IsGame=true
         }
