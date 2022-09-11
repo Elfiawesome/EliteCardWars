@@ -293,6 +293,7 @@
         <scripts name="grp_checks">
           <script>scripts\scr_spells_Checks_none.gml</script>
           <script>scripts\scr_spells_Checks_OnlyAllies.gml</script>
+          <script>scripts\scr_spells_Checks_Open.gml</script>
         </scripts>
         <script>scripts\scr_spell_Hexeria_BlueElixir_WhenCasted.gml</script>
       </scripts>

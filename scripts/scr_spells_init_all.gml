@@ -18,7 +18,7 @@ enum SpellTrigger{
 }
 
 var Cur=SpellID.Hexeria_BlueElixir
-scr_spells_init_func(Cur,"Blue Elixir",5,spr_spells,Cur-1,SpellCastType.UnitTarget)
+scr_spells_init_func(Cur,"Blue Elixir",5,spr_spells,Cur-1,SpellCastType.Battlefield)//UnitTarget)
 global.SpellDat_CastCheck[Cur]=scr_spells_Checks_OnlyAllies
 global.SpellDat_SpellTrigger[Cur,0]=SpellTrigger.WhenCasted
 global.SpellDat_SpellScript[Cur,0]=scr_spell_Hexeria_BlueElixir_WhenCasted
