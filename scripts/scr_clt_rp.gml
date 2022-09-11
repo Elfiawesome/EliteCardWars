@@ -30,6 +30,9 @@ switch(type){
     case NETWORKPKT.SUMMONCARD:
         scr_clt_SUMMONCARD(buffer)
     break;
+    case NETWORKPKT.CASTSPELL:
+        scr_clt_CASTSPELL(buffer)
+    break;
     case NETWORKPKT.ATTACKCARDHOLDER:
         scr_clt_ATTACKCARDHOLDER(buffer)
     break;

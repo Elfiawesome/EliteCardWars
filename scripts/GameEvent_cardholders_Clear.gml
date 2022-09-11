@@ -19,6 +19,8 @@ Stats[? "IsFrozen"]=0
 Stats[? "IsImmune"]=0
 Stats[? "IsSPImmune"]=0
 Stats[? "IsBAImmune"]=0
+//Spells
+ds_list_clear(Stats[? "Spells"])
 
 //Hidden stats
 Stats[? "IsAbilityStun"]=false

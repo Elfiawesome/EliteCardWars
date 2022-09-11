@@ -22,6 +22,9 @@ switch(type){
     case NETWORKPKT.SUMMONCARD:
         scr_svr_SUMMONCARD(socket,buffer)
     break;
+    case NETWORKPKT.CASTSPELL:
+        scr_svr_CASTSPELL(socket,buffer)
+    break;
     case NETWORKPKT.ATTACKCARDHOLDER:
         scr_svr_ATTACKCARDHOLDER(socket,buffer)
     break;

@@ -65,6 +65,9 @@ var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsSPImmune",m);
 Stats[? "IsSPImmune"]=0
 var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsBAImmune",m);
 Stats[? "IsBAImmune"]=0
+//Spells lists
+var EquipedSpellsList=ds_list_create()
+ds_map_add_list(Stats,"Spells",EquipedSpellsList)
 
 //Hidden stats
 Stats[? "IsAbilityStun"]=false

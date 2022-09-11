@@ -81,7 +81,6 @@ if EntranceAnimation&gt;0{
                 }else{
                     sprite_index=global.SpellDat_Sprite[CardID]
                     image_index=global.SpellDat_Image[CardID]
-                    
                 }
                 EntranceAnimation=2
             }
