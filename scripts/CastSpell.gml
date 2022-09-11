@@ -13,10 +13,10 @@ ds_list_add(_cardholder.Stats[? "Spells"],_map)
 ds_list_mark_as_map(_cardholder.Stats[? "Spells"],ds_list_size(_cardholder.Stats[? "Spells"])-1)
 
 //activate WhenCasted
-var _m=ds_map_create();
-_m[? "Target"]=_cardholder
 var _no=IsSpellTrigger(_ID,SpellTrigger.WhenCasted)
 if _no!=-1{
+    var _m=ds_map_create();
+    _m[? "Target"]=_cardholder
     script_execute(global.SpellDat_SpellScript[_ID,_no],_m)
 }
 
