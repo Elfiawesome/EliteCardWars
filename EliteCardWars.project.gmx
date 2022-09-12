@@ -145,12 +145,15 @@
       <script>scripts\scr_init_network.gml</script>
       <script>scripts\inherit_svrclt_create.gml</script>
       <scripts name="grp_ClientServer_scripts">
-        <script>scripts\TurnstageMoveOn.gml</script>
+        <scripts name="grp_TurnstageMoveon">
+          <script>scripts\TurnstageMoveOn.gml</script>
+          <script>scripts\EndOfAttackingTurnChecks.gml</script>
+          <script>scripts\EndOfTurnSpellsCheck.gml</script>
+          <script>scripts\CheckingForVictoryOrEliminations.gml</script>
+        </scripts>
         <script>scripts\SummonCard.gml</script>
         <script>scripts\CastSpell.gml</script>
         <script>scripts\AttackCardHolder.gml</script>
-        <script>scripts\EndOfAttackingTurnChecks.gml</script>
-        <script>scripts\CheckingForVictoryOrEliminations.gml</script>
         <script>scripts\ActivateAbilityTarget.gml</script>
         <script>scripts\ActivateAbility.gml</script>
         <script>scripts\ActivateAfterCardSelection.gml</script>
@@ -290,12 +293,25 @@
         <script>scripts\scr_ability_instakill.gml</script>
       </scripts>
       <scripts name="grp_spells_scr">
+        <script>scripts\scr_spell_json_setup.gml</script>
         <scripts name="grp_checks">
-          <script>scripts\scr_spells_Checks_none.gml</script>
-          <script>scripts\scr_spells_Checks_OnlyAllies.gml</script>
-          <script>scripts\scr_spells_Checks_Open.gml</script>
+          <scripts name="grp_cardholders">
+            <script>scripts\scr_spells_Checks_none.gml</script>
+            <script>scripts\scr_spells_Checks_OnlyAllies.gml</script>
+            <script>scripts\scr_spells_Checks_Open.gml</script>
+          </scripts>
+          <scripts name="grp_cons">
+            <script>scripts\scr_spellls_Check_EnemyTeam.gml</script>
+          </scripts>
+        </scripts>
+        <scripts name="grp_spells">
+          <script>scripts\Activate_WhenCasted_Spell.gml</script>
         </scripts>
         <script>scripts\scr_spell_Hexeria_BlueElixir_WhenCasted.gml</script>
+        <script>scripts\scr_spell_Payday2_HostageTaker_EndOfTurn.gml</script>
+        <script>scripts\scr_spell_RedAlert3_Cryogeddon_StartOfBattle.gml</script>
+        <script>scripts\scr_available1.gml</script>
+        <script>scripts\scr_available2.gml</script>
       </scripts>
       <scripts name="grp_cardholders_event">
         <script>scripts\GameEvent_cardholders_Damaged.gml</script>
@@ -337,6 +353,7 @@
       <object>objects\obj_player_con</object>
       <object>objects\obj_animator_sys</object>
       <object>objects\obj_animator</object>
+      <object>objects\obj_spells_sys</object>
     </objects>
     <objects name="grp_game">
       <object>objects\obj_card</object>
@@ -348,6 +365,7 @@
         <object>objects\obj_cardselection</object>
       </objects>
       <object>objects\obj_carddrawer_control</object>
+      <object>objects\obj_spell_animation</object>
     </objects>
   </objects>
   <rooms name="rooms">

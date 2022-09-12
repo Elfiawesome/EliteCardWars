@@ -1,8 +1,9 @@
 ///scr_spell_Hexeria_BlueElixir_WhenCasted(Mapstr)
 var MapStr=argument0;
 
-with(MapStr[? "Target"]){
-    Stats[? "Hp"]+=200
+if (Stats[? "Hp"]+20)<=Stats[? "Base_Hp"]{
+    Stats[? "Hp"]+=20
+}else{
+    Stats[? "Hp"]+=(Stats[? "Base_Hp"]-Stats[? "Hp"])
 }
 
-ds_map_destroy(MapStr)
