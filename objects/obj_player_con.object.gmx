@@ -293,7 +293,7 @@ if global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
                 if ds_list_find_index(global.NetworkObj.SelectedCardHolders_Ability,_cardholder)!=-1{exit;}
                 //Selecting MY unit
                 if _cardholder.CardID!=0{
-                if _cardholder.mysocket=mysocket &amp;&amp; _cardholder.Stats[? "AtkAlrdy"]=false{
+                if _cardholder.mysocket=mysocket &amp;&amp; _cardholder.Stats[? "AtkAlrdy"]=false  &amp;&amp; !_cardholder.Stats[? "IsFrozen"]{
                     if ds_list_find_index(Cardholderlist,_cardholder)!=-1{
                     if ds_list_find_index(global.NetworkObj.SelectedCardHolders,_cardholder)=-1{
                         ds_list_add(global.NetworkObj.SelectedCardHolders,_cardholder)
