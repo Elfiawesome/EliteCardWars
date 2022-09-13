@@ -115,12 +115,17 @@ if SpellsIsRun[SpellType.Weather]{
           <argument>
             <kind>1</kind>
             <string>var SQ=SpellsQueue[SpellType.Weather]
+if ds_list_empty(SQ){exit;}
+var midy=view_hport[0]/2;
+var midx=150;
+draw_set_halign(fa_center)
+draw_text(midx,midy-170,"Weather Spells ["+string(ds_list_size(SQ))+"]")
+draw_set_halign(fa_left)
 for(var i=0;i&lt;ds_list_size(SQ);i++){
     var _m=SQ[| i]
     var sprite=global.SpellDat_Sprite[_m[? "ID"]];
     var image=global.SpellDat_Image[_m[? "ID"]];
-    var midy=view_hport[0]/2;
-    draw_sprite_ext(sprite,image,150,midy+i*50,0.2,0.2,0,c_white,1)
+    draw_sprite_ext(sprite,image,midx,midy+i*50,0.2,0.2,0,c_white,1)
 }
 </string>
           </argument>

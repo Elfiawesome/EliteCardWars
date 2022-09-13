@@ -445,7 +445,7 @@ if global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//draw event
+            <string>///drawing Teams before game
 if IsLocal &amp;&amp; !global.IsGame{
 var sl=global.NetworkObj.socketlist
 var stid=global.NetworkObj.socket_to_instanceid
@@ -464,6 +464,33 @@ for(var k=ds_map_find_first(_map);!is_undefined(k);k=ds_map_find_next(_map,k)){
     ii++
 }
 
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if global.IsGame{
+if global.SelectedCard!=noone &amp;&amp; global.SelectedCard.CardType=1 &amp;&amp; global.SpellDat_SpellCastType[global.SelectedCard.CardID]=SpellCastType.BattlefieldTarget{
+    draw_set_alpha((sin(current_time/100)+1)/4)
+    draw_rectangle(Homex-350,Homey-300,Homex+350,Homey+300,false)
+    draw_set_alpha(1)
+}
 }
 </string>
           </argument>

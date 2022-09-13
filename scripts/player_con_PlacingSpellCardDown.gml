@@ -15,8 +15,8 @@ if global.SpellDat_SpellCastType[global.SelectedCard.CardID]=SpellCastType.UnitT
         }
     }
 }
-if global.SpellDat_SpellCastType[global.SelectedCard.CardID]=SpellCastType.BattlefieldTarget && position_meeting(mouse_x,mouse_y,obj_heroholder){
-    var _cardholder=instance_position(mouse_x,mouse_y,obj_heroholder)
+if global.SpellDat_SpellCastType[global.SelectedCard.CardID]=SpellCastType.BattlefieldTarget && IsMouseOverBattlefield(){
+    var _cardholder=IsMouseOverBattlefield()
     if script_execute(global.SpellDat_CastCheck[global.SelectedCard.CardID],_cardholder.mysocket){
         if Points>=global.SpellDat_Pt[global.SelectedCard.CardID]{
         Points-=global.SpellDat_Pt[global.SelectedCard.CardID]
