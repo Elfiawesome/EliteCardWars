@@ -15,9 +15,13 @@ Stats[? "Sweep_Atk"]=false
 Stats[? "Pierce_Atk"]=false
 Stats[? "Sp_Atk"]=false
 //Character states
+ds_map_clear(Stats[? "Multi_IsFrozen"])
 Stats[? "IsFrozen"]=0
+ds_map_clear(Stats[? "Multi_IsImmune"])
 Stats[? "IsImmune"]=0
+ds_map_clear(Stats[? "Multi_IsSPImmune"])
 Stats[? "IsSPImmune"]=0
+ds_map_clear(Stats[? "Multi_IsBAImmune"])
 Stats[? "IsBAImmune"]=0
 //Spells
 ds_list_clear(Stats[? "Spells"])
