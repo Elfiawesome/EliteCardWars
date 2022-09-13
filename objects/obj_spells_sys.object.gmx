@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>1</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>SpellsQueue[SpellType.Weather]=ds_list_create()
-
+SpellsIsRun[SpellType.Weather]=false
 </string>
           </argument>
         </arguments>
@@ -72,12 +72,32 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>//running 
+if SpellsIsRun[SpellType.Weather]{
+    var SQ=SpellsQueue[SpellType.Weather]
+    var _l=ds_list_create()
+    for(var i=0;i&lt;ds_list_size(SQ);i++){
+        var spellMap=SQ[| i]
+        var spellID=spellMap[? "ID"]
+        var _no=IsSpellTrigger(spellID,SpellTrigger.StartOfBattle)
+        if _no!=-1{
+            var _IsCompleted=script_execute(global.SpellDat_SpellScript[spellID,_no],spellMap)
+            if _IsCompleted{
+                //ds_map_destroy(SQ[| i]);ds_list_delete(SQ,i);i--//alternative usage? i dunno it may work
+                ds_list_add(_l,SQ[| i])
+            }
+        }
+    }
+    for(var i=0;i&lt;ds_list_size(_l);i++){ds_map_destroy(_l[| i]);ds_list_delete(SQ,ds_list_find_index(SQ,_l[| i]));}
+    ds_list_destroy(_l)
+    SpellsIsRun[SpellType.Weather]=false
+}
+</string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -94,9 +114,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*var SQ=SpellsQueue[SpellType.Weather]
+            <string>var SQ=SpellsQueue[SpellType.Weather]
 for(var i=0;i&lt;ds_list_size(SQ);i++){
-    draw_text(mouse_x,mouse_y-100+(i*30),json_encode(SQ[| i]))
+    var _m=SQ[| i]
+    var sprite=global.SpellDat_Sprite[_m[? "ID"]];
+    var image=global.SpellDat_Image[_m[? "ID"]];
+    var midy=view_hport[0]/2;
+    draw_sprite_ext(sprite,image,150,midy+i*50,0.2,0.2,0,c_white,1)
 }
 </string>
           </argument>

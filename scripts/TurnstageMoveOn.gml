@@ -26,23 +26,7 @@ if Turn>=0{
                 CameraFocusNo=Turn
                 global.GameStage=GAMESTAGE.ATTACKINGTURN
                 //run spellsys spells scripts
-                with(global.SpellSys){
-                    var SQ=SpellsQueue[SpellType.Weather]
-                    var _l=ds_list_create()
-                    for(var i=0;i<ds_list_size(SQ);i++){
-                        var spellMap=SQ[| i]
-                        var spellID=spellMap[? "ID"]
-                        var _no=IsSpellTrigger(spellID,SpellTrigger.StartOfBattle)
-                        if _no!=-1{
-                            var _IsCompleted=script_execute(global.SpellDat_SpellScript[spellID,_no],spellMap)
-                            if _IsCompleted{
-                                //ds_map_destroy(SQ[| i]);ds_list_delete(SQ,i);i--//alternative usage? i dunno it may work
-                                ds_list_add(_l,SQ[| i])
-                            }
-                        }
-                    }
-                    for(var i=0;i<ds_list_size(_l);i++){ds_map_destroy(_l[| i]);ds_list_delete(SQ,ds_list_find_index(SQ,_l[| i]));}ds_list_destroy(_l)
-                }
+                with(global.SpellSys){SpellsIsRun[SpellType.Weather]=true}
             break;
             case GAMESTAGE.ATTACKINGTURN://end of attacking turn
                 Turn=0

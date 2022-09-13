@@ -8,6 +8,7 @@ global.SpellSys=instance_create(0,0,obj_spells_sys)
 global.IsGame=false
 enum GAMESTAGE{
     PLAYERTURNS,
+    STARTOFATTACKINGTURN,
     ATTACKINGTURN,
 }
 global.GameStage=GAMESTAGE.PLAYERTURNS
