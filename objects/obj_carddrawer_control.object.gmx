@@ -65,24 +65,28 @@ DeckHover[1]=false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if ControlParent.GUIObjectOrder[| 0]!=id{exit;}
+            <string>//appearing animation
+if ControlParent.GUIObjectOrder[| 0]=id{
+    switch(AnimationStage){
+        case 0://bring black background
+            if x &gt; (-view_wport[0]/4*3){
+                AnimationStage=1
+            }
+        break;
+        case 1://how to exit
+            if keyboard_check_pressed(vk_escape){
+                AnimationStage=3
+                ds_list_delete(ControlParent.GUIObjectOrder,0)
+            }
+            if ds_list_size(ControlParent.cardList)&gt;=10{
+                Draws=0
+            }
+        break;
+    }
+}
+
+//exit animation
 switch(AnimationStage){
-    case 0://bring black background
-        if x &gt; (-view_wport[0]/4*3){
-            AnimationStage=1
-        }
-    break;
-    case 1://how to exit
-        if keyboard_check_pressed(vk_escape){
-            AnimationStage=3
-            ds_list_delete(ControlParent.GUIObjectOrder,0)
-        }
-        if Draws&lt;1 || ds_list_empty(ControlParent.DeckList){// || ds_list_empty(ControlParent."Spells") [Not yet implemented]
-            AnimationStage=3
-            ds_list_delete(ControlParent.GUIObjectOrder,0)
-        }
-        
-    break;
     case 3://pack up all
         backtgtx=-view_wport[0]
         if abs(x-backtgtx)&lt;0.1{
@@ -95,7 +99,13 @@ switch(AnimationStage){
 }
 
 //Lerping the background
-x=lerp(x,backtgtx,0.2)
+if ControlParent.GUIObjectOrder[| 0]=id || AnimationStage&gt;2{
+    x=lerp(x,backtgtx,0.2)
+}
+
+
+
+
 
 
 </string>
@@ -120,8 +130,7 @@ x=lerp(x,backtgtx,0.2)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if ControlParent.GUIObjectOrder[| 0]!=id{exit;}
-draw_set_alpha(0.2)
+            <string>draw_set_alpha(0.2)
 draw_set_color(c_black)
 //draw black background
 draw_rectangle(x,y,x+view_wport[0],y+view_hport[0],false)
@@ -136,9 +145,9 @@ var msx=device_mouse_x_to_gui(0)
 var msy=device_mouse_y_to_gui(0)
 for(var i=0;i&lt;array_length_1d(DeckSprite);i++){
     var canDraw=true
-    if Draws&lt;1{canDraw=false}
     if i=0 &amp;&amp; ds_list_empty(ControlParent.DeckList){canDraw=false}//if unit deck is empty
     if i=1 {canDraw=true}//if spell deck is empty [Not implemented]
+    if Draws&lt;1{canDraw=false}
     
     //draw sprite
     var _clr=c_white
@@ -147,50 +156,68 @@ for(var i=0;i&lt;array_length_1d(DeckSprite);i++){
     var _y=view_hport[0]/2
     draw_sprite_ext(DeckSprite[i],DeckImage[i],_x+x,_y+y,DeckScale[i],DeckScale[i],0,_clr,1)
     
-    
     //checking for collision
-    if !canDraw{continue;}
-    DeckHover[i]=false
-    if point_in_rectangle(msx,msy,
-        _x+x-sprite_get_width(DeckSprite[i])/2*DeckScale[i],
-        _y+y-sprite_get_height(DeckSprite[i])/2*DeckScale[i],
-        _x+x+sprite_get_width(DeckSprite[i])/2*DeckScale[i],
-        _y+y+sprite_get_height(DeckSprite[i])/2*DeckScale[i],
-    ){DeckHover[i]=true}
-    //do the selection animatiion
-    if DeckHover[i]=true{
-        DeckScale[i]=DeckBaseScale+sin(current_time/100)*0.01
-        //clicking of card
-        if mouse_check_button_pressed(mb_left){
-            switch(i){
-                case 0://draw unit card
-                    CardID=ControlParent.DeckList[| 0]
-                    ds_list_delete(ControlParent.DeckList,0)
-                    with(global.NetworkObj.socket_to_instanceid[? global.NetworkObj.mysocket]){
-                        var _card=GameEvent_draw_specific_card(other.CardID);
-                        _card.CardType=0
-                        _card.x=_x
-                        _card.y=_y
-                    }
-                break;
-                case 1://draw spell card [not yet implemented]
-                    CardID=irandom_range(1,SpellID.Payday2_HostageTaker)//SpellID_MAX-1)
-                    //ds_list_delete(ControlParent.DeckList,0)
-                    with(global.NetworkObj.socket_to_instanceid[? global.NetworkObj.mysocket]){
-                        var _card=GameEvent_draw_specific_card(other.CardID);
-                        _card.CardType=1
-                        _card.x=_x
-                        _card.y=_y
-                    }
-                break;
+    if canDraw &amp;&amp; ControlParent.GUIObjectOrder[| 0]=id{
+        DeckHover[i]=false
+        if point_in_rectangle(msx,msy,
+            _x+x-sprite_get_width(DeckSprite[i])/2*DeckScale[i],
+            _y+y-sprite_get_height(DeckSprite[i])/2*DeckScale[i],
+            _x+x+sprite_get_width(DeckSprite[i])/2*DeckScale[i],
+            _y+y+sprite_get_height(DeckSprite[i])/2*DeckScale[i],
+        ){DeckHover[i]=true}
+        //do the selection animatiion
+        if DeckHover[i]=true{
+            DeckScale[i]=DeckBaseScale+sin(current_time/100)*0.01
+            //clicking of card
+            if mouse_check_button_pressed(mb_left){
+                switch(i){
+                    case 0://draw unit card
+                        CardID=ControlParent.DeckList[| 0]
+                        ds_list_delete(ControlParent.DeckList,0)
+                        with(global.NetworkObj.socket_to_instanceid[? global.NetworkObj.mysocket]){
+                            var _card=GameEvent_draw_specific_card(other.CardID);
+                            _card.CardType=0
+                            _card.x=_x
+                            _card.y=_y
+                        }
+                    break;
+                    case 1://draw spell card [not yet implemented]
+                        CardID=irandom_range(1,SpellID.Payday2_HostageTaker)//SpellID_MAX-1)
+                        //ds_list_delete(ControlParent.DeckList,0)
+                        with(global.NetworkObj.socket_to_instanceid[? global.NetworkObj.mysocket]){
+                            var _card=GameEvent_draw_specific_card(other.CardID);
+                            _card.CardType=1
+                            _card.x=_x
+                            _card.y=_y
+                        }
+                    break;
+                }
+                //reduce number of draws available
+                Draws--
+                if Draws&lt;1{
+                    AnimationStage=3
+                    ds_list_delete(ControlParent.GUIObjectOrder,0)
+                }
             }
-            //reduce number of draws available
-            Draws--
         }
     }
 }
 
-
+//exit button
+var _x=view_wport[0]-100+x
+var _y=50+y
+var _w=50
+var _h=50
+draw_set_color(c_red)
+draw_rectangle(_x,_y,_x+_w,_y+_h,false)
+if point_in_rectangle(msx, msy, _x, _y, _x+_w, _y+_h,){
+    if mouse_check_button_pressed(mb_left){
+        AnimationStage=3
+        ds_list_delete(ControlParent.GUIObjectOrder,0)
+    }
+}
+draw_line_width(_x,_y,_x+_w,_y+_h,3)
+draw_line_width(_x,_y+_h,_x+_w,_y,3)
 
 draw_set_alpha(1)
 draw_set_color(c_white)
