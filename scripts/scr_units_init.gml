@@ -21,12 +21,29 @@ enum UnitID{
     MadnessCombat_MagHank,
     MadnessCombat_TheSavior,
     
+    //Plants Vs Zombies
     PlantVsZombies_AstroVera,
     PlantVsZombies_CobCannon,
     PlantVsZombies_DoubledMint,
     PlantVsZombies_Imitator,
     PlantVsZombies_MagnifyingGrass,
     PlantVsZombies_Seedling,
+    
+    //Red Alert 3
+    RedAlert3_ApocalypseTank,
+    RedAlert3_Conscript,//legacy
+    RedAlert3_Dreadnought,
+    RedAlert3_FutureTankX1,
+    RedAlert3_GigaFortress,
+    RedAlert3_HammerTank,
+    RedAlert3_Kirov,
+    RedAlert3_MigFighter,
+    RedAlert3_MirageTank,
+    RedAlert3_ShogunExecutioner,
+    RedAlert3_Spy,
+    RedAlert3_Stingray,
+    RedAlert3_V4RocketLauncher,
+    
     
     UnitID_MAX,
 }

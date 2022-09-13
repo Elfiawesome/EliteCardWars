@@ -62,7 +62,7 @@ scr_units_init_func(Cur,"Mag Agent",25,15,10,spr_cards,Cur-1)
 var Cur=UnitID.MadnessCombat_MagHank
 scr_units_init_func(Cur,"Mag Agent",25,20,15,spr_cards,Cur-1)
 var Cur=UnitID.MadnessCombat_TheSavior
-scr_units_init_func(Cur,"The Savior",20,15,12,spr_cards,Cur-1)//**Ability not yet done!
+scr_units_init_func(Cur,"The Savior",20,15,12,spr_cards,Cur-1)//**Ability not yet done! No zombie yet?
 
 //Plant VS Zombies
 var Cur=UnitID.PlantVsZombies_AstroVera
@@ -93,4 +93,40 @@ global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_PlantVsZombies_Seedling_Intrinsic
 
 //Red Alert 3
+var Cur=UnitID.RedAlert3_ApocalypseTank//need do
+scr_units_init_func(Cur,"Apocalypse Tank",30,20,20,spr_cards,Cur-1)
+
+var Cur=UnitID.RedAlert3_Conscript
+scr_units_init_func(Cur,"Conscript",5,2,2,spr_cards,Cur-1)
+global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
+var Cur=UnitID.RedAlert3_Dreadnought
+scr_units_init_func(Cur,"Dreadnought",30,30,20,spr_cards,Cur-1)
+global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
+
+var Cur=UnitID.RedAlert3_FutureTankX1//need do
+scr_units_init_func(Cur,"The Future Tank X-1",20,30,22,spr_cards,Cur-1)
+
+var Cur=UnitID.RedAlert3_GigaFortress
+scr_units_init_func(Cur,"Giga Fortress",40,25,22,spr_cards,Cur-1)
+global.UnitDat_AttackType[Cur,UnitAttackType.Pierce_Atk]=true
+
+var Cur=UnitID.RedAlert3_HammerTank//need do
+scr_units_init_func(Cur,"Hammer Tank",12,5,12,spr_cards,Cur-1)
+var Cur=UnitID.RedAlert3_Kirov//need do
+scr_units_init_func(Cur,"Kirov",30,25,22,spr_cards,Cur-1)
+
+var Cur=UnitID.RedAlert3_MigFighter
+scr_units_init_func(Cur,"Mig Fighter",7,5,2,spr_cards,Cur-1)
+
+var Cur=UnitID.RedAlert3_ShogunExecutioner//need do
+scr_units_init_func(Cur,"Shogun Executioner",45,30,25,spr_cards,Cur-1)
+var Cur=UnitID.RedAlert3_Spy//need do
+scr_units_init_func(Cur,"Spy",15,0,8,spr_cards,Cur-1)
+
+var Cur=UnitID.RedAlert3_Stingray
+scr_units_init_func(Cur,"Stingray",16,3,10,spr_cards,Cur-1)
+global.UnitDat_AttackType[Cur,UnitAttackType.SpreadAtk]=true
+var Cur=UnitID.RedAlert3_V4RocketLauncher
+scr_units_init_func(Cur,"V4 Rocket Launcher",10,30,18,spr_cards,Cur-1)
+global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
 
