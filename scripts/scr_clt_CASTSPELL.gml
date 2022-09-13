@@ -14,6 +14,3 @@ if global.NetworkObj.mysocket!=socket{
 }
 
 
-
-//socket_to_instanceid[? socket].Cardholderlist[| Pos],_ID)
-

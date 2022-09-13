@@ -16,20 +16,12 @@ switch(global.SpellDat_SpellType[_ID]){
     case SpellType.Consumable:
     break;
     case SpellType.Equipment:
-        //adding map into cardholder's list
-        if _Pos!=undefined{//add to cardholder's list
-            var _map=ds_map_create();
-            _map[? "ID"]=_ID
-            scr_spell_json_setup(_map)
-            ds_list_add(_cardholder.Stats[? "Spells"],_map)
-            ds_list_mark_as_map(_cardholder.Stats[? "Spells"],ds_list_size(_cardholder.Stats[? "Spells"])-1)
-        }else{//add to hero's list
-            var _map=ds_map_create();
-            _map[? "ID"]=_ID
-            scr_spell_json_setup(_map)
-            ds_list_add(_cardholder.Stats[? "Spells"],_map)
-            ds_list_mark_as_map(_cardholder.Stats[? "Spells"],ds_list_size(_cardholder.Stats[? "Spells"])-1)
-        }
+        //adding map into cardholder's/Hero's list
+        var _map=ds_map_create();
+        _map[? "ID"]=_ID
+        scr_spell_json_setup(_map)
+        ds_list_add(_cardholder.Stats[? "Spells"],_map)
+        ds_list_mark_as_map(_cardholder.Stats[? "Spells"],ds_list_size(_cardholder.Stats[? "Spells"])-1)
     break;
     case SpellType.Weather:
         var spell=global.SpellSys.SpellsQueue[SpellType.Weather]

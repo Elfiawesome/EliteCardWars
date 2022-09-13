@@ -136,6 +136,8 @@ if keyboard_check_pressed(vk_enter){
     var _c1=GameEvent_draw_specific_card(UnitID.PlantVsZombies_Imitator);
     var _c2=GameEvent_draw_specific_card(SpellID.Hexeria_Purify);
     _c2.CardType=1
+    var _c2=GameEvent_draw_specific_card(SpellID.Payday2_HostageTaker);
+    _c2.CardType=1
 }
 if global.SelectedCard=noone{
     if position_meeting(mouse_x,mouse_y,obj_card){
@@ -293,7 +295,7 @@ if global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
                 if ds_list_find_index(global.NetworkObj.SelectedCardHolders_Ability,_cardholder)!=-1{exit;}
                 //Selecting MY unit
                 if _cardholder.CardID!=0{
-                if _cardholder.mysocket=mysocket &amp;&amp; _cardholder.Stats[? "AtkAlrdy"]=false  &amp;&amp; !_cardholder.Stats[? "IsFrozen"]{
+                if _cardholder.mysocket=mysocket &amp;&amp; !_cardholder.Stats[? "AtkAlrdy"]  &amp;&amp; !_cardholder.Stats[? "IsFrozen"]{
                     if ds_list_find_index(Cardholderlist,_cardholder)!=-1{
                     if ds_list_find_index(global.NetworkObj.SelectedCardHolders,_cardholder)=-1{
                         ds_list_add(global.NetworkObj.SelectedCardHolders,_cardholder)
