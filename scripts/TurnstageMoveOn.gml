@@ -41,8 +41,7 @@ if Turn>=0{
                             }
                         }
                     }
-                    for(var i=0;i<ds_list_size(_l);i++){ds_map_destroy(_l);ds_list_delete(SQ,ds_list_find_index(SQ,_l[| i]));}ds_list_destroy(_l)
-                    
+                    for(var i=0;i<ds_list_size(_l);i++){ds_map_destroy(_l[| i]);ds_list_delete(SQ,ds_list_find_index(SQ,_l[| i]));}ds_list_destroy(_l)
                 }
             break;
             case GAMESTAGE.ATTACKINGTURN://end of attacking turn

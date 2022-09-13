@@ -174,7 +174,7 @@ for(var i=0;i&lt;array_length_1d(DeckSprite);i++){
                     }
                 break;
                 case 1://draw spell card [not yet implemented]
-                    CardID=SpellID.Hexeria_BlueElixir//irandom_range(1,SpellID.SpellID_MAX-1)
+                    CardID=SpellID.Payday2_HostageTaker//irandom_range(1,SpellID.SpellID_MAX-1)
                     //ds_list_delete(ControlParent.DeckList,0)
                     with(global.NetworkObj.socket_to_instanceid[? global.NetworkObj.mysocket]){
                         var _card=GameEvent_draw_specific_card(other.CardID);

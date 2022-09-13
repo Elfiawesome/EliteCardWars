@@ -1,5 +1,5 @@
 ///player_con_PlacingSpellCardDown()
-if instance_exists(global.SelectedCard) && global.SelectedCard.CardType=1{
+if global.GameStage=GAMESTAGE.PLAYERTURNS && instance_exists(global.SelectedCard) && global.SelectedCard.CardType=1{
 //Battlefield
 var _send=false
 if global.SpellDat_SpellCastType[global.SelectedCard.CardID]=SpellCastType.UnitTarget && position_meeting(mouse_x,mouse_y,obj_cardholder){//target Unit

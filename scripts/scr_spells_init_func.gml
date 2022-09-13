@@ -3,6 +3,7 @@ global.SpellDat_Name[argument0]=argument1
 global.SpellDat_Pt[argument0]=argument2
 global.SpellDat_Sprite[argument0]=argument3
 global.SpellDat_Image[argument0]=argument4
+global.SpellDat_IsDebuff[argument0]=false
 
 global.SpellDat_SpellType[argument0]=argument5
 global.SpellDat_SpellCastType[argument0]=argument6

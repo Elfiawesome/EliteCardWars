@@ -295,16 +295,16 @@ if CardID=0{
         image_alpha=1
     }
 }
-/*for(var i=0;i&lt;ds_list_size(Stats[? "Spells"]);i++){
-    var spell=Stats[? "Spells"]
-    draw_text(x,y-100+i*30,json_encode(spell[| i]))
-}*/
 
 if CardID=0{exit;}
 //draw Card
 var alpha=1;
 if Stats[? "AtkAlrdy"]{alpha=0.8}
 draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,alpha)
+for(var i=0;i&lt;ds_list_size(Stats[? "Spells"]);i++){
+    var spell=Stats[? "Spells"]
+    draw_text(x,y-100+i*30,json_encode(spell[| i]))
+}
 
 //drawing cooldown
 if Stats[? "AbilityCooldownMax"]&gt;0{

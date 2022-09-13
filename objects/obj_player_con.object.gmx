@@ -132,8 +132,10 @@ with(Hero){instance_destroy()}
             <string>///Managing of Hand Cards
 if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating &amp;&amp; ds_list_empty(GUIObjectOrder){
 if keyboard_check_pressed(vk_enter){
-    GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
-    GameEvent_draw_specific_card(UnitID.PlantVsZombies_Imitator)
+    //GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
+    var _c1=GameEvent_draw_specific_card(UnitID.PlantVsZombies_Imitator);
+    var _c2=GameEvent_draw_specific_card(SpellID.Hexeria_Purify);
+    _c2.CardType=1
 }
 if global.SelectedCard=noone{
     if position_meeting(mouse_x,mouse_y,obj_card){
