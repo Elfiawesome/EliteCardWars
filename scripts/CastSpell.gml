@@ -22,6 +22,13 @@ switch(global.SpellDat_SpellType[_ID]){
         scr_spell_json_setup(_map)
         ds_list_add(_cardholder.Stats[? "Spells"],_map)
         ds_list_mark_as_map(_cardholder.Stats[? "Spells"],ds_list_size(_cardholder.Stats[? "Spells"])-1)
+        //activate
+        with(_cardholder){
+            var _no=IsSpellTrigger(_ID,SpellTrigger.StartAndEndOfTurn)
+            if _no!=-1{
+                script_execute(global.SpellDat_SpellScript[_ID,_no],_map)
+            }
+        }
     break;
     case SpellType.Weather:
         var spell=global.SpellSys.SpellsQueue[SpellType.Weather]

@@ -309,9 +309,9 @@
         </scripts>
         <script>scripts\scr_spell_Hexeria_BlueElixir_WhenCasted.gml</script>
         <script>scripts\scr_spell_Hexeria_Purify_WhenCasted.gml</script>
+        <script>scripts\scr_spell_MadnessCombat_SaviorsHalo_StartAndEndOfTurn.gml</script>
         <script>scripts\scr_spell_Payday2_HostageTaker_EndOfTurn.gml</script>
         <script>scripts\scr_spell_RedAlert3_Cryogeddon_StartOfBattle.gml</script>
-        <script>scripts\scr_available2.gml</script>
         <script>scripts\script148.gml</script>
       </scripts>
       <scripts name="grp_cardholders_event">

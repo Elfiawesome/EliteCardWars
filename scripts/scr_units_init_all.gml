@@ -92,3 +92,5 @@ scr_units_init_func(Cur,"Seedling",1,0,2,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_PlantVsZombies_Seedling_Intrinsic
 
+//Red Alert 3
+

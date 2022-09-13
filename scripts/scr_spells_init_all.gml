@@ -34,6 +34,7 @@ enum SpellTrigger{
     EndOfTurn,
     WhenCasted,
     StartOfBattle,
+    StartAndEndOfTurn,
 }
 
 
@@ -42,15 +43,16 @@ scr_spells_init_func(Cur,"Blue Elixir",5,spr_spells,Cur-1,SpellType.Consumable,S
 global.SpellDat_CastCheck[Cur]=scr_spells_Checks_OnlyAllies
 global.SpellDat_SpellTrigger[Cur,0]=SpellTrigger.WhenCasted
 global.SpellDat_SpellScript[Cur,0]=scr_spell_Hexeria_BlueElixir_WhenCasted
-var Cur=SpellID.Hexeria_Purify
+var Cur=SpellID.Hexeria_Purify//Consumable Type
 scr_spells_init_func(Cur,"Purify",3,spr_spells,Cur-1,SpellType.Consumable,SpellCastType.UnitTarget)
 global.SpellDat_CastCheck[Cur]=scr_spells_Checks_OnlyAllies
 global.SpellDat_SpellTrigger[Cur,0]=SpellTrigger.WhenCasted
 global.SpellDat_SpellScript[Cur,0]=scr_spell_Hexeria_Purify_WhenCasted
-
-
-/*var Cur=SpellID.MadnessCombat_SaviorsHalo
-scr_spells_init_func(Cur,"Savior's Halo",1,spr_spells,Cur-1)*/
+var Cur=SpellID.MadnessCombat_SaviorsHalo//Equipment Type
+scr_spells_init_func(Cur,"Savior's Halo",1,spr_spells,Cur-1,SpellType.Equipment,SpellCastType.UnitTarget)
+global.SpellDat_CastCheck[Cur]=scr_spells_Checks_OnlyAllies
+global.SpellDat_SpellTrigger[Cur,0]=SpellTrigger.StartAndEndOfTurn
+global.SpellDat_SpellScript[Cur,0]=scr_spell_MadnessCombat_SaviorsHalo_StartAndEndOfTurn
 var Cur=SpellID.Payday2_HostageTaker//Equipment Type
 scr_spells_init_func(Cur,"Hostage Taker",4,spr_spells,Cur-1,SpellType.Equipment,SpellCastType.UnitTarget)
 global.SpellDat_CastCheck[Cur]=scr_spells_Checks_OnlyAllies
