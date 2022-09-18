@@ -42,13 +42,33 @@ global.PlayerOnlineName=choose(
 
 scr_units_init()
 global.PlayerDeck=ds_list_create()
-repeat(20){
+/*repeat(20){
     //ds_list_add(global.PlayerDeck,irandom_range(1,UnitID.UnitID_MAX-1))
     //ds_list_add(global.PlayerDeck,UnitID.PlantVsZombies_Imitator)
-    //ds_list_add(global.PlayerDeck,irandom_range(UnitID.RedAlert3_ApocalypseTank,UnitID.UnitID_MAX-1))
     ds_list_add(global.PlayerDeck,irandom_range(1,UnitID.UnitID_MAX-1))
-    
-}
+}*/
+ds_list_add(global.PlayerDeck,
+    UnitID.PlantVsZombies_Imitator,
+    UnitID.MadnessCombat_Auditor,
+    UnitID.PlantVsZombies_AstroVera,
+    UnitID.FanFron_FantasticDragon,
+    UnitID.PlantVsZombies_CobCannon,
+    UnitID.RedAlert3_ApocalypseTank,
+    UnitID.RedAlert3_GigaFortress,
+    UnitID.RedAlert3_MirageTank,
+    UnitID.D2_Servitor,
+    UnitID.D2_Harpy,
+    UnitID.D2_Goblin,
+    UnitID.PlantVsZombies_Seedling,
+    UnitID.RedAlert3_Kirov,
+    UnitID.RedAlert3_Spy,
+    UnitID.RedAlert3_Stingray,
+    UnitID.RedAlert3_V4RocketLauncher,
+    UnitID.RedAlert3_MigFighter,
+    UnitID.RedAlert3_FutureTankX1,
+    UnitID.MadnessCombat_HankJwimbleton,
+    UnitID.MadnessCombat_TheSavior,
+)
 </string>
           </argument>
         </arguments>

@@ -75,6 +75,7 @@ _inst.name="SERVER OWNER"
 _inst.IsLocal=true
 _inst.mysocket=0
 ds_list_copy(_inst.DeckList,global.PlayerDeck)
+ds_list_shuffle(_inst.DeckList)
 socket_to_instanceid[? 0]=_inst
 ds_list_add(socketlist,0)
 
