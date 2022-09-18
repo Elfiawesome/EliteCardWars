@@ -54,6 +54,9 @@ switch(type){
     case NETWORKPKT.ROLLADIE:
         scr_clt_ROLLADIE(buffer)
     break;
+    case NETWORKPKT.TRANSFORMCARDHOLDER:
+        scr_clt_TRANSFORMCARDHOLDER(buffer)
+    break;
     
     //end game
     case NETWORKPKT.PLAYERELIMINATEED:
