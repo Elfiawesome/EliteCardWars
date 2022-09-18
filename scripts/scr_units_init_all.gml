@@ -146,3 +146,66 @@ var Cur=UnitID.RedAlert3_V4RocketLauncher
 scr_units_init_func(Cur,"V4 Rocket Launcher",10,30,18,spr_cards,Cur-1)
 global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
 
+//SouthPark
+var Cur=UnitID.SouthPark_AWESOMEO4000
+scr_units_init_func(Cur,"A.W.E.S.O.m.-O 4000",40,10,16,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_BountyHunterKyle
+scr_units_init_func(Cur,"Bounty Hunter Kyle",12,14,12,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_BuccaneerBebe
+scr_units_init_func(Cur,"Buccaneer Bebe",10,10,9,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_CanadianKnightIke
+scr_units_init_func(Cur,"Canadian Knight Ike",5,8,3,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_CaptainDiabetes
+scr_units_init_func(Cur,"Captain Diabetes",7,8,3,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_ChaosHamsters
+scr_units_init_func(Cur,"Chaos Hamsters",7,5,3,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_DarkAngelRed
+scr_units_init_func(Cur,"Dark Angel Red",8,8,9,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_DarkMageCraig
+scr_units_init_func(Cur,"Dark Mage Craig",12,7,10,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_DoctorTimothy
+scr_units_init_func(Cur,"Doctor Timothy",18,5,10,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_EnforcerJimmy
+scr_units_init_func(Cur,"Enforcer Jimmy",10,5,8,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_Fastpass
+scr_units_init_func(Cur,"Fastpsas",15,10,10,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_Firkle
+scr_units_init_func(Cur,"Firkle",10,5,6,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_Henrietta
+scr_units_init_func(Cur,"Henrietta",16,10,14,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_HermesKenny
+scr_units_init_func(Cur,"Hermes Kenny",5,8,4,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_IncanCraig
+scr_units_init_func(Cur,"Incan Craig",20,10,10,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_InuitKenny
+scr_units_init_func(Cur,"Innuit Kenny",6,9,5,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_KyleOfTheDrowElves
+scr_units_init_func(Cur,"Kyle of the Drow Elves",15,10,12,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_Manbearpig
+scr_units_init_func(Cur,"Manbearpig",50,30,25,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_MrHankey
+scr_units_init_func(Cur,"Mr. Hankey",16,4,12,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_Nathan
+scr_units_init_func(Cur,"Nathan",12,10,12,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_PaladinButters
+scr_units_init_func(Cur,"Paladin Butters",8,15,10,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_PrincessKenny
+scr_units_init_func(Cur,"Princess Kenny",4,7,4,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_Robobebe
+scr_units_init_func(Cur,"Robo Bebe",10,10,9,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_RogueToken
+scr_units_init_func(Cur,"Rogue Token",14,5,10,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_ShamanToken
+scr_units_init_func(Cur,"Shaman Token",14,4,10,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_SheildmaidenWendy
+scr_units_init_func(Cur,"Sheildmaiden Wendy",18,12,12,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_StanofManyMoonos
+scr_units_init_func(Cur,"Stan of Many Moons",10,15,15,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_Tupperware
+scr_units_init_func(Cur,"Tupperware",15,10,10,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_WoodlandCritters
+scr_units_init_func(Cur,"Woodland Critters",16,6,12,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_YouthPastorCraig
+scr_units_init_func(Cur,"Youth Pastor Craig",16,4,8,spr_cards,Cur-1)
+var Cur=UnitID.SouthPark_ZenCartman
+scr_units_init_func(Cur,"Zen Cartman",45,0,15,spr_cards,Cur-1)
