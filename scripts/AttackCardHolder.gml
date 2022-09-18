@@ -3,7 +3,8 @@ var AttackMapString=argument0;
 var AttackMap=json_decode(AttackMapString);
 //identifying object
 var Victim_Map=AttackMap[? "Victim"]
-var VictimObj=socket_to_instanceid[? real(Victim_Map[? "Socket"])].Cardholderlist[| real(Victim_Map[? "Pos"])]
+var VictimCon=socket_to_instanceid[? real(Victim_Map[? "Socket"])]
+var VictimObj=VictimCon.Cardholderlist[| real(Victim_Map[? "Pos"])]
 
 
 //going through all the attackers
@@ -23,9 +24,30 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
             GameEvent_cardholders_Damaged(AttackObj)
         }
     }
+    //Splash Damage
+    if AttackObj.Stats[? "Splash_Atk"]=true{
+        for(var ii=0;ii<ds_list_size(VictimCon.Cardholderlist);ii++){
+            if VictimObj!=VictimCon.Cardholderlist[| ii]{
+                with(VictimCon.Cardholderlist[| ii]){
+                //execute Dealing Damage Event
+                GameEvent_cardholders_DealSplashDamage(id,AttackObj)
+                //execute Damaged Event
+                GameEvent_cardholders_Damaged(AttackObj)
+                ds_list_add(_list,id)//probably need change :|
+                }
+            }
+        }
+    }
+    //activate after damaged ability
     for(var ii=0;ii<ds_list_size(_list);ii+=1){
         with(_list[| ii]){
             GameEvent_cardholders_AfterDamaged(_list[| ii])
+        }
+    }
+    //if Killed, activate Kill Ability
+    for(var ii=0;ii<ds_list_size(_list);ii+=1){
+        if _list[| ii].Stats[? "Hp"]<1{
+            with(AttackObj){Activate_Kill_Ability(_list[| ii])}
         }
     }
     //animation

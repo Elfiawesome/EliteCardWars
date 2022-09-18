@@ -16,6 +16,7 @@ global.UnitDat_AbilityScript[Cur,0]=scr_ability_D2_Hobgoblin
 var Cur=UnitID.D2_Psion
 scr_units_init_func(Cur,"Psion",5,15,12,spr_cards,Cur-1);global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
+global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_PlayerTurn
 global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_OnlyEnemy
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_D2_Psion
 global.UnitDat_CooldownMax[Cur]=2
@@ -23,6 +24,7 @@ global.UnitDat_CooldownMax[Cur]=2
 var Cur=UnitID.D2_Servitor
 scr_units_init_func(Cur,"Servitor",14,10,18,spr_cards,Cur-1);global.UnitDat_ImmuneCapable[Cur]=true
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
+global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_PlayerTurn
 global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_OnlyAllies_NoImmuneCapable
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_D2_Servitor_ActivateTarget
 global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.Intrinsic
@@ -93,36 +95,50 @@ global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_PlantVsZombies_Seedling_Intrinsic
 
 //Red Alert 3
-var Cur=UnitID.RedAlert3_ApocalypseTank//need do
+var Cur=UnitID.RedAlert3_ApocalypseTank
 scr_units_init_func(Cur,"Apocalypse Tank",30,20,20,spr_cards,Cur-1)
-
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Damaging
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_RedAlert3_ApocalypseTank_Damaging
 var Cur=UnitID.RedAlert3_Conscript
 scr_units_init_func(Cur,"Conscript",5,2,2,spr_cards,Cur-1)
 global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
 var Cur=UnitID.RedAlert3_Dreadnought
 scr_units_init_func(Cur,"Dreadnought",30,30,20,spr_cards,Cur-1)
 global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
-
-var Cur=UnitID.RedAlert3_FutureTankX1//need do
+var Cur=UnitID.RedAlert3_FutureTankX1
 scr_units_init_func(Cur,"The Future Tank X-1",20,30,22,spr_cards,Cur-1)
-
+global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_AttackingTurn
+global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_RedAlert3_FutureTankX1
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_RedAlert3_FutureTankX1_ActivateTarget
+global.UnitDat_CooldownMax[Cur]=3
 var Cur=UnitID.RedAlert3_GigaFortress
 scr_units_init_func(Cur,"Giga Fortress",40,25,22,spr_cards,Cur-1)
 global.UnitDat_AttackType[Cur,UnitAttackType.Pierce_Atk]=true
-
-var Cur=UnitID.RedAlert3_HammerTank//need do
+var Cur=UnitID.RedAlert3_HammerTank
 scr_units_init_func(Cur,"Hammer Tank",12,5,12,spr_cards,Cur-1)
-var Cur=UnitID.RedAlert3_Kirov//need do
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Kill
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_RedAlert3_HammerTank_Kill
+var Cur=UnitID.RedAlert3_Kirov
 scr_units_init_func(Cur,"Kirov",30,25,22,spr_cards,Cur-1)
-
+global.UnitDat_AttackType[Cur,UnitAttackType.Splash_Atk]=true
+global.UnitDat_AttackType_SplashDmg[Cur]=5
 var Cur=UnitID.RedAlert3_MigFighter
 scr_units_init_func(Cur,"Mig Fighter",7,5,2,spr_cards,Cur-1)
-
-var Cur=UnitID.RedAlert3_ShogunExecutioner//need do
+var Cur=UnitID.RedAlert3_MirageTank
+scr_units_init_func(Cur,"Mirage Tank",10,16,14,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_BAImmune
+var Cur=UnitID.RedAlert3_ShogunExecutioner
 scr_units_init_func(Cur,"Shogun Executioner",45,30,25,spr_cards,Cur-1)
-var Cur=UnitID.RedAlert3_Spy//need do
+global.UnitDat_AttackType[Cur,UnitAttackType.Splash_Atk]=true
+global.UnitDat_AttackType_SplashDmg[Cur]=5
+var Cur=UnitID.RedAlert3_Spy
 scr_units_init_func(Cur,"Spy",15,0,8,spr_cards,Cur-1)
-
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
+global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_PlayerTurn
+global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_RedAlert3_Spy
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_RedAlert3_Spy_ActivateTarget
 var Cur=UnitID.RedAlert3_Stingray
 scr_units_init_func(Cur,"Stingray",16,3,10,spr_cards,Cur-1)
 global.UnitDat_AttackType[Cur,UnitAttackType.SpreadAtk]=true

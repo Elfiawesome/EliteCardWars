@@ -31,6 +31,7 @@ Stats[? "IsAbilityStun"]=false
 Stats[? "AbilityLifespan"]=0
 Stats[? "AbilityCooldown"]=0
 Stats[? "AbilityCooldownMax"]=0
+ds_list_clear(Stats[? "AbilitiesScript"])
 
 Stats[? "AbilityConstantTarget"]=noone
 Stats[? "LastAttackedBy"]=noone

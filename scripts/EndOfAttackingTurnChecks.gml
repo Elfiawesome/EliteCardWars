@@ -3,7 +3,7 @@ for(var i=0;i<ds_list_size(socketlist);i++){
     with(socket_to_instanceid[? socketlist[| i]]){
         for(var ii=0;ii<ds_list_size(Cardholderlist);ii++){
             var _ch=Cardholderlist[| ii]
-            if _ch.CardID=0{continue;}
+            if _ch.CardID!=0{
             //going through every cardholder
             with(_ch){
                 //increasing lifespan
@@ -27,14 +27,10 @@ for(var i=0;i<ds_list_size(socketlist);i++){
             for(var i3=0;i3<ds_list_size(Cardholderlist);i3++){
                 if _ch!=Cardholderlist[| i3]{
                     with(Cardholderlist[| i3]){
-                        if Stats[? "IsAbilityStun"]=false{
-                            if IsAbilityTrigger(CardID,AbilityTrigger.FriendDeath)!=-1{
-                                var _no=IsAbilityTrigger(CardID,AbilityTrigger.FriendDeath)
-                                script_execute(global.UnitDat_AbilityScript[CardID,_no],other.id)
-                            }
-                        }
-                    }
+                        Activate_FriendDeath_Ability(_ch)
+                    }                    
                 }
+            }
             }
             }
         }

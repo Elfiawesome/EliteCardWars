@@ -31,7 +31,7 @@ enum UnitID{
     
     //Red Alert 3
     RedAlert3_ApocalypseTank,
-    RedAlert3_Conscript,//legacy
+    RedAlert3_Conscript,//Legacy, might drop out
     RedAlert3_Dreadnought,
     RedAlert3_FutureTankX1,
     RedAlert3_GigaFortress,
@@ -58,6 +58,7 @@ enum UnitAttackType{
     SpreadAtk,
     Sweep_Atk,
     Pierce_Atk,
+    Splash_Atk,
     Sp_Atk,
 }
 enum AbilityTrigger{
@@ -68,8 +69,9 @@ enum AbilityTrigger{
     Intrinsic,//activated when summoned and updated on every start of the round
     Deathwish,//activated when dead
     FriendDeath,//Activated when cardholder friend is dead
-    Warcry,//activated when Summoned [Not yet implemented]
+    Warcry,//activated when Summoned
     Kill,//activated Each kill [Not yet implemented]
+    Damaging,//activated when damaging
     Damaged,//activated when damaged
     AfterDamaged,//activated after damaged calculation
     AfterCardSelection,//activated after con has finished selecting a card
@@ -91,7 +93,7 @@ scr_hero_init_func(Cur,"Zavala",10,0,spr_Heroes,Cur-1)
 
 //how many points at a turn
 global.TurnPointArray[0]=1000
-global.TurnPointArray[0]=5
+/*global.TurnPointArray[0]=5
 global.TurnPointArray[1]=6
 global.TurnPointArray[2]=8
 global.TurnPointArray[3]=11

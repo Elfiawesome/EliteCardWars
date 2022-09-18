@@ -261,8 +261,14 @@
         <scripts name="grp_Checks">
           <script>scripts\scr_ability_Checks_none.gml</script>
           <script>scripts\scr_ability_Checks_OnlyEnemy.gml</script>
+          <script>scripts\scr_ability_Checks_RedAlert3_FutureTankX1.gml</script>
+          <script>scripts\scr_ability_Checks_RedAlert3_Spy.gml</script>
           <script>scripts\scr_ability_Checks_OnlyAllies.gml</script>
           <script>scripts\scr_ability_Checks_OnlyAllies_NoImmuneCapable.gml</script>
+        </scripts>
+        <scripts name="grp_SelectChecks">
+          <script>scripts\scr_ability_SelectChecks_PlayerTurn.gml</script>
+          <script>scripts\scr_ability_SelectChecks_AttackingTurn.gml</script>
         </scripts>
         <scripts name="grp_Ability">
           <script>scripts\Activate_Intrinsic_Ability.gml</script>
@@ -271,6 +277,7 @@
           <script>scripts\Activate_Damaged_Ability.gml</script>
           <script>scripts\Activate_AfterDamaged_Ability.gml</script>
           <script>scripts\Activate_FriendDeath_Ability.gml</script>
+          <script>scripts\Activate_Kill_Ability.gml</script>
         </scripts>
         <script>scripts\scr_ability_none.gml</script>
         <script>scripts\scr_ability_D2_Hobgoblin.gml</script>
@@ -288,6 +295,10 @@
         <script>scripts\scr_ability_PlantVsZombies_Imitator_AfterCardSelection.gml</script>
         <script>scripts\scr_ability_PlantVsZombies_MagnifyingGrass_Warcry.gml</script>
         <script>scripts\scr_ability_PlantVsZombies_Seedling_Intrinsic.gml</script>
+        <script>scripts\scr_ability_RedAlert3_ApocalypseTank_Damaging.gml</script>
+        <script>scripts\scr_ability_RedAlert3_FutureTankX1_ActivateTarget.gml</script>
+        <script>scripts\scr_ability_RedAlert3_HammerTank_Kill.gml</script>
+        <script>scripts\scr_ability_RedAlert3_Spy_ActivateTarget.gml</script>
         <script>scripts\scr_ability_SPImmune.gml</script>
         <script>scripts\scr_ability_BAImmune.gml</script>
         <script>scripts\scr_ability_instakill.gml</script>
@@ -317,6 +328,8 @@
       <scripts name="grp_cardholders_event">
         <script>scripts\GameEvent_cardholders_Damaged.gml</script>
         <script>scripts\GameEvent_cardholders_DealDamage.gml</script>
+        <script>scripts\GameEvent_cardholders_DealSplashDamage.gml</script>
+        <script>scripts\GameEvent_cardholders_DealDamageAmt.gml</script>
         <script>scripts\GameEvent_cardholders_AfterDamaged.gml</script>
         <script>scripts\GameEvent_cardholders_Death.gml</script>
         <script>scripts\GameEvent_cardholders_Clear.gml</script>

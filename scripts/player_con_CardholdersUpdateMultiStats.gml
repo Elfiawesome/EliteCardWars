@@ -8,6 +8,8 @@ _m=Stats[? "Multi_Sweep_Atk"];for(var k=ds_map_find_first(_m);!is_undefined(k);k
 if !ds_map_empty(_m){Stats[? "Sweep_Atk"]=true}else{Stats[? "Sweep_Atk"]=false}
 _m=Stats[? "Multi_Pierce_Atk"];for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]=false{ds_list_add(_l,k)}};for(var _i=0;_i<ds_list_size(_l);_i++){ds_map_delete(_m,_l[| _i])};ds_list_clear(_l)
 if !ds_map_empty(_m){Stats[? "Pierce_Atk"]=true}else{Stats[? "Pierce_Atk"]=false}
+_m=Stats[? "Multi_Splash_Atk"];for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]=false{ds_list_add(_l,k)}};for(var _i=0;_i<ds_list_size(_l);_i++){ds_map_delete(_m,_l[| _i])};ds_list_clear(_l)
+if !ds_map_empty(_m){Stats[? "Splash_Atk"]=true}else{Stats[? "Splash_Atk"]=false}
 ds_list_destroy(_l)
 
 _m=Stats[? "Multi_IsFrozen"]

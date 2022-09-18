@@ -133,8 +133,9 @@ with(Hero){instance_destroy()}
 if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating &amp;&amp; ds_list_empty(GUIObjectOrder){
 if keyboard_check_pressed(vk_enter){
     //GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
-    var _c1=GameEvent_draw_specific_card(UnitID.PlantVsZombies_Imitator);_c1.CardType=0
-    var _c2=GameEvent_draw_specific_card(SpellID.Hexeria_Purify);_c2.CardType=1
+    var _c1=GameEvent_draw_specific_card(UnitID.RedAlert3_HammerTank);_c1.CardType=0
+    var _c1=GameEvent_draw_specific_card(UnitID.D2_Harpy);_c1.CardType=0
+    //var _c2=GameEvent_draw_specific_card(SpellID.Hexeria_Purify);_c2.CardType=1
 }
 if global.SelectedCard=noone{
     if position_meeting(mouse_x,mouse_y,obj_card){
@@ -312,13 +313,14 @@ if global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
                     var AttackingObjects=ds_list_create()
                     for(var i=0;i&lt;ds_list_size(global.NetworkObj.SelectedCardHolders);i++){
                         var _o=global.NetworkObj.SelectedCardHolders[| i];
-                        if !scr_ValidAttackSpot(_o,_cardholder){continue;}
+                        if scr_ValidAttackSpot(_o,_cardholder){
                         var _map=ds_map_create();
                         _map[? "Id"]=_o.CardID
                         _map[? "Pos"]=_o.Pos
                         _map[? "Socket"]=_o.mysocket
                         ds_list_add(AttackingList,json_encode_destroy(_map))
                         ds_list_add(AttackingObjects,_o)
+                        }
                     }
                     
                     var AttackingListString=ds_list_write(AttackingList);

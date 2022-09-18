@@ -43,6 +43,7 @@ Stats[? "Base_Hp"]=0
 Stats[? "Hp"]=0
 Stats[? "Base_Atk"]=0
 Stats[? "Atk"]=0
+Stats[? "SplashAtk"]=0
 Stats[? "Pt"]=0
 Stats[? "AtkAlrdy"]=false
 Stats[? "AbilityAlrdy"]=false
@@ -55,6 +56,8 @@ var m=ds_map_create();ds_map_add_map(Stats,"Multi_Sweep_Atk",m);
 Stats[? "Sweep_Atk"]=false
 var m=ds_map_create();ds_map_add_map(Stats,"Multi_Pierce_Atk",m);
 Stats[? "Pierce_Atk"]=false
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_Splash_Atk",m);
+Stats[? "Splash_Atk"]=false
 Stats[? "Sp_Atk"]=false
 //Character states
 var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsFrozen",m);
@@ -74,6 +77,8 @@ Stats[? "IsAbilityStun"]=false
 Stats[? "AbilityLifespan"]=0
 Stats[? "AbilityCooldown"]=0//how many rounds till ability can be used again
 Stats[? "AbilityCooldownMax"]=0
+var _l=ds_list_create();
+ds_map_add_list(Stats,"AbilitiesScript",_l)
 
 Stats[? "AbilityConstantTarget"]=noone
 Stats[? "LastAttackedBy"]=noone
@@ -309,7 +314,10 @@ for(var i=0;i&lt;ds_list_size(Stats[? "Spells"]);i++){
     var spell=Stats[? "Spells"]
     draw_text(x,y-100+i*30,json_encode(spell[| i]))
 }
-
+var _l=Stats[? "AbilitiesScript"]
+for(var i=0;i&lt;ds_list_size(_l);i++){
+    draw_text(x,y-100+i*30,_l[| i])
+}
 //drawing cooldown
 if Stats[? "AbilityCooldownMax"]&gt;0{
 var wid=sprite_get_width(sprite_index)*image_xscale

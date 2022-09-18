@@ -11,11 +11,13 @@ global.UnitDat_AttackType[argument0,UnitAttackType.CrossAtk]=false
 global.UnitDat_AttackType[argument0,UnitAttackType.SpreadAtk]=false
 global.UnitDat_AttackType[argument0,UnitAttackType.Sweep_Atk]=false
 global.UnitDat_AttackType[argument0,UnitAttackType.Pierce_Atk]=false
+global.UnitDat_AttackType[argument0,UnitAttackType.Splash_Atk]=false;global.UnitDat_AttackType_SplashDmg[argument0]=0
 global.UnitDat_AttackType[argument0,UnitAttackType.Sp_Atk]=false
 global.UnitDat_CooldownMax[argument0]=0
 global.UnitDat_ImmuneCapable[argument0]=false
 
 //ability
 global.UnitDat_AbilityTrigger[argument0,0]=AbilityTrigger.Default
+global.UnitDat_AbilityTargetSelectCheck[argument0]=scr_ability_Checks_none
 global.UnitDat_AbilityTargetCheck[argument0,0]=scr_ability_Checks_none
 global.UnitDat_AbilityScript[argument0,0]=scr_ability_none
