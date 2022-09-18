@@ -21,3 +21,11 @@ if !ds_map_empty(_m){Stats[? "IsSPImmune"]=1}else{Stats[? "IsSPImmune"]=0}
 _m=Stats[? "Multi_IsBAImmune"]
 if !ds_map_empty(_m){Stats[? "IsBAImmune"]=1}else{Stats[? "IsBAImmune"]=0}
 
+//Burn & Poison Dmg
+var dmg=0;
+var _m=Stats[? "Multi_BurnDuration"];var _n=Stats[? "Multi_BurnDmg"];
+if !ds_map_empty(_m){for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){dmg+=_n[? k];}}
+Stats[? "BurnDmg"]=dmg;dmg=0
+var _m=Stats[? "Multi_PoisonDuration"];var _n=Stats[? "Multi_PoisonDmg"];
+if !ds_map_empty(_m){for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){dmg+=_n[? k];}}
+Stats[? "PoisonDmg"]=dmg;dmg=0

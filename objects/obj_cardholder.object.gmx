@@ -68,6 +68,16 @@ var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsSPImmune",m);
 Stats[? "IsSPImmune"]=0
 var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsBAImmune",m);
 Stats[? "IsBAImmune"]=0
+//status effects
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_BurnDmg",m);
+Stats[? "BurnDmg"]=0
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_BurnDuration",m);
+Stats[? "BurnDuration"]=0//not used yet
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_PoisonDmg",m);
+Stats[? "PoisonDmg"]=0
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_PoisonDuration",m);
+Stats[? "PoisonDuration"]=0//not used yet
+
 //Spells lists
 var EquipedSpellsList=ds_list_create()
 ds_map_add_list(Stats,"Spells",EquipedSpellsList)
@@ -314,10 +324,13 @@ for(var i=0;i&lt;ds_list_size(Stats[? "Spells"]);i++){
     var spell=Stats[? "Spells"]
     draw_text(x,y-100+i*30,json_encode(spell[| i]))
 }
-var _l=Stats[? "AbilitiesScript"]
-for(var i=0;i&lt;ds_list_size(_l);i++){
-    draw_text(x,y-100+i*30,_l[| i])
-}
+/*var _m=Stats[? "Multi_PoisonDuration"];var _n=Stats[? "Multi_PoisonDmg"];
+var cntr=0
+for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){
+    draw_text(x,y+cntr*20,string(_m[? k])+", "+string(_n[? k]))
+    cntr++
+}*/
+
 //drawing cooldown
 if Stats[? "AbilityCooldownMax"]&gt;0{
 var wid=sprite_get_width(sprite_index)*image_xscale

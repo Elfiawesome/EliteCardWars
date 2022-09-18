@@ -331,6 +331,8 @@
         <script>scripts\GameEvent_cardholders_DealDamage.gml</script>
         <script>scripts\GameEvent_cardholders_DealSplashDamage.gml</script>
         <script>scripts\GameEvent_cardholders_DealDamageAmt.gml</script>
+        <script>scripts\GameEvent_cardholders_DealBurnDamage.gml</script>
+        <script>scripts\GameEvent_cardholders_DealPoisonDamage.gml</script>
         <script>scripts\GameEvent_cardholders_AfterDamaged.gml</script>
         <script>scripts\GameEvent_cardholders_Death.gml</script>
         <script>scripts\GameEvent_cardholders_Clear.gml</script>
