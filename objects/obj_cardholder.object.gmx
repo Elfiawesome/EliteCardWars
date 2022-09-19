@@ -337,7 +337,7 @@ var wid=sprite_get_width(sprite_index)*image_xscale
 var hei=sprite_get_height(sprite_index)*image_yscale
 
 var proportion = (Stats[? "AbilityCooldown"]/Stats[? "AbilityCooldownMax"])
-var newhei=y-hei/2+hei*proportion
+var newhei=hei*proportion
 Visual_CooldownY = lerp(Visual_CooldownY,newhei,0.15)
 
 draw_set_alpha(0.2)
@@ -354,7 +354,7 @@ draw_rectangle(//front rectangle
     x+wid/2+10,
     y+hei/2,
     x+wid/2+20,
-    Visual_CooldownY,
+    y-hei/2+Visual_CooldownY,
 false)
 draw_set_alpha(1)
 draw_set_color(c_white)

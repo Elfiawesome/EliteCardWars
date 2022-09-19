@@ -252,7 +252,8 @@ window_set_fullscreen(true);
 if keyboard_check_pressed(ord("P")){IsDebug=!IsDebug}
 if !IsDebug{exit;}
 var CurY=0
-draw_text(0,CurY,mysocket);CurY+=30
+draw_text(0,CurY,"Mysocket: "+string(mysocket));CurY+=30
+draw_text(0,CurY,"Instances: "+string(instance_count));CurY+=30
 draw_text(0,CurY,"Animator Count: "+string(instance_number(obj_animator)));CurY+=30
 for(var i=0;i&lt;ds_list_size(socketlist);i++){
     draw_text(0,CurY+(i*20),string(socketlist[| i])+": "+string(socket_to_instanceid[? socketlist[| i]].name))

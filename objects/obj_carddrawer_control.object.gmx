@@ -138,7 +138,7 @@ draw_rectangle(x,y,x+view_wport[0],y+view_hport[0],false)
 draw_set_halign(fa_center)
 draw_text(x+view_wport[0]/2,y+10,"Select Deck to Draw")
 draw_text(x+view_wport[0]/2,y+30,"Press 'esc' to cancel")
-draw_set_valign(fa_left)
+draw_set_halign(fa_left)
 
 //Selectable decks
 var msx=device_mouse_x_to_gui(0)

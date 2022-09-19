@@ -133,7 +133,7 @@ with(Hero){instance_destroy()}
 if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating &amp;&amp; ds_list_empty(GUIObjectOrder){
 if keyboard_check_pressed(vk_enter){
     //GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
-    var _c1=GameEvent_draw_specific_card(UnitID.PlantVsZombies_Imitator);_c1.CardType=0
+    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_AWESOMEO4000);_c1.CardType=0
     //var _c1=GameEvent_draw_specific_card(UnitID.PlantVsZombies_Seedling);_c1.CardType=0
     //var _c2=GameEvent_draw_specific_card(SpellID.Hexeria_Purify);_c2.CardType=1
 }

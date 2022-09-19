@@ -303,6 +303,7 @@
         <script>scripts\scr_ability_SPImmune.gml</script>
         <script>scripts\scr_ability_BAImmune.gml</script>
         <script>scripts\scr_ability_instakill.gml</script>
+        <script>scripts\scr_ability_SouthPark_AWESOMEO4000_ActivateTarget.gml</script>
       </scripts>
       <scripts name="grp_spells_scr">
         <script>scripts\scr_spell_json_setup.gml</script>

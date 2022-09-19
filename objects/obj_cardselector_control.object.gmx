@@ -89,7 +89,25 @@ ds_list_destroy(Objlist)
           <argument>
             <kind>1</kind>
             <string>///animation stage checks
-if ControlParent.GUIObjectOrder[| 0]!=id{exit;}
+switch(AnimationStage){
+    case 3://pack up all
+        backtgtx=-view_wview[0]
+        for(var i=0;i&lt;ds_list_size(Objlist);i++){
+            Objlist[| i].tgtx=-200
+        }
+        if abs(x-backtgtx)&lt;0.1{
+            AnimationStage=4
+        }
+    break;
+    case 4://destroy
+        for(var i=0;i&lt;ds_list_size(Objlist);i++){
+            with(Objlist[| i]){instance_destroy()}
+        }
+        instance_destroy()
+    break;
+}
+
+if ControlParent.GUIObjectOrder[| 0]=id{
 switch(AnimationStage){
     case 0://bring black background
         if x &gt; (-view_wview[0]/4*3){
@@ -114,23 +132,8 @@ switch(AnimationStage){
         }
         AnimationStage=2
     break;
-    case 3://pack up all
-        backtgtx=-view_wview[0]
-        for(var i=0;i&lt;ds_list_size(Objlist);i++){
-            Objlist[| i].tgtx=-200
-        }
-        if abs(x-backtgtx)&lt;0.1{
-            AnimationStage=4
-        }
-    break;
-    case 4://destroy
-        for(var i=0;i&lt;ds_list_size(Objlist);i++){
-            with(Objlist[| i]){instance_destroy()}
-        }
-        instance_destroy()
-    break;
 }
-
+}
 //keep background
 x=lerp(x,backtgtx,0.2)
 
@@ -182,8 +185,7 @@ if AnimationStage&lt;3{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if ControlParent.GUIObjectOrder[| 0]!=id{exit;}
-draw_set_alpha(0.2)
+            <string>draw_set_alpha(0.2)
 draw_set_color(c_black)
 //draw black background
 draw_rectangle(x,y,x+view_wport[0],y+view_hport[0],false)
@@ -205,7 +207,7 @@ for(var i=0;i&lt;ds_list_size(Objlist);i++){
 draw_set_halign(fa_center)
 draw_text(x+view_wport[0]/2,y+10,"Select Card")
 draw_text(x+view_wport[0]/2,y+30,"Press 'esc' to cancel")
-draw_set_valign(fa_left)
+draw_set_halign(fa_left)
 
 //draw scrollbar
 draw_set_alpha(0.2)

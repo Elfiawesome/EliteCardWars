@@ -149,6 +149,11 @@ global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
 //SouthPark
 var Cur=UnitID.SouthPark_AWESOMEO4000
 scr_units_init_func(Cur,"A.W.E.S.O.m.-O 4000",40,10,16,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
+global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_PlayerTurn
+global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_OnlyEnemy
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_AWESOMEO4000_ActivateTarget
+global.UnitDat_CooldownMax[Cur]=2
 var Cur=UnitID.SouthPark_BountyHunterKyle
 scr_units_init_func(Cur,"Bounty Hunter Kyle",12,14,12,spr_cards,Cur-1)
 var Cur=UnitID.SouthPark_BuccaneerBebe
