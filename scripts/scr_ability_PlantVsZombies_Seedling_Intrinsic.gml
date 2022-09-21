@@ -3,7 +3,7 @@ var MapStr=argument0;
 
 //Become random unit after 1 round
 if global.NetworkObj.object_index=obj_server{
-if Stats[? "Lifespan"]>0 && Stats[? "Hp"]>0{
+if Stats[? "Lifespan"]>0 && Stats[? "Finalized_Hp"]>0{
     //finding what cards are available
     var possibleList=ds_list_create()
     for(i=1;i<UnitID.UnitID_MAX;i++){

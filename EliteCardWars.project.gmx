@@ -262,10 +262,11 @@
         <scripts name="grp_Checks">
           <script>scripts\scr_ability_Checks_none.gml</script>
           <script>scripts\scr_ability_Checks_OnlyEnemy.gml</script>
-          <script>scripts\scr_ability_Checks_RedAlert3_FutureTankX1.gml</script>
-          <script>scripts\scr_ability_Checks_RedAlert3_Spy.gml</script>
           <script>scripts\scr_ability_Checks_OnlyAllies.gml</script>
           <script>scripts\scr_ability_Checks_OnlyAllies_NoImmuneCapable.gml</script>
+          <script>scripts\scr_ability_Checks_RedAlert3_Spy.gml</script>
+          <script>scripts\scr_ability_Checks_RedAlert3_FutureTankX1.gml</script>
+          <script>scripts\scr_ability_Checks_SouthPark_DoctorTimothy.gml</script>
         </scripts>
         <scripts name="grp_SelectChecks">
           <script>scripts\scr_ability_SelectChecks_PlayerTurn.gml</script>
@@ -281,14 +282,18 @@
           <script>scripts\Activate_Kill_Ability.gml</script>
         </scripts>
         <script>scripts\scr_ability_none.gml</script>
-        <script>scripts\scr_ability_D2_Hobgoblin.gml</script>
-        <script>scripts\scr_ability_D2_Psion.gml</script>
-        <script>scripts\scr_ability_D2_Servitor_ActivateTarget.gml</script>
-        <script>scripts\scr_ability_D2_Servitor_Intrinsic.gml</script>
-        <script>scripts\scr_ability_D2_Servitor_AfterDamaged.gml</script>
-        <script>scripts\scr_ability_D2_Wyvern_Activate.gml</script>
-        <script>scripts\scr_ability_MadnessCombat_Auditor_FriendDeath.gml</script>
-        <script>scripts\scr_ability_MadnessCombat_HankJwimbleton_Deathwish.gml</script>
+        <scripts name="grp_D2">
+          <script>scripts\scr_ability_D2_Hobgoblin.gml</script>
+          <script>scripts\scr_ability_D2_Psion.gml</script>
+          <script>scripts\scr_ability_D2_Servitor_ActivateTarget.gml</script>
+          <script>scripts\scr_ability_D2_Servitor_Intrinsic.gml</script>
+          <script>scripts\scr_ability_D2_Servitor_AfterDamaged.gml</script>
+          <script>scripts\scr_ability_D2_Wyvern_Activate.gml</script>
+        </scripts>
+        <scripts name="grp_MadnessCombat">
+          <script>scripts\scr_ability_MadnessCombat_Auditor_FriendDeath.gml</script>
+          <script>scripts\scr_ability_MadnessCombat_HankJwimbleton_Deathwish.gml</script>
+        </scripts>
         <script>scripts\scr_ability_PlantVsZombies_AstroVera_Warcry.gml</script>
         <script>scripts\scr_ability_PlantVsZombies_AstroVera_Intrinsic.gml</script>
         <script>scripts\scr_ability_PlantVsZombies_DoubledMint_Intrinsic.gml</script>
@@ -300,10 +305,22 @@
         <script>scripts\scr_ability_RedAlert3_FutureTankX1_ActivateTarget.gml</script>
         <script>scripts\scr_ability_RedAlert3_HammerTank_Kill.gml</script>
         <script>scripts\scr_ability_RedAlert3_Spy_ActivateTarget.gml</script>
+        <script>scripts\scr_ability_SouthPark_AWESOMEO4000_ActivateTarget.gml</script>
+        <script>scripts\scr_ability_SouthPark_BountyHunterKyle_Kill.gml</script>
+        <script>scripts\scr_ability_SouthPark_BountyHunterKyle_Damaging.gml</script>
+        <script>scripts\scr_ability_SouthPark_BuccaneerBebe_Kill.gml</script>
+        <script>scripts\scr_ability_SouthPark_CanadianKnightIke_Intrinsic.gml</script>
+        <script>scripts\scr_ability_SouthPark_CaptainDiabetes_Intrinsic.gml</script>
+        <script>scripts\scr_ability_SouthPark_DarkAngelRed_ActivateTarget.gml</script>
+        <script>scripts\scr_ability_SouthPark_DarkAngelRed_AfterCardSelection.gml</script>
+        <script>scripts\scr_ability_SouthPark_DarkAngelRed_Intrinsic.gml</script>
+        <script>scripts\scr_ability_SouthPark_DarkMageCraig_Warcry.gml</script>
+        <script>scripts\scr_ability_SouthPark_DoctorTimothy_ActivateTarget.gml</script>
+        <script>scripts\scr_ability_SouthPark_EnforcerJimmy_Intrinsic.gml</script>
         <script>scripts\scr_ability_SPImmune.gml</script>
         <script>scripts\scr_ability_BAImmune.gml</script>
+        <script>scripts\scr_ability_StatusEffectSpellsImmune.gml</script>
         <script>scripts\scr_ability_instakill.gml</script>
-        <script>scripts\scr_ability_SouthPark_AWESOMEO4000_ActivateTarget.gml</script>
       </scripts>
       <scripts name="grp_spells_scr">
         <script>scripts\scr_spell_json_setup.gml</script>
@@ -343,6 +360,7 @@
         <script>scripts\GameEvent_cardholders_ReceiveImmunity.gml</script>
         <script>scripts\GameEvent_Con_ReimbursePoints.gml</script>
         <script>scripts\GameEvent_Con_HeroDeath.gml</script>
+        <script>scripts\GameEvent_cardholders_heal.gml</script>
       </scripts>
       <scripts name="grp_con_scripts">
         <script>scripts\player_con_CameraPosition.gml</script>

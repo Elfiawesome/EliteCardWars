@@ -102,6 +102,7 @@ enum AbilityTrigger{
     Deathwish,//activated when dead
     FriendDeath,//Activated when cardholder friend is dead
     Warcry,//activated when Summoned
+    WarcryTarget,//activated when Summoned but gives a target to pick
     Kill,//activated Each kill [Not yet implemented]
     Damaging,//activated when damaging
     Damaged,//activated when damaged

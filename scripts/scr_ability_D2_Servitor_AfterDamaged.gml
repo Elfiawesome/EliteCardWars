@@ -1,7 +1,7 @@
 ///scr_ability_D2_Servitor_AfterDamaged()
 var MapStr=argument0;
 
-if Stats[? "Hp"]<1{
+if Stats[? "Finalized_Hp"]<1{
     if Stats[? "AbilityConstantTarget"]!=noone && instance_exists(Stats[? "AbilityConstantTarget"]){
         with(Stats[? "AbilityConstantTarget"]){
             //remove its immunity

@@ -3,7 +3,7 @@ var MapStr=argument0;
 with(MapStr){
     if Pos=other.Pos{
     if Pos!=3{
-        Stats[? "Hp"]-=(other.Stats[? "Atk"]/2)
+        Stats[? "Hp"]-=(other.Stats[? "Finalized_Atk"]/2)
     }
     }
 }

@@ -4,7 +4,15 @@ IsSelected=false
 Stats[? "Base_Hp"]=0
 Stats[? "Hp"]=0
 Stats[? "Base_Atk"]=0
+ds_map_clear(Stats[? "Multi_OtherHpAmt"])
+Stats[? "OtherHpAmt"]=0
+ds_map_clear(Stats[? "Multi_OtherHpDuration"])
+Stats[? "Finalized_Hp"]=0
 Stats[? "Atk"]=0
+ds_map_clear(Stats[? "Multi_OtherAtkAmt"])
+Stats[? "OtherAtkAmt"]=0
+ds_map_clear(Stats[? "Multi_OtherAtkDuration"])
+Stats[? "Finalized_Atk"]=0
 Stats[? "Pt"]=0
 Stats[? "AtkAlrdy"]=false
 Stats[? "AbilityAlrdy"]=false
@@ -36,3 +44,12 @@ ds_list_clear(Stats[? "AbilitiesScript"])
 Stats[? "AbilityConstantTarget"]=noone
 Stats[? "LastAttackedBy"]=noone
 Stats[? "Lifespan"]=0
+
+
+
+//if selected, remove selected
+if ds_list_find_index(global.NetworkObj.SelectedCardHolders_Ability,id)!=-1{
+    ds_list_delete(global.NetworkObj.SelectedCardHolders_Ability,ds_list_find_index(global.NetworkObj.SelectedCardHolders_Ability,id))
+}
+IsSelected_Ability=false
+

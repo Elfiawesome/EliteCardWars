@@ -46,7 +46,7 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
     }
     //if Killed, activate Kill Ability
     for(var ii=0;ii<ds_list_size(_list);ii+=1){
-        if _list[| ii].Stats[? "Hp"]<1{
+        if _list[| ii].Stats[? "Finalized_Hp"]<1{
             with(AttackObj){Activate_Kill_Ability(_list[| ii])}
         }
     }
@@ -57,7 +57,7 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
     //remove atkalrdy
     AttackObj.Stats[? "AtkAlrdy"]=true
     ds_map_destroy(_m)
-    if VictimObj.Stats[? "Hp"]<1{break;}
+    if VictimObj.Stats[? "Finalized_Hp"]<1{break;}
 }
 ds_list_destroy(AttackingList)
 

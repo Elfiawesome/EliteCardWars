@@ -1,8 +1,6 @@
-///scr_ability_MadnessCombat_Auditor_FriendDeath()
+///scr_ability_SouthPark_BuccaneerBebe_Kill()
 var MapStr=argument0;
 
-Stats[? "Hp"]+=5
-Stats[? "Base_Hp"]+=5
 Stats[? "Atk"]+=5
 Stats[? "Base_Atk"]+=5
 player_con_CardholdersUpdateMultiStats()

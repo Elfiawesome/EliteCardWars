@@ -156,22 +156,56 @@ global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_AWESOMEO4000_ActivateT
 global.UnitDat_CooldownMax[Cur]=2
 var Cur=UnitID.SouthPark_BountyHunterKyle
 scr_units_init_func(Cur,"Bounty Hunter Kyle",12,14,12,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Kill
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_BountyHunterKyle_Kill
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Damaging
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_BountyHunterKyle_Damaging
 var Cur=UnitID.SouthPark_BuccaneerBebe
 scr_units_init_func(Cur,"Buccaneer Bebe",10,10,9,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Kill
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_BuccaneerBebe_Kill
 var Cur=UnitID.SouthPark_CanadianKnightIke
 scr_units_init_func(Cur,"Canadian Knight Ike",5,8,3,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_CanadianKnightIke_Intrinsic
 var Cur=UnitID.SouthPark_CaptainDiabetes
 scr_units_init_func(Cur,"Captain Diabetes",7,8,3,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_CaptainDiabetes_Intrinsic
+global.UnitDat_CooldownMax[Cur]=1
 var Cur=UnitID.SouthPark_ChaosHamsters
 scr_units_init_func(Cur,"Chaos Hamsters",7,5,3,spr_cards,Cur-1)
-var Cur=UnitID.SouthPark_DarkAngelRed
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_StatusEffectSpellsImmune
+
+var Cur=UnitID.SouthPark_DarkAngelRed//needs some fixing How does a warcry target work?
 scr_units_init_func(Cur,"Dark Angel Red",8,8,9,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
+global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_PlayerTurn
+global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_OnlyAllies
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_DarkAngelRed_ActivateTarget//ability does not trigger deathwish
+global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.AfterCardSelection
+global.UnitDat_AbilityScript[Cur,1]=scr_ability_SouthPark_DarkAngelRed_AfterCardSelection
+global.UnitDat_AbilityTrigger[Cur,2]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,2]=scr_ability_SouthPark_DarkAngelRed_Intrinsic
+
 var Cur=UnitID.SouthPark_DarkMageCraig
 scr_units_init_func(Cur,"Dark Mage Craig",12,7,10,spr_cards,Cur-1)
+global.UnitDat_AttackType[Cur,UnitAttackType.SpreadAtk]=true
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_DarkMageCraig_Warcry
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Warcry
 var Cur=UnitID.SouthPark_DoctorTimothy
 scr_units_init_func(Cur,"Doctor Timothy",18,5,10,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
+global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_AttackingTurn
+global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_SouthPark_DoctorTimothy
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_DoctorTimothy_ActivateTarget
+global.UnitDat_CooldownMax[Cur]=1
 var Cur=UnitID.SouthPark_EnforcerJimmy
 scr_units_init_func(Cur,"Enforcer Jimmy",10,5,8,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_EnforcerJimmy_Intrinsic
+
 var Cur=UnitID.SouthPark_Fastpass
 scr_units_init_func(Cur,"Fastpsas",15,10,10,spr_cards,Cur-1)
 var Cur=UnitID.SouthPark_Firkle

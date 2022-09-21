@@ -2,7 +2,7 @@
 var MapStr=argument0;
 
 if Stats[? "AbilityCooldown"]=0{
-    Stats[? "Hp"]+=4
+    GameEvent_cardholders_heal(4)
     var _mii=Stats[? "Multi_IsImmune"];
     _mii[? string(id)]=1
     var _mii=Stats[? "Multi_IsFrozen"];

@@ -1,4 +1,4 @@
-///scr_ability_RedAlert3_Spy_ActivateTarget()
+///scr_ability_SouthPark_DoctorTimothy_ActivateTarget()
 var MapStr=argument0;
 var vict=MapStr[? "Victim"]
 var atkr=MapStr[? "Attacker"]
@@ -8,22 +8,20 @@ var victimList=ds_list_create()
 ds_list_add(victimList,global.NetworkObj.socket_to_instanceid[? vict.mysocket].Cardholderlist[| vict.Pos])
 ani_AttackSet_basic(atkr,victimList)
 
-//Get the card
-if atkr.mysocket=global.NetworkObj.mysocket{
-    with(stid[? atkr.mysocket]){
-        GameEvent_draw_specific_card(vict.CardID)
+//damage those cards
+for(var i=0;i<ds_list_size(victimList);i+=1){
+    with(victimList[| i]){
+        GameEvent_cardholders_DealDamageAmt(victimList[| i],atkr,10)
     }
 }
-//deduct the points
-with(global.NetworkObj.socket_to_instanceid[? atkr.mysocket]){
-    Points-=(15)
+//damage those cards
+for(var i=0;i<ds_list_size(victimList);i+=1){
+    with(victimList[| i]){
+        Activate_AfterDamaged_Ability()
+    }
 }
-//clear that card
-with(vict){
-    Stats[? "Finalized_Hp"]=0//for servitors
-    Activate_Damaged_Ability()
-    GameEvent_cardholders_Clear()
-}
+ds_list_destroy(victimList)
+
 //Ability alrdy done
 atkr.Stats[? "AbilityAlrdy"]=true
 atkr.Stats[? "AbilityCooldown"]=atkr.Stats[? "AbilityCooldownMax"]

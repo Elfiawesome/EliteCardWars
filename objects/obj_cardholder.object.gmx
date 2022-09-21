@@ -41,8 +41,18 @@ RollADieNumber=0
 Stats=ds_map_create()
 Stats[? "Base_Hp"]=0
 Stats[? "Hp"]=0
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_OtherHpAmt",m);
+Stats[? "OtherHpAmt"]=0
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_OtherHpDuration",m);
+Stats[? "Finalized_Hp"]=0
+
 Stats[? "Base_Atk"]=0
 Stats[? "Atk"]=0
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_OtherAtkAmt",m);
+Stats[? "OtherAtkAmt"]=0
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_OtherAtkDuration",m);
+Stats[? "Finalized_Atk"]=0
+
 Stats[? "SplashAtk"]=0
 Stats[? "Pt"]=0
 Stats[? "AtkAlrdy"]=false
@@ -68,6 +78,10 @@ var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsSPImmune",m);
 Stats[? "IsSPImmune"]=0
 var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsBAImmune",m);
 Stats[? "IsBAImmune"]=0
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsStatusEffectImmune",m);
+Stats[? "IsStatusEffectImmune"]=0
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsSpellsImmune",m);
+Stats[? "IsSpellsImmune"]=0
 //status effects
 var m=ds_map_create();ds_map_add_map(Stats,"Multi_BurnDmg",m);
 Stats[? "BurnDmg"]=0
@@ -336,7 +350,8 @@ if Stats[? "AbilityCooldownMax"]&gt;0{
 var wid=sprite_get_width(sprite_index)*image_xscale
 var hei=sprite_get_height(sprite_index)*image_yscale
 
-var proportion = (Stats[? "AbilityCooldown"]/Stats[? "AbilityCooldownMax"])
+var _Maxamt=clamp(Stats[? "AbilityCooldown"],0,Stats[? "AbilityCooldownMax"])
+var proportion = (_Maxamt/Stats[? "AbilityCooldownMax"])
 var newhei=hei*proportion
 Visual_CooldownY = lerp(Visual_CooldownY,newhei,0.15)
 
@@ -372,7 +387,7 @@ draw_quad_vector(sprite_get_texture(spr_CardValBackground,0),
     _x,_y+25,
     _x+25,_y,
     )
-draw_text(_x,_y,Stats[? "Hp"])
+draw_text(_x,_y,Stats[? "Finalized_Hp"])
 
 var _x=x-sprite_get_width(sprite_index)*image_xscale/4
 var _y=y-sprite_get_height(sprite_index)*image_yscale/2
@@ -382,7 +397,7 @@ draw_quad_vector(sprite_get_texture(spr_CardValBackground,1),
     _x,_y+25,
     _x+25,_y,
     )
-draw_text(_x,_y,Stats[? "Atk"])
+draw_text(_x,_y,Stats[? "Finalized_Atk"])
 draw_set_halign(fa_left)
 draw_set_valign(fa_top)
 

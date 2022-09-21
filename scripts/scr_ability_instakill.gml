@@ -2,6 +2,6 @@
 var MapStr=argument0;
 if Stats[? "LastAttackedBy"]!=noone{
     with(Stats[? "LastAttackedBy"]){
-        Stats[? "Hp"]=-1
+        Stats[? "Finalized_Hp"]=-1
     }
 }

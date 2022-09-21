@@ -7,8 +7,10 @@ for(var i=0;i<ds_list_size(socketlist);i++){
         if _ch.CardID!=0{
             with(_ch){
                 player_con_CardholdersUpdateMultiStats()
+                if Stats[? "IsStatusEffectImmune"]=0{
                 GameEvent_cardholders_DealBurnDamage(_ch)
                 GameEvent_cardholders_DealPoisonDamage(_ch)
+                }
             }
         }
         }
@@ -33,13 +35,13 @@ for(var i=0;i<ds_list_size(socketlist);i++){
                 Activate_Intrinsic_Ability()
                 
                 //Activate Deathwish Ability
-                if Stats[? "Hp"]<1{
+                if Stats[? "Finalized_Hp"]<1{
                     //activate my death
                     Activate_Deathwish_Ability()
                 }
             }
             //activate my friends death
-            if _ch.Stats[? "Hp"]<1{
+            if _ch.Stats[? "Finalized_Hp"]<1{
             for(var i3=0;i3<ds_list_size(Cardholderlist);i3++){
                 if _ch!=Cardholderlist[| i3]{
                     with(Cardholderlist[| i3]){
@@ -70,16 +72,25 @@ for(var i=0;i<ds_list_size(socketlist);i++){
                 for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;if _m[? k]=0{ds_list_add(_l,k);}}else{ds_list_add(_l,k);}};for(var _i=0;_i<ds_list_size(_l);_i++){ds_map_delete(_m,_l[| _i])};ds_list_clear(_l)
                 var _m=Stats[? "Multi_IsBAImmune"];
                 for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;if _m[? k]=0{ds_list_add(_l,k);}}else{ds_list_add(_l,k);}};for(var _i=0;_i<ds_list_size(_l);_i++){ds_map_delete(_m,_l[| _i])};ds_list_clear(_l)
+                var _m=Stats[? "Multi_IsStatusEffectImmune"];
+                for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;if _m[? k]=0{ds_list_add(_l,k);}}else{ds_list_add(_l,k);}};for(var _i=0;_i<ds_list_size(_l);_i++){ds_map_delete(_m,_l[| _i])};ds_list_clear(_l)
+                var _m=Stats[? "Multi_IsSpellsImmune"];
+                for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;if _m[? k]=0{ds_list_add(_l,k);}}else{ds_list_add(_l,k);}};for(var _i=0;_i<ds_list_size(_l);_i++){ds_map_delete(_m,_l[| _i])};ds_list_clear(_l)
                 //reduce timer on burn and poison
                 var _m=Stats[? "Multi_BurnDuration"];var _n=Stats[? "Multi_BurnDmg"];
                 for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;if _m[? k]=0{ds_list_add(_l,k);}}else{ds_list_add(_l,k);}};for(var _i=0;_i<ds_list_size(_l);_i++){ds_map_delete(_m,_l[| _i]);ds_map_delete(_n,_l[| _i])};ds_list_clear(_l)
                 var _m=Stats[? "Multi_PoisonDuration"];var _n=Stats[? "Multi_PoisonDmg"];
                 for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;if _m[? k]=0{ds_list_add(_l,k);}}else{ds_list_add(_l,k);}};for(var _i=0;_i<ds_list_size(_l);_i++){ds_map_delete(_m,_l[| _i]);ds_map_delete(_n,_l[| _i])};ds_list_clear(_l)
+                //Other Hp & Atk
+                var _m=Stats[? "Multi_OtherAtkDuration"];var _n=Stats[? "Multi_OtherAtkAmt"];
+                for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;if _m[? k]=0{ds_list_add(_l,k);}}else{ds_list_add(_l,k);}};for(var _i=0;_i<ds_list_size(_l);_i++){ds_map_delete(_m,_l[| _i]);ds_map_delete(_n,_l[| _i])};ds_list_clear(_l)
+                var _m=Stats[? "Multi_OtherHpDuration"];var _n=Stats[? "Multi_OtherHpAmt"];
+                for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;if _m[? k]=0{ds_list_add(_l,k);}}else{ds_list_add(_l,k);}};for(var _i=0;_i<ds_list_size(_l);_i++){ds_map_delete(_m,_l[| _i]);ds_map_delete(_n,_l[| _i])};ds_list_clear(_l)
                 ds_list_destroy(_l)
                 player_con_CardholdersUpdateMultiStats()
                 
                 if Stats[? "AbilityCooldown"]!=0{Stats[? "AbilityCooldown"]-=1}
-                if Stats[? "Hp"]<1{GameEvent_cardholders_Death()}
+                if Stats[? "Finalized_Hp"]<1{GameEvent_cardholders_Death()}
             }
         }
     }

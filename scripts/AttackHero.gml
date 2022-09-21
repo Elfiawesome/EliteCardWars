@@ -16,7 +16,7 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
     //deduction of health
     with(VictimObj){
         //do damage to hero
-        VictimObj.Stats[? "Hp"]-=ceil(AttackObj.Stats[? "Atk"]/10)
+        VictimObj.Stats[? "Hp"]-=ceil(AttackObj.Stats[? "Finalized_Atk"]/10)
     }
     //animation
     var _list=ds_list_create()
