@@ -42,7 +42,7 @@ global.PlayerOnlineName=choose(
 
 scr_units_init()
 global.PlayerDeck=ds_list_create()
-global.IsSpeedrun=false
+global.IsSpeedrun=true
 IsTempDeckEditor=false
 scrollbarY=0
 if global.IsSpeedrun{

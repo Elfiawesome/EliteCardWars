@@ -159,6 +159,8 @@
         <script>scripts\ActivateAbility.gml</script>
         <script>scripts\ActivateAfterCardSelection.gml</script>
         <script>scripts\ActivateAfterCardSelectionCancel.gml</script>
+        <script>scripts\svr_ActivateUnitCardOnMe.gml</script>
+        <script>scripts\ActivateUnitCardOnMe.gml</script>
         <script>scripts\AttackHero.gml</script>
         <script>scripts\BattlefieldUpdate.gml</script>
         <script>scripts\RollADie.gml</script>
@@ -194,6 +196,7 @@
           <script>scripts\scr_svr_ACTIVATEABILITY.gml</script>
           <script>scripts\scr_svr_ACTIVATEAFTERCARDSELECTION.gml</script>
           <script>scripts\scr_svr_ACTIVATEAFTERCARDSELECTIONCANCEL.gml</script>
+          <script>scripts\scr_svr_ACTIVATEUNITCARDONME.gml</script>
           <script>scripts\scr_svr_ATTACKHERO.gml</script>
           <script>scripts\scr_svr_ROLLADIE.gml</script>
         </scripts>
@@ -216,6 +219,7 @@
           <script>scripts\scr_clt_ACTIVATEABILITY.gml</script>
           <script>scripts\scr_clt_ACTIVATEAFTERCARDSELECTION.gml</script>
           <script>scripts\scr_clt_ACTIVATEAFTERCARDSELECTIONCANCEL.gml</script>
+          <script>scripts\scr_clt_ACTIVATEUNITCARDONME.gml</script>
           <script>scripts\scr_clt_ATTACKHERO.gml</script>
           <script>scripts\scr_clt_PLAYERELIMINATEED.gml</script>
           <script>scripts\scr_clt_PLAYERWIN.gml</script>
@@ -286,6 +290,7 @@
           <script>scripts\Activate_AfterDamaged_Ability.gml</script>
           <script>scripts\Activate_FriendDeath_Ability.gml</script>
           <script>scripts\Activate_Kill_Ability.gml</script>
+          <script>scripts\Activate_UnitCardOnMe_Ability.gml</script>
         </scripts>
         <script>scripts\scr_ability_none.gml</script>
         <scripts name="grp_Abilities">
@@ -317,36 +322,39 @@
             <script>scripts\scr_ability_RedAlert3_HammerTank_Kill.gml</script>
             <script>scripts\scr_ability_RedAlert3_Spy_ActivateTarget.gml</script>
           </scripts>
+          <scripts name="grp_SouthPark">
+            <script>scripts\scr_ability_SouthPark_AWESOMEO4000_ActivateTarget.gml</script>
+            <script>scripts\scr_ability_SouthPark_BountyHunterKyle_Kill.gml</script>
+            <script>scripts\scr_ability_SouthPark_BountyHunterKyle_Damaging.gml</script>
+            <script>scripts\scr_ability_SouthPark_BuccaneerBebe_Kill.gml</script>
+            <script>scripts\scr_ability_SouthPark_CanadianKnightIke_Intrinsic.gml</script>
+            <script>scripts\scr_ability_SouthPark_CaptainDiabetes_Intrinsic.gml</script>
+            <script>scripts\scr_ability_SouthPark_DarkAngelRed_ActivateTarget.gml</script>
+            <script>scripts\scr_ability_SouthPark_DarkAngelRed_Intrinsic.gml</script>
+            <script>scripts\scr_ability_SouthPark_DarkAngelRed_AfterCardSelection.gml</script>
+            <script>scripts\scr_ability_SouthPark_DarkMageCraig_Warcry.gml</script>
+            <script>scripts\scr_ability_SouthPark_DoctorTimothy_ActivateTarget.gml</script>
+            <script>scripts\scr_ability_SouthPark_EnforcerJimmy_Intrinsic.gml</script>
+            <script>scripts\scr_ability_SouthPark_Fastpass_Damaging.gml</script>
+            <script>scripts\scr_ability_SouthPark_Firkle_Deathwish.gml</script>
+            <script>scripts\scr_ability_SouthPark_Henrietta_FriendDeath.gml</script>
+            <script>scripts\scr_ability_SouthPark_HermesKenny_Deathwish.gml</script>
+            <script>scripts\scr_ability_SouthPark_InuitKenny_Deathwish.gml</script>
+            <script>scripts\scr_ability_SouthPark_IncanCraig_ActivateTarget.gml</script>
+            <script>scripts\scr_ability_SouthPark_KyleOfTheDrowElves_Activate.gml</script>
+            <script>scripts\scr_ability_SouthPark_KyleOfTheDrowElves_AfterDamaged.gml</script>
+            <script>scripts\scr_ability_SouthPark_MrHankey_Warcry.gml</script>
+            <script>scripts\scr_ability_SouthPark_PaladinButters_Deathwish.gml</script>
+            <script>scripts\scr_ability_SouthPark_PrincessKenny_Deathwish.gml</script>
+            <script>scripts\scr_ability_SouthPark_RogueToken_Warcry.gml</script>
+            <script>scripts\scr_ability_SouthPark_ShamanToken_Intrinsic.gml</script>
+            <script>scripts\scr_ability_SouthPark_WoodlandCritters_UnitCardOnMe.gml</script>
+            <script>scripts\scr_ability_SouthPark_SheildmaidenWendy_Activate.gml</script>
+            <script>scripts\scr_ability_SouthPark_YouthPastorCraig_Warcry.gml</script>
+            <script>scripts\scr_ability_SouthPark_ZenCartman_Intrinsic.gml</script>
+            <script>scripts\scr_ability_SouthPark_ZenCartman_AfterDamaged.gml</script>
+          </scripts>
         </scripts>
-        <script>scripts\scr_ability_SouthPark_AWESOMEO4000_ActivateTarget.gml</script>
-        <script>scripts\scr_ability_SouthPark_BountyHunterKyle_Kill.gml</script>
-        <script>scripts\scr_ability_SouthPark_BountyHunterKyle_Damaging.gml</script>
-        <script>scripts\scr_ability_SouthPark_BuccaneerBebe_Kill.gml</script>
-        <script>scripts\scr_ability_SouthPark_CanadianKnightIke_Intrinsic.gml</script>
-        <script>scripts\scr_ability_SouthPark_CaptainDiabetes_Intrinsic.gml</script>
-        <script>scripts\scr_ability_SouthPark_DarkAngelRed_ActivateTarget.gml</script>
-        <script>scripts\scr_ability_SouthPark_DarkAngelRed_AfterCardSelection.gml</script>
-        <script>scripts\scr_ability_SouthPark_DarkAngelRed_Intrinsic.gml</script>
-        <script>scripts\scr_ability_SouthPark_DarkMageCraig_Warcry.gml</script>
-        <script>scripts\scr_ability_SouthPark_DoctorTimothy_ActivateTarget.gml</script>
-        <script>scripts\scr_ability_SouthPark_EnforcerJimmy_Intrinsic.gml</script>
-        <script>scripts\scr_ability_SouthPark_Fastpass_Damaging.gml</script>
-        <script>scripts\scr_ability_SouthPark_Firkle_Deathwish.gml</script>
-        <script>scripts\scr_ability_SouthPark_Henrietta_FriendDeath.gml</script>
-        <script>scripts\scr_ability_SouthPark_HermesKenny_Deathwish.gml</script>
-        <script>scripts\scr_ability_SouthPark_IncanCraig_ActivateTarget.gml</script>
-        <script>scripts\scr_ability_SouthPark_InuitKenny_Deathwish.gml</script>
-        <script>scripts\scr_ability_SouthPark_KyleOfTheDrowElves_Activate.gml</script>
-        <script>scripts\scr_ability_SouthPark_KyleOfTheDrowElves_AfterDamaged.gml</script>
-        <script>scripts\scr_ability_SouthPark_MrHankey_Warcry.gml</script>
-        <script>scripts\scr_ability_SouthPark_PaladinButters_Deathwish.gml</script>
-        <script>scripts\scr_ability_SouthPark_PrincessKenny_Deathwish.gml</script>
-        <script>scripts\scr_ability_SouthPark_RogueToken_Warcry.gml</script>
-        <script>scripts\scr_ability_SouthPark_ShamanToken_Intrinsic.gml</script>
-        <script>scripts\scr_ability_SouthPark_SheildmaidenWendy_Activate.gml</script>
-        <script>scripts\scr_ability_SouthPark_YouthPastorCraig_Warcry.gml</script>
-        <script>scripts\scr_ability_SouthPark_ZenCartman_Intrinsic.gml</script>
-        <script>scripts\scr_ability_SouthPark_ZenCartman_AfterDamaged.gml</script>
         <script>scripts\scr_ability_SPImmune.gml</script>
         <script>scripts\scr_ability_BAImmune.gml</script>
         <script>scripts\scr_ability_StatusEffectSpellsImmune.gml</script>
@@ -396,6 +404,7 @@
       <scripts name="grp_con_scripts">
         <script>scripts\player_con_CameraPosition.gml</script>
         <script>scripts\player_con_PlacingUnitCardDown.gml</script>
+        <script>scripts\player_con_PlacingUnitCardDown_For_UnitCardOnMe.gml</script>
         <script>scripts\player_con_PlacingSpellCardDown.gml</script>
         <script>scripts\player_con_AbilitySelection.gml</script>
         <script>scripts\player_con_CardSelectorControl.gml</script>

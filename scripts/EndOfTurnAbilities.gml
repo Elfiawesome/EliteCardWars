@@ -38,17 +38,20 @@ for(var i=0;i<ds_list_size(socketlist);i++){
                         Activate_Deathwish_Ability()
                     }
                 }
-                //activate my friends death
-                if _ch.Stats[? "Finalized_Hp"]<1{
-                    for(var i3=0;i3<ds_list_size(Cardholderlist);i3++){
-                        if _ch!=Cardholderlist[| i3]{
-                            with(Cardholderlist[| i3]){
+            }
+            //activate my friends death
+            if _ch.CardID!=0 && _ch.Stats[? "Finalized_Hp"]<1{
+                for(var i3=0;i3<ds_list_size(Cardholderlist);i3++){
+                    if _ch!=Cardholderlist[| i3]{
+                        with(Cardholderlist[| i3]){
+                            if CardID!=0 && Stats[? "AbilityAlrdy"]=false{
                                 Activate_FriendDeath_Ability(_ch)
-                            }                    
-                        }
+                            }
+                        }                    
                     }
                 }
             }
+            
         }
         }
     }

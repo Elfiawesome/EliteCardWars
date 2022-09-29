@@ -11,7 +11,10 @@ ani_AttackSet_basic(atkr,victimList)
 //damage those cards
 for(var i=0;i<ds_list_size(victimList);i+=1){
     with(victimList[| i]){
+        //execute Damage Event
         GameEvent_cardholders_DealDamageAmt(victimList[| i],atkr,20)
+        //execute Damaged Event
+        GameEvent_cardholders_Damaged(AttackObj)
     }
 }
 //damage those cards

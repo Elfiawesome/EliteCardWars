@@ -108,7 +108,7 @@ var Cur=UnitID.RedAlert3_Dreadnought
 scr_units_init_func(Cur,"Dreadnought",30,30,20,spr_cards,Cur-1)
 global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
 var Cur=UnitID.RedAlert3_FutureTankX1
-scr_units_init_func(Cur,"The Future Tank X-1",20,30,22,spr_cards,Cur-1)
+scr_units_init_func(Cur,"The Future Tank X-1",20,30,22,spr_cards,Cur-1)//damaging event inside
 global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_AttackingTurn
 global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_RedAlert3_FutureTankX1
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
@@ -197,7 +197,7 @@ global.UnitDat_AttackType[Cur,UnitAttackType.SpreadAtk]=true
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_DarkMageCraig_Warcry
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Warcry
 var Cur=UnitID.SouthPark_DoctorTimothy
-scr_units_init_func(Cur,"Doctor Timothy",18,5,10,spr_cards,Cur-1)
+scr_units_init_func(Cur,"Doctor Timothy",18,5,10,spr_cards,Cur-1)//damaging event inside
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
 global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_AttackingTurn
 global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_SouthPark_DoctorTimothy
@@ -223,7 +223,7 @@ var Cur=UnitID.SouthPark_HermesKenny
 scr_units_init_func(Cur,"Hermes Kenny",5,8,4,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Deathwish
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_HermesKenny_Deathwish
-var Cur=UnitID.SouthPark_IncanCraig
+var Cur=UnitID.SouthPark_IncanCraig//damaging event inside
 scr_units_init_func(Cur,"Incan Craig",20,10,10,spr_cards,Cur-1)
 global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_FutureTankX1
 global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_RedAlert3_FutureTankX1
@@ -253,17 +253,14 @@ global.UnitDat_AbilityScript[Cur,1]=scr_ability_SouthPark_MrHankey_Warcry
 var Cur=UnitID.SouthPark_Nathan
 scr_units_init_func(Cur,"Nathan",12,10,12,spr_cards,Cur-1)
 global.UnitDat_AttackType[Cur,UnitAttackType.SpreadAtk]=true
-
 var Cur=UnitID.SouthPark_PaladinButters
-scr_units_init_func(Cur,"Paladin Butters",8,15,10,spr_cards,Cur-1)//not done yet
+scr_units_init_func(Cur,"Paladin Butters",8,15,10,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.Deathwish
 global.UnitDat_AbilityScript[Cur,1]=scr_ability_SouthPark_PaladinButters_Deathwish
-
 var Cur=UnitID.SouthPark_PrincessKenny
 scr_units_init_func(Cur,"Princess Kenny",4,7,4,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.Deathwish
 global.UnitDat_AbilityScript[Cur,1]=scr_ability_SouthPark_PrincessKenny_Deathwish
-
 var Cur=UnitID.SouthPark_Robobebe//legacy
 scr_units_init_func(Cur,"Robo Bebe",10,10,9,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Kill
@@ -293,6 +290,9 @@ global.UnitDat_AbilityScript[Cur,0]=scr_ability_StatusEffectSpellsImmune
 
 var Cur=UnitID.SouthPark_WoodlandCritters
 scr_units_init_func(Cur,"Woodland Critters",16,6,12,spr_cards,Cur-1)
+global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_PlayerTurn
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.UnitCardOnMe
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_WoodlandCritters_UnitCardOnMe
 
 var Cur=UnitID.SouthPark_YouthPastorCraig
 scr_units_init_func(Cur,"Youth Pastor Craig",16,4,8,spr_cards,Cur-1)

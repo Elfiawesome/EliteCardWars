@@ -40,6 +40,9 @@ switch(type){
     case NETWORKPKT.ACTIVATEAFTERCARDSELECTIONCANCEL:
         scr_svr_ACTIVATEAFTERCARDSELECTIONCANCEL(socket,buffer)
     break;
+    case NETWORKPKT.ACTIVATEUNITCARDONME:
+        scr_svr_ACTIVATEUNITCARDONME(socket,buffer)
+    break;
     case NETWORKPKT.ATTACKHERO:
         scr_svr_ATTACKHERO(socket,buffer)
     break;

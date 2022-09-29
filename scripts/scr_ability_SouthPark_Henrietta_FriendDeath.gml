@@ -7,7 +7,9 @@ with(MapStr){
     if Stats[? "Finalized_Hp"]<1{
         Activate_Deathwish_Ability()
     }
-    GameEvent_cardholders_Transform(CardID)
+    var _cid=CardID
+    GameEvent_cardholders_Clear()
+    SummonCard(id,_cid)
 }
 Stats[? "Hp"]-=clamp(
     floor(Stats[? "Base_Hp"]/4),0,Stats[? "Hp"]-1
