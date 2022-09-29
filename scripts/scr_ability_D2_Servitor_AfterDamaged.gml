@@ -6,8 +6,10 @@ if Stats[? "Finalized_Hp"]<1{
         with(Stats[? "AbilityConstantTarget"]){
             //remove its immunity
             var _m=Stats[? "Multi_IsImmune"];
-            ds_map_delete(_m,string(other.id))
+            ds_map_delete(_m,GetMultiStatsString(other.id))
             player_con_CardholdersUpdateMultiStats()
         }
+        //ability is completed
+        Stats[? "AbilityAlrdy"]=true
     }
 }

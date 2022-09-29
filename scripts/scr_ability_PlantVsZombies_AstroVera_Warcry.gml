@@ -5,4 +5,3 @@ var MapStr=argument0;
 with(global.NetworkObj.socket_to_instanceid[? mysocket].Hero){
     Stats[? "Base_Hp"]+=5
 }
-

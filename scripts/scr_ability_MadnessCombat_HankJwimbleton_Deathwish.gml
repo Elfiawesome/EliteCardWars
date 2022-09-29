@@ -7,3 +7,6 @@ if mysocket=global.NetworkObj.mysocket{
         GameEvent_draw_specific_card(UnitID.MadnessCombat_MagHank)
     }
 }
+
+//ability is completed
+Stats[? "AbilityAlrdy"]=true

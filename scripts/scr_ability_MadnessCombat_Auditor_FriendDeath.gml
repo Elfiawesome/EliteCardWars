@@ -6,3 +6,6 @@ Stats[? "Base_Hp"]+=5
 Stats[? "Atk"]+=5
 Stats[? "Base_Atk"]+=5
 player_con_CardholdersUpdateMultiStats()
+
+//ability is completed
+Stats[? "AbilityAlrdy"]=true

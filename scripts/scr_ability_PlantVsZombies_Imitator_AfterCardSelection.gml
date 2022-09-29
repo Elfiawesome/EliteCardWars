@@ -5,5 +5,3 @@ with(global.NetworkObj.socket_to_instanceid[? mysocket]){
     Points-=(global.UnitDat_Pt[selection]+3)
 }
 GameEvent_cardholders_Transform(selection)
-ds_map_destroy(MapStr)
-

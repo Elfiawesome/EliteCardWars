@@ -33,6 +33,6 @@ buffer_delete(buffer)
 ds_list_add(socketlist,socket)
 var _o=instance_create(100,100,obj_player_con);
 _o.mysocket=socket
-with(_o){Team=2}
+with(_o){Team=irandom_range(1,5)}
 socket_to_instanceid[? socket] = _o
 

@@ -7,4 +7,6 @@ if Stats[? "Lifespan"]>0{
     Stats[? "Base_Atk"]+=Stats[? "Atk"]
     Stats[? "Hp"]+=Stats[? "Hp"]
     Stats[? "Atk"]+=Stats[? "Atk"]
+    //ability is completed
+    Stats[? "AbilityAlrdy"]=true
 }

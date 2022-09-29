@@ -1,6 +1,6 @@
 ///scr_ability_SouthPark_DarkMageCraig_Warcry()
 var MapStr=argument0;
-var _id=id
+var _id=GetMultiStatsString(id)
 //with everyone
 for(var i=0;i<ds_list_size(global.NetworkObj.socketlist);i++){
     var _sock=global.NetworkObj.socketlist[| i]

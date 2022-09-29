@@ -101,6 +101,8 @@ Stats[? "IsAbilityStun"]=false
 Stats[? "AbilityLifespan"]=0
 Stats[? "AbilityCooldown"]=0//how many rounds till ability can be used again
 Stats[? "AbilityCooldownMax"]=0
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_AbilityCooldownMaxAmt",m);//dunno abt this
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_AbilityCooldownMaxDuration",m);
 var _l=ds_list_create();
 ds_map_add_list(Stats,"AbilitiesScript",_l)
 
@@ -255,7 +257,7 @@ if position_meeting(mouse_x,mouse_y,obj_cardholder){
     var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
     if IsSelected{
     if _cardholder.CardID!=0 &amp;&amp; _cardholder.mysocket!=mysocket &amp;&amp; global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket].Team!=global.NetworkObj.socket_to_instanceid[? mysocket].Team{
-        if scr_ValidAttackSpot(id,_cardholder){
+        if scr_ValidAttackSpot(id,_cardholder) &amp;&amp; IsForceAttackHolder(_cardholder){
             draw_set_colour(c_lime)
         }
         var pointx=_cardholder.x
@@ -334,24 +336,19 @@ if CardID=0{exit;}
 var alpha=1;
 if Stats[? "AtkAlrdy"]{alpha=0.8}
 draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,alpha)
-for(var i=0;i&lt;ds_list_size(Stats[? "Spells"]);i++){
+/*for(var i=0;i&lt;ds_list_size(Stats[? "Spells"]);i++){
     var spell=Stats[? "Spells"]
     draw_text(x,y-100+i*30,json_encode(spell[| i]))
-}
-/*var _m=Stats[? "Multi_PoisonDuration"];var _n=Stats[? "Multi_PoisonDmg"];
-var cntr=0
-for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){
-    draw_text(x,y+cntr*20,string(_m[? k])+", "+string(_n[? k]))
-    cntr++
 }*/
-
+if Stats[? "IsImmune"]{draw_text(x,y,"IMMUNITY")}
 //drawing cooldown
 if Stats[? "AbilityCooldownMax"]&gt;0{
 var wid=sprite_get_width(sprite_index)*image_xscale
 var hei=sprite_get_height(sprite_index)*image_yscale
 
-var _Maxamt=clamp(Stats[? "AbilityCooldown"],0,Stats[? "AbilityCooldownMax"])
-var proportion = (_Maxamt/Stats[? "AbilityCooldownMax"])
+var _cooldownmax=Stats[? "AbilityCooldownMax"]//+MultiStats_GetSum(Stats[? "Multi_AbilityCooldownMaxAmt"],Stats[? "Multi_AbilityCooldownMaxDuration"])
+var _Maxamt=clamp(Stats[? "AbilityCooldown"],0,_cooldownmax)
+var proportion = (_Maxamt/_cooldownmax)
 var newhei=hei*proportion
 Visual_CooldownY = lerp(Visual_CooldownY,newhei,0.15)
 

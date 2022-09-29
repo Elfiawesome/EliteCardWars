@@ -8,3 +8,5 @@ with(global.NetworkObj.socket_to_instanceid[? mysocket].Hero){
     }
 }
 
+//ability is completed
+Stats[? "AbilityAlrdy"]=true

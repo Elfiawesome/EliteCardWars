@@ -11,12 +11,12 @@ ds_list_destroy(victimList)
 //Freeze those cards
 with(vict){
     var _mii=Stats[? "Multi_IsFrozen"];
-    _mii[? string(atkr)]=1
+    _mii[? GetMultiStatsString(atkr)]=1
     player_con_CardholdersUpdateMultiStats()
 }
 with(atkr){
     Stats[? "AbilityAlrdy"]=true
-    Stats[? "AbilityCooldown"]=atkr.Stats[? "AbilityCooldownMax"]
+    Stats[? "AbilityCooldown"]=atkr.Stats[? "AbilityCooldownMax"]+1
 }
 //remove from selected
 if ds_list_find_index(global.NetworkObj.SelectedCardHolders_Ability,MapStr[? "Attacker"])!=-1{

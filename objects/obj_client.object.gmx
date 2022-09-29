@@ -56,7 +56,11 @@ global.NetworkObj=id
 var type=network_socket_tcp
 var port=3115
 var socket=network_create_socket(type)
-client=network_connect(socket,"127.0.0.1",port)
+var _url="127.0.0.1"
+if !global.IsSpeedrun{
+    var _url=get_string("Enter Host's IP","127.0.0.1")
+}
+client=network_connect(socket,_url,port)
 if client&lt;0{
     show_message("Failed to connect")
 }

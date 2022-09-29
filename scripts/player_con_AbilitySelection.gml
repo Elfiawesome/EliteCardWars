@@ -3,7 +3,7 @@ if global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
     if keyboard_check_pressed(ord("A")){
         if position_meeting(mouse_x,mouse_y,obj_cardholder){
         var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
-        if script_execute(global.UnitDat_AbilityTargetSelectCheck[_cardholder.CardID]){
+        if script_execute(global.UnitDat_AbilityTargetSelectCheck[_cardholder.CardID],_cardholder){
         if ds_list_find_index(global.NetworkObj.SelectedCardHolders,_cardholder)=-1{//only if no attacking selected
             //selecting my units [AbilityActivateTarget]
             if IsAbilityTrigger(_cardholder.CardID,AbilityTrigger.ActivateTarget)!=-1 && _cardholder.Stats[? "AbilityCooldown"]=0{
@@ -25,7 +25,7 @@ if global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
         }
             
             //Activate non Target Ability [AbilityActivate]
-            if IsAbilityTrigger(_cardholder.CardID,AbilityTrigger.Activate)!=-1 && _cardholder.Stats[? "AbilityCooldown"]=0{
+            if IsAbilityTrigger(_cardholder.CardID,AbilityTrigger.Activate)!=-1 && _cardholder.Stats[? "AbilityCooldown"]=0 && script_execute(global.UnitDat_AbilityTargetSelectCheck[_cardholder.CardID],_cardholder){
                 if _cardholder.CardID!=0{
                 if _cardholder.mysocket=mysocket && _cardholder.Stats[? "AbilityAlrdy"]=false{
                     var _map=ds_map_create();

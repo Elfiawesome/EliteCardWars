@@ -38,6 +38,13 @@ ShakeAmt=0
 Shakex=x
 Shakey=y
 Stats=ds_map_create()
+
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_ExtraPointsAmt",m);
+Stats[? "ExtraPointsDuration"]=0
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_ExtraPointsDuration",m);
+Stats[? "ExtraPoints"]=0
+
+
 Stats[? "Base_Hp"]=10
 Stats[? "Hp"]=10
 Stats[? "Base_Atk"]=10
@@ -53,6 +60,7 @@ Stats[? "Pierce_Atk"]=false
 Stats[? "Sp_Atk"]=false
 //Character states
 Stats[? "IsFrozen"]=0
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsImmune",m);
 Stats[? "IsImmune"]=0
 Stats[? "IsSPImmune"]=0
 Stats[? "IsBAImmune"]=0
@@ -71,6 +79,10 @@ Stats[? "LastAttackedBy"]=noone
 //hero's only stats
 Stats[? "AdditionalPoints"]=0
 Stats[? "TotaledReimbursedPoints"]=0
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_DisableSpells",m);
+Stats[? "DisableSpells"]=false
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_ForceAttackHolder",m);
+Stats[? "ForceAttackHolder"]=-1
 
 //appearance
 image_xscale=0.2

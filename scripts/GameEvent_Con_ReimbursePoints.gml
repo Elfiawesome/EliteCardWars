@@ -5,7 +5,7 @@ for(var i=0;i<ds_list_size(socketlist);i++){
         if !IsSpectating{
         var newAmt=global.TurnPointArray[
                 clamp(other.GameLifespan,0,array_length_1d(global.TurnPointArray)-1)
-            ]
+            ]+Hero.Stats[? "ExtraPoints"]
         var Inc=newAmt-Points
         Points=newAmt
         with(Hero){

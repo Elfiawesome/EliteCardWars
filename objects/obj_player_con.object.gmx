@@ -135,8 +135,9 @@ with(Hero){instance_destroy()}
 if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating &amp;&amp; ds_list_empty(GUIObjectOrder){
 if keyboard_check_pressed(vk_enter){
     //GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
-    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_CaptainDiabetes);_c1.CardType=0
-    var _c1=GameEvent_draw_specific_card(UnitID.RedAlert3_FutureTankX1);_c1.CardType=0
+    var _c1=GameEvent_draw_specific_card(UnitID.PlantVsZombies_Imitator);_c1.CardType=0
+    var _c1=GameEvent_draw_specific_card(UnitID.D2_Servitor);_c1.CardType=0
+    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_RogueToken);_c1.CardType=0
     //var _c1=GameEvent_draw_specific_card(UnitID.PlantVsZombies_Seedling);_c1.CardType=0
     //var _c2=GameEvent_draw_specific_card(SpellID.Hexeria_Purify);_c2.CardType=1
 }
@@ -155,7 +156,9 @@ if global.SelectedCard!=noone{
         //Placing UNIT card down
         player_con_PlacingUnitCardDown()
         //Placing Spell card down
-        player_con_PlacingSpellCardDown()
+        if !Hero.Stats[? "DisableSpells"]{
+            player_con_PlacingSpellCardDown()
+        }
         global.SelectedCard=noone
     }
 }
@@ -308,7 +311,14 @@ if global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
                     }
                 }
                 //attacking Enemy unit
-                if _cardholder.mysocket!=mysocket &amp;&amp; _cardholder.Stats[? "Finalized_Hp"]&gt;0 &amp;&amp; !ds_list_empty(global.NetworkObj.SelectedCardHolders) &amp;&amp; global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket].Team!=Team{
+                var _IsForceCan=false
+                var _hero=global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket].Hero
+                if _hero.Stats[? "ForceAttackHolder"]=-1{
+                    _IsForceCan=true
+                }else if _cardholder.Pos=_hero.Stats[? "ForceAttackHolder"]{
+                    _IsForceCan=true
+                }
+                if _cardholder.mysocket!=mysocket &amp;&amp; _cardholder.Stats[? "Finalized_Hp"]&gt;0 &amp;&amp; !ds_list_empty(global.NetworkObj.SelectedCardHolders) &amp;&amp; global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket].Team!=Team &amp;&amp; IsForceAttackHolder(_cardholder){
                     //Setting all Attacking data into a json called 'DatMap'
                     var DatMap=ds_map_create()
                     //writing All Attacking Units

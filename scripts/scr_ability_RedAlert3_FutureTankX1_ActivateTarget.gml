@@ -24,7 +24,7 @@ ds_list_destroy(victimList)
 with(atkr){
     Stats[? "AtkAlrdy"]=true
     Stats[? "AbilityAlrdy"]=true
-    Stats[? "AbilityCooldown"]=atkr.Stats[? "AbilityCooldownMax"]
+    Stats[? "AbilityCooldown"]=atkr.Stats[? "AbilityCooldownMax"]+1
 }
 //remove from selected
 if ds_list_find_index(global.NetworkObj.SelectedCardHolders_Ability,MapStr[? "Attacker"])!=-1{

@@ -19,4 +19,6 @@ for(var i=0;i<ds_list_size(global.NetworkObj.socketlist);i++){
         }
     }
     }
+    //ability is completed
+    Stats[? "AbilityAlrdy"]=true
 }

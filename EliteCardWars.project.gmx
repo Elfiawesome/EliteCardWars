@@ -148,6 +148,7 @@
         <scripts name="grp_TurnstageMoveon">
           <script>scripts\TurnstageMoveOn.gml</script>
           <script>scripts\EndOfAttackingTurnChecks.gml</script>
+          <script>scripts\EndOfTurnAbilities.gml</script>
           <script>scripts\EndOfTurnSpellsCheck.gml</script>
           <script>scripts\CheckingForVictoryOrEliminations.gml</script>
         </scripts>
@@ -157,6 +158,7 @@
         <script>scripts\ActivateAbilityTarget.gml</script>
         <script>scripts\ActivateAbility.gml</script>
         <script>scripts\ActivateAfterCardSelection.gml</script>
+        <script>scripts\ActivateAfterCardSelectionCancel.gml</script>
         <script>scripts\AttackHero.gml</script>
         <script>scripts\BattlefieldUpdate.gml</script>
         <script>scripts\RollADie.gml</script>
@@ -173,6 +175,7 @@
           <script>scripts\svr_ActivateAbilityTarget.gml</script>
           <script>scripts\svr_ActivateAbility.gml</script>
           <script>scripts\svr_ActivateAfterCardSelection.gml</script>
+          <script>scripts\svr_ActivateAfterCardSelectionCancel.gml</script>
           <script>scripts\svr_AttackHero.gml</script>
           <script>scripts\svr_RollADie.gml</script>
         </scripts>
@@ -190,6 +193,7 @@
           <script>scripts\scr_svr_ACTIVATEABILITYTARGET.gml</script>
           <script>scripts\scr_svr_ACTIVATEABILITY.gml</script>
           <script>scripts\scr_svr_ACTIVATEAFTERCARDSELECTION.gml</script>
+          <script>scripts\scr_svr_ACTIVATEAFTERCARDSELECTIONCANCEL.gml</script>
           <script>scripts\scr_svr_ATTACKHERO.gml</script>
           <script>scripts\scr_svr_ROLLADIE.gml</script>
         </scripts>
@@ -211,6 +215,7 @@
           <script>scripts\scr_clt_ACTIVATEABILITYTARGET.gml</script>
           <script>scripts\scr_clt_ACTIVATEABILITY.gml</script>
           <script>scripts\scr_clt_ACTIVATEAFTERCARDSELECTION.gml</script>
+          <script>scripts\scr_clt_ACTIVATEAFTERCARDSELECTIONCANCEL.gml</script>
           <script>scripts\scr_clt_ATTACKHERO.gml</script>
           <script>scripts\scr_clt_PLAYERELIMINATEED.gml</script>
           <script>scripts\scr_clt_PLAYERWIN.gml</script>
@@ -271,8 +276,9 @@
         <scripts name="grp_SelectChecks">
           <script>scripts\scr_ability_SelectChecks_PlayerTurn.gml</script>
           <script>scripts\scr_ability_SelectChecks_AttackingTurn.gml</script>
+          <script>scripts\scr_ability_SelectChecks_FutureTankX1.gml</script>
         </scripts>
-        <scripts name="grp_Ability">
+        <scripts name="grp_ActivateAbility">
           <script>scripts\Activate_Intrinsic_Ability.gml</script>
           <script>scripts\Activate_Warcry_Ability.gml</script>
           <script>scripts\Activate_Deathwish_Ability.gml</script>
@@ -282,29 +288,36 @@
           <script>scripts\Activate_Kill_Ability.gml</script>
         </scripts>
         <script>scripts\scr_ability_none.gml</script>
-        <scripts name="grp_D2">
-          <script>scripts\scr_ability_D2_Hobgoblin.gml</script>
-          <script>scripts\scr_ability_D2_Psion.gml</script>
-          <script>scripts\scr_ability_D2_Servitor_ActivateTarget.gml</script>
-          <script>scripts\scr_ability_D2_Servitor_Intrinsic.gml</script>
-          <script>scripts\scr_ability_D2_Servitor_AfterDamaged.gml</script>
-          <script>scripts\scr_ability_D2_Wyvern_Activate.gml</script>
+        <scripts name="grp_Abilities">
+          <scripts name="grp_D2">
+            <script>scripts\scr_ability_D2_Hobgoblin.gml</script>
+            <script>scripts\scr_ability_D2_Psion.gml</script>
+            <script>scripts\scr_ability_D2_Servitor_ActivateTarget.gml</script>
+            <script>scripts\scr_ability_D2_Servitor_Intrinsic.gml</script>
+            <script>scripts\scr_ability_D2_Servitor_AfterDamaged.gml</script>
+            <script>scripts\scr_ability_D2_Wyvern_Activate.gml</script>
+          </scripts>
+          <scripts name="grp_MadnessCombat">
+            <script>scripts\scr_ability_MadnessCombat_Auditor_FriendDeath.gml</script>
+            <script>scripts\scr_ability_MadnessCombat_HankJwimbleton_Deathwish.gml</script>
+          </scripts>
+          <scripts name="grp_PlantVsZombies">
+            <script>scripts\scr_ability_PlantVsZombies_AstroVera_Warcry.gml</script>
+            <script>scripts\scr_ability_PlantVsZombies_AstroVera_Intrinsic.gml</script>
+            <script>scripts\scr_ability_PlantVsZombies_DoubledMint_Intrinsic.gml</script>
+            <script>scripts\scr_ability_PlantVsZombies_Imitator_Warcry.gml</script>
+            <script>scripts\scr_ability_PlantVsZombies_Imitator_AfterCardSelection.gml</script>
+            <script>scripts\scr_ability_PlantVsZombies_Imitator_AfterCardSelectionCancel.gml</script>
+            <script>scripts\scr_ability_PlantVsZombies_MagnifyingGrass_Warcry.gml</script>
+            <script>scripts\scr_ability_PlantVsZombies_Seedling_Intrinsic.gml</script>
+          </scripts>
+          <scripts name="grp_RedAlert3">
+            <script>scripts\scr_ability_RedAlert3_ApocalypseTank_Damaging.gml</script>
+            <script>scripts\scr_ability_RedAlert3_FutureTankX1_ActivateTarget.gml</script>
+            <script>scripts\scr_ability_RedAlert3_HammerTank_Kill.gml</script>
+            <script>scripts\scr_ability_RedAlert3_Spy_ActivateTarget.gml</script>
+          </scripts>
         </scripts>
-        <scripts name="grp_MadnessCombat">
-          <script>scripts\scr_ability_MadnessCombat_Auditor_FriendDeath.gml</script>
-          <script>scripts\scr_ability_MadnessCombat_HankJwimbleton_Deathwish.gml</script>
-        </scripts>
-        <script>scripts\scr_ability_PlantVsZombies_AstroVera_Warcry.gml</script>
-        <script>scripts\scr_ability_PlantVsZombies_AstroVera_Intrinsic.gml</script>
-        <script>scripts\scr_ability_PlantVsZombies_DoubledMint_Intrinsic.gml</script>
-        <script>scripts\scr_ability_PlantVsZombies_Imitator_Warcry.gml</script>
-        <script>scripts\scr_ability_PlantVsZombies_Imitator_AfterCardSelection.gml</script>
-        <script>scripts\scr_ability_PlantVsZombies_MagnifyingGrass_Warcry.gml</script>
-        <script>scripts\scr_ability_PlantVsZombies_Seedling_Intrinsic.gml</script>
-        <script>scripts\scr_ability_RedAlert3_ApocalypseTank_Damaging.gml</script>
-        <script>scripts\scr_ability_RedAlert3_FutureTankX1_ActivateTarget.gml</script>
-        <script>scripts\scr_ability_RedAlert3_HammerTank_Kill.gml</script>
-        <script>scripts\scr_ability_RedAlert3_Spy_ActivateTarget.gml</script>
         <script>scripts\scr_ability_SouthPark_AWESOMEO4000_ActivateTarget.gml</script>
         <script>scripts\scr_ability_SouthPark_BountyHunterKyle_Kill.gml</script>
         <script>scripts\scr_ability_SouthPark_BountyHunterKyle_Damaging.gml</script>
@@ -317,6 +330,23 @@
         <script>scripts\scr_ability_SouthPark_DarkMageCraig_Warcry.gml</script>
         <script>scripts\scr_ability_SouthPark_DoctorTimothy_ActivateTarget.gml</script>
         <script>scripts\scr_ability_SouthPark_EnforcerJimmy_Intrinsic.gml</script>
+        <script>scripts\scr_ability_SouthPark_Fastpass_Damaging.gml</script>
+        <script>scripts\scr_ability_SouthPark_Firkle_Deathwish.gml</script>
+        <script>scripts\scr_ability_SouthPark_Henrietta_FriendDeath.gml</script>
+        <script>scripts\scr_ability_SouthPark_HermesKenny_Deathwish.gml</script>
+        <script>scripts\scr_ability_SouthPark_IncanCraig_ActivateTarget.gml</script>
+        <script>scripts\scr_ability_SouthPark_InuitKenny_Deathwish.gml</script>
+        <script>scripts\scr_ability_SouthPark_KyleOfTheDrowElves_Activate.gml</script>
+        <script>scripts\scr_ability_SouthPark_KyleOfTheDrowElves_AfterDamaged.gml</script>
+        <script>scripts\scr_ability_SouthPark_MrHankey_Warcry.gml</script>
+        <script>scripts\scr_ability_SouthPark_PaladinButters_Deathwish.gml</script>
+        <script>scripts\scr_ability_SouthPark_PrincessKenny_Deathwish.gml</script>
+        <script>scripts\scr_ability_SouthPark_RogueToken_Warcry.gml</script>
+        <script>scripts\scr_ability_SouthPark_ShamanToken_Intrinsic.gml</script>
+        <script>scripts\scr_ability_SouthPark_SheildmaidenWendy_Activate.gml</script>
+        <script>scripts\scr_ability_SouthPark_YouthPastorCraig_Warcry.gml</script>
+        <script>scripts\scr_ability_SouthPark_ZenCartman_Intrinsic.gml</script>
+        <script>scripts\scr_ability_SouthPark_ZenCartman_AfterDamaged.gml</script>
         <script>scripts\scr_ability_SPImmune.gml</script>
         <script>scripts\scr_ability_BAImmune.gml</script>
         <script>scripts\scr_ability_StatusEffectSpellsImmune.gml</script>
@@ -361,6 +391,7 @@
         <script>scripts\GameEvent_Con_ReimbursePoints.gml</script>
         <script>scripts\GameEvent_Con_HeroDeath.gml</script>
         <script>scripts\GameEvent_cardholders_heal.gml</script>
+        <script>scripts\GameEvent_cardholders_ClearDebuff.gml</script>
       </scripts>
       <scripts name="grp_con_scripts">
         <script>scripts\player_con_CameraPosition.gml</script>
@@ -369,6 +400,7 @@
         <script>scripts\player_con_AbilitySelection.gml</script>
         <script>scripts\player_con_CardSelectorControl.gml</script>
         <script>scripts\player_con_CardholdersUpdateMultiStats.gml</script>
+        <script>scripts\player_con_HeroUpdateMultiStats.gml</script>
       </scripts>
       <script>scripts\scr_ValidAttackSpot.gml</script>
       <script>scripts\IsSPAtk.gml</script>
@@ -376,6 +408,9 @@
       <script>scripts\IsSpellTrigger.gml</script>
       <script>scripts\scr_ConBattlefieldSize.gml</script>
       <script>scripts\scr_ListVictimsByAttackersSPAtkTypes.gml</script>
+      <script>scripts\IsForceAttackHolder.gml</script>
+      <script>scripts\GetMultiStatsString.gml</script>
+      <script>scripts\MultiStats_GetSum.gml</script>
       <script>scripts\IsMouseOverBattlefield.gml</script>
     </scripts>
   </scripts>

@@ -10,7 +10,7 @@ if Stats[? "AbilityConstantTarget"]!=noone{//if it exists
     if Stats[? "Finalized_Hp"]>0{
         with(Stats[? "AbilityConstantTarget"]){
             var _mii=Stats[? "Multi_IsImmune"];
-            _mii[? string(other.id)]=2
+            _mii[? GetMultiStatsString(other.id)]=2
         }
         Stats[? "AbilityAlrdy"]=true
     }

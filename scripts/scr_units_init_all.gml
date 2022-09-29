@@ -85,6 +85,8 @@ global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Warcry
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_PlantVsZombies_Imitator_Warcry
 global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.AfterCardSelection
 global.UnitDat_AbilityScript[Cur,1]=scr_ability_PlantVsZombies_Imitator_AfterCardSelection
+global.UnitDat_AbilityTrigger[Cur,2]=AbilityTrigger.AfterCardSelectionCancel
+global.UnitDat_AbilityScript[Cur,2]=scr_ability_PlantVsZombies_Imitator_AfterCardSelectionCancel
 var Cur=UnitID.PlantVsZombies_MagnifyingGrass
 scr_units_init_func(Cur,"Magnifying Grass",1,0,5,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Warcry
@@ -158,8 +160,8 @@ var Cur=UnitID.SouthPark_BountyHunterKyle
 scr_units_init_func(Cur,"Bounty Hunter Kyle",12,14,12,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Kill
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_BountyHunterKyle_Kill
-global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Damaging
-global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_BountyHunterKyle_Damaging
+global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.Damaging
+global.UnitDat_AbilityScript[Cur,1]=scr_ability_SouthPark_BountyHunterKyle_Damaging
 var Cur=UnitID.SouthPark_BuccaneerBebe
 scr_units_init_func(Cur,"Buccaneer Bebe",10,10,9,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Kill
@@ -205,46 +207,100 @@ var Cur=UnitID.SouthPark_EnforcerJimmy
 scr_units_init_func(Cur,"Enforcer Jimmy",10,5,8,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_EnforcerJimmy_Intrinsic
-
 var Cur=UnitID.SouthPark_Fastpass
 scr_units_init_func(Cur,"Fastpsas",15,10,10,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Damaging
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_Fastpass_Damaging
 var Cur=UnitID.SouthPark_Firkle
 scr_units_init_func(Cur,"Firkle",10,5,6,spr_cards,Cur-1)
-var Cur=UnitID.SouthPark_Henrietta
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Deathwish
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_Firkle_Deathwish
+var Cur=UnitID.SouthPark_Henrietta//when cards die, they respawn but the card is still in the dead card deck
 scr_units_init_func(Cur,"Henrietta",16,10,14,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.FriendDeath
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_Henrietta_FriendDeath
 var Cur=UnitID.SouthPark_HermesKenny
 scr_units_init_func(Cur,"Hermes Kenny",5,8,4,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Deathwish
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_HermesKenny_Deathwish
 var Cur=UnitID.SouthPark_IncanCraig
 scr_units_init_func(Cur,"Incan Craig",20,10,10,spr_cards,Cur-1)
+global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_FutureTankX1
+global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_RedAlert3_FutureTankX1
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_IncanCraig_ActivateTarget
+global.UnitDat_CooldownMax[Cur]=1
 var Cur=UnitID.SouthPark_InuitKenny
 scr_units_init_func(Cur,"Innuit Kenny",6,9,5,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Deathwish
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_InuitKenny_Deathwish
 var Cur=UnitID.SouthPark_KyleOfTheDrowElves
-scr_units_init_func(Cur,"Kyle of the Drow Elves",15,10,12,spr_cards,Cur-1)
+scr_units_init_func(Cur,"Kyle of the Drow Elves",15,10,12,spr_cards,Cur-1);global.UnitDat_ImmuneCapable[Cur]=true
+global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_PlayerTurn
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Activate
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_KyleOfTheDrowElves_Activate
+global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.AfterDamaged
+global.UnitDat_AbilityScript[Cur,1]=scr_ability_SouthPark_KyleOfTheDrowElves_AfterDamaged
+global.UnitDat_CooldownMax[Cur]=2
 var Cur=UnitID.SouthPark_Manbearpig
 scr_units_init_func(Cur,"Manbearpig",50,30,25,spr_cards,Cur-1)
+global.UnitDat_AttackType[Cur,UnitAttackType.Splash_Atk]=true
+global.UnitDat_AttackType_SplashDmg[Cur]=5
 var Cur=UnitID.SouthPark_MrHankey
-scr_units_init_func(Cur,"Mr. Hankey",16,4,12,spr_cards,Cur-1)
+scr_units_init_func(Cur,"Mr. Hankey",16,4,12,spr_cards,Cur-1)//not technically a warcry
+global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.Warcry
+global.UnitDat_AbilityScript[Cur,1]=scr_ability_SouthPark_MrHankey_Warcry
 var Cur=UnitID.SouthPark_Nathan
 scr_units_init_func(Cur,"Nathan",12,10,12,spr_cards,Cur-1)
+global.UnitDat_AttackType[Cur,UnitAttackType.SpreadAtk]=true
+
 var Cur=UnitID.SouthPark_PaladinButters
-scr_units_init_func(Cur,"Paladin Butters",8,15,10,spr_cards,Cur-1)
+scr_units_init_func(Cur,"Paladin Butters",8,15,10,spr_cards,Cur-1)//not done yet
+global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.Deathwish
+global.UnitDat_AbilityScript[Cur,1]=scr_ability_SouthPark_PaladinButters_Deathwish
+
 var Cur=UnitID.SouthPark_PrincessKenny
 scr_units_init_func(Cur,"Princess Kenny",4,7,4,spr_cards,Cur-1)
-var Cur=UnitID.SouthPark_Robobebe
+global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.Deathwish
+global.UnitDat_AbilityScript[Cur,1]=scr_ability_SouthPark_PrincessKenny_Deathwish
+
+var Cur=UnitID.SouthPark_Robobebe//legacy
 scr_units_init_func(Cur,"Robo Bebe",10,10,9,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Kill
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_BuccaneerBebe_Kill
 var Cur=UnitID.SouthPark_RogueToken
 scr_units_init_func(Cur,"Rogue Token",14,5,10,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Warcry
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_RogueToken_Warcry
 var Cur=UnitID.SouthPark_ShamanToken
 scr_units_init_func(Cur,"Shaman Token",14,4,10,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_ShamanToken_Intrinsic
+global.UnitDat_CooldownMax[Cur]=2
 var Cur=UnitID.SouthPark_SheildmaidenWendy
-scr_units_init_func(Cur,"Sheildmaiden Wendy",18,12,12,spr_cards,Cur-1)
+scr_units_init_func(Cur,"Sheildmaiden Wendy",18,12,12,spr_cards,Cur-1);global.UnitDat_ImmuneCapable[Cur]=true
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Activate
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_SheildmaidenWendy_Activate
+global.UnitDat_CooldownMax[Cur]=2
 var Cur=UnitID.SouthPark_StanofManyMoonos
 scr_units_init_func(Cur,"Stan of Many Moons",10,15,15,spr_cards,Cur-1)
+global.UnitDat_AttackType[Cur,UnitAttackType.Splash_Atk]=true
+global.UnitDat_AttackType_SplashDmg[Cur]=10
 var Cur=UnitID.SouthPark_Tupperware
 scr_units_init_func(Cur,"Tupperware",15,10,10,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_StatusEffectSpellsImmune
+
 var Cur=UnitID.SouthPark_WoodlandCritters
 scr_units_init_func(Cur,"Woodland Critters",16,6,12,spr_cards,Cur-1)
+
 var Cur=UnitID.SouthPark_YouthPastorCraig
 scr_units_init_func(Cur,"Youth Pastor Craig",16,4,8,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Warcry
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_YouthPastorCraig_Warcry
 var Cur=UnitID.SouthPark_ZenCartman
 scr_units_init_func(Cur,"Zen Cartman",45,0,15,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_ZenCartman_Intrinsic
+global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.AfterDamaged
+global.UnitDat_AbilityScript[Cur,1]=scr_ability_SouthPark_ZenCartman_AfterDamaged

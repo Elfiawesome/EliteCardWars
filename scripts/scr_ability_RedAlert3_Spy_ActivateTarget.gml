@@ -26,7 +26,7 @@ with(vict){
 }
 //Ability alrdy done
 atkr.Stats[? "AbilityAlrdy"]=true
-atkr.Stats[? "AbilityCooldown"]=atkr.Stats[? "AbilityCooldownMax"]
+atkr.Stats[? "AbilityCooldown"]=atkr.Stats[? "AbilityCooldownMax"]+1
 
 //remove from selected
 if ds_list_find_index(global.NetworkObj.SelectedCardHolders_Ability,MapStr[? "Attacker"])!=-1{
