@@ -286,7 +286,7 @@ if IsTempDeckEditor{
           <argument>
             <kind>1</kind>
             <string>draw_set_font(ft_number)
-draw_text_transformed(0,0,"Ultra Card Wars Demo",5,5,0)
+draw_text_transformed(0,0,"Elite Card Wars Demo",5,5,0)
 draw_text_transformed(0,120,"Press 's' to create server",3,3,0)
 draw_text_transformed(0,200,"Press 'c' to connect server",3,3,0)
 draw_text_transformed(0,280,"Press 'd' to edit your local deck",3,3,0)
