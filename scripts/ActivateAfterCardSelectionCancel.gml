@@ -17,5 +17,16 @@ with(map[? "Attacker"]){
         }
     }
 }
-
+//run spells script
+with(map[? "Attacker"]){
+    var _l=Stats[? "Spells"]
+    for(var i=0;i<ds_list_size(_l);i++){//POTENTIAL PROBLEM: IF IT DELETES HALFWAY ERROR YES
+        var _map=_l[| i]
+        _id=_map[? "ID"]
+        var _no=IsSpellTrigger(_id,SpellTrigger.AfterCardSelectionCancel)
+        if _no!=-1{
+            script_execute(global.SpellDat_SpellScript[_id,_no],map)
+        }
+    }
+}
 ds_map_destroy(map)

@@ -14,7 +14,7 @@ for(var i=0;i<ds_list_size(victimList);i+=1){
         //execute Damage Event
         GameEvent_cardholders_DealDamageAmt(victimList[| i],atkr,20)
         //execute Damaged Event
-        GameEvent_cardholders_Damaged(AttackObj)
+        GameEvent_cardholders_Damaged(atkr)
     }
 }
 //damage those cards

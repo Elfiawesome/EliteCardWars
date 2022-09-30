@@ -366,10 +366,12 @@
           <scripts name="grp_cardholders">
             <script>scripts\scr_spells_Checks_none.gml</script>
             <script>scripts\scr_spells_Checks_OnlyAllies.gml</script>
+            <script>scripts\scr_spells_Checks_OnlyEnemies.gml</script>
             <script>scripts\scr_spells_Checks_Open.gml</script>
           </scripts>
           <scripts name="grp_cons">
             <script>scripts\scr_spellls_Check_EnemyTeam.gml</script>
+            <script>scripts\scr_spellls_Check_AlliesTeam.gml</script>
           </scripts>
         </scripts>
         <scripts name="grp_spells">
@@ -379,6 +381,11 @@
         <script>scripts\scr_spell_Hexeria_Purify_WhenCasted.gml</script>
         <script>scripts\scr_spell_MadnessCombat_SaviorsHalo_StartAndEndOfTurn.gml</script>
         <script>scripts\scr_spell_Payday2_HostageTaker_EndOfTurn.gml</script>
+        <script>scripts\scr_spell_Payday2_ImprovedCombinedTacticalVest_WhenCasted.gml</script>
+        <script>scripts\scr_spell_Payday2_Inspire_StartAndEndOfTurn.gml</script>
+        <script>scripts\scr_spell_Payday2_Inspire_AfterCardSelection.gml</script>
+        <script>scripts\scr_spell_Payday2_Inspire_AfterCardSelectionCancel.gml</script>
+        <script>scripts\scr_spell_PlantVsZombies_SpringBean_WhenCasted.gml</script>
         <script>scripts\scr_spell_RedAlert3_Cryogeddon_StartOfBattle.gml</script>
         <script>scripts\script148.gml</script>
       </scripts>

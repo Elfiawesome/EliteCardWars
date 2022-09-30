@@ -39,10 +39,10 @@ global.PlayerOnlineName=choose(
     "No ping",
     "Namesr",
 )
-
+global.IsSpeedrun=false
 scr_units_init()
+global.IsFullScreen=false
 global.PlayerDeck=ds_list_create()
-global.IsSpeedrun=true
 IsTempDeckEditor=false
 scrollbarY=0
 if global.IsSpeedrun{
@@ -165,12 +165,26 @@ if keyboard_check_pressed(vk_f1){
             <string>///scalling
 //need add some kind of scalling feature
 if keyboard_check_pressed(ord("Z")){
-screen_width = display_get_width();
-screen_height = display_get_height();
-surface_resize(application_surface, screen_width, screen_height)
-display_set_gui_size(screen_width, screen_height)
-window_set_size(screen_width, screen_height);
-window_set_fullscreen(true);
+switch(global.IsFullScreen){
+    case false://becoming fullscreen
+        screen_width = display_get_width();
+        screen_height = display_get_height();
+        surface_resize(application_surface, screen_width, screen_height)
+        display_set_gui_size(screen_width, screen_height)
+        window_set_size(screen_width, screen_height);
+        window_set_fullscreen(true);
+        global.IsFullScreen=true
+    break;
+    case true://exiting form fullscreen
+        screen_width = 1920;
+        screen_height = 1080;
+        surface_resize(application_surface, screen_width, screen_height)
+        display_set_gui_size(screen_width, screen_height)
+        window_set_size(screen_width, screen_height);
+        window_set_fullscreen(false);
+        global.IsFullScreen=false
+    break;
+}
 }
 </string>
           </argument>

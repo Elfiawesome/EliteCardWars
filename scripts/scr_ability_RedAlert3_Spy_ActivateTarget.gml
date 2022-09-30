@@ -21,7 +21,7 @@ with(global.NetworkObj.socket_to_instanceid[? atkr.mysocket]){
 //clear that card
 with(vict){
     Stats[? "Finalized_Hp"]=0//for servitors
-    Activate_Damaged_Ability()
+    Activate_AfterDamaged_Ability()
     GameEvent_cardholders_Clear()
 }
 //Ability alrdy done

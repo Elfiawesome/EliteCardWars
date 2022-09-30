@@ -31,7 +31,7 @@ mysocket=-1
 //variables
 CardID=1
 IsEnemy=false
-Pos=0
+Pos=-1
 IsSelected=false
 IsSelected_Ability=false
 ShakeAmt=0

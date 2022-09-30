@@ -13,8 +13,13 @@ for(var i=0;i<ds_list_size(global.NetworkObj.socketlist);i++){
             with(_cardholder){
                 var _ota=Stats[? "Multi_OtherAtkAmt"];
                 var _otd=Stats[? "Multi_OtherAtkDuration"];
-                _ota[? _id]=-floor(Stats[? "Finalized_Atk"]/2)
-                _otd[? _id]=2
+                if ds_map_exists(_ota,_id){
+                    _ota[? _id]+=-floor(Stats[? "Finalized_Atk"]/2)
+                    _otd[? _id]=2
+                }else{
+                    _ota[? _id]=-floor(Stats[? "Finalized_Atk"]/2)
+                    _otd[? _id]=2
+                }
                 player_con_CardholdersUpdateMultiStats()
             }
         }
