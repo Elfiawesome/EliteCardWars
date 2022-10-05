@@ -85,6 +85,16 @@ enum HeroID{
     D2_Zavala,
     HeroID_MAX,
 }
+enum WorldType{
+    Destiny2,
+    FantasticFrontier,
+    Hexeria,
+    MadnessCombat,
+    PlantVsZombies,
+    RedAlert3,
+    SouthPark,
+    TowerBattles,
+}
 enum UnitAttackType{
     CrossAtk,
     SpreadAtk,
