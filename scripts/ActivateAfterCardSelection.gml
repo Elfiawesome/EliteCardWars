@@ -34,5 +34,6 @@ with(map[? "Attacker"]){
         }
     }
 }
+ds_map_destroy(map)
 
 ds_map_destroy(map)

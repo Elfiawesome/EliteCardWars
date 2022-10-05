@@ -12,4 +12,4 @@ with(_con){
 }
 Stats[? "AbilityAlrdy"]=true
 Stats[? "AbilityCooldown"]=-1
-ds_map_destroy(MapStr)
+

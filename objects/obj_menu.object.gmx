@@ -39,7 +39,7 @@ global.PlayerOnlineName=choose(
     "No ping",
     "Namesr",
 )
-global.IsSpeedrun=false
+global.IsSpeedrun=true
 scr_units_init()
 global.IsFullScreen=false
 global.PlayerDeck=ds_list_create()
