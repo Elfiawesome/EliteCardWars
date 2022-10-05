@@ -47,9 +47,9 @@ IsTempDeckEditor=false
 scrollbarY=0
 if global.IsSpeedrun{
 repeat(20){
-    //ds_list_add(global.PlayerDeck,irandom_range(1,UnitID.UnitID_MAX-1))
+    ds_list_add(global.PlayerDeck,irandom_range(1,UnitID.UnitID_MAX-1))
     //ds_list_add(global.PlayerDeck,UnitID.PlantVsZombies_Imitator)
-    ds_list_add(global.PlayerDeck,irandom_range(UnitID.SouthPark_AWESOMEO4000,UnitID.UnitID_MAX-1))
+    //ds_list_add(global.PlayerDeck,irandom_range(UnitID.SouthPark_AWESOMEO4000,UnitID.UnitID_MAX-1))
 }
 }
 /*ds_list_add(global.PlayerDeck,
