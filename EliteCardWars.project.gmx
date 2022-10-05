@@ -354,6 +354,9 @@
             <script>scripts\scr_ability_SouthPark_ZenCartman_Intrinsic.gml</script>
             <script>scripts\scr_ability_SouthPark_ZenCartman_AfterDamaged.gml</script>
           </scripts>
+          <scripts name="grp_towerbattles">
+            <script>scripts\scr_ability_TowerBattles_Void_ActivateTarget.gml</script>
+          </scripts>
         </scripts>
         <script>scripts\scr_ability_SPImmune.gml</script>
         <script>scripts\scr_ability_BAImmune.gml</script>

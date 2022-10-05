@@ -77,6 +77,13 @@ enum UnitID{
     SouthPark_YouthPastorCraig,
     SouthPark_ZenCartman,
     
+    //tower battles
+    TowerBattles_MaxedSniper,
+    TowerBattles_Sniper,
+    TowerBattles_Void,
+    
+    //untured
+    
     UnitID_MAX,
 }
 enum HeroID{

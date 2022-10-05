@@ -314,3 +314,17 @@ global.UnitDat_AbilityScript[Cur,1]=scr_ability_SouthPark_ZenCartman_AfterDamage
 
 //Tower battles
 var _wt=WorldType.TowerBattles
+var Cur=UnitID.TowerBattles_MaxedSniper
+scr_units_init_func(Cur,"Maxed Sniper",_wt,15,20,12,spr_cards,Cur-1);global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
+var Cur=UnitID.TowerBattles_Sniper
+scr_units_init_func(Cur,"Sniper",_wt,10,3,2,spr_cards,Cur-1);global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
+
+var Cur=UnitID.TowerBattles_Void
+scr_units_init_func(Cur,"Sniper",_wt,55,10,22,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
+global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_PlayerTurn
+global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_OnlyEnemy
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_TowerBattles_Void_ActivateTarget
+global.UnitDat_AbilityTrigger[Cur,2]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,2]=scr_ability_SouthPark_DarkAngelRed_Intrinsic
+
