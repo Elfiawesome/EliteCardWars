@@ -6,4 +6,5 @@ with(MapStr){
     var msDur=Stats[? "Multi_BurnDuration"];
     msDmg[? GetMultiStatsString(other.id)]=5
     msDur[? GetMultiStatsString(other.id)]=2
+    player_con_CardholdersUpdateMultiStats()
 }

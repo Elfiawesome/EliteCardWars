@@ -49,7 +49,7 @@ if global.IsSpeedrun{
 repeat(20){
     //ds_list_add(global.PlayerDeck,irandom_range(1,UnitID.UnitID_MAX-1))
     //ds_list_add(global.PlayerDeck,UnitID.PlantVsZombies_Imitator)
-    ds_list_add(global.PlayerDeck,irandom_range(UnitID.TowerBattles_MaxedSniper,UnitID.UnitID_MAX-1))
+    ds_list_add(global.PlayerDeck,irandom_range(UnitID.Unturned_AcidZombie,UnitID.UnitID_MAX-1))
 }
 }
 /*ds_list_add(global.PlayerDeck,

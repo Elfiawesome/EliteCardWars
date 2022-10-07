@@ -357,6 +357,10 @@
           <scripts name="grp_towerbattles">
             <script>scripts\scr_ability_TowerBattles_Void_ActivateTarget.gml</script>
           </scripts>
+          <scripts name="grp_Unturned">
+            <script>scripts\scr_ability_Unturned_AcidZombie_Damaging.gml</script>
+            <script>scripts\scr_ability_Unturned_BurnerZombie_Deathwish.gml</script>
+          </scripts>
         </scripts>
         <script>scripts\scr_ability_SPImmune.gml</script>
         <script>scripts\scr_ability_BAImmune.gml</script>

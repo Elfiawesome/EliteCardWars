@@ -318,13 +318,32 @@ var Cur=UnitID.TowerBattles_MaxedSniper
 scr_units_init_func(Cur,"Maxed Sniper",_wt,15,20,12,spr_cards,Cur-1);global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
 var Cur=UnitID.TowerBattles_Sniper
 scr_units_init_func(Cur,"Sniper",_wt,10,3,2,spr_cards,Cur-1);global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
-
 var Cur=UnitID.TowerBattles_Void
 scr_units_init_func(Cur,"Sniper",_wt,55,10,22,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
 global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_PlayerTurn
 global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_OnlyEnemy
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_TowerBattles_Void_ActivateTarget
-global.UnitDat_AbilityTrigger[Cur,2]=AbilityTrigger.Intrinsic
-global.UnitDat_AbilityScript[Cur,2]=scr_ability_SouthPark_DarkAngelRed_Intrinsic
+global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,1]=scr_ability_SouthPark_DarkAngelRed_Intrinsic
+
+//Unturned
+var _wt=WorldType.Unturned
+var Cur=UnitID.Unturned_AcidZombie
+scr_units_init_func(Cur,"Acid Zombie",_wt,12,10,12,spr_cards,Cur-1);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Damaging
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_Unturned_AcidZombie_Damaging
+global.UnitDat_CooldownMax[Cur]=1
+
+var Cur=UnitID.Unturned_BurnerZombie
+scr_units_init_func(Cur,"Burner Zombie",_wt,12,10,12,spr_cards,Cur-1);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Deathwish
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_Unturned_BurnerZombie_Deathwish
+
+var Cur=UnitID.Unturned_SpiritZombie
+scr_units_init_func(Cur,"Spirit Zombie",_wt,12,10,12,spr_cards,Cur-1);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SPImmune
+var Cur=UnitID.Unturned_Zombie
+scr_units_init_func(Cur,"Zombie",_wt,5,1,1,spr_cards,Cur-1);
 

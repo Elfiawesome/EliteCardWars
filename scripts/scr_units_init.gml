@@ -83,6 +83,10 @@ enum UnitID{
     TowerBattles_Void,
     
     //untured
+    Unturned_AcidZombie,
+    Unturned_BurnerZombie,
+    Unturned_SpiritZombie,
+    Unturned_Zombie,
     
     UnitID_MAX,
 }
@@ -101,6 +105,7 @@ enum WorldType{
     RedAlert3,
     SouthPark,
     TowerBattles,
+    Unturned,
 }
 enum UnitAttackType{
     CrossAtk,
