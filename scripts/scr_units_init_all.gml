@@ -334,16 +334,19 @@ scr_units_init_func(Cur,"Acid Zombie",_wt,12,10,12,spr_cards,Cur-1);
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Damaging
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_Unturned_AcidZombie_Damaging
 global.UnitDat_CooldownMax[Cur]=1
-
 var Cur=UnitID.Unturned_BurnerZombie
 scr_units_init_func(Cur,"Burner Zombie",_wt,12,10,12,spr_cards,Cur-1);
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Deathwish
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_Unturned_BurnerZombie_Deathwish
-
 var Cur=UnitID.Unturned_SpiritZombie
 scr_units_init_func(Cur,"Spirit Zombie",_wt,12,10,12,spr_cards,Cur-1);
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_SPImmune
 var Cur=UnitID.Unturned_Zombie
 scr_units_init_func(Cur,"Zombie",_wt,5,1,1,spr_cards,Cur-1);
+
+//Unturned
+var _wt=WorldType.Vesteria
+var Cur=UnitID.Vesteria_Crabby
+scr_units_init_func(Cur,"Crabby",_wt,8,2,2,spr_cards,Cur-1);
 

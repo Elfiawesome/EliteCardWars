@@ -88,6 +88,9 @@ enum UnitID{
     Unturned_SpiritZombie,
     Unturned_Zombie,
     
+    //Vesteria
+    Vesteria_Crabby,
+    
     UnitID_MAX,
 }
 enum HeroID{
@@ -106,6 +109,7 @@ enum WorldType{
     SouthPark,
     TowerBattles,
     Unturned,
+    Vesteria,
 }
 enum UnitAttackType{
     CrossAtk,
