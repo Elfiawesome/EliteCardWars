@@ -45,35 +45,29 @@ global.IsFullScreen=false
 global.PlayerDeck=ds_list_create()
 IsTempDeckEditor=false
 scrollbarY=0
+
 if global.IsSpeedrun{
 repeat(20){
-    //ds_list_add(global.PlayerDeck,irandom_range(1,UnitID.UnitID_MAX-1))
+    ds_list_add(global.PlayerDeck,irandom_range(1,UnitID.UnitID_MAX-1))
     //ds_list_add(global.PlayerDeck,UnitID.PlantVsZombies_Imitator)
-    ds_list_add(global.PlayerDeck,irandom_range(UnitID.Unturned_AcidZombie,UnitID.UnitID_MAX-1))
+    //ds_list_add(global.PlayerDeck,irandom_range(UnitID.Unturned_AcidZombie,UnitID.UnitID_MAX-1))
 }
 }
-/*ds_list_add(global.PlayerDeck,
-    UnitID.PlantVsZombies_Imitator,
-    UnitID.MadnessCombat_Auditor,
-    UnitID.PlantVsZombies_AstroVera,
-    UnitID.FanFron_FantasticDragon,
-    UnitID.PlantVsZombies_CobCannon,
-    UnitID.RedAlert3_ApocalypseTank,
-    UnitID.RedAlert3_GigaFortress,
-    UnitID.RedAlert3_MirageTank,
-    UnitID.D2_Servitor,
-    UnitID.D2_Harpy,
-    UnitID.D2_Goblin,
-    UnitID.PlantVsZombies_Seedling,
-    UnitID.RedAlert3_Kirov,
-    UnitID.RedAlert3_Spy,
-    UnitID.RedAlert3_Stingray,
-    UnitID.RedAlert3_V4RocketLauncher,
-    UnitID.RedAlert3_MigFighter,
-    UnitID.RedAlert3_FutureTankX1,
-    UnitID.MadnessCombat_HankJwimbleton,
-    UnitID.MadnessCombat_TheSavior,
-)
+if !global.IsSpeedrun{
+    //reading Deck file
+    var _dir=working_directory+"DeckList.txt"
+    if file_exists(_dir){
+        //converting string
+        var buffer=buffer_load(_dir)
+        var _string=buffer_read(buffer,buffer_string)
+        buffer_delete(buffer)
+        //reading
+        _m=json_decode(_string)
+        _l=_m[? "DeckList"]
+        ds_list_copy(global.PlayerDeck,_l)
+        ds_map_destroy(_m)
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -109,6 +103,20 @@ if keyboard_check_pressed(ord("C")){
 if keyboard_check_pressed(ord("D")){
     //Open temp deck editor
     IsTempDeckEditor=!IsTempDeckEditor
+    //save deck
+    if !IsTempDeckEditor{
+        //getting string to write
+        var _m=ds_map_create();
+        var _l=ds_list_create();ds_list_copy(_l,global.PlayerDeck);
+        ds_map_add_list(_m,"DeckList",_l)
+        var _string=json_encode_destroy(_m)
+        _string=json_beautify(_string)
+        //writing into file
+        var _dir=working_directory+"DeckList.txt"
+        file = file_text_open_write(_dir);
+        file_text_write_string(file,_string);
+        file_text_close(file);
+    }
 }
 if keyboard_check_pressed(vk_f1){
     //open new window
@@ -255,13 +263,6 @@ if IsTempDeckEditor{
     if mouse_wheel_down(){
         scrollbarY--
     }
-    
-    if keyboard_check_pressed("1"){
-        clipboard_set_text(ds_list_write(global.PlayerDeck))
-    }
-    if keyboard_check_pressed("2"){
-        ds_list_read(global.PlayerDeck,clipboard_get_text())
-    }
 }
 </string>
           </argument>
@@ -290,7 +291,7 @@ draw_text_transformed(0,0,"Elite Card Wars Demo",5,5,0)
 draw_text_transformed(0,120,"Press 's' to create server",3,3,0)
 draw_text_transformed(0,200,"Press 'c' to connect server",3,3,0)
 draw_text_transformed(0,280,"Press 'd' to edit your local deck",3,3,0)
-draw_text_transformed(0,360,"Press 'z' to fullscreen [theres no undo from this]",3,3,0)
+draw_text_transformed(0,360,"Press 'z' to fullscreen",3,3,0)
 
 </string>
           </argument>

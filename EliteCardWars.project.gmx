@@ -233,6 +233,8 @@
         <script>scripts\json_encode_destroy.gml</script>
         <script>scripts\scr_Player_Init_Data_Get.gml</script>
         <script>scripts\scr_Player_Init_Data_Set.gml</script>
+        <script>scripts\buffer_write_slice.gml</script>
+        <script>scripts\json_beautify.gml</script>
       </scripts>
     </scripts>
     <scripts name="ExecuteShell">
