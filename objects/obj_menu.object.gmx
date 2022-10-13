@@ -45,7 +45,9 @@ global.IsFullScreen=false
 global.PlayerDeck=ds_list_create()
 IsTempDeckEditor=false
 scrollbarY=0
-
+scrolamt=0
+ScrollbarUIAmt=0
+IsScrollbarPress=false
 if global.IsSpeedrun{
 repeat(20){
     ds_list_add(global.PlayerDeck,irandom_range(1,UnitID.UnitID_MAX-1))
@@ -218,27 +220,61 @@ switch(global.IsFullScreen){
 var len=9
 var _ylevel=0
 var _xlevel=0
+var _ygap=270
 if IsTempDeckEditor{
+    //draw background
+    draw_set_alpha(0.2)
+    draw_set_color(c_black)
+    draw_rectangle(0,0,view_wport[0],view_hport[0],false)
+    draw_set_alpha(1)
+    draw_set_color(c_white)
+
+    var _curWorld=WorldType.Destiny2
     for(var i=1;i&lt;(UnitID.UnitID_MAX);i++){
-        var _sc=0.2
+        var _StartOfNewWorld=false
+        if global.UnitDat_WorldType[i]!=_curWorld{
+            _ylevel+=1.2
+            _xlevel=0
+            _curWorld=global.UnitDat_WorldType[i]
+            _StartOfNewWorld=true
+        }
+        var IsSelected=false
+        var IsFull=false
         var _sp=global.UnitDat_Sprite[i]
         var _im=global.UnitDat_Image[i]
-        var _op=1
-        if ds_list_size(global.PlayerDeck)&gt;20{
-            _op=0.2
+        if ds_list_size(global.PlayerDeck)&gt;=20{
+            IsFull=true
         }
         if ds_list_find_index(global.PlayerDeck,i)!=-1{
-            _op=0.2
+            IsSelected=true
         }
         
-        var _x=100+200*_xlevel
-        var _y=100+250*_ylevel+scrollbarY*100
+        var _x=(view_wview[0]/(len+1))*(_xlevel+1);
+        var _y=150+_ygap*_ylevel+scrollbarY*100;
         _xlevel++
-        draw_sprite_ext(_sp,_im,_x,_y,0.2,0.2,0,c_white,_op)
+        var _sc=0.2;
+        var _oc=1;if IsSelected{_oc=0.2}
+        if !IsFull{
+            draw_sprite_ext(_sp,_im,_x,_y,_sc,_sc,0,c_white,_oc)
+        }else{
+            draw_sprite_ext(_sp,_im,_x,_y,_sc,_sc,0,c_gray,_oc)
+        }
+        //drawing world type above
+        if _StartOfNewWorld{
+            draw_set_valign(fa_bottom)
+            draw_set_color(c_black)
+            draw_text(_x-sprite_get_width(_sp)*_sc/2,_y-sprite_get_height(_sp)*_sc/2,global.WorldTypeName[_curWorld])
+            draw_set_valign(fa_top)
+            draw_set_color(c_white)
+        }
+        
+        //moving to a next line
         if _xlevel=len{
             _ylevel++
             _xlevel=0
         }
+        
+        //selection/deselection
         var msx=device_mouse_x_to_gui(0)
         var msy=device_mouse_y_to_gui(0)
         
@@ -249,7 +285,7 @@ if IsTempDeckEditor{
             _x+sprite_get_width(_sp)/2*_sc,
             _y+sprite_get_height(_sp)/2*_sc,
         ){
-            if _op=1{
+            if !IsSelected &amp;&amp; !IsFull{
                 ds_list_add(global.PlayerDeck,i)
             }else{
                 ds_list_delete(global.PlayerDeck,ds_list_find_index(global.PlayerDeck,i))
@@ -257,12 +293,59 @@ if IsTempDeckEditor{
         }
         }
     }
-    if mouse_wheel_up(){
-        scrollbarY++
+    //drawing scrollbar
+    var _ratio=abs((scrolamt*100)/(_ylevel*_ygap))
+    var ScrollbarUI_he=100
+    var ScrollbarUI_x1=view_wport[0]-30
+    var ScrollbarUI_x2=view_wport[0]
+    var ScrollbarUI_y1=_ratio*(view_hport[0]-ScrollbarUI_he)+0
+    var ScrollbarUI_y2=_ratio*(view_hport[0]-ScrollbarUI_he)+ScrollbarUI_he
+    draw_set_alpha(0.2)
+    draw_set_color(c_black)
+    draw_rectangle(ScrollbarUI_x1,0,ScrollbarUI_x2,view_hport[0],false)
+    draw_rectangle(ScrollbarUI_x1,ScrollbarUI_y1,ScrollbarUI_x2,ScrollbarUI_y2,false)
+    draw_set_alpha(1)
+    draw_set_color(c_white)
+    var msx=device_mouse_x_to_gui(0)
+    var msy=device_mouse_y_to_gui(0)
+    if point_in_rectangle(msx,msy,ScrollbarUI_x1,ScrollbarUI_y1,ScrollbarUI_x2,ScrollbarUI_y2){
+    if !IsScrollbarPress{
+        if mouse_check_button_pressed(mb_left){
+            IsScrollbarPress=true
+        }
     }
+    }
+    if IsScrollbarPress{
+        if mouse_check_button_released(mb_left){
+            IsScrollbarPress=false
+        }
+    }
+    if IsScrollbarPress{
+        scrolamt=-((device_mouse_y_to_gui(0)/view_hport[0])*(_ylevel*_ygap))/100
+    }
+    
+    //drawing header
+    draw_set_halign(fa_center)
+    draw_set_color(c_black)
+    draw_text(view_wport[0]/2,10,string(ds_list_size(global.PlayerDeck))+"/20 Cards")
+    draw_set_halign(fa_left)
+    draw_set_color(c_white)
+    //scrolling
+    var amt=5
+    scrollbarY=lerp(scrollbarY,scrolamt,0.6)
     if mouse_wheel_down(){
-        scrollbarY--
+        //if scrolamt&gt;(-(((UnitID.UnitID_MAX) div len)*(_ygap/100)))
+        if scrolamt*100&gt;=-_ylevel*_ygap
+        {
+            scrolamt--
+        }
     }
+    if mouse_wheel_up(){
+        if scrolamt&lt;0{
+            scrolamt++
+        }
+    }
+    scrolamt=clamp(scrolamt,-_ylevel*_ygap,0)
 }
 </string>
           </argument>

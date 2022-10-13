@@ -151,6 +151,16 @@ scr_hero_init_func(Cur,"Premier AnatolyIlych Cherdenko",10,0,spr_Heroes,Cur-1)
 var Cur=HeroID.D2_Zavala
 scr_hero_init_func(Cur,"Zavala",10,0,spr_Heroes,Cur-1)
 
+global.WorldTypeName[WorldType.Destiny2]="Destiny 2"
+global.WorldTypeName[WorldType.FantasticFrontier]="Fantastic Frontier"
+global.WorldTypeName[WorldType.Hexeria]="Hexeria"
+global.WorldTypeName[WorldType.MadnessCombat]="Madness Combat"
+global.WorldTypeName[WorldType.PlantVsZombies]="Plant Vs Zombies"
+global.WorldTypeName[WorldType.RedAlert3]="Red Alert 3"
+global.WorldTypeName[WorldType.SouthPark]="South Park"
+global.WorldTypeName[WorldType.TowerBattles]="Tower Battles"
+global.WorldTypeName[WorldType.Unturned]="Unturned"
+global.WorldTypeName[WorldType.Vesteria]="Vesteria"
 
 //how many points at a turn
 global.TurnPointArray[0]=1000
