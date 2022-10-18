@@ -7,3 +7,4 @@ for(var i=0;i<ds_list_size(socketlist);i++){
     network_send_packet(socketlist[| i],buffer,buffer_tell(buffer))
     buffer_delete(buffer)
 }
+

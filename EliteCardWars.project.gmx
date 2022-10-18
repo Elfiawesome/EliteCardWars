@@ -161,6 +161,8 @@
         <script>scripts\ActivateAfterCardSelectionCancel.gml</script>
         <script>scripts\svr_ActivateUnitCardOnMe.gml</script>
         <script>scripts\ActivateUnitCardOnMe.gml</script>
+        <script>scripts\HeroActivateAbilityTarget.gml</script>
+        <script>scripts\HeroActivateAbility.gml</script>
         <script>scripts\AttackHero.gml</script>
         <script>scripts\BattlefieldUpdate.gml</script>
         <script>scripts\RollADie.gml</script>
@@ -178,6 +180,8 @@
           <script>scripts\svr_ActivateAbility.gml</script>
           <script>scripts\svr_ActivateAfterCardSelection.gml</script>
           <script>scripts\svr_ActivateAfterCardSelectionCancel.gml</script>
+          <script>scripts\svr_HeroActivateAbilityTarget.gml</script>
+          <script>scripts\svr_HeroActivateAbility.gml</script>
           <script>scripts\svr_AttackHero.gml</script>
           <script>scripts\svr_RollADie.gml</script>
         </scripts>
@@ -197,6 +201,8 @@
           <script>scripts\scr_svr_ACTIVATEAFTERCARDSELECTION.gml</script>
           <script>scripts\scr_svr_ACTIVATEAFTERCARDSELECTIONCANCEL.gml</script>
           <script>scripts\scr_svr_ACTIVATEUNITCARDONME.gml</script>
+          <script>scripts\scr_svr_HEROACTIVATEABILITYTARGET.gml</script>
+          <script>scripts\scr_svr_HEROACTIVATEABILITY.gml</script>
           <script>scripts\scr_svr_ATTACKHERO.gml</script>
           <script>scripts\scr_svr_ROLLADIE.gml</script>
         </scripts>
@@ -220,6 +226,8 @@
           <script>scripts\scr_clt_ACTIVATEAFTERCARDSELECTION.gml</script>
           <script>scripts\scr_clt_ACTIVATEAFTERCARDSELECTIONCANCEL.gml</script>
           <script>scripts\scr_clt_ACTIVATEUNITCARDONME.gml</script>
+          <script>scripts\scr_clt_HEROACTIVATEABILITYTARGET.gml</script>
+          <script>scripts\scr_clt_HEROACTIVATEABILITY.gml</script>
           <script>scripts\scr_clt_ATTACKHERO.gml</script>
           <script>scripts\scr_clt_PLAYERELIMINATEED.gml</script>
           <script>scripts\scr_clt_PLAYERWIN.gml</script>
@@ -247,12 +255,14 @@
       <script>scripts\scr_units_init_func.gml</script>
       <script>scripts\scr_spells_init_all.gml</script>
       <script>scripts\scr_spells_init_func.gml</script>
+      <script>scripts\scr_heroes_init_all.gml</script>
       <script>scripts\scr_hero_init_func.gml</script>
     </scripts>
     <scripts name="grp_setup_battlefield">
       <script>scripts\update_json_TeamMap.gml</script>
       <script>scripts\create_AllCardHolders.gml</script>
       <script>scripts\update_Turnstage.gml</script>
+      <script>scripts\SummonHero.gml</script>
     </scripts>
     <scripts name="grp_AnimatorSys">
       <script>scripts\ani_move_lerp.gml</script>
@@ -278,11 +288,18 @@
           <script>scripts\scr_ability_Checks_RedAlert3_Spy.gml</script>
           <script>scripts\scr_ability_Checks_RedAlert3_FutureTankX1.gml</script>
           <script>scripts\scr_ability_Checks_SouthPark_DoctorTimothy.gml</script>
+          <scripts name="grp_heroes">
+            <script>scripts\scr_ability_Checks_Unturned_CaptainSydney.gml</script>
+          </scripts>
         </scripts>
         <scripts name="grp_SelectChecks">
           <script>scripts\scr_ability_SelectChecks_PlayerTurn.gml</script>
           <script>scripts\scr_ability_SelectChecks_AttackingTurn.gml</script>
           <script>scripts\scr_ability_SelectChecks_FutureTankX1.gml</script>
+          <scripts name="grp_heroes">
+            <script>scripts\scr_ability_SelectChecks_Unturned_CaptainSydney.gml</script>
+            <script>scripts\scr_ability_SelectChecks_NotBattlefieldEmpty_PlayerTurns.gml</script>
+          </scripts>
         </scripts>
         <scripts name="grp_ActivateAbility">
           <script>scripts\Activate_Intrinsic_Ability.gml</script>
@@ -365,9 +382,9 @@
           </scripts>
         </scripts>
         <script>scripts\scr_ability_SPImmune.gml</script>
-        <script>scripts\scr_ability_BAImmune.gml</script>
         <script>scripts\scr_ability_StatusEffectSpellsImmune.gml</script>
         <script>scripts\scr_ability_instakill.gml</script>
+        <script>scripts\scr_ability_BAImmune.gml</script>
       </scripts>
       <scripts name="grp_spells_scr">
         <script>scripts\scr_spell_json_setup.gml</script>
@@ -398,6 +415,18 @@
         <script>scripts\scr_spell_RedAlert3_Cryogeddon_StartOfBattle.gml</script>
         <script>scripts\script148.gml</script>
       </scripts>
+      <scripts name="grp_heroability_scr">
+        <scripts name="grp_ActivateAbility">
+          <script>scripts\Activate_Intrinsic_HeroAbility.gml</script>
+        </scripts>
+        <scripts name="grp_Abilities">
+          <script>scripts\scr_heroability_Unturned_CaptainSydney_Intrinsic.gml</script>
+          <script>scripts\scr_heroability_Unturned_CaptainSydney_ActivateTarget.gml</script>
+          <script>scripts\scr_heroability_RA3_PremierAnatolyIlychCherdenko_Activate.gml</script>
+          <script>scripts\scr_heroability_AttackTargetExample.gml</script>
+          <script>scripts\scr_heroability_D2_Zavala_Activate.gml</script>
+        </scripts>
+      </scripts>
       <scripts name="grp_cardholders_event">
         <script>scripts\GameEvent_cardholders_Damaged.gml</script>
         <script>scripts\GameEvent_cardholders_DealDamage.gml</script>
@@ -423,13 +452,18 @@
         <script>scripts\player_con_PlacingUnitCardDown_For_UnitCardOnMe.gml</script>
         <script>scripts\player_con_PlacingSpellCardDown.gml</script>
         <script>scripts\player_con_AbilitySelection.gml</script>
+        <script>scripts\player_con_HeroAbilitySelection.gml</script>
         <script>scripts\player_con_CardSelectorControl.gml</script>
         <script>scripts\player_con_CardholdersUpdateMultiStats.gml</script>
         <script>scripts\player_con_HeroUpdateMultiStats.gml</script>
       </scripts>
+      <scripts name="grp_menu">
+        <script>scripts\scr_menu_update_deckfile.gml</script>
+      </scripts>
       <script>scripts\scr_ValidAttackSpot.gml</script>
       <script>scripts\IsSPAtk.gml</script>
       <script>scripts\IsAbilityTrigger.gml</script>
+      <script>scripts\IsHeroAbilityTrigger.gml</script>
       <script>scripts\IsSpellTrigger.gml</script>
       <script>scripts\scr_ConBattlefieldSize.gml</script>
       <script>scripts\scr_ListVictimsByAttackersSPAtkTypes.gml</script>
@@ -441,9 +475,14 @@
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_number</font>
+    <font>fonts\ft_Ebrima_s12</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_menu</object>
+    <objects name="grp_menu">
+      <object>objects\obj_menu_DeckSelector</object>
+      <object>objects\obj_menu_HeroSelector</object>
+    </objects>
     <objects name="grp_network">
       <object>objects\obj_server</object>
       <object>objects\obj_client</object>
@@ -454,8 +493,8 @@
     </objects>
     <objects name="grp_game">
       <object>objects\obj_card</object>
-      <object>objects\obj_cardholder</object>
       <object>objects\obj_heroholder</object>
+      <object>objects\obj_cardholder</object>
       <object>objects\obj_GameEndAnnouncement</object>
       <object>objects\obj_carddrawer_control</object>
       <objects name="selection">

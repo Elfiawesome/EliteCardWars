@@ -37,12 +37,17 @@ if global.NetworkObj.object_index=obj_server{
         }
         exit;
     }
+    //if draw
+    if Tcntr = ds_map_size(TeamMap){
+        show_message("A Draw has insured")
+        exit;
+    }
     //declare eliminated && Victory
     for(var k=ds_map_find_first(socket_to_instanceid);!is_undefined(k);k=ds_map_find_next(socket_to_instanceid,k)){
         var con = socket_to_instanceid[? k];
-        if con.Hero=-1{continue;}
+        if con.Hero!=-1{
         if con.Hero.Stats[? "Hp"]<=0{
-            with(con){GameEvent_Con_HeroDeath()}
+            with(con){GameEvent_Con_HeroDeath();}
             if con.mysocket=mysocket{
                 var gea=instance_create(0,0,obj_GameEndAnnouncement);
                 gea.image_index=1
@@ -57,6 +62,7 @@ if global.NetworkObj.object_index=obj_server{
             }
             update_json_TeamMap()
             update_Turnstage(TeamMap)
+        }
         }
     }
 }

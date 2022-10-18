@@ -78,7 +78,7 @@ if ControlParent.GUIObjectOrder[| 0]=id{
                 AnimationStage=3
                 ds_list_delete(ControlParent.GUIObjectOrder,0)
             }
-            if ds_list_size(ControlParent.cardList)&gt;=10{
+            if ds_list_size(ControlParent.cardList)&gt;=(10+ControlParent.Hero.Stats[? "ExtraHandCards"]){
                 Draws=0
             }
         break;

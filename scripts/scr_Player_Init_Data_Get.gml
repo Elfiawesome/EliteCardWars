@@ -4,6 +4,7 @@ var _m = ds_map_create();
 _m[? "Name"]=inst.name
 _m[? "Team"]=inst.Team
 _m[? "Deck"]=ds_list_write(inst.DeckList)
+_m[? "Hero"]=inst.PlayerHeroID
 var str=json_encode_destroy(_m);
 return str
 

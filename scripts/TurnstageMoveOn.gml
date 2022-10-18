@@ -11,6 +11,7 @@ if Turn>=0{
             IsSelected=false
         }
     }
+    IsHeroSelected=false
     ds_list_clear(global.NetworkObj.SelectedCardHolders_Ability)
     ds_list_clear(global.NetworkObj.SelectedCardHolders)
     

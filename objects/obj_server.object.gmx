@@ -76,6 +76,7 @@ _inst.IsLocal=true
 _inst.mysocket=0
 ds_list_copy(_inst.DeckList,global.PlayerDeck)
 ds_list_shuffle(_inst.DeckList)
+_inst.PlayerHeroID=global.PlayerHero
 socket_to_instanceid[? 0]=_inst
 ds_list_add(socketlist,0)
 
@@ -225,6 +226,7 @@ var CurY=0
 draw_text(0,CurY,"Mysocket: "+string(mysocket));CurY+=30
 draw_text(0,CurY,"Instances: "+string(instance_count));CurY+=30
 draw_text(0,CurY,"Animator Count: "+string(instance_number(obj_animator)));CurY+=30
+
 for(var i=0;i&lt;ds_list_size(socketlist);i++){
     draw_text(0,CurY+(i*20),string(socketlist[| i])+": "+string(socket_to_instanceid[? socketlist[| i]].name))
     draw_text(180,CurY+(i*20),"Ping: "+string(socket_to_instanceid[? socketlist[| i]].Ping))

@@ -5,6 +5,7 @@ with(argument0){
     Stats[? "Hp"]=Stats[? "Base_Hp"]
     Stats[? "Base_Atk"]=global.UnitDat_Atk[CardID]
     Stats[? "Atk"]=Stats[? "Base_Atk"]
+    Stats[? "Pt"]=global.UnitDat_Pt[CardID]
     
     var ms=Stats[? "Multi_CrossAtk"];ms[? GetMultiStatsString(id)]=global.UnitDat_AttackType[CardID,UnitAttackType.CrossAtk]
     var ms=Stats[? "Multi_SpreadAtk"];ms[? GetMultiStatsString(id)]=global.UnitDat_AttackType[CardID,UnitAttackType.SpreadAtk]

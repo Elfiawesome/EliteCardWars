@@ -51,6 +51,12 @@ switch(type){
     case NETWORKPKT.ACTIVATEUNITCARDONME:
         scr_clt_ACTIVATEUNITCARDONME(buffer)
     break;
+    case NETWORKPKT.HEROACTIVATEABILITYTARGET:
+        scr_clt_HEROACTIVATEABILITYTARGET(buffer)
+    break;
+    case NETWORKPKT.HEROACTIVATEABILITY:
+        scr_clt_HEROACTIVATEABILITY(buffer)
+    break;
     case NETWORKPKT.ATTACKHERO:
         scr_clt_ATTACKHERO(buffer)
     break;

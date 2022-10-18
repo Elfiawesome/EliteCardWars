@@ -31,11 +31,15 @@ cardList=ds_list_create()
 Cardholderlist=ds_list_create()
 DeckList=ds_list_create()
 DeadCardList=ds_list_create()
+PlayerHeroID=0//used for setting up the game
 Points=0
 IsSpectating=false
 CameraFocus=-1//still not sure about the camera?
 CameraFocusNo=0
 GUIObjectOrder=ds_list_create()
+GUIHeroHpWidth=0
+GUIHeroPtWidth=0
+IsHeroActivateButton=false
 CardDrawerControl=noone
 global.HoveredCard=noone
 global.ShowHands=false
@@ -135,9 +139,9 @@ with(Hero){instance_destroy()}
 if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating &amp;&amp; ds_list_empty(GUIObjectOrder){
 if keyboard_check_pressed(vk_enter){
     //GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
-    var _c1=GameEvent_draw_specific_card(UnitID.PlantVsZombies_Imitator);_c1.CardType=0
-    var _c1=GameEvent_draw_specific_card(UnitID.Unturned_BurnerZombie);_c1.CardType=0
-    var _c1=GameEvent_draw_specific_card(UnitID.TowerBattles_Void);_c1.CardType=0
+    var _c1=GameEvent_draw_specific_card(UnitID.D2_Servitor);_c1.CardType=0
+    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_Manbearpig);_c1.CardType=0
+    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_Manbearpig);_c1.CardType=0
     var _c2=GameEvent_draw_specific_card(SpellID.PlantVsZombies_SpringBean);_c2.CardType=1
 }
 if global.SelectedCard=noone{
@@ -265,6 +269,9 @@ if ds_list_empty(GUIObjectOrder){
     
     //Pressing "A" on a Cardholders
     player_con_AbilitySelection()
+    
+    //Activate Target for Heroes
+    player_con_HeroAbilitySelection()
 }
 //Card Selector
 player_con_CardSelectorControl()
@@ -442,6 +449,138 @@ if global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
         </arguments>
       </action>
     </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw Hero Stats
+if IsLocal &amp;&amp; global.IsGame  &amp;&amp; !IsSpectating &amp;&amp; ds_list_empty(GUIObjectOrder){
+//Hero Health GUI
+var _x=30;var _y=30;
+var _wid=view_wport[0]/2 - _x
+var _bwid=_wid/Hero.Stats[? "Base_Hp"]
+var _hei=40
+var _tgtwidth=_bwid*Hero.Stats[? "Hp"]
+GUIHeroHpWidth=lerp(GUIHeroHpWidth,_tgtwidth,0.7)
+//set main color
+draw_set_color(3618734)
+draw_set_font(ft_Ebrima_s12);draw_text(_x,_y-2,"Hearts: "+string(Hero.Stats[? "Hp"]));draw_set_font(ft_number)
+//health bar
+draw_set_alpha(0.6)
+draw_rectangle(_x,_y,_x+GUIHeroHpWidth,_y+_hei,false)
+//background
+draw_set_alpha(0.1)
+draw_rectangle(_x,_y,_x+_wid,_y+_hei,false)
+//health lines
+draw_set_alpha(1)
+draw_set_color(c_white)
+for(i=1;i&lt;Hero.Stats[? "Hp"];i++){
+    draw_line_width(_x+_bwid*i,_y+_hei-15,_x+_bwid*i,_y+_hei,3)
+}
+//bottom line
+draw_set_color(c_red)
+draw_rectangle(_x,_y+_hei-5,_x+_wid,_y+_hei,false)
+draw_set_color(c_white)
+
+
+//Hero Points GUI
+var _x=30;var _y=80;
+var _wid=view_wport[0]/2 - _x
+var _bwid=_wid/50
+var _hei=40
+var _tgtwidth=_bwid*Points
+GUIHeroPtWidth=lerp(GUIHeroPtWidth,_tgtwidth,0.7)
+//set main color
+draw_set_color(11759175)
+draw_set_font(ft_Ebrima_s12);draw_text(_x,_y-2,"Points: "+string(Points));draw_set_font(ft_number)
+//health bar
+draw_set_alpha(0.6)
+draw_rectangle(_x,_y,_x+GUIHeroPtWidth,_y+_hei,false)
+//background
+draw_set_alpha(0.1)
+draw_rectangle(_x,_y,_x+_wid,_y+_hei,false)
+//health lines
+draw_set_alpha(1)
+draw_set_color(c_white)
+for(i=1;i&lt;Points;i++){
+    draw_line_width(_x+_bwid*i,_y+_hei-15,_x+_bwid*i,_y+_hei,3)
+}
+//bottom line
+draw_set_color(12535040)
+draw_rectangle(_x,_y+_hei-5,_x+_wid,_y+_hei,false)
+draw_set_color(c_white)
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw Hero's Ability &amp;&amp; Check for button pressed
+IsHeroActivateButton=false
+if global.IsGame &amp;&amp; IsLocal &amp;&amp; !IsSpectating &amp;&amp; global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket &amp;&amp; ds_list_empty(GUIObjectOrder){
+    if IsHeroAbilityTrigger(Hero.CardID,AbilityTrigger.ActivateTarget)!=-1 || IsHeroAbilityTrigger(Hero.CardID,AbilityTrigger.Activate)!=-1{
+    if script_execute(global.HeroDat_AbilityTargetSelectCheck[Hero.CardID],Hero) &amp;&amp; Hero.Stats[? "AbilityCooldown"]=0 &amp;&amp; Hero.Stats[? "AbilityAlrdy"]=false{
+    draw_set_font(ft_Ebrima_s12)
+    var _t="Hero's Ability"
+    var _w=string_width(_t)
+    var _h=string_height(_t)
+    var _x=30
+    var _y=140
+    draw_set_alpha(0.2)
+    draw_set_color(c_purple)
+    draw_rectangle(_x,_y,_x+_w,_y+_h,false)
+    draw_rectangle(_x-5,_y-5,_x+_w+5,_y+_h+5,false)
+    draw_set_alpha(1)
+    draw_set_color(c_white)
+    draw_text(_x,_y,_t)
+    draw_set_font(ft_number)
+    
+    //Is Hero Button Pressed
+    var msx=device_mouse_x_to_gui(0)
+    var msy=device_mouse_y_to_gui(0)
+    if mouse_check_button_pressed(mb_left) &amp;&amp; point_in_rectangle(msx,msy,_x-5,_y-5,_x+_w+5,_y+_h+5){
+        IsHeroActivateButton=true
+    }
+    if keyboard_check_pressed(ord("A")) &amp;&amp; position_meeting(mouse_x,mouse_y,Hero){
+        IsHeroActivateButton=true
+    }
+    
+    }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -499,7 +638,8 @@ for(var k=ds_map_find_first(_map);!is_undefined(k);k=ds_map_find_next(_map,k)){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if global.IsGame{
+            <string>///Drawing Battlefield highlight
+if global.IsGame{
 if global.SelectedCard!=noone &amp;&amp; global.SelectedCard.CardType=1 &amp;&amp; global.SpellDat_SpellCastType[global.SelectedCard.CardID]=SpellCastType.BattlefieldTarget{
     draw_set_alpha((sin(current_time/100)+1)/4)
     draw_rectangle(Homex-350,Homey-300,Homex+350,Homey+300,false)

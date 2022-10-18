@@ -8,7 +8,7 @@ _card.CardID=argument0
 ds_list_add(cardList,_card)
 //reorganize hand cards
 for(var i=0;i<ds_list_size(cardList);i+=1){
-    angle=pi/2+degtorad(10)*(ds_list_size(cardList)/2-i)
+    angle=pi/2+degtorad(10 / clamp((ds_list_size(cardList)/20)*2,1,30))*(ds_list_size(cardList)/2-i)
     cardList[| i].Homex=xMid+(HorRad*cos(angle))
     cardList[| i].Homey=yMid-(VerRad*sin(angle))    
     cardList[| i].CardPos=i

@@ -143,13 +143,7 @@ global.UnitDataMap=ds_map_create()
 ds_map_destroy(global.UnitDataMap)
 scr_units_init_all()
 scr_spells_init_all()
-//Heroes
-var Cur=HeroID.Unturned_CaptainSydney
-scr_hero_init_func(Cur,"Captain Sydney",10,0,spr_Heroes,Cur-1)
-var Cur=HeroID.RA3_PremierAnatolyIlychCherdenko
-scr_hero_init_func(Cur,"Premier AnatolyIlych Cherdenko",10,0,spr_Heroes,Cur-1)
-var Cur=HeroID.D2_Zavala
-scr_hero_init_func(Cur,"Zavala",10,0,spr_Heroes,Cur-1)
+scr_heroes_init_all()
 
 global.WorldTypeName[WorldType.Destiny2]="Destiny 2"
 global.WorldTypeName[WorldType.FantasticFrontier]="Fantastic Frontier"

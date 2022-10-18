@@ -1,4 +1,4 @@
-///scr_units_init_func(CardID,Name,HP,ATK,Pt,Sprite,Image)
+///scr_units_init_func(CardID,Name,world,HP,ATK,Pt,Sprite,Image)
 global.UnitDat_Name[argument0]=argument1
 global.UnitDat_WorldType[argument0]=argument2
 global.UnitDat_Hp[argument0]=argument3

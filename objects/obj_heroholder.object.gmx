@@ -28,8 +28,10 @@
             <string>//networking
 mysocket=-1
 
+//healthbar
+GUIHeroHpWidth=0
 //variables
-CardID=1
+CardID=0
 IsEnemy=false
 Pos=-1
 IsSelected=false
@@ -72,7 +74,7 @@ ds_map_add_list(Stats,"Spells",EquipedSpellsList)
 Stats[? "IsAbilityStun"]=false
 Stats[? "AbilityLifespan"]=0
 Stats[? "AbilityCooldown"]=0//how many rounds till ability can be used again
-Stats[? "AbilityContstantRun"]=false
+Stats[? "AbilityCooldownMax"]=0
 Stats[? "AbilityConstantTarget"]=noone
 Stats[? "LastAttackedBy"]=noone
 
@@ -84,10 +86,14 @@ Stats[? "DisableSpells"]=false
 var m=ds_map_create();ds_map_add_map(Stats,"Multi_ForceAttackHolder",m);
 Stats[? "ForceAttackHolder"]=-1
 
+Stats[? "ExtraHandCards"]=0
+
+
 //appearance
 image_xscale=0.2
 image_yscale=0.2
 image_speed=0
+Visual_CooldownY=0
 </string>
           </argument>
         </arguments>
@@ -110,11 +116,106 @@ image_speed=0
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Visual Changes
+//Change of sprites
+if CardID!=0{
+    sprite_index=global.HeroDat_Sprite[CardID]
+    image_index=global.HeroDat_Image[CardID]
+    if mysocket=global.NetworkObj.mysocket &amp;&amp; global.NetworkObj.IsHeroSelected=true{
+        image_xscale=0.2+(sin(current_time/100)/100)
+        image_yscale=0.2+(sin(current_time/100)/100)
+    }else{
+        image_xscale=0.2
+        image_yscale=0.2
+    }
+}
+//shake
+if ShakeAmt&gt;0{
+    x=Shakex+random_range(-ShakeAmt,ShakeAmt)
+    y=Shakey+random_range(-ShakeAmt,ShakeAmt)
+    ShakeAmt-=0.5
+    if ShakeAmt&lt;=0{
+        ShakeAmt=0;
+        x=Shakex
+        y=Shakey
+    }
+}else{
+    Shakex=x
+    Shakey=y
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///debug
 if keyboard_check_pressed(ord("I")){
     if position_meeting(mouse_x,mouse_y,id){
         show_message(json_encode(Stats))
     }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///drawing curve lines
+if mysocket=global.NetworkObj.mysocket &amp;&amp; global.NetworkObj.IsHeroSelected=true{
+draw_set_colour(c_yellow)
+var pointx=mouse_x
+var pointy=mouse_y
+if position_meeting(mouse_x,mouse_y,obj_cardholder){
+    var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
+    //ability attacking
+    var _no=IsHeroAbilityTrigger(CardID,AbilityTrigger.ActivateTarget)
+    if _no!=-1{
+        if script_execute(global.HeroDat_AbilityTargetCheck[CardID,_no],_cardholder,id){
+            var pointx=_cardholder.x
+            var pointy=_cardholder.y
+        }
+    }
+}
+
+var xscale=view_wview[0]/view_wport[0]
+var yscale=view_hview[0]/view_hport[0]
+var _x=xscale*(x-view_xview[0])
+var _y=yscale*(y-view_yview[0])
+var _x2=xscale*(pointx-view_xview[0])
+var _y2=yscale*(pointy-view_yview[0])
+draw_curve(_x,_y,_x2,_y2,100,15,10)
+draw_set_colour(c_white)
 }
 </string>
           </argument>
@@ -145,8 +246,39 @@ for(var i=0;i&lt;ds_list_size(Stats[? "Spells"]);i++){
     var spell=Stats[? "Spells"]
     draw_text(x,y-100+i*30,json_encode(spell[| i]))
 }
+
+//drawing cooldown
+if Stats[? "AbilityCooldownMax"]&gt;0{
+var wid=sprite_get_width(sprite_index)*image_xscale
+var hei=sprite_get_height(sprite_index)*image_yscale
+
+var _cooldownmax=Stats[? "AbilityCooldownMax"]//+MultiStats_GetSum(Stats[? "Multi_AbilityCooldownMaxAmt"],Stats[? "Multi_AbilityCooldownMaxDuration"])
+var _Maxamt=clamp(Stats[? "AbilityCooldown"],0,_cooldownmax)
+var proportion = (_Maxamt/_cooldownmax)
+var newhei=hei*proportion
+Visual_CooldownY = lerp(Visual_CooldownY,newhei,0.15)
+
+draw_set_alpha(0.2)
+draw_set_color(c_white)
+draw_rectangle(//back rectangle
+    x+wid/2+10,
+    y+hei/2,
+    x+wid/2+11,
+    y-hei/2,
+false)
+draw_set_alpha(0.4)
+draw_set_color(c_black)
+draw_rectangle(//front rectangle
+    x+wid/2+10,
+    y+hei/2,
+    x+wid/2+20,
+    y-hei/2+Visual_CooldownY,
+false)
+draw_set_alpha(1)
+draw_set_color(c_white)
+}
+
 //draw health
-draw_text(x,y,"Points: "+string(global.NetworkObj.socket_to_instanceid[? mysocket].Points))
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
 var _x=x-sprite_get_width(sprite_index)*image_xscale/2
@@ -158,11 +290,39 @@ draw_quad_vector(sprite_get_texture(spr_cardholder,0),
     _x+25,_y,
     )
 draw_text(_x,_y,Stats[? "Hp"])
-
 draw_set_halign(fa_left)
 draw_set_valign(fa_top)
 
-
+//Hero Health GUI
+if IsEnemy{
+    var _y=y+sprite_get_height(sprite_index)*image_yscale/2+15;
+}else{
+    var _y=y-sprite_get_height(sprite_index)*image_yscale/2-35;
+}
+var _x=x-sprite_get_width(sprite_index)*image_xscale/2 - 10;
+var _wid=sprite_get_width(sprite_index)*image_xscale + 20
+var _bwid=_wid/Stats[? "Base_Hp"]
+var _hei=20
+var _tgtwidth=_bwid*Stats[? "Hp"]
+GUIHeroHpWidth=lerp(GUIHeroHpWidth,_tgtwidth,0.7)
+//set main color
+draw_set_color(3618734)
+//health bar
+draw_set_alpha(0.6)
+draw_rectangle(_x,_y,_x+GUIHeroHpWidth,_y+_hei,false)
+//background
+draw_set_alpha(0.1)
+draw_rectangle(_x,_y,_x+_wid,_y+_hei,false)
+//health lines
+draw_set_alpha(1)
+draw_set_color(c_white)
+for(i=1;i&lt;Stats[? "Hp"];i++){
+    draw_line_width(_x+_bwid*i,_y+_hei-2,_x+_bwid*i,_y+_hei,1)
+}
+//bottom line
+draw_set_color(c_red)
+draw_rectangle(_x,_y+_hei-1,_x+_wid,_y+_hei,false)
+draw_set_color(c_white)
 </string>
           </argument>
         </arguments>

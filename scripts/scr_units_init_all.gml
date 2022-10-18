@@ -339,7 +339,7 @@ scr_units_init_func(Cur,"Burner Zombie",_wt,12,10,12,spr_cards,Cur-1);
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Deathwish
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_Unturned_BurnerZombie_Deathwish
 var Cur=UnitID.Unturned_SpiritZombie
-scr_units_init_func(Cur,"Spirit Zombie",_wt,12,10,12,spr_cards,Cur-1);
+scr_units_init_func(Cur,"Spirit Zombie",_wt,12,10,11,spr_cards,Cur-1);
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_SPImmune
 var Cur=UnitID.Unturned_Zombie

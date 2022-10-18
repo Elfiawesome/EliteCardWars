@@ -21,6 +21,7 @@ for (var k=ds_map_find_first(TeamMap);!is_undefined(k);k=ds_map_find_next(TeamMa
                 _hero.mysocket=mysocket
                 _hero.IsEnemy=IsEnemy
                 Hero=_hero
+                SummonHero(Hero,PlayerHeroID)
             }else{
                 Homex=view_wview[0]/2+h_seperation*player_cntr;player_cntr++
                 Homey=view_hview[0]/2-v_seperation
@@ -29,6 +30,11 @@ for (var k=ds_map_find_first(TeamMap);!is_undefined(k);k=ds_map_find_next(TeamMa
                 _hero.mysocket=mysocket
                 _hero.IsEnemy=IsEnemy
                 Hero=_hero
+                SummonHero(Hero,PlayerHeroID)
+            }
+            with(Hero){
+                //Activate Intrinsic Hero Ability
+                Activate_Intrinsic_HeroAbility()
             }
         }
     }

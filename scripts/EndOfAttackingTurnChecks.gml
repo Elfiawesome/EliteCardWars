@@ -2,6 +2,7 @@
 //Running Poison And Burn
 for(var i=0;i<ds_list_size(socketlist);i++){
     with(socket_to_instanceid[? socketlist[| i]]){
+        if IsSpectating=false{
         for(var ii=0;ii<ds_list_size(Cardholderlist);ii++){
         var _ch=Cardholderlist[| ii]
         if _ch.CardID!=0{
@@ -12,6 +13,7 @@ for(var i=0;i<ds_list_size(socketlist);i++){
                 GameEvent_cardholders_DealPoisonDamage(_ch)
                 }
             }
+        }
         }
         }
     }
@@ -25,6 +27,7 @@ EndOfTurnSpellsCheck()
 //Reducing Timers & Deaths
 for(var i=0;i<ds_list_size(socketlist);i++){
     with(socket_to_instanceid[? socketlist[| i]]){
+    if IsSpectating=false{
         for(var ii=0;ii<ds_list_size(Cardholderlist);ii++){
             with(Cardholderlist[| ii]){
                 //reducing stats timer
@@ -68,10 +71,10 @@ for(var i=0;i<ds_list_size(socketlist);i++){
             var _m=Stats[? "Multi_IsImmune"];
             for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;if _m[? k]=0{ds_list_add(_l,k);}}else{ds_list_add(_l,k);}};for(var _i=0;_i<ds_list_size(_l);_i++){ds_map_delete(_m,_l[| _i])};ds_list_clear(_l)    
             ds_list_destroy(_l)
+            if Stats[? "AbilityCooldown"]!=0{Stats[? "AbilityCooldown"]-=1}
             player_con_HeroUpdateMultiStats()
         }
     }
+    }
 }
-
-CheckingForVictoryOrEliminations()
-
+CheckingForVictoryOrEliminations()//psssible problem here

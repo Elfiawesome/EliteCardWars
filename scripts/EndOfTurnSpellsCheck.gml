@@ -2,6 +2,7 @@
 //run spells scripts
 for(var i=0;i<ds_list_size(socketlist);i++){
     with(socket_to_instanceid[? socketlist[| i]]){
+        if IsSpectating=false{
         with(Hero){
             var spell=Stats[? "Spells"]
             for(var _i=0;_i<ds_list_size(spell);_i++){
@@ -33,6 +34,7 @@ for(var i=0;i<ds_list_size(socketlist);i++){
                     }
                 }
             }
+        }
         }
     }
 }
