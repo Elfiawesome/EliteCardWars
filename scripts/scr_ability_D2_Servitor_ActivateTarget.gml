@@ -17,7 +17,7 @@ if scr_ability_Checks_OnlyAllies_NoImmuneCapable(vict,atkr){
         player_con_CardholdersUpdateMultiStats()
     }
     with(atkr){
-        Stats[? "AbilityConstantTarget"]=GetMultiStatsString(atkr)
+        Stats[? "AbilityConstantTarget"]=GetMultiStatsString(vict)
         Stats[? "AbilityAlrdy"]=true
     }
     //remove from selected
