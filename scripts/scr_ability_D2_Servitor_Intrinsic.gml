@@ -2,13 +2,14 @@
 var MapStr=argument0;
 
 
-if Stats[? "AbilityConstantTarget"]!=noone{//if it exists
-    if Stats[? "AbilityConstantTarget"].CardID=0{
-        Stats[? "AbilityConstantTarget"]=noone
+if GetMultiStatsObject(Stats[? "AbilityConstantTarget"])!=noone{//if it exists
+    var _o=GetMultiStatsObject(Stats[? "AbilityConstantTarget"])
+    if _o.CardID=0{
+        _o=""
         exit;
     }
     if Stats[? "Finalized_Hp"]>0{
-        with(Stats[? "AbilityConstantTarget"]){
+        with(_o){
             var _mii=Stats[? "Multi_IsImmune"];
             _mii[? GetMultiStatsString(other.id)]=2
         }

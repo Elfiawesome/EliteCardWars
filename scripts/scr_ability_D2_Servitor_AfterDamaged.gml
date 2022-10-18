@@ -2,8 +2,9 @@
 var MapStr=argument0;
 
 if Stats[? "Finalized_Hp"]<1{
-    if Stats[? "AbilityConstantTarget"]!=noone && instance_exists(Stats[? "AbilityConstantTarget"]){
-        with(Stats[? "AbilityConstantTarget"]){
+    var _o=GetMultiStatsObject(Stats[? "AbilityConstantTarget"])
+    if _o!=noone && instance_exists(_o){
+        with(_o){
             //remove its immunity
             var _m=Stats[? "Multi_IsImmune"];
             ds_map_delete(_m,GetMultiStatsString(other.id))

@@ -469,6 +469,7 @@
       <script>scripts\scr_ListVictimsByAttackersSPAtkTypes.gml</script>
       <script>scripts\IsForceAttackHolder.gml</script>
       <script>scripts\GetMultiStatsString.gml</script>
+      <script>scripts\GetMultiStatsObject.gml</script>
       <script>scripts\MultiStats_GetSum.gml</script>
       <script>scripts\IsMouseOverBattlefield.gml</script>
     </scripts>
