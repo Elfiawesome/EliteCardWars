@@ -4,9 +4,12 @@ ReadySocket=ds_list_create()
 SelectedCardHolders=ds_list_create()
 IsHeroSelected=false
 SelectedCardHolders_Ability=ds_list_create()
+UnitsIdentifierDetails=ds_map_create()
 global.AnimatorSys[0]=instance_create(0,0,obj_animator_sys)
 global.SpellSys=instance_create(0,0,obj_spells_sys)
 global.IsGame=false
+global.SpellsIdentifier=0
+global.UnitsIdentifier=0
 GameWinner=-1
 enum GAMESTAGE{
     PLAYERTURNS,

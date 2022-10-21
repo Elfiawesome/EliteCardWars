@@ -1,6 +1,6 @@
 ///BattlefieldUpdate(string)
-var _map=json_decode(argument0)
-
+var _Mainmap=json_decode(argument0)
+var _map=_Mainmap[? "Players"]
 for(var k=ds_map_find_first(_map);!is_undefined(k);k=ds_map_find_next(_map,k)){
     var _sockmap = _map[? k];
     var _con=socket_to_instanceid[? real(k)];
@@ -22,4 +22,7 @@ for(var k=ds_map_find_first(_map);!is_undefined(k);k=ds_map_find_next(_map,k)){
         _cardholderObj.Stats = json_decode(json);
     }
 }
-ds_map_destroy(_map)
+//update Identifiers
+global.SpellsIdentifier=_Mainmap[? "SpellsIdentifier"]
+global.UnitsIdentifier=_Mainmap[? "UnitsIdentifier"]
+ds_map_destroy(_Mainmap)

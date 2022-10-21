@@ -155,6 +155,9 @@
         <script>scripts\SummonCard.gml</script>
         <script>scripts\CastSpell.gml</script>
         <script>scripts\AttackCardHolder.gml</script>
+        <script>scripts\AddCardIntoHand.gml</script>
+        <script>scripts\RemoveCardFromHand.gml</script>
+        <script>scripts\scr_RemoveAndDestroyCardFromHand.gml</script>
         <script>scripts\ActivateAbilityTarget.gml</script>
         <script>scripts\ActivateAbility.gml</script>
         <script>scripts\ActivateAfterCardSelection.gml</script>
@@ -176,6 +179,8 @@
           <script>scripts\svr_SummonCard.gml</script>
           <script>scripts\svr_CastSpell.gml</script>
           <script>scripts\svr_AttackCardHolder.gml</script>
+          <script>scripts\svr_AddCardIntoHand.gml</script>
+          <script>scripts\svr_RemoveCardFromHand.gml</script>
           <script>scripts\svr_ActivateAbilityTarget.gml</script>
           <script>scripts\svr_ActivateAbility.gml</script>
           <script>scripts\svr_ActivateAfterCardSelection.gml</script>
@@ -196,6 +201,8 @@
           <script>scripts\scr_svr_SUMMONCARD.gml</script>
           <script>scripts\scr_svr_CASTSPELL.gml</script>
           <script>scripts\scr_svr_ATTACKCARDHOLDER.gml</script>
+          <script>scripts\scr_svr_ADDCARDINTOHAND.gml</script>
+          <script>scripts\scr_svr_REMOVECARDFROMHAND.gml</script>
           <script>scripts\scr_svr_ACTIVATEABILITYTARGET.gml</script>
           <script>scripts\scr_svr_ACTIVATEABILITY.gml</script>
           <script>scripts\scr_svr_ACTIVATEAFTERCARDSELECTION.gml</script>
@@ -413,7 +420,23 @@
         <script>scripts\scr_spell_Payday2_Inspire_AfterCardSelectionCancel.gml</script>
         <script>scripts\scr_spell_PlantVsZombies_SpringBean_WhenCasted.gml</script>
         <script>scripts\scr_spell_RedAlert3_Cryogeddon_StartOfBattle.gml</script>
-        <script>scripts\script148.gml</script>
+        <script>scripts\scr_spell_RedAlert3_DesolatorAirstrike_StartOfBattle.gml</script>
+        <script>scripts\scr_spell_RedAlert3_MassProductionUpgrade_StartAndEndOfTurn.gml</script>
+        <script>scripts\scr_spell_RedAlert3_ObservationPost_WhenCasted.gml</script>
+        <script>scripts\script252.gml</script>
+        <script>scripts\scr_spell_RedAlert3_OrbitalDownpour_StartAndEndOfTurn.gml</script>
+        <script>scripts\scr_spell_RedAlert3_PointDefenseDrones_WhenCasted.gml</script>
+        <script>scripts\scr_spell_SouthPark_UnholyCombustion_StartOfBattle.gml</script>
+        <script>scripts\scr_spell_Unturned_Bandage_WhenCasted.gml</script>
+        <script>scripts\scr_spell_Unturned_FullMoon_WhenCasted.gml</script>
+        <script>scripts\scr_spell_Vesteria_Flare_StartOfBattle.gml</script>
+        <script>scripts\scr_spell_Vesteria_Inspire_WhenCasted.gml</script>
+        <script>scripts\scr_spell_Vesteria_RangerStance_WhenCasted.gml</script>
+        <script>scripts\scr_spell_Vesteria_Regeneration_StartOfBattle.gml</script>
+        <script>scripts\scr_spell_Vesteria_Reserruct_StartAndEndOfTurn.gml</script>
+        <script>scripts\scr_spell_Vesteria_Reserruct_AfterCardSelection.gml</script>
+        <script>scripts\scr_spell_Vesteria_Reserruct_AfterCardSelectionCancel.gml</script>
+        <script>scripts\scr_spell_Vesteria_Warcry_WhenCasted.gml</script>
       </scripts>
       <scripts name="grp_heroability_scr">
         <scripts name="grp_ActivateAbility">
@@ -471,6 +494,9 @@
       <script>scripts\GetMultiStatsString.gml</script>
       <script>scripts\GetMultiStatsObject.gml</script>
       <script>scripts\MultiStats_GetSum.gml</script>
+      <script>scripts\GetMultiStatsString_Spells.gml</script>
+      <script>scripts\GetPointDeductionValue.gml</script>
+      <script>scripts\GetIntakeMultiplier.gml</script>
       <script>scripts\IsMouseOverBattlefield.gml</script>
     </scripts>
   </scripts>
@@ -504,6 +530,7 @@
       </objects>
       <objects name="grp_GUI">
         <object>objects\obj_spell_animation</object>
+        <object>objects\obj_handcardselector_control</object>
       </objects>
     </objects>
   </objects>

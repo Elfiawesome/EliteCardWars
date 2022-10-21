@@ -4,7 +4,7 @@ var MapStr=argument0;
 
 if GetMultiStatsObject(Stats[? "AbilityConstantTarget"])!=noone{//if it exists
     var _o=GetMultiStatsObject(Stats[? "AbilityConstantTarget"])
-    if _o.CardID=0{
+    if _o.CardID=0 || _o.Stats[? "Finalized_Hp"]<1{
         _o=""
         exit;
     }

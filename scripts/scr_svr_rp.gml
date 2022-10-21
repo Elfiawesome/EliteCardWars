@@ -28,6 +28,12 @@ switch(type){
     case NETWORKPKT.ATTACKCARDHOLDER:
         scr_svr_ATTACKCARDHOLDER(socket,buffer)
     break;
+    case NETWORKPKT.ADDCARDINTOHAND:
+        scr_svr_ADDCARDINTOHAND(socket,buffer)    
+    break;
+    case NETWORKPKT.REMOVECARDFROMHAND:
+        scr_svr_REMOVECARDFROMHAND(socket,buffer)    
+    break;
     case NETWORKPKT.ACTIVATEABILITYTARGET:
         scr_svr_ACTIVATEABILITYTARGET(socket,buffer)
     break;

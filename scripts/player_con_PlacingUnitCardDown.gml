@@ -3,8 +3,8 @@ if position_meeting(mouse_x,mouse_y,obj_cardholder) && instance_exists(global.Se
     var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
     if mysocket=_cardholder.mysocket && _cardholder.CardID=0{
     if global.GameStage=GAMESTAGE.PLAYERTURNS && global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
-    if Points>=global.UnitDat_Pt[global.SelectedCard.CardID]{
-    Points-=global.UnitDat_Pt[global.SelectedCard.CardID]
+    if Points>=GetPointDeductionValue(global.UnitDat_Pt[global.SelectedCard.CardID]){
+    Points-=GetPointDeductionValue(global.UnitDat_Pt[global.SelectedCard.CardID])
         with(global.NetworkObj){
             if global.NetworkObj.object_index=obj_server{
                 svr_SummonCard(mysocket,_cardholder.Pos,global.SelectedCard.CardID)
@@ -18,8 +18,7 @@ if position_meeting(mouse_x,mouse_y,obj_cardholder) && instance_exists(global.Se
                 buffer_delete(buffer)
             }
         }
-    instance_destroy(global.SelectedCard)
-    ds_list_delete(cardList,ds_list_find_index(cardList,global.SelectedCard))
+    scr_RemoveAndDestroyCardFromHand(global.SelectedCard)
     }
     }
     }

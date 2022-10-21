@@ -17,7 +17,7 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
     if VictimObj.Stats[? "IsImmune"]=false{
     with(VictimObj){
         //do damage to hero
-        VictimObj.Stats[? "Hp"]-=ceil(AttackObj.Stats[? "Finalized_Atk"]/10)
+        VictimObj.Stats[? "Hp"]-=ceil((AttackObj.Stats[? "Finalized_Atk"]*GetIntakeMultiplier(AttackObj,0))/10)
     }
     }
     //animation

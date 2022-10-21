@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>CardID=0
+Type=0
 Parent=-1
 //scalling
 OriScale=0.3
@@ -33,6 +34,7 @@ scale=OriScale
 //lerping coordinates values
 tgtx=0
 tgty=0
+
 </string>
           </argument>
         </arguments>
@@ -60,6 +62,7 @@ if CardID!=0{
 //lerping coordinate values
 x=lerp(x,tgtx,0.1)
 y=lerp(y,tgty,0.1)
+
 }
 
 </string>

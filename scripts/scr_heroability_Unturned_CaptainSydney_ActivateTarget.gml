@@ -13,7 +13,7 @@ var stid=global.NetworkObj.socket_to_instanceid
     //refund the card if you are the victim
     if vict.mysocket=global.NetworkObj.mysocket{
         with(stid[? vict.mysocket]){
-            GameEvent_draw_specific_card(vict.CardID)
+            GameEvent_draw_specific_card(vict.CardID,0)
         }
     }
     //clear that card

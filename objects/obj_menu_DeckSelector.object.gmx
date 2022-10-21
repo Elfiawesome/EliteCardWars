@@ -70,8 +70,8 @@ draw_set_alpha(1)
 draw_set_color(c_white)
 
 var _curWorld=WorldType.Destiny2
+var _StartOfNewWorld=true
 for(var i=1;i&lt;(UnitID.UnitID_MAX);i++){
-    var _StartOfNewWorld=false
     if global.UnitDat_WorldType[i]!=_curWorld{
         _ylevel+=1.2
         _xlevel=0
@@ -132,6 +132,8 @@ for(var i=1;i&lt;(UnitID.UnitID_MAX);i++){
         }
     }
     }
+    
+    var _StartOfNewWorld=false
 }
 //drawing header
 draw_set_halign(fa_center)

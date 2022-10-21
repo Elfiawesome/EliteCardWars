@@ -3,11 +3,12 @@ var MapStr=argument0;
 var selection=MapStr[? "SelectionID"];
 if mysocket=global.NetworkObj.mysocket{
     with(global.NetworkObj.socket_to_instanceid[? mysocket]){
-        GameEvent_draw_specific_card(selection)
+        GameEvent_draw_specific_card(selection,0)
     }
 }
 var _con=global.NetworkObj.socket_to_instanceid[? mysocket];
 with(_con){
+    ds_list_delete(DeadCardListTurn,ds_list_find_index(DeadCardList,selection))
     ds_list_delete(DeadCardList,ds_list_find_index(DeadCardList,selection))
 }
 Stats[? "AbilityAlrdy"]=true

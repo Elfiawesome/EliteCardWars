@@ -18,8 +18,7 @@ if position_meeting(mouse_x,mouse_y,obj_cardholder) && instance_exists(global.Se
                 buffer_delete(buffer)
             }
         }
-    instance_destroy(global.SelectedCard)
-    ds_list_delete(cardList,ds_list_find_index(cardList,global.SelectedCard))
+    scr_RemoveAndDestroyCardFromHand(global.SelectedCard)
     }
     }
     }

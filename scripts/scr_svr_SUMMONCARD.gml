@@ -6,5 +6,5 @@ var CardID=buffer_read(buffer,buffer_s16)
 svr_SummonCard(socket,Pos,CardID)
 //deduct points
 with(socket_to_instanceid[? socket]){
-    Points-=global.UnitDat_Pt[CardID]
+    Points-=GetPointDeductionValue(global.UnitDat_Pt[CardID])
 }

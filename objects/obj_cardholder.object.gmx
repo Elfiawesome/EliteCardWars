@@ -39,12 +39,17 @@ Shakex=x
 Shakey=y
 RollADieNumber=0
 Stats=ds_map_create()
+Stats[? "UnitsIdentifier"]=0
 Stats[? "Base_Hp"]=0
 Stats[? "Hp"]=0
 var m=ds_map_create();ds_map_add_map(Stats,"Multi_OtherHpAmt",m);
 Stats[? "OtherHpAmt"]=0
 var m=ds_map_create();ds_map_add_map(Stats,"Multi_OtherHpDuration",m);
 Stats[? "Finalized_Hp"]=0
+
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_DefAmt",m);
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_DefDuration",m);
+Stats[? "Def"]=0
 
 Stats[? "Base_Atk"]=0
 Stats[? "Atk"]=0
@@ -91,6 +96,14 @@ var m=ds_map_create();ds_map_add_map(Stats,"Multi_PoisonDmg",m);
 Stats[? "PoisonDmg"]=0
 var m=ds_map_create();ds_map_add_map(Stats,"Multi_PoisonDuration",m);
 Stats[? "PoisonDuration"]=0//not used yet
+
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_DamageIntakeMultiplierAmt",m);
+Stats[? "DamageIntakeMultiplier"]=1
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_DamageIntakeMultiplierDur",m);
+
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_DamageOutputMultiplierAmt",m);
+Stats[? "DamageOutputMultiplier"]=1
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_DamageOutputMultiplierDur",m);
 
 //Spells lists
 var EquipedSpellsList=ds_list_create()

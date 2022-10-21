@@ -28,7 +28,13 @@ for(var i=0;i<ds_list_size(socketlist);i++){
     //wrap up
     ds_map_add_map(_map,_sock,_socketmap)
 }
-var _mapstr=json_encode_destroy(_map)
+var _Mainmap=ds_map_create()
+ds_map_add_map(_Mainmap,"Players",_map)
+//add identifiers
+_Mainmap[? "SpellsIdentifier"]=global.SpellsIdentifier
+_Mainmap[? "UnitsIdentifier"]=global.UnitsIdentifier
+
+var _mapstr=json_encode_destroy(_Mainmap)
 
 for(var i=0;i<ds_list_size(socketlist);i++){
     var sock=socketlist[| i]

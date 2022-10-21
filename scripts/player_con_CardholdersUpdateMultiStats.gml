@@ -42,3 +42,18 @@ Stats[? "Finalized_Atk"]=Stats[? "Atk"]+Amt;Amt=0
 var _m=Stats[? "Multi_OtherHpDuration"];var _n=Stats[? "Multi_OtherHpAmt"];
 if !ds_map_empty(_m){for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){Amt+=_n[? k];}}
 Stats[? "Finalized_Hp"]=Stats[? "Hp"]+Amt;Amt=0
+
+//Def
+var Amt=0;
+var _m=Stats[? "Multi_DefDuration"];var _n=Stats[? "Multi_DefAmt"];
+if !ds_map_empty(_m){for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){Amt+=_n[? k];}}
+Stats[? "Def"]=Amt;Amt=0
+
+//damage multiploer
+var Amt=0;
+var _m=Stats[? "Multi_DamageIntakeMultiplierDur"];var _n=Stats[? "Multi_DamageIntakeMultiplierAmt"];
+if !ds_map_empty(_m){for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){Amt+=_n[? k];}}
+if Amt=0{Amt=1};Stats[? "DamageIntakeMultiplier"]=Amt;Amt=0
+var _m=Stats[? "Multi_DamageOutputMultiplierDur"];var _n=Stats[? "Multi_DamageOutputMultiplierAmt"];
+if !ds_map_empty(_m){for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){Amt+=_n[? k];}}
+if Amt=0{Amt=1};Stats[? "DamageOutputMultiplier"]=Amt;Amt=0

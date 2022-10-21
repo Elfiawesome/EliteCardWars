@@ -80,6 +80,7 @@ Stats[? "LastAttackedBy"]=noone
 
 //hero's only stats
 Stats[? "AdditionalPoints"]=0
+Stats[? "DiscountPoints"]=0
 Stats[? "TotaledReimbursedPoints"]=0
 var m=ds_map_create();ds_map_add_map(Stats,"Multi_DisableSpells",m);
 Stats[? "DisableSpells"]=false

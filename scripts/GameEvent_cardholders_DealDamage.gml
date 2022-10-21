@@ -4,7 +4,11 @@ var Vict=argument0;
 if Vict.Stats[? "IsImmune"]!=0{exit;}
 if Vict.Stats[? "IsSPImmune"]!=0 && IsSPAtk(Atkr.Stats)=true{exit;}
 if Vict.Stats[? "IsBAImmune"]!=0 && IsSPAtk(Atkr.Stats)=false{exit;}
-Vict.Stats[? "Hp"]-=Atkr.Stats[? "Finalized_Atk"]
+var dmgamt=(Atkr.Stats[? "Finalized_Atk"]*GetIntakeMultiplier(Atkr,Vict)-Vict.Stats[? "Def"])
+if sign(dmgamt)=1{
+    Vict.Stats[? "Hp"]-=dmgamt
+}
+
 with(Vict){player_con_CardholdersUpdateMultiStats()}
 //activate damaging ability
 with(Atkr){

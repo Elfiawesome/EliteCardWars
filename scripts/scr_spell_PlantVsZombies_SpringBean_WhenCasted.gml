@@ -4,7 +4,7 @@ var MapStr=argument0;
 //refund the card if you are the victim
 if mysocket=global.NetworkObj.mysocket{
     with(global.NetworkObj.socket_to_instanceid[? mysocket]){
-        GameEvent_draw_specific_card(other.CardID)
+        GameEvent_draw_specific_card(other.CardID,0)
     }
 }
 //clear this card

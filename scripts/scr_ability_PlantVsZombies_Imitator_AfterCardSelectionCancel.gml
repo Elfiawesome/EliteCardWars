@@ -4,12 +4,12 @@ var MapStr=argument0;
 //give the card if you are the socket
 if mysocket=global.NetworkObj.mysocket{
     with(global.NetworkObj.socket_to_instanceid[? global.NetworkObj.mysocket]){
-        GameEvent_draw_specific_card(UnitID.PlantVsZombies_Imitator)
+        GameEvent_draw_specific_card(UnitID.PlantVsZombies_Imitator,0)
     }
 }
 //refund points [1]
 with(global.NetworkObj.socket_to_instanceid[? mysocket]){
-    Points+=global.UnitDat_Pt[UnitID.PlantVsZombies_Imitator]
+    Points+=GetPointDeductionValue(global.UnitDat_Pt[UnitID.PlantVsZombies_Imitator])
 }
 GameEvent_cardholders_Clear()
 //ability is completed

@@ -104,6 +104,7 @@ enum WorldType{
     FantasticFrontier,
     Hexeria,
     MadnessCombat,
+    Payday2,
     PlantVsZombies,
     RedAlert3,
     SouthPark,
@@ -149,6 +150,7 @@ global.WorldTypeName[WorldType.Destiny2]="Destiny 2"
 global.WorldTypeName[WorldType.FantasticFrontier]="Fantastic Frontier"
 global.WorldTypeName[WorldType.Hexeria]="Hexeria"
 global.WorldTypeName[WorldType.MadnessCombat]="Madness Combat"
+global.WorldTypeName[WorldType.Payday2]="Payday 2"
 global.WorldTypeName[WorldType.PlantVsZombies]="Plant Vs Zombies"
 global.WorldTypeName[WorldType.RedAlert3]="Red Alert 3"
 global.WorldTypeName[WorldType.SouthPark]="South Park"

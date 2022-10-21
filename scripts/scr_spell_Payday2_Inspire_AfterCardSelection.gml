@@ -11,5 +11,7 @@ Stats[? "Hp"]=ceil(Stats[? "Hp"]/3)
 player_con_CardholdersUpdateMultiStats()
 //remove card from dead card list
 with(global.NetworkObj.socket_to_instanceid[? mysocket]){
+    ds_list_delete(DeadCardListTurn,ds_list_find_index(DeadCardList,selection))
     ds_list_delete(DeadCardList,ds_list_find_index(DeadCardList,selection))
+    Points-=GetPointDeductionValue(global.SpellDat_Pt[SpellID.Payday2_Inspire])
 }

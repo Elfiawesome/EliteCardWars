@@ -11,7 +11,7 @@ ani_AttackSet_basic(atkr,victimList)
 //Get the card
 if atkr.mysocket=global.NetworkObj.mysocket{
     with(stid[? atkr.mysocket]){
-        GameEvent_draw_specific_card(vict.CardID)
+        GameEvent_draw_specific_card(vict.CardID,0)
     }
 }
 //deduct the points

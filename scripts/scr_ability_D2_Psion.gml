@@ -15,7 +15,7 @@ if scr_ability_Checks_OnlyEnemy(vict,atkr){
     //refund the card if you are the victim
     if vict.mysocket=global.NetworkObj.mysocket{
         with(stid[? vict.mysocket]){
-            GameEvent_draw_specific_card(vict.CardID)
+            GameEvent_draw_specific_card(vict.CardID,0)
         }
     }
     //clear that card

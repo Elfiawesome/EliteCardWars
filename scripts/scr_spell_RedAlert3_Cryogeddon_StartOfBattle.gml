@@ -4,10 +4,10 @@ var _isCompleted=true
 with(MapStr[? "TgtCon"]){
     for(var i=0;i<ds_list_size(Cardholderlist);i++){
         with(Cardholderlist[| i]){
-            if CardID!=0{
+            if CardID!=0 && !Stats[? "IsSpellsImmune"]{
                 if Stats[? "Finalized_Hp"]<25{
                     var _mii=Stats[? "Multi_IsFrozen"];
-                    _mii[? "Spell_"+string(MapStr)]=2
+                    _mii[? GetMultiStatsString_Spells(MapStr)]=2
                     player_con_CardholdersUpdateMultiStats()
                 }
             }
