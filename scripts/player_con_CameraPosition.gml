@@ -2,10 +2,10 @@
 with(global.NetworkObj){
     //camera follow person's battlefield
     if global.GameStage=GAMESTAGE.PLAYERTURNS{
-        CameraFocus=socket_to_instanceid[? Turnstage[Turn]];
-        CameraFocusNo=Turn
+        //CameraFocus=socket_to_instanceid[? Turnstage[Turn]];
+        //CameraFocusNo=Turn
     }
-    if global.GameStage=GAMESTAGE.ATTACKINGTURN{
+    if global.GameStage=GAMESTAGE.ATTACKINGTURN || global.GameStage=GAMESTAGE.PLAYERTURNS{
         if Turnstage[Turn]=mysocket{
             if keyboard_check_pressed(ord("X")){
                 if CameraFocusNo<(array_length_1d(Turnstage)-1){

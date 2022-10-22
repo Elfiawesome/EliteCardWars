@@ -31,6 +31,7 @@ if Turn>=0{
             break;
             case GAMESTAGE.ATTACKINGTURN://end of attacking turn
                 Turn=0
+                CameraFocusNo=Turn
                 EndOfAttackingTurnChecks()
                 GameLifespan++
                 //reimburse all the players points
