@@ -40,7 +40,7 @@ global.PlayerOnlineName=choose(
     "Namesr",
 )
 //settings
-global.IsSpeedrun=true
+global.IsSpeedrun=false
 global.Version="0.0.1"
 global.IsFullScreen=false
 scr_units_init()

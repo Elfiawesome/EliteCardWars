@@ -160,7 +160,7 @@ global.WorldTypeName[WorldType.Vesteria]="Vesteria"
 
 //how many points at a turn
 global.TurnPointArray[0]=1000
-if global.IsSpeedrun=false{
+if global.IsSpeedrun=true{
 global.TurnPointArray[0]=5
 global.TurnPointArray[1]=6
 global.TurnPointArray[2]=8
