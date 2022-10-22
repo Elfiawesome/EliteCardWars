@@ -270,7 +270,7 @@ if position_meeting(mouse_x,mouse_y,obj_cardholder){
     var _cardholder=instance_position(mouse_x,mouse_y,obj_cardholder)
     if IsSelected{
     if _cardholder.CardID!=0 &amp;&amp; _cardholder.mysocket!=mysocket &amp;&amp; global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket].Team!=global.NetworkObj.socket_to_instanceid[? mysocket].Team{
-        if scr_ValidAttackSpot(id,_cardholder) &amp;&amp; IsForceAttackHolder(_cardholder){
+        if (!HasForceAttack(_cardholder) &amp;&amp; scr_ValidAttackSpot(id,_cardholder)) || (HasForceAttack(_cardholder) &amp;&amp; IsForceAttackHolder(_cardholder)){
             draw_set_colour(c_lime)
         }
         var pointx=_cardholder.x
