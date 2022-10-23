@@ -135,6 +135,7 @@ for(var i=1;i&lt;(UnitID.UnitID_MAX);i++){
     
     var _StartOfNewWorld=false
 }
+
 //drawing header
 draw_set_halign(fa_center)
 draw_set_color(c_black)
@@ -198,6 +199,69 @@ if !Exit{
     }
 }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///drawing character details
+var len=9
+var _ylevel=0
+var _xlevel=0
+var _ygap=270
+
+var _curWorld=WorldType.Destiny2
+for(var i=1;i&lt;(UnitID.UnitID_MAX);i++){
+    if global.UnitDat_WorldType[i]!=_curWorld{
+        _ylevel+=1.2
+        _xlevel=0
+        _curWorld=global.UnitDat_WorldType[i]
+    }
+    var _sp=global.UnitDat_Sprite[i]
+    var _im=global.UnitDat_Image[i]
+    
+    var _x=x+(view_wview[0]/(len+1))*(_xlevel+1);
+    var _y=y+150+_ygap*_ylevel+scrollbarY*100;
+    _xlevel++
+    
+    //moving to a next line
+    if _xlevel=len{
+        _ylevel++
+        _xlevel=0
+    }
+    
+    //selection/deselection
+    var msx=device_mouse_x_to_gui(0)
+    var msy=device_mouse_y_to_gui(0)
+    
+    if point_in_rectangle(msx,msy,
+        _x-sprite_get_width(_sp)/2*_sc,
+        _y-sprite_get_height(_sp)/2*_sc,
+        _x+sprite_get_width(_sp)/2*_sc,
+        _y+sprite_get_height(_sp)/2*_sc,
+    ){
+        var _wid=sprite_get_width(_sp)*0.6
+        var _hei=sprite_get_height(_sp)*0.6
+        var _maxX=clamp(msx+_wid/2,_wid/2,view_wport[0]-_wid/2)
+        var _maxY=clamp(msy+_hei/2,_hei/2,view_hport[0]-_hei/2)
+        draw_sprite_ext(_sp,_im,_maxX,_maxY,0.6,0.6,0,c_white,1)
+    }
+}
 </string>
           </argument>
         </arguments>
