@@ -230,6 +230,8 @@
           <script>scripts\scr_clt_SUMMONCARD.gml</script>
           <script>scripts\scr_clt_CASTSPELL.gml</script>
           <script>scripts\scr_clt_ATTACKCARDHOLDER.gml</script>
+          <script>scripts\scr_clt_ADDCARDINTOHAND.gml</script>
+          <script>scripts\scr_clt_REMOVECARDFROMHAND.gml</script>
           <script>scripts\scr_clt_ACTIVATEABILITYTARGET.gml</script>
           <script>scripts\scr_clt_ACTIVATEABILITY.gml</script>
           <script>scripts\scr_clt_ACTIVATEAFTERCARDSELECTION.gml</script>
