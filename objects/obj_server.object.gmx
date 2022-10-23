@@ -76,6 +76,8 @@ _inst.IsLocal=true
 _inst.mysocket=0
 ds_list_copy(_inst.DeckList,global.PlayerDeck)
 ds_list_shuffle(_inst.DeckList)
+ds_list_copy(_inst.SpellList,global.PlayerSpells)
+ds_list_shuffle(_inst.SpellList)
 _inst.PlayerHeroID=global.PlayerHero
 socket_to_instanceid[? 0]=_inst
 ds_list_add(socketlist,0)

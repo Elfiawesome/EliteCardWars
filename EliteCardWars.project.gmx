@@ -513,6 +513,7 @@
     <object>objects\obj_menu</object>
     <objects name="grp_menu">
       <object>objects\obj_menu_DeckSelector</object>
+      <object>objects\obj_menu_SpellsSelector</object>
       <object>objects\obj_menu_HeroSelector</object>
     </objects>
     <objects name="grp_network">

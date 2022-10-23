@@ -146,7 +146,7 @@ var msy=device_mouse_y_to_gui(0)
 for(var i=0;i&lt;array_length_1d(DeckSprite);i++){
     var canDraw=true
     if i=0 &amp;&amp; ds_list_empty(ControlParent.DeckList){canDraw=false}//if unit deck is empty
-    if i=1 {canDraw=true}//if spell deck is empty [Not implemented]
+    if i=1 &amp;&amp; ds_list_empty(ControlParent.SpellList){canDraw=false}//if spell deck is empty [Not implemented]
     if Draws&lt;1{canDraw=false}
     
     //draw sprite
@@ -176,17 +176,15 @@ for(var i=0;i&lt;array_length_1d(DeckSprite);i++){
                         ds_list_delete(ControlParent.DeckList,0)
                         with(global.NetworkObj.socket_to_instanceid[? global.NetworkObj.mysocket]){
                             var _card=GameEvent_draw_specific_card(other.CardID,0);
-                            _card.CardType=0
                             _card.x=_x
                             _card.y=_y
                         }
                     break;
                     case 1://draw spell card [not yet implemented]
-                        CardID=irandom_range(1,SpellID.SpellID_MAX-1)
-                        //ds_list_delete(ControlParent.DeckList,0)
+                        CardID=ControlParent.SpellList[| 0]
+                        ds_list_delete(ControlParent.SpellList,0)
                         with(global.NetworkObj.socket_to_instanceid[? global.NetworkObj.mysocket]){
                             var _card=GameEvent_draw_specific_card(other.CardID,1);
-                            _card.CardType=1
                             _card.x=_x
                             _card.y=_y
                         }

@@ -9,6 +9,9 @@ _m[? "Hero"]=global.PlayerHero
 //writing decklist
 var _l=ds_list_create();ds_list_copy(_l,global.PlayerDeck);
 ds_map_add_list(_m,"DeckList",_l)
+//writing spellslist
+var _l=ds_list_create();ds_list_copy(_l,global.PlayerSpells);
+ds_map_add_list(_m,"SpellsList",_l)
 
 //converting json into string
 var _string=json_encode_destroy(_m)

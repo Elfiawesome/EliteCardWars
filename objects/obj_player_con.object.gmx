@@ -59,12 +59,17 @@ Team=-1
             <kind>1</kind>
             <string>///init Game variables
 scr_units_init()
+//Hand Cards
 cardList=ds_list_create()
 HandCards=ds_list_create()
-Cardholderlist=ds_list_create()
+//deck cards
 DeckList=ds_list_create()
+SpellList=ds_list_create()
+//dead card lists
 DeadCardList=ds_list_create()
 DeadCardListTurn=ds_list_create()
+//Cardholder lists
+Cardholderlist=ds_list_create()
 PlayerHeroID=0//used for setting up the game
 Points=0
 IsSpectating=false
@@ -107,6 +112,7 @@ Homey=y
             <string>ds_list_destroy(cardList)
 ds_list_destroy(HandCards)
 ds_list_destroy(DeckList)
+ds_list_destroy(SpellList)
 ds_list_destroy(DeadCardList)
 ds_list_destroy(DeadCardListTurn)
 ds_list_destroy(GUIObjectOrder)
