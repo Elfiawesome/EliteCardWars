@@ -21,6 +21,9 @@ switch(type){
     case NETWORKPKT.STARTGAME:
         scr_clt_STARTGAME(buffer)
     break;
+    case NETWORKPKT.UPDATETEAMS:
+        scr_clt_UPDATETEAMS(buffer)
+    break;
     case NETWORKPKT.TURNMOVEON:
         scr_clt_TURNMOVEON(buffer)
     break;

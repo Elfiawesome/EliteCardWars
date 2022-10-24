@@ -89,7 +89,7 @@ for(var i=1;i&lt;(UnitID.UnitID_MAX);i++){
         IsSelected=true
     }
     
-    var _x=x+(view_wview[0]/(len+1))*(_xlevel+1);
+    var _x=x+(view_wport[0]/(len+1))*(_xlevel+1);
     var _y=y+150+_ygap*_ylevel+scrollbarY*100;
     _xlevel++
     var _sc=0.2;

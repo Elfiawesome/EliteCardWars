@@ -13,6 +13,9 @@ switch(type){
     case NETWORKPKT.EXAMPLEPACKET:
         show_message("Example Packet received")
     break;
+    case NETWORKPKT.UPDATETEAMS:
+        scr_svr_UPDATETEAMS(socket,buffer)
+    break;
     case NETWORKPKT.TURNMOVEON:
         scr_svr_TURNMOVEON(socket,buffer)
     break;

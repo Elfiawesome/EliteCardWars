@@ -150,7 +150,7 @@ if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating &amp;&amp; ds_list_
 if keyboard_check_pressed(vk_enter){
     //GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
     //var _c1=GameEvent_draw_specific_card(real(get_string("Enter the unit ID","0")),1)
-    var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_ObservationPost,1)
+    //var _c1=GameEvent_draw_specific_card(UnitID.PlantVsZombies_Imitator,0)
 }
 if global.SelectedCard=noone{
     if position_meeting(mouse_x,mouse_y,obj_card){
@@ -231,7 +231,7 @@ if keyboard_check_pressed(ord("Q")){
             update_Turnstage(TeamMap)
             //send server an example packet
             for(var i=0;i&lt;ds_list_size(socketlist);i++){
-                buffer=buffer_create(1024,buffer_fixed,1)
+                buffer=buffer_create(2048,buffer_fixed,1)
                 buffer_write(buffer,buffer_s16,NETWORKPKT.STARTGAME)
                 buffer_write(buffer,buffer_string,json_encode(TeamMap))
                 network_send_packet(socketlist[| i],buffer,buffer_tell(buffer))
@@ -478,6 +478,19 @@ if global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
             <kind>1</kind>
             <string>///Draw Hero Stats
 if IsLocal &amp;&amp; global.IsGame  &amp;&amp; !IsSpectating &amp;&amp; ds_list_empty(GUIObjectOrder){
+//Current Turns
+draw_set_font(ft_Ebrima_s12)
+draw_set_halign(fa_center)
+var _x=view_wport[0]*3/4;var _y=30;
+var _str=""
+if global.GameStage=GAMESTAGE.PLAYERTURNS{_str="Player Turns"}
+if global.GameStage=GAMESTAGE.ATTACKINGTURN{_str="Attacking Turns"}
+draw_text(_x,_y,_str)
+with(global.NetworkObj){_str=socket_to_instanceid[? Turnstage[Turn]].name}
+draw_text(_x,_y*2,_str)
+draw_set_halign(fa_left)
+draw_set_font(ft_number)
+
 //Hero Health GUI
 var _x=30;var _y=30;
 var _wid=view_wport[0]/2 - _x
@@ -532,6 +545,26 @@ for(i=1;i&lt;Points;i++){
 draw_set_color(12535040)
 draw_rectangle(_x,_y+_hei-5,_x+_wid,_y+_hei,false)
 draw_set_color(c_white)
+}
+if keyboard_check(vk_tab){
+    with(global.NetworkObj){
+    var _x=view_wport[0]/2
+    var _y=100
+    var _wid=300
+    var _hei=40
+    
+    for(i=0;i&lt;ds_list_size(socketlist);i++){
+        draw_set_color(c_white)
+        draw_set_alpha(0.1)
+        draw_rectangle(_x-_wid/2,_y+_hei*(i),_x+_wid/2,_y+_hei*(i+1),false)
+        draw_set_alpha(1)
+        var _o=socket_to_instanceid[? socketlist[| i]]
+        var _s="PLAYER NOT FOUND"
+        if _o!=undefined{_s=socket_to_instanceid[? socketlist[| i]].name}
+        draw_text(_x-_wid/2,_y+_hei*(i),_s)
+        draw_set_color(c_white)
+    }
+    }
 }
 </string>
           </argument>
@@ -614,19 +647,7 @@ var sl=global.NetworkObj.socketlist
 var stid=global.NetworkObj.socket_to_instanceid
 
 with(global.NetworkObj){update_json_TeamMap()}
-/*var _map=global.NetworkObj.TeamMap
-var ii=0
-for(var k=ds_map_find_first(_map);!is_undefined(k);k=ds_map_find_next(_map,k)){
-    var v=_map[? k];
-    var _l=ds_list_create();
-    ds_list_read(_l,v)
-    for(var i=0;i&lt;ds_list_size(_l);i++){
-        draw_text(100+ii*200,100+i*30,stid[? real(_l[| i])].name)
-    }
-    ds_list_destroy(_l)
-    ii++
-}*/
-
+var NeedToUpdateTeamMap=false
 draw_set_font(ft_Ebrima_s12)
 for(var i=0;i&lt;ds_list_size(sl);i++){
     var _name=stid[? sl[| i]].name
@@ -648,11 +669,58 @@ for(var i=0;i&lt;ds_list_size(sl);i++){
     draw_text(_x,_y,_name)
     draw_set_alpha(0.2)
     draw_rectangle(_x,_y,_x+_namewid,_y+_namehei,false)
+    draw_set_alpha(1)
+    
+    //selection/deselection
+    var msx=device_mouse_x_to_gui(0)
+    var msy=device_mouse_y_to_gui(0)
+    if point_in_rectangle(msx,msy,_x,_y,_x+_namewid,_y+_namehei){
+        if mouse_wheel_up(){
+            stid[? sl[| i]].Team++;NeedToUpdateTeamMap=true
+        }
+        if mouse_wheel_down(){
+            stid[? sl[| i]].Team--;NeedToUpdateTeamMap=true
+        }
+    }
+    draw_set_color(TeamColorOf(stid[? sl[| i]].Team))
+    draw_rectangle(_x+50,_y,_x+100,_y+_namehei,false)
 }
 draw_set_font(ft_number)
+/*var _map=global.NetworkObj.TeamMap
+var _string=""
+for(var k=ds_map_find_first(_map);!is_undefined(k);k=ds_map_find_next(_map,k)){
+    _string+="{"
+    _string+=string(k)+": "
+    var _l=ds_list_create()
+    ds_list_read(_l,_map[? k])
+    for(var ii=0;ii&lt;ds_list_size(_l);ii++){
+        _string+=string(_l[| ii])+" "
+    }
+    ds_list_destroy(_l)
+    _string+="}"
+}
+draw_text(200,400,_string)*/
 
+if NeedToUpdateTeamMap{
+with(global.NetworkObj){
+update_json_TeamMap()
+
+var _str=json_encode(TeamMap)
+if global.NetworkObj.object_index=obj_client{
+    buffer=buffer_create(2048,buffer_fixed,1)
+    buffer_write(buffer,buffer_s16,NETWORKPKT.UPDATETEAMS)
+    buffer_write(buffer,buffer_string,_str)
+    network_send_packet(client,buffer,buffer_tell(buffer))
+    buffer_delete(buffer)
+}
+if global.NetworkObj.object_index=obj_server{
+    svr_UpdateTeams(_str)
+}
+}
 }
 
+
+}
 </string>
           </argument>
         </arguments>
@@ -676,9 +744,11 @@ draw_set_font(ft_number)
             <string>///Drawing Battlefield highlight
 if global.IsGame{
 if global.SelectedCard!=noone &amp;&amp; global.SelectedCard.CardType=1 &amp;&amp; global.SpellDat_SpellCastType[global.SelectedCard.CardID]=SpellCastType.BattlefieldTarget{
+    draw_set_color(TeamColorOf(global.NetworkObj.socket_to_instanceid[? mysocket].Team))
     draw_set_alpha((sin(current_time/100)+1)/4)
     draw_rectangle(Homex-350,Homey-300,Homex+350,Homey+300,false)
     draw_set_alpha(1)
+    draw_set_color(c_white)
 }
 }
 </string>

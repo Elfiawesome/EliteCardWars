@@ -156,6 +156,7 @@
         </scripts>
         <script>scripts\SummonCard.gml</script>
         <script>scripts\CastSpell.gml</script>
+        <script>scripts\UpdateTeams.gml</script>
         <script>scripts\AttackCardHolder.gml</script>
         <script>scripts\AddCardIntoHand.gml</script>
         <script>scripts\RemoveCardFromHand.gml</script>
@@ -177,6 +178,7 @@
         <scripts name="grp_scripts">
           <script>scripts\create_cardholders.gml</script>
           <script>scripts\svr_TurnstageMoveOn.gml</script>
+          <script>scripts\svr_UpdateTeams.gml</script>
           <script>scripts\svr_AttackingPhaseIsReady.gml</script>
           <script>scripts\svr_SummonCard.gml</script>
           <script>scripts\svr_CastSpell.gml</script>
@@ -198,6 +200,7 @@
         <script>scripts\scr_svr_PLAYERINIT.gml</script>
         <script>scripts\scr_svr_PING.gml</script>
         <scripts name="grp_tfr [Useless scripts]">
+          <script>scripts\scr_svr_UPDATETEAMS.gml</script>
           <script>scripts\scr_svr_TURNMOVEON.gml</script>
           <script>scripts\scr_svr_ATTACKINGPHASEISREADY.gml</script>
           <script>scripts\scr_svr_SUMMONCARD.gml</script>
@@ -229,6 +232,7 @@
           <script>scripts\scr_clt_ATTACKINGPHASEISREADY.gml</script>
           <script>scripts\scr_clt_SUMMONCARD.gml</script>
           <script>scripts\scr_clt_CASTSPELL.gml</script>
+          <script>scripts\scr_clt_UPDATETEAMS.gml</script>
           <script>scripts\scr_clt_ATTACKCARDHOLDER.gml</script>
           <script>scripts\scr_clt_ADDCARDINTOHAND.gml</script>
           <script>scripts\scr_clt_REMOVECARDFROMHAND.gml</script>
@@ -503,7 +507,8 @@
       <script>scripts\GetPointDeductionValue.gml</script>
       <script>scripts\GetIntakeMultiplier.gml</script>
       <script>scripts\IsMouseOverBattlefield.gml</script>
-      <script>scripts\draw.gml</script>
+      <script>scripts\TeamColorOf.gml</script>
+      <script>scripts\draw_battlefield_teamcolor.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">

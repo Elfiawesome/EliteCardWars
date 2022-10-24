@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>NextRoomInit=0
-ExecuteShellOpenwindow()
+repeat(2){ExecuteShellOpenwindow()}
 randomize()
 draw_set_font(ft_number)
 global.PlayerOnlineName=choose(
@@ -69,7 +69,7 @@ if !global.IsSpeedrun{
         var _string=buffer_read(buffer,buffer_string)
         buffer_delete(buffer)
         //correct file?
-        _m=json_decode(_string)
+        var _m=json_decode(_string)
         
         //reading Decklist
         _h=_m[? "Hero"]
@@ -81,6 +81,19 @@ if !global.IsSpeedrun{
         _l=_m[? "SpellsList"]
         if !is_undefined(_l){ds_list_copy(global.PlayerSpells,_l)}
         
+        ds_map_destroy(_m)
+    }
+    
+    var _dir=working_directory+"PlayerInfo.txt"
+    if file_exists(_dir){
+        //converting string
+        var buffer=buffer_load(_dir)
+        var _string=buffer_read(buffer,buffer_string)
+        buffer_delete(buffer)
+        //read file
+        var _m=json_decode(_string)
+        var _v=_m[? "OnlineName"]
+        if !is_undefined(_v){global.PlayerOnlineName=_v}
         ds_map_destroy(_m)
     }
 }
@@ -122,7 +135,6 @@ if keyboard_check_pressed(vk_f1){
     //open new window
     ExecuteShellOpenwindow()
 }
-
 if keyboard_check_pressed(ord("D")){
     if !instance_exists(DeckEditorPage){
         DeckEditorPage=instance_create(0,0,obj_menu_DeckSelector)
@@ -152,6 +164,23 @@ if keyboard_check_pressed(ord("G")){
         DeckEditorPage.Exit=true
         scr_menu_update_deckfile()
     }
+}
+
+
+if keyboard_check_pressed(ord("M")){
+global.PlayerOnlineName=get_string("Enter Name","")
+//getting string to write
+var _m=ds_map_create();
+//writing all data
+_m[? "OnlineName"]=global.PlayerOnlineName
+//converting json into string
+var _string=json_encode_destroy(_m)
+_string=json_beautify(_string)
+//writing into file
+var _dir=working_directory+"PlayerInfo.txt"
+file = file_text_open_write(_dir);
+file_text_write_string(file,_string);
+file_text_close(file);
 }
 </string>
           </argument>

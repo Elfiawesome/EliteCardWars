@@ -160,7 +160,7 @@ global.WorldTypeName[WorldType.Vesteria]="Vesteria"
 
 //how many points at a turn
 global.TurnPointArray[0]=1000
-if global.IsSpeedrun=true{
+if !global.IsSpeedrun{
 global.TurnPointArray[0]=5
 global.TurnPointArray[1]=6
 global.TurnPointArray[2]=8
@@ -172,3 +172,18 @@ global.TurnPointArray[7]=33
 global.TurnPointArray[8]=41
 global.TurnPointArray[9]=50
 }
+
+var _c=0
+global.TeamColor[_c]=c_blue;_c++
+global.TeamColor[_c]=c_red;_c++
+global.TeamColor[_c]=c_yellow;_c++
+global.TeamColor[_c]=c_green;_c++
+global.TeamColor[_c]=c_orange;_c++
+global.TeamColor[_c]=c_purple;_c++
+global.TeamColor[_c]=c_black;_c++
+global.TeamColor[_c]=c_gray;_c++
+global.TeamColor[_c]=c_maroon;_c++
+global.TeamColor[_c]=c_fuchsia;_c++
+global.TeamColor[_c]=c_silver;_c++
+global.TeamColor[_c]=c_teal;_c++
+global.TeamColor[_c]=c_olive;

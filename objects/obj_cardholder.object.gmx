@@ -339,7 +339,18 @@ if CardID=0{
         if global.SelectedCard.CardType=1 &amp;&amp; global.SpellDat_SpellCastType[global.SelectedCard.CardID]=SpellCastType.UnitTarget{D=true}
         if !D{exit;}
         image_alpha=(sin(current_time/100)+1)/2
-        draw_self()
+        draw_set_color(TeamColorOf(global.NetworkObj.socket_to_instanceid[? mysocket].Team))
+        draw_set_alpha(image_alpha*0.7)
+        draw_rectangle(
+            x-sprite_get_width(sprite_index)*image_xscale/2,
+            y-sprite_get_height(sprite_index)*image_yscale/2,
+            x+sprite_get_width(sprite_index)*image_xscale/2,
+            y+sprite_get_height(sprite_index)*image_yscale/2,
+            false
+        )
+        draw_set_alpha(1)
+        draw_set_color(c_white)
+        //draw_self()
         image_alpha=1
     }
 }
