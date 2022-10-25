@@ -74,6 +74,7 @@ var _inst=instance_create(100,100,obj_player_con);
 _inst.name="SERVER OWNER"
 _inst.IsLocal=true
 _inst.mysocket=0
+_inst.Team=0
 ds_list_copy(_inst.DeckList,global.PlayerDeck)
 ds_list_shuffle(_inst.DeckList)
 ds_list_copy(_inst.SpellList,global.PlayerSpells)

@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>NextRoomInit=0
+            <string>//game variables
+NextRoomInit=0
 repeat(2){ExecuteShellOpenwindow()}
 randomize()
 draw_set_font(ft_number)
@@ -103,6 +104,34 @@ if !global.IsSpeedrun{
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///visual variables
+MenuButtonPressed[0]=false
+MenuButtonPressed[1]=false
+MenuButtonPressed[2]=false
+
+MenuButtonOverlay[0]=0
+MenuButtonOverlay[1]=0
+MenuButtonOverlay[2]=0
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -121,12 +150,12 @@ if !global.IsSpeedrun{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if keyboard_check_pressed(ord("S")){
+            <string>if keyboard_check_pressed(ord("S")) || MenuButtonPressed[1]{
     //server
     NextRoomInit=obj_server
     room_goto(rm_online)
 }
-if keyboard_check_pressed(ord("C")){
+if keyboard_check_pressed(ord("C")) || MenuButtonPressed[2]{
     //Connect to server as client
     NextRoomInit=obj_client
     room_goto(rm_online)
@@ -274,7 +303,42 @@ switch(global.IsFullScreen){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///empty
+            <string>MenuButtonPressed[0]=false
+MenuButtonPressed[1]=false
+MenuButtonPressed[2]=false
+for(i=0;i&lt;3;i++){
+    var _x=view_wport[0]/(3+1)*(i+1)
+    var _y=view_hport[0]/2
+    var _sp=spr_MenuButton
+    var _sc=0.2
+    draw_sprite_ext(_sp,i,_x,_y,_sc,_sc,1,c_white,1)
+    
+    var msx=device_mouse_x_to_gui(0)
+    var msy=device_mouse_y_to_gui(0)
+    if point_in_rectangle(msx,msy,
+        _x-sprite_get_width(_sp)/2*_sc,
+        _y-sprite_get_height(_sp)/2*_sc,
+        _x+sprite_get_width(_sp)/2*_sc,
+        _y+sprite_get_height(_sp)/2*_sc,
+    ){
+        MenuButtonOverlay[i]=lerp(MenuButtonOverlay[i],1,0.5)
+        if mouse_check_button_pressed(mb_left){
+            MenuButtonPressed[i]=true
+        }
+    }else{
+        MenuButtonOverlay[i]=lerp(MenuButtonOverlay[i],0,0.1)
+    }
+    draw_set_alpha(c_white)
+    draw_set_alpha(0.1)
+    draw_rectangle(
+        _x-sprite_get_width(_sp)/2*_sc,
+        _y+sprite_get_height(_sp)/2*_sc - sprite_get_height(_sp)*_sc*MenuButtonOverlay[i],
+        _x+sprite_get_width(_sp)/2*_sc,
+        _y+sprite_get_height(_sp)/2*_sc,false
+        )
+    draw_set_alpha(c_white)
+    draw_set_alpha(1)
+}
 </string>
           </argument>
         </arguments>
@@ -299,8 +363,7 @@ switch(global.IsFullScreen){
             <kind>1</kind>
             <string>draw_set_font(ft_number)
 draw_text_transformed(0,0,"Elite Card Wars Demo",5,5,0)
-draw_text_transformed(0,120,"Press 's' to create server",3,3,0)
-draw_text_transformed(0,200,"Press 'c' to connect server",3,3,0)
+draw_text_transformed(0,120,"S:Server/C:Client",3,3,0)
 draw_text_transformed(0,280,"Press 'D,F' to edit deck",3,3,0)
 draw_text_transformed(0,360,"Press 'z' to fullscreen",3,3,0)
 
