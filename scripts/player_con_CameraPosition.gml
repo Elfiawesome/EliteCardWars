@@ -7,12 +7,23 @@ with(global.NetworkObj){
     }
     if global.GameStage=GAMESTAGE.ATTACKINGTURN || global.GameStage=GAMESTAGE.PLAYERTURNS{
         if Turnstage[Turn]=mysocket{
+            if keyboard_check_pressed(ord("Z")){
+                CameraFocusNo=Turn
+            }
             if keyboard_check_pressed(ord("X")){
+            if !keyboard_check(vk_lshift){
                 if CameraFocusNo<(array_length_1d(Turnstage)-1){
-                    CameraFocusNo++
+                        CameraFocusNo++
                 }else{
                     CameraFocusNo=0
                 }
+            }else{
+                if CameraFocusNo>0{
+                        CameraFocusNo--
+                }else{
+                    CameraFocusNo=array_length_1d(Turnstage)-1
+                }            
+            }
             }
             CameraFocus=socket_to_instanceid[? Turnstage[CameraFocusNo]];
         }else{

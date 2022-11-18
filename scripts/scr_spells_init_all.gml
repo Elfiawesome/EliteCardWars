@@ -174,7 +174,7 @@ global.SpellDat_SpellTrigger[Cur,2]=SpellTrigger.AfterCardSelectionCancel
 global.SpellDat_SpellScript[Cur,2]=scr_spell_Vesteria_Reserruct_AfterCardSelectionCancel
 
 var Cur=SpellID.Vesteria_Warcry//Consumable
-scr_spells_init_func(Cur,"Warcry",_wt,5,spr_spells,Cur-1,SpellType.Consumable,SpellCastType.BattlefieldTarget)
+scr_spells_init_func(Cur,"Warcry",_wt,3,spr_spells,Cur-1,SpellType.Consumable,SpellCastType.BattlefieldTarget)
 global.SpellDat_CastCheck[Cur]=scr_spellls_Check_AlliesTeam
 global.SpellDat_SpellTrigger[Cur,0]=SpellTrigger.WhenCasted
 global.SpellDat_SpellScript[Cur,0]=scr_spell_Vesteria_Warcry_WhenCasted

@@ -82,7 +82,6 @@ ds_list_shuffle(_inst.SpellList)
 _inst.PlayerHeroID=global.PlayerHero
 socket_to_instanceid[? 0]=_inst
 ds_list_add(socketlist,0)
-
 </string>
           </argument>
         </arguments>
@@ -156,6 +155,39 @@ if BattlefieldUpdateTimer&gt;0{
 }else{
     BattlefieldUpdateTimer=BattlefieldUpdateTimerMax
     svr_ForceBattlefieldUpdate()
+}
+
+//bot problems:
+//  -Some Spells dont work on bots eg SpringBean
+//
+//adding another 'bot player' into the game
+if keyboard_check_pressed(vk_control){
+var _inst=instance_create(100,100,obj_player_con);
+_inst.name="Bot "+string(ds_list_size(socketlist))
+_inst.IsLocal=false
+_inst.mysocket=-ds_list_size(socketlist) - 1
+_inst.Team=0
+_inst.IsBot=true
+ds_list_copy(_inst.DeckList,global.PlayerDeck)
+ds_list_shuffle(_inst.DeckList)
+_inst.DeckList[| 0]=UnitID.RedAlert3_Conscript
+ds_list_copy(_inst.SpellList,global.PlayerSpells)
+ds_list_shuffle(_inst.SpellList)
+_inst.PlayerHeroID=global.PlayerHero
+socket_to_instanceid[? _inst.mysocket]=_inst
+ds_list_add(socketlist,_inst.mysocket)
+
+
+//tell all other clients to create this player with the Player Init Data Values given(str)
+for(var i=0;i&lt;ds_list_size(socketlist);i++){
+    buffer=buffer_create(2048,buffer_fixed,1)
+    buffer_write(buffer,buffer_s16,NETWORKPKT.PLAYERINITCREATE)
+    buffer_write(buffer,buffer_s16,_inst.mysocket)
+    buffer_write(buffer,buffer_string,scr_Player_Init_Data_Get(_inst))
+    network_send_packet(socketlist[| i],buffer,buffer_tell(buffer))
+    buffer_delete(buffer)
+}
+
 }
 </string>
           </argument>

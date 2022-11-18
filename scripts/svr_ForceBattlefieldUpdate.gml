@@ -38,7 +38,7 @@ var _mapstr=json_encode_destroy(_Mainmap)
 
 for(var i=0;i<ds_list_size(socketlist);i++){
     var sock=socketlist[| i]
-    buffer=buffer_create(2048,buffer_grow,1)
+    buffer=buffer_create(string_byte_length(_mapstr),buffer_grow,1)
     buffer_write(buffer,buffer_s16,NETWORKPKT.BATTLEFIELDUPDATE)
     buffer_write(buffer,buffer_string,_mapstr)
     network_send_packet(sock,buffer,buffer_tell(buffer))

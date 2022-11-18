@@ -488,11 +488,17 @@
         <script>scripts\player_con_CardSelectorControl.gml</script>
         <script>scripts\player_con_CardholdersUpdateMultiStats.gml</script>
         <script>scripts\player_con_HeroUpdateMultiStats.gml</script>
+        <script>scripts\player_con_AttackCardholder.gml</script>
+        <scripts name="grp_AI">
+          <script>scripts\AISelectVictims_Default.gml</script>
+          <script>scripts\AISelectVictim_Easy.gml</script>
+        </scripts>
       </scripts>
       <scripts name="grp_menu">
         <script>scripts\scr_menu_update_deckfile.gml</script>
       </scripts>
       <script>scripts\scr_ValidAttackSpot.gml</script>
+      <script>scripts\scr_OverallValidAttackSpot.gml</script>
       <script>scripts\IsSPAtk.gml</script>
       <script>scripts\IsAbilityTrigger.gml</script>
       <script>scripts\IsHeroAbilityTrigger.gml</script>

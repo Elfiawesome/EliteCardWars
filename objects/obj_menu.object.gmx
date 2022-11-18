@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>1</depth>
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>//game variables
 NextRoomInit=0
-repeat(2){ExecuteShellOpenwindow()}
+repeat(1){ExecuteShellOpenwindow()}
 randomize()
 draw_set_font(ft_number)
 global.PlayerOnlineName=choose(
@@ -41,7 +41,7 @@ global.PlayerOnlineName=choose(
     "Namesr",
 )
 //settings
-global.IsSpeedrun=false
+global.IsSpeedrun=false//false
 global.Version="0.0.1"
 global.IsFullScreen=false
 scr_units_init()
@@ -315,6 +315,7 @@ for(i=0;i&lt;3;i++){
     
     var msx=device_mouse_x_to_gui(0)
     var msy=device_mouse_y_to_gui(0)
+    if !instance_exists(DeckEditorPage){
     if point_in_rectangle(msx,msy,
         _x-sprite_get_width(_sp)/2*_sc,
         _y-sprite_get_height(_sp)/2*_sc,
@@ -327,6 +328,7 @@ for(i=0;i&lt;3;i++){
         }
     }else{
         MenuButtonOverlay[i]=lerp(MenuButtonOverlay[i],0,0.1)
+    }
     }
     draw_set_alpha(c_white)
     draw_set_alpha(0.1)

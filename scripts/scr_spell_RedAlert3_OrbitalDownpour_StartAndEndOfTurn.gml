@@ -13,6 +13,7 @@ with(MapStr[? "TgtCon"]){
                         Stats[? "Hp"]-=10*GetIntakeMultiplier(0,id)
                     }
                     player_con_CardholdersUpdateMultiStats()
+                    Activate_AfterDamaged_Ability()
                 }
             }
         }
