@@ -142,7 +142,7 @@ if AnimationStage&lt;3{
     //exit out of gui
     if keyboard_check_pressed(vk_escape){
         AnimationStage=3
-        ds_list_delete(ControlParent.GUIObjectOrder,ds_list_size(ControlParent.GUIObjectOrder)-1)
+        ds_list_delete(ControlParent.GUIObjectOrder,0)
     }
 }
 </string>

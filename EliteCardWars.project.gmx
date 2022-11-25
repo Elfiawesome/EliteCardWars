@@ -493,6 +493,7 @@
           <script>scripts\AISelectVictims_Default.gml</script>
           <script>scripts\AISelectVictim_Easy.gml</script>
         </scripts>
+        <script>scripts\player_con_AttackHero.gml</script>
       </scripts>
       <scripts name="grp_menu">
         <script>scripts\scr_menu_update_deckfile.gml</script>

@@ -283,6 +283,14 @@ if Turn&gt;=0{
     draw_text(view_wport[0]/2,100,string(ds_list_size(ReadySocket))+"/"+string(array_length_1d(Turnstage))+" is ready")
 }
 
+if instance_exists(socket_to_instanceid[? mysocket]){
+    CurY+=30
+    draw_text(CurY,0,"GUI Object order List:");CurY+=40
+    for(var i=0;i&lt;ds_list_size(socket_to_instanceid[? mysocket].GUIObjectOrder);i++){
+        draw_text(0,CurY,string(socket_to_instanceid[? mysocket].GUIObjectOrder[| i])+": "+object_get_name(socket_to_instanceid[? mysocket].GUIObjectOrder[| i].object_index));CurY+=30
+    }
+}
+
 
 </string>
           </argument>

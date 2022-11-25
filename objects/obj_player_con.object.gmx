@@ -157,7 +157,7 @@ if keyboard_check_pressed(vk_enter){
     
     //var _c1=GameEvent_draw_specific_card(SpellID.PlantVsZombies_SpringBean,1)
     //var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_ObservationPost,1)
-    var _c1=GameEvent_draw_specific_card(UnitID.D2_Servitor,0)
+    var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_ObservationPost,1)
 }
 if global.SelectedCard=noone{
     if position_meeting(mouse_x,mouse_y,obj_card){
@@ -353,37 +353,19 @@ if IsBot &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
         //who to attack?
         var _MapStrategy=AISelectVictim_Easy()//AISelectVictims_Default()
         
-        /*
-        var _MapStrategy=ds_map_create()
-        var _AlreadyAttackedCardsList=ds_list_create()
-        for(var i=0;i&lt;ds_list_size(global.NetworkObj.socketlist);i++){
-            var _con=global.NetworkObj.socket_to_instanceid[? global.NetworkObj.socketlist[| i]]
-            if _con.Team!=Team{
-                for(var ii=0;ii&lt;ds_list_size(_con.Cardholderlist);ii++){
-                    var _ch=_con.Cardholderlist[| ii]
-                    if _ch.CardID!=0 &amp;&amp; _ch.Stats[? "Finalized_Hp"]&gt;0{
-                        var _l=ds_list_create()
-                        for(var i3=0;i3&lt;ds_list_size(Cardholderlist);i3++){
-                        if Cardholderlist[| i3].CardID!=0 &amp;&amp; Cardholderlist[| i3].Stats[? "AtkAlrdy"]=false &amp;&amp; ds_list_find_index(_AlreadyAttackedCardsList,Cardholderlist[| i3])=-1{
-                            if (!HasForceAttack(_ch) &amp;&amp; scr_ValidAttackSpot(Cardholderlist[| i3],_ch)) || (HasForceAttack(_ch) &amp;&amp; IsForceAttackHolder(_ch)){
-                                ds_list_add(_l,Cardholderlist[| i3])
-                                ds_list_add(_AlreadyAttackedCardsList,Cardholderlist[| i3])
-                                BotSpeed=0
-                            }
-                        }
-                        }
-                        ds_map_add_list(_MapStrategy,_ch,_l)
-                    }
-                }
-            }
-        }
-        ds_list_destroy(_AlreadyAttackedCardsList)
-        */
-        //attack person
-        for (var k=ds_map_find_first(_MapStrategy);!is_undefined(k);k=ds_map_find_next(_MapStrategy,k)){
+        //Attack Cardholders
+        var HoldersStrat=_MapStrategy[? "Holders"]
+        for (var k=ds_map_find_first(HoldersStrat);!is_undefined(k);k=ds_map_find_next(HoldersStrat,k)){
             var _cardholder=real(k);
-            var _attackinglist=_MapStrategy[? k]
+            var _attackinglist=HoldersStrat[? k]
             player_con_AttackCardholder(_attackinglist,_cardholder,0)
+        }
+        //Attack Heroes
+        var HeroesStrat=_MapStrategy[? "Heroes"]
+        for (var k=ds_map_find_first(HeroesStrat);!is_undefined(k);k=ds_map_find_next(HeroesStrat,k)){
+            var _Hero=real(k);
+            var _attackinglist=HeroesStrat[? k]
+            player_con_AttackHero(_attackinglist,_Hero,0)
         }
         ds_map_destroy(_MapStrategy)
         
@@ -447,16 +429,14 @@ if global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
                     }
                     }
                 }
-                //attacking Enemy unit
+                //attacking Enemy unit (ie cardholder)
                 if _cardholder.Stats[? "Finalized_Hp"]&gt;0 &amp;&amp; !ds_list_empty(global.NetworkObj.SelectedCardHolders){
                     var AttackingObjects=ds_list_create()
                     //activate attacking sequence
                     player_con_AttackCardholder(global.NetworkObj.SelectedCardHolders,_cardholder,AttackingObjects)
                     //Making cardholders not selected
                     for(var i=0;i&lt;ds_list_size(AttackingObjects);i++){
-                        with(AttackingObjects[| i]){
-                            IsSelected=false
-                        }
+                        with(AttackingObjects[| i]){IsSelected=false}
                         ds_list_delete(global.NetworkObj.SelectedCardHolders,ds_list_find_index(global.NetworkObj.SelectedCardHolders,AttackingObjects[| i]))
                     }
                     ds_list_destroy(AttackingObjects)
@@ -466,57 +446,16 @@ if global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
             if position_meeting(mouse_x,mouse_y,obj_heroholder){
                 var _cardholder=instance_position(mouse_x,mouse_y,obj_heroholder)
                 //Attacking Hero
-                if _cardholder.mysocket!=mysocket &amp;&amp; !ds_list_empty(global.NetworkObj.SelectedCardHolders) &amp;&amp; global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket].Team!=Team{
-                    //if battlefield empty
-                    if scr_ConBattlefieldSize(global.NetworkObj.socket_to_instanceid[? _cardholder.mysocket])&lt;1{
-                        //Setting all Attacking data into a json
-                        var DatMap=ds_map_create()
-                        var AttackingList=ds_list_create()
-                        for(var i=0;i&lt;ds_list_size(global.NetworkObj.SelectedCardHolders);i++){
-                            var _o=global.NetworkObj.SelectedCardHolders[| i];
-                            var _map=ds_map_create();
-                            _map[? "Id"]=_o.CardID
-                            _map[? "Pos"]=_o.Pos
-                            _map[? "Socket"]=_o.mysocket
-                            ds_list_add(AttackingList,json_encode_destroy(_map))
-                        }
-                        var AttackingListString=ds_list_write(AttackingList);
-                        ds_list_destroy(AttackingList)
-                        DatMap[? "AttackingList"]=AttackingListString
-                        
-                        //setting up victim data
-                        var _map=ds_map_create();
-                        _map[? "Id"]=_cardholder.CardID
-                        _map[? "Socket"]=_cardholder.mysocket
-                        ds_map_add_map(DatMap,"Victim",_map)
-                        //wrapping up the DatMapString
-                        var DatMapString=json_encode_destroy(DatMap)
-                        
-                        //Sending to server
-                        if global.NetworkObj.object_index=obj_client{
-                            with(global.NetworkObj){
-                                buffer=buffer_create(2048,buffer_fixed,1)
-                                buffer_write(buffer,buffer_s16,NETWORKPKT.ATTACKHERO)
-                                buffer_write(buffer,buffer_string,DatMapString)
-                                network_send_packet(client,buffer,buffer_tell(buffer))
-                                buffer_delete(buffer)
-                            }
-                        }
-                        if global.NetworkObj.object_index=obj_server{
-                            with(global.NetworkObj){
-                                svr_AttackHero(DatMapString)
-                            }
-                        }
-                        
-                        //Making cardholders not selected
-                        for(var i=0;i&lt;ds_list_size(global.NetworkObj.SelectedCardHolders);i++){
-                            with(global.NetworkObj.SelectedCardHolders[| i]){
-                                IsSelected=false
-                            }
-                        }
-                        ds_list_clear(global.NetworkObj.SelectedCardHolders)
-                        
+                if !ds_list_empty(global.NetworkObj.SelectedCardHolders){
+                    var AttackingObjects=ds_list_create()
+                    //Activate Attacking Hero Sequence
+                    player_con_AttackHero(global.NetworkObj.SelectedCardHolders,_cardholder,AttackingObjects)
+                    //Making cardholders not selected
+                    for(var i=0;i&lt;ds_list_size(AttackingObjects);i++){
+                        with(AttackingObjects[| i]){IsSelected=false}
+                        ds_list_delete(global.NetworkObj.SelectedCardHolders,ds_list_find_index(global.NetworkObj.SelectedCardHolders,AttackingObjects[| i]))
                     }
+                    ds_list_destroy(AttackingObjects)
                 }
             }
         }
@@ -742,7 +681,7 @@ for(var i=0;i&lt;ds_list_size(sl);i++){
     //selection/deselection
     var msx=device_mouse_x_to_gui(0)
     var msy=device_mouse_y_to_gui(0)
-    if point_in_rectangle(msx,msy,_x,_y,_x+_namewid,_y+_namehei){
+    if point_in_rectangle(msx,msy,_x,_y,_x+100,_y+_namehei){
         if mouse_wheel_up(){
             stid[? sl[| i]].Team++;NeedToUpdateTeamMap=true
         }
