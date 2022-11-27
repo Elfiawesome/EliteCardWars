@@ -138,6 +138,7 @@
     <sprite>sprites\spr_AttackType</sprite>
     <sprite>sprites\spr_EndgameAnnouncement</sprite>
     <sprite>sprites\spr_MenuButton</sprite>
+    <sprite>sprites\spr_statuseffect</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_background</background>

@@ -422,8 +422,35 @@ draw_text(_x,_y,Stats[? "Finalized_Atk"])
 draw_set_halign(fa_left)
 draw_set_valign(fa_top)
 
+//drawing side effects
+var _offset=0
+var _sc=0.5
+var _height=sprite_get_height(spr_statuseffect)*_sc
+var _width=sprite_get_width(spr_statuseffect)*_sc
+var _x=x-sprite_get_width(sprite_index)*image_xscale/2-_width
+var _y=y-sprite_get_height(sprite_index)*image_yscale/2+10
 
-
+if Stats[? "IsFrozen"]&gt;0{
+    draw_sprite_ext(spr_statuseffect,0,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+}
+if Stats[? "BurnDmg"]!=0{
+    draw_sprite_ext(spr_statuseffect,1,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+}
+if Stats[? "PoisonDmg"]!=0{
+    draw_sprite_ext(spr_statuseffect,2,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+}
+if Stats[? "IsImmune"]&gt;0{
+    draw_sprite_ext(spr_statuseffect,3,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+}
+if Stats[? "IsSPImmune"]&gt;0{
+    draw_sprite_ext(spr_statuseffect,4,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+}
+if Stats[? "IsBAImmune"]&gt;0{
+    draw_sprite_ext(spr_statuseffect,5,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+}
+if global.NetworkObj.socket_to_instanceid[? mysocket].Hero.Stats[? "ForceAttackHolder"]=Pos{
+    draw_sprite_ext(spr_statuseffect,6,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+}
 
 </string>
           </argument>

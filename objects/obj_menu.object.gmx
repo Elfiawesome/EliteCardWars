@@ -56,8 +56,8 @@ DeckEditorScrollAmt[0]=0;DeckEditorScrollAmt[1]=0;DeckEditorScrollAmt[2]=0;
 //initializing deck
 if global.IsSpeedrun{
 repeat(20){
-    ds_list_add(global.PlayerDeck,irandom_range(1,UnitID.UnitID_MAX-1))
-    //ds_list_add(global.PlayerDeck,UnitID.PlantVsZombies_Imitator)
+    //ds_list_add(global.PlayerDeck,irandom_range(1,UnitID.UnitID_MAX-1))
+    ds_list_add(global.PlayerDeck,UnitID.TowerBattles_Void)
     //ds_list_add(global.PlayerDeck,irandom_range(UnitID.Unturned_AcidZombie,UnitID.UnitID_MAX-1))
 }
 }

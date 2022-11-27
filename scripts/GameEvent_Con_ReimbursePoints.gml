@@ -12,5 +12,8 @@ for(var i=0;i<ds_list_size(socketlist);i++){
             Stats[? "TotaledReimbursedPoints"]=Inc
         }
         }
+        
+        //reset draws
+        DrawsLeft=2
     }
 }

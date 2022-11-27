@@ -31,7 +31,7 @@ x=-view_wport[0]
 y=0
 backtgtx=0
 ControlParent=0
-Draws=2
+Draws=0
 //selectable decks
 DeckBaseScale=0.4
 DeckSprite[0]=spr_cardsback

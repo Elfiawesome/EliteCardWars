@@ -1,4 +1,4 @@
-///scr_ability_PlantVsZombies_MagnifyingGrass_Warcry()
+///scr_ability_PlantVsZombies_Seedling_Intrinsic()
 var MapStr=argument0;
 
 //Become random unit after 1 round

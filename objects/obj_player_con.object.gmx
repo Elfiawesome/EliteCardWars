@@ -82,6 +82,7 @@ CameraFocusNo=0
 GUIObjectOrder=ds_list_create()
 GUIHeroHpWidth=0
 GUIHeroPtWidth=0
+DrawsLeft=2
 IsHeroActivateButton=false
 CardDrawerControl=noone
 global.HoveredCard=noone
@@ -157,7 +158,7 @@ if keyboard_check_pressed(vk_enter){
     
     //var _c1=GameEvent_draw_specific_card(SpellID.PlantVsZombies_SpringBean,1)
     //var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_ObservationPost,1)
-    var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_ObservationPost,1)
+    var _c1=GameEvent_draw_specific_card(UnitID.PlantVsZombies_Seedling,0)
 }
 if global.SelectedCard=noone{
     if position_meeting(mouse_x,mouse_y,obj_card){
@@ -304,6 +305,7 @@ if IsBot &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
 
     if global.GameStage=GAMESTAGE.PLAYERTURNS &amp;&amp; BotSpeed=BotSpeedMax{
         //first draw cards
+        if DrawsLeft&gt;0 &amp;&amp; !ds_list_empty(DeckList) &amp;&amp; ds_list_size(cardList)&lt;(10+Hero.Stats[? "ExtraHandCards"]){
         CardID=DeckList[| 0]
         ds_list_delete(DeckList,0)
         //tell server I drawed a card
@@ -317,7 +319,8 @@ if IsBot &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
                 svr_AddCardIntoHand(_str,other.mysocket)
             }
         }
-        
+        DrawsLeft-=1
+        }
         //see if theres a need to place cards
         for(var ii=ds_list_size(HandCards)-1; ii&gt;=0; ii--){
             var _cardCur=HandCards[| ii]
@@ -418,7 +421,7 @@ if global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
                 if ds_list_find_index(global.NetworkObj.SelectedCardHolders_Ability,_cardholder)!=-1{exit;}
                 //Selecting MY unit
                 if _cardholder.CardID!=0{
-                if _cardholder.mysocket=mysocket &amp;&amp; !_cardholder.Stats[? "AtkAlrdy"]  &amp;&amp; !_cardholder.Stats[? "IsFrozen"]{
+                if _cardholder.mysocket=mysocket &amp;&amp; !_cardholder.Stats[? "AtkAlrdy"] &amp;&amp; !_cardholder.Stats[? "IsFrozen"]{
                     if ds_list_find_index(Cardholderlist,_cardholder)!=-1{
                     if ds_list_find_index(global.NetworkObj.SelectedCardHolders,_cardholder)=-1{
                         ds_list_add(global.NetworkObj.SelectedCardHolders,_cardholder)
@@ -553,6 +556,8 @@ draw_set_color(12535040)
 draw_rectangle(_x,_y+_hei-5,_x+_wid,_y+_hei,false)
 draw_set_color(c_white)
 }
+
+
 if keyboard_check(vk_tab){
     with(global.NetworkObj){
     var _x=view_wport[0]/2
@@ -758,7 +763,6 @@ if global.SelectedCard!=noone &amp;&amp; global.SelectedCard.CardType=1 &amp;&am
     draw_set_color(c_white)
 }
 draw_set_halign(fa_middle)
-draw_text(Homex,Homey,global.NetworkObj.socket_to_instanceid[? mysocket].name)
 draw_set_halign(fa_left)
 }
 </string>
