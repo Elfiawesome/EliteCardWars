@@ -424,11 +424,11 @@ draw_set_valign(fa_top)
 
 //drawing side effects
 var _offset=0
-var _sc=0.5
+var _sc=0.3
 var _height=sprite_get_height(spr_statuseffect)*_sc
 var _width=sprite_get_width(spr_statuseffect)*_sc
-var _x=x-sprite_get_width(sprite_index)*image_xscale/2-_width
-var _y=y-sprite_get_height(sprite_index)*image_yscale/2+10
+var _x=x-sprite_get_width(sprite_index)*image_xscale/2-_width-5
+var _y=y-sprite_get_height(sprite_index)*image_yscale/2+20
 
 if Stats[? "IsFrozen"]&gt;0{
     draw_sprite_ext(spr_statuseffect,0,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height

@@ -169,7 +169,7 @@ _inst.mysocket=-ds_list_size(socketlist) - 1
 _inst.Team=0
 _inst.IsBot=true
 ds_list_add(_inst.DeckList,
-    /*UnitID.RedAlert3_Conscript,
+    UnitID.RedAlert3_Conscript,
     UnitID.RedAlert3_MigFighter,
     UnitID.RedAlert3_MirageTank,
     UnitID.RedAlert3_GigaFortress,
@@ -179,17 +179,16 @@ ds_list_add(_inst.DeckList,
     UnitID.RedAlert3_Dreadnought,
     UnitID.MadnessCombat_Auditor,
     UnitID.MadnessCombat_HankJwimbleton,
-    UnitID.MadnessCombat_HankJwimbleton,
+    UnitID.MadnessCombat_TheSavior,
     UnitID.SouthPark_InuitKenny,
-    UnitID.SouthPark_InuitKenny,
+    UnitID.SouthPark_Firkle,
     UnitID.SouthPark_Fastpass,
     UnitID.SouthPark_Henrietta,
     UnitID.SouthPark_ZenCartman,
     UnitID.Unturned_AcidZombie,
     UnitID.Unturned_BurnerZombie,
     UnitID.Unturned_AcidZombie,
-    UnitID.Unturned_Zombie,*/
-    UnitID.SouthPark_ZenCartman,UnitID.SouthPark_ZenCartman,UnitID.SouthPark_ZenCartman,UnitID.SouthPark_ZenCartman,UnitID.SouthPark_ZenCartman,UnitID.SouthPark_ZenCartman,UnitID.SouthPark_ZenCartman,UnitID.SouthPark_ZenCartman,
+    UnitID.Unturned_Zombie,
 )
 ds_list_shuffle(_inst.DeckList)
 ds_list_copy(_inst.SpellList,global.PlayerSpells)
