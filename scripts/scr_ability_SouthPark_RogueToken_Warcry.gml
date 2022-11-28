@@ -16,6 +16,7 @@ for(var i=0;i<ds_list_size(global.NetworkObj.socketlist);i++){
             with(_cardholder){
                 GameEvent_cardholders_DealDamageAmt(id,_atkr,8)
                 GameEvent_cardholders_Damaged(_atkr)
+                GameEvent_cardholders_AfterDamaged(id)
             }
             ds_list_add(victimList,_cardholder)
             }

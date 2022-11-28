@@ -9,6 +9,8 @@ with(MapStr[? "TgtCon"]){
                 if Stats[? "IsImmune"]=0{
                     Stats[? "Hp"]-=5*GetIntakeMultiplier(0,id)
                     player_con_CardholdersUpdateMultiStats()
+                    Activate_Damaged_Ability()
+                    GameEvent_cardholders_AfterDamaged(id)
                 }
             }
         }

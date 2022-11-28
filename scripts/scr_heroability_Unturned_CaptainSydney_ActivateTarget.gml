@@ -19,7 +19,7 @@ var stid=global.NetworkObj.socket_to_instanceid
     //clear that card
     with(vict){
         Stats[? "Finalized_Hp"]=0//for servitors
-        Activate_AfterDamaged_Ability()
+        GameEvent_cardholders_AfterDamaged(id)
         GameEvent_cardholders_Clear()
     }
     //Deduct amount

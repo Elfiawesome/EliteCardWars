@@ -8,4 +8,5 @@ player_con_CardholdersUpdateMultiStats()
 //Activate Damaged Ability
 with(Vict){
     Activate_Damaged_Ability()
+    GameEvent_cardholders_AfterDamaged(id)
 }

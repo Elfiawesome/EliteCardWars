@@ -20,7 +20,7 @@ for(var i=0;i<ds_list_size(victimList);i+=1){
 //damage those cards
 for(var i=0;i<ds_list_size(victimList);i+=1){
     with(victimList[| i]){
-        Activate_AfterDamaged_Ability()
+        GameEvent_cardholders_AfterDamaged(id)
     }
 }
 ds_list_destroy(victimList)

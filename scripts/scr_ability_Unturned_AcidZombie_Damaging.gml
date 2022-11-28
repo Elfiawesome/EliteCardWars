@@ -6,8 +6,8 @@ var _con=global.NetworkObj.socket_to_instanceid[? MapStr.mysocket]
 with(_con){
     for(var i=0;i<ds_list_size(Cardholderlist);i++){
         with(Cardholderlist[| i]){
-        var msDmg=Stats[? "Multi_BurnDmg"];
-        var msDur=Stats[? "Multi_BurnDuration"];
+        var msDmg=Stats[? "Multi_PoisonDmg"];
+        var msDur=Stats[? "Multi_PoisonDuration"];
         msDmg[? _id]=5
         msDur[? _id]=2
         player_con_CardholdersUpdateMultiStats()

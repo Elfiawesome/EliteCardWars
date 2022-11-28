@@ -9,5 +9,5 @@ if mysocket=global.NetworkObj.mysocket{
 }
 //clear this card
 Stats[? "Finalized_Hp"]=0//for servitors
-Activate_AfterDamaged_Ability()
+GameEvent_cardholders_AfterDamaged(id)
 GameEvent_cardholders_Clear()

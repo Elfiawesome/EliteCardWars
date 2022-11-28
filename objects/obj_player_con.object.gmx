@@ -158,7 +158,12 @@ if keyboard_check_pressed(vk_enter){
     
     //var _c1=GameEvent_draw_specific_card(SpellID.PlantVsZombies_SpringBean,1)
     //var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_ObservationPost,1)
-    var _c1=GameEvent_draw_specific_card(UnitID.PlantVsZombies_Seedling,0)
+    Points+=200
+    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_ZenCartman,0)
+    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_Henrietta,0)
+    var _c1=GameEvent_draw_specific_card(UnitID.RedAlert3_HammerTank,0)
+    
+    //GameEvent_cardholders_AfterDamaged(id)
 }
 if global.SelectedCard=noone{
     if position_meeting(mouse_x,mouse_y,obj_card){
@@ -202,6 +207,17 @@ if global.NetworkObj.Turn!=-1{//during player's turn
     if abs(view_yview[0]-mouse_y)&lt;100{view_yview[0]-=amt}
     if abs((view_yview[0]+view_hview[0])-mouse_y)&lt;200{view_yview[0]+=amt}
 }
+//cardholder inspection
+if mouse_check_button_pressed(mb_right){
+    if position_meeting(mouse_x,mouse_y,obj_cardholder){
+        var _o=instance_position(mouse_x,mouse_y,obj_cardholder)
+        var _inspector=instance_create(0,0,obj_cardholder_inspector);
+        _inspector.ControlParent=id
+        _inspector.Cardholder=_o
+        ds_list_add(global.NetworkObj.socket_to_instanceid[? mysocket].GUIObjectOrder,_inspector)
+    }
+}
+
 }
 
 </string>
@@ -294,7 +310,7 @@ if ds_list_empty(GUIObjectOrder){
 //Card Selector
 player_con_CardSelectorControl()
 }
-
+//bot
 if IsBot &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
     if global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
     if BotSpeed=BotSpeedMax{

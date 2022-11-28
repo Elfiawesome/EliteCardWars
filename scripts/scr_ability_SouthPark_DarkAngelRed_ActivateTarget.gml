@@ -25,6 +25,8 @@ if mysocket=global.NetworkObj.mysocket{
 }
 //Sacrifice the cardholder
 with(vict){
+    Stats[? "Finalized_Hp"]=0
+    GameEvent_cardholders_AfterDamaged(id)
     GameEvent_cardholders_Death()
 }
 

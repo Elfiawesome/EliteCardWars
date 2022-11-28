@@ -13,6 +13,8 @@ with(stid[? atkr.mysocket]){
     }
     if _curHighest!=0{
         with(_curHighest){
+            Stats[? "Finalized_Hp"]=0//for servitors
+            GameEvent_cardholders_AfterDamaged(id)
             GameEvent_cardholders_Death()
         }
         Points+=(_curHighestPt+2)

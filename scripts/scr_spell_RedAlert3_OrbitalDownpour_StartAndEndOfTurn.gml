@@ -14,6 +14,7 @@ with(MapStr[? "TgtCon"]){
                     }
                     player_con_CardholdersUpdateMultiStats()
                     Activate_AfterDamaged_Ability()
+                    GameEvent_cardholders_AfterDamaged(id)
                 }
             }
         }

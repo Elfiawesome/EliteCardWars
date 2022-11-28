@@ -519,6 +519,7 @@
       <script>scripts\TeamColorOf.gml</script>
       <script>scripts\draw_battlefield_teamcolor.gml</script>
     </scripts>
+    <script>scripts\script290.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_number</font>
@@ -550,6 +551,7 @@
         <object>objects\obj_cardselection</object>
       </objects>
       <objects name="grp_GUI">
+        <object>objects\obj_cardholder_inspector</object>
         <object>objects\obj_spell_animation</object>
         <object>objects\obj_handcardselector_control</object>
       </objects>
