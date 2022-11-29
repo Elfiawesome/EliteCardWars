@@ -16,7 +16,7 @@ for(var i=0;i<ds_list_size(global.NetworkObj.socketlist);i++){
                 _ch.Stats[? "Atk"]*clamp(sign(_ch.Stats[? "Atk"]),0,1))
         }
     if scr_ConBattlefieldSize(_con)=0{
-        _val=50
+        _val=_con.Hero.Stats[? "Hp"]*10
     }
     ds_priority_add(_socketpriority,global.NetworkObj.socketlist[| i],_val)
     }

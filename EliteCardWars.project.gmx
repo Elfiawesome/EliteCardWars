@@ -480,6 +480,7 @@
         <script>scripts\GameEvent_cardholders_ClearDebuff.gml</script>
       </scripts>
       <scripts name="grp_con_scripts">
+        <script>scripts\player_con_MovingTurn.gml</script>
         <script>scripts\player_con_CameraPosition.gml</script>
         <script>scripts\player_con_PlacingUnitCardDown.gml</script>
         <script>scripts\player_con_PlacingUnitCardDown_For_UnitCardOnMe.gml</script>
@@ -490,11 +491,11 @@
         <script>scripts\player_con_CardholdersUpdateMultiStats.gml</script>
         <script>scripts\player_con_HeroUpdateMultiStats.gml</script>
         <script>scripts\player_con_AttackCardholder.gml</script>
+        <script>scripts\player_con_AttackHero.gml</script>
         <scripts name="grp_AI">
           <script>scripts\AISelectVictims_Default.gml</script>
           <script>scripts\AISelectVictim_Easy.gml</script>
         </scripts>
-        <script>scripts\player_con_AttackHero.gml</script>
       </scripts>
       <scripts name="grp_menu">
         <script>scripts\scr_menu_update_deckfile.gml</script>
@@ -517,6 +518,7 @@
       <script>scripts\GetIntakeMultiplier.gml</script>
       <script>scripts\IsMouseOverBattlefield.gml</script>
       <script>scripts\TeamColorOf.gml</script>
+      <script>scripts\draw_BasicHealthbar.gml</script>
       <script>scripts\draw_battlefield_teamcolor.gml</script>
     </scripts>
     <script>scripts\script290.gml</script>

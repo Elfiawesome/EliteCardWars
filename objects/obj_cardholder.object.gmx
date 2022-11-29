@@ -299,8 +299,8 @@ if IsSelected{
         }
     }
 }
-var xscale=view_wview[0]/view_wport[0]
-var yscale=view_hview[0]/view_hport[0]
+var xscale=view_wport[0]/view_wview[0];
+var yscale=view_hport[0]/view_hview[0];
 var _x=xscale*(x-view_xview[0])
 var _y=yscale*(y-view_yview[0])
 var _x2=xscale*(pointx-view_xview[0])
@@ -364,7 +364,7 @@ draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_ang
     var spell=Stats[? "Spells"]
     draw_text(x,y-100+i*30,json_encode(spell[| i]))
 }*/
-if Stats[? "IsImmune"]{draw_text(x,y,"IMMUNITY")}
+//if Stats[? "IsImmune"]{draw_text(x,y,"IMMUNITY")}
 //drawing cooldown
 if Stats[? "AbilityCooldownMax"]&gt;0{
 var wid=sprite_get_width(sprite_index)*image_xscale

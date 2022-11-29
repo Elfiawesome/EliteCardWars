@@ -216,6 +216,7 @@ global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_EnforcerJimmy_Intrinsic
 var Cur=UnitID.SouthPark_Fastpass
 scr_units_init_func(Cur,"Fastpsas",_wt,15,10,10,spr_cards,Cur-1)
+global.UnitDat_AttackType[Cur,UnitAttackType.Pierce_Atk]=true
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Damaging
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_Fastpass_Damaging
 var Cur=UnitID.SouthPark_Firkle

@@ -190,7 +190,7 @@ if global.SelectedCard!=noone{
     }
 }
 if global.SelectedCard=noone{
-    if mouse_y&gt;(view_hview[0]*7/10+view_yview[0]){
+    if (mouse_y-view_yview[0]) &gt; (view_hview[0]*7/10){
         global.ShowHands=true
     }else{
         global.ShowHands=false
@@ -199,14 +199,6 @@ if global.SelectedCard=noone{
     global.ShowHands=false
 }
 
-//camera movement
-if global.NetworkObj.Turn!=-1{//during player's turn
-    var amt=50
-    if abs(view_xview[0]-mouse_x)&lt;100{view_xview[0]-=amt}
-    if abs((view_xview[0]+view_wview[0])-mouse_x)&lt;100{view_xview[0]+=amt}
-    if abs(view_yview[0]-mouse_y)&lt;100{view_yview[0]-=amt}
-    if abs((view_yview[0]+view_hview[0])-mouse_y)&lt;200{view_yview[0]+=amt}
-}
 //cardholder inspection
 if mouse_check_button_pressed(mb_right){
     if position_meeting(mouse_x,mouse_y,obj_cardholder){
@@ -298,8 +290,8 @@ if keyboard_check_pressed(ord("Q")){
             <string>///When Your Turn
 if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
 if ds_list_empty(GUIObjectOrder){
-    //Camera Position
-    player_con_CameraPosition()
+    //Moving on
+    player_con_MovingTurn()
     
     //Pressing "A" on a Cardholders
     player_con_AbilitySelection()
@@ -310,6 +302,12 @@ if ds_list_empty(GUIObjectOrder){
 //Card Selector
 player_con_CardSelectorControl()
 }
+
+//Camera Position
+if IsLocal &amp;&amp; global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
+    player_con_CameraPosition()
+}
+
 //bot
 if IsBot &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
     if global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
@@ -505,7 +503,7 @@ if global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
             <string>///Draw Hero Stats
 if IsLocal &amp;&amp; global.IsGame  &amp;&amp; !IsSpectating &amp;&amp; ds_list_empty(GUIObjectOrder){
 //Current Turns
-draw_set_font(ft_Ebrima_s12)
+/*draw_set_font(ft_Ebrima_s12)
 draw_set_halign(fa_center)
 var _x=view_wport[0]*3/4;var _y=30;
 var _str=""
@@ -515,7 +513,7 @@ draw_text(_x,_y,_str)
 with(global.NetworkObj){_str=socket_to_instanceid[? Turnstage[Turn]].name}
 draw_text(_x,_y*2,_str)
 draw_set_halign(fa_left)
-draw_set_font(ft_number)
+draw_set_font(ft_number)*/
 
 //Hero Health GUI
 var _x=30;var _y=30;
@@ -571,9 +569,73 @@ for(i=1;i&lt;Points;i++){
 draw_set_color(12535040)
 draw_rectangle(_x,_y+_hei-5,_x+_wid,_y+_hei,false)
 draw_set_color(c_white)
+
+
+var offsety=0
+var _dist=5
+//draw other people's healthbar
+for(var i=0;i&lt;array_length_1d(global.NetworkObj.Turnstage);i++){
+    var _sock = global.NetworkObj.Turnstage[i]
+    var _con = global.NetworkObj.socket_to_instanceid[? _sock]
+    if _sock!=mysocket{
+        var _off=30
+        var _wo=view_wport[0]/4
+        var _w=_wo
+        var _h=40
+        var _x=view_wport[0]-_w-_off
+        var _y=_off+(_h+10)*offsety
+        var _vl=_con.Hero.Stats[? "Hp"]
+        var _mx=_con.Hero.Stats[? "Base_Hp"]
+        var _prop=_vl/_mx;
+        _con.GUIHeroHpWidth=lerp(_con.GUIHeroHpWidth,_prop,0.7)
+        draw_set_color(TeamColorOf(_con.Team))
+        //background
+        draw_set_alpha(0.1)
+        draw_rectangle(_x,_y,_x+_w,_y+_h,false)
+        //health
+        draw_set_alpha(0.5)
+        draw_rectangle(_x+_w*(1-_con.GUIHeroHpWidth),_y,_x+_w,_y+_h,false)
+        
+        draw_set_alpha(1)
+        draw_set_color(c_white)
+        var _bwid=_w/_mx
+        for(var ii=0;ii&lt;_con.Hero.Stats[? "Hp"];ii+=1){
+            draw_line_width(_x+_w-_bwid*ii,_y+_h, _x+_w-_bwid*ii,_y+_h-_h/4, 3)
+        }
+        
+        draw_text(_x,_y,_con.name+": "+string(_con.Hero.Stats[? "Hp"]))
+        
+        draw_set_color(TeamColorOf(_con.Team))
+        draw_set_alpha(1)
+        //draw bottom line
+        draw_rectangle(_x,_y+_h-_h/10,_x+_w,_y+_h,false)
+        
+        
+        //draw if its this guys turn
+        if global.NetworkObj.Turnstage[global.NetworkObj.Turn]=_con.mysocket{
+            draw_rectangle(_x-30,_y,_x-5,_y+_h,false)
+        }
+        draw_set_color(c_white)
+        
+
+        var msx=device_mouse_x_to_gui(0)
+        var msy=device_mouse_y_to_gui(0)
+        if mouse_check_button_pressed(mb_left) &amp;&amp; point_in_rectangle(msx,msy,_x,_y,_x+_w,_y+_h){
+            with(global.NetworkObj){
+            CameraFocusNo=i
+            CameraFocus=socket_to_instanceid[? Turnstage[CameraFocusNo]];
+            }
+        }
+        offsety+=1
+    }
 }
+//drawing text
+var _str=""
+if global.GameStage=GAMESTAGE.PLAYERTURNS{_str="Player Turns"}
+if global.GameStage=GAMESTAGE.ATTACKINGTURN{_str="Attacking Turns"}
+draw_text(_x,_y+50,_str)
 
-
+//press tab to see all players
 if keyboard_check(vk_tab){
     with(global.NetworkObj){
     var _x=view_wport[0]/2
@@ -583,7 +645,7 @@ if keyboard_check(vk_tab){
     
     for(i=0;i&lt;ds_list_size(socketlist);i++){
         draw_set_color(c_white)
-        draw_set_alpha(0.1)
+        draw_set_alpha(0.4)
         draw_rectangle(_x-_wid/2,_y+_hei*(i),_x+_wid/2,_y+_hei*(i+1),false)
         draw_set_alpha(1)
         var _o=socket_to_instanceid[? socketlist[| i]]
@@ -593,6 +655,7 @@ if keyboard_check(vk_tab){
         draw_set_color(c_white)
     }
     }
+}
 }
 </string>
           </argument>
@@ -618,22 +681,35 @@ if keyboard_check(vk_tab){
 IsHeroActivateButton=false
 if global.IsGame &amp;&amp; IsLocal &amp;&amp; !IsSpectating &amp;&amp; global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket &amp;&amp; ds_list_empty(GUIObjectOrder){
     if IsHeroAbilityTrigger(Hero.CardID,AbilityTrigger.ActivateTarget)!=-1 || IsHeroAbilityTrigger(Hero.CardID,AbilityTrigger.Activate)!=-1{
-    if script_execute(global.HeroDat_AbilityTargetSelectCheck[Hero.CardID],Hero) &amp;&amp; Hero.Stats[? "AbilityCooldown"]=0 &amp;&amp; Hero.Stats[? "AbilityAlrdy"]=false{
+    if Hero.Stats[? "AbilityAlrdy"]=false{
+    
+    //transperancy
+    var op_sc=1
+    if Hero.Stats[? "AbilityCooldown"]!=0 || !script_execute(global.HeroDat_AbilityTargetSelectCheck[Hero.CardID],Hero){
+        op_sc=0.5
+    }
     draw_set_font(ft_Ebrima_s12)
     var _t="Hero's Ability"
     var _w=string_width(_t)
     var _h=string_height(_t)
     var _x=30
     var _y=140
-    draw_set_alpha(0.2)
+    draw_set_alpha(0.2*op_sc)
     draw_set_color(c_purple)
     draw_rectangle(_x,_y,_x+_w,_y+_h,false)
     draw_rectangle(_x-5,_y-5,_x+_w+5,_y+_h+5,false)
-    draw_set_alpha(1)
+    draw_set_alpha(1*op_sc)
     draw_set_color(c_white)
     draw_text(_x,_y,_t)
     draw_set_font(ft_number)
+    //cooldown bar below
+    var _p = clamp((1-Hero.Stats[? "AbilityCooldown"]/Hero.Stats[? "AbilityCooldownMax"]),0,1)
+    draw_set_alpha(0.1)
+    draw_rectangle(_x,_y+_h+10,_x+_w,_y+_h+15,false)
+    draw_set_alpha(1)
+    draw_rectangle(_x,_y+_h+10,_x+_w*_p,_y+_h+15,false)
     
+    if script_execute(global.HeroDat_AbilityTargetSelectCheck[Hero.CardID],Hero) &amp;&amp; Hero.Stats[? "AbilityCooldown"]=0{
     //Is Hero Button Pressed
     var msx=device_mouse_x_to_gui(0)
     var msy=device_mouse_y_to_gui(0)
@@ -643,7 +719,7 @@ if global.IsGame &amp;&amp; IsLocal &amp;&amp; !IsSpectating &amp;&amp; global.N
     if keyboard_check_pressed(ord("A")) &amp;&amp; position_meeting(mouse_x,mouse_y,Hero){
         IsHeroActivateButton=true
     }
-    
+    }
     }
     }
 }

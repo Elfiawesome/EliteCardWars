@@ -42,6 +42,7 @@ Tgty=0
 Tgtxscale=0.4
 Tgtyscale=0.4
 
+
 </string>
           </argument>
         </arguments>
@@ -65,6 +66,11 @@ Tgtyscale=0.4
           <argument>
             <kind>1</kind>
             <string>///EntranceAnimation
+var _xsc=view_wview[0]/view_wport[0];
+var _ysc=view_hview[0]/view_hport[0];
+var _homex=Homex*_xsc
+var _homey=Homey*_ysc
+
 if EntranceAnimation&gt;0{
     switch(EntranceAnimation){
         case 1:
@@ -93,17 +99,17 @@ if EntranceAnimation&gt;0{
             }
         break;
     }
-    x=lerp(x,Homex+view_xview[0],0.09)
-    y=lerp(y,Homey+view_yview[0],0.09)
+    x=lerp(x,Homex*_xsc + view_xview[0],0.09)
+    y=lerp(y,Homey*_xsc + view_yview[0],0.09)
 }
 if EntranceAnimation=0{
     if global.HoveredCard=id{
-        Tgtx=Homex+view_xview[0]
-        Tgty=view_hview[0]/2+view_yview[0]
-        x=lerp(x,Tgtx,0.09)
-        y=lerp(y,Tgty,0.09)
-        image_xscale=lerp(image_xscale,0.6,0.05)
-        image_yscale=lerp(image_yscale,0.6,0.05)
+        Tgtx=Homex*_xsc
+        Tgty=view_hport[0]/2*_xsc
+        x=lerp(x,(Tgtx+view_xview[0]),0.09)
+        y=lerp(y,(Tgty+view_yview[0]),0.09)
+        image_xscale=lerp(image_xscale,0.6*_xsc,0.05)
+        image_yscale=lerp(image_yscale,0.6*_ysc,0.05)
         depth=-3
         if !position_meeting(mouse_x,mouse_y,id){global.HoveredCard=noone}
         exit;
@@ -117,16 +123,15 @@ if EntranceAnimation=0{
         exit;
     }
     if !global.ShowHands{
-        y=lerp(y,Homey+view_yview[0]+400,0.09)
+        y=lerp(y,(Homey+400)*_xsc + view_yview[0],0.09)
     }
     image_angle=0
-    image_xscale=lerp(image_xscale,0.4,0.05)
-    image_yscale=lerp(image_yscale,0.4,0.05)
-    x=lerp(x,Homex+view_xview[0],0.09)
-    y=lerp(y,Homey+view_yview[0],0.09)
+    image_xscale=lerp(image_xscale,0.4*_xsc,0.05)
+    image_yscale=lerp(image_yscale,0.4*_ysc,0.05)
+    x=lerp(x,(Homex*_xsc + view_xview[0]),0.09)
+    y=lerp(y,(Homey*_ysc + view_yview[0]),0.09)
     depth=HomeDepth
 }
-
 </string>
           </argument>
         </arguments>

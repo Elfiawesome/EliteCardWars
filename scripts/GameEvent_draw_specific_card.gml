@@ -1,9 +1,9 @@
 ///GameEvent_draw_specific_card(CardID,Type)
 var _card=instance_create(0,0,obj_card);
-var xMid=view_wview[0]/2;
-var yMid=view_hview[0]*1.3;
-var HorRad=view_wview[0]*0.45;
-var VerRad=view_hview[0]*0.4;
+var xMid=view_wport[0]/2;
+var yMid=view_hport[0]*1.3;
+var HorRad=view_wport[0]*0.45;
+var VerRad=view_hport[0]*0.4;
 _card.CardID=argument0
 _card.CardType=argument1
 ds_list_add(cardList,_card)

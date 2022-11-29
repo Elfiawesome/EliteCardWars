@@ -42,4 +42,5 @@ if Turn>=0{
     }
     GameEvent_Con_CardDrawed()
 }
-
+CameraXoffset=0
+CameraYoffset=0

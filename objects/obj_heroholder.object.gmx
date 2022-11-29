@@ -209,8 +209,8 @@ if position_meeting(mouse_x,mouse_y,obj_cardholder){
     }
 }
 
-var xscale=view_wview[0]/view_wport[0]
-var yscale=view_hview[0]/view_hport[0]
+var xscale=view_wport[0]/view_wview[0];
+var yscale=view_hport[0]/view_hview[0];
 var _x=xscale*(x-view_xview[0])
 var _y=yscale*(y-view_yview[0])
 var _x2=xscale*(pointx-view_xview[0])

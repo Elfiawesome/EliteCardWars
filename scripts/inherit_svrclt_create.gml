@@ -21,6 +21,12 @@ global.GameStage=GAMESTAGE.PLAYERTURNS
 Turn=0
 Turnstage[0]=0
 GameLifespan=0
-
+//camera dragging
+CameraIsDrag=false
+CameraXoffsetStart=0
+CameraYoffsetStart=0
+CameraXoffset=0
+CameraYoffset=0
+//units
 scr_units_init()
 IsDebug=false
