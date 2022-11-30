@@ -235,6 +235,20 @@ file_text_close(file);
             <kind>1</kind>
             <string>if NextRoomInit!=0{
     var _o=instance_create(0,0,NextRoomInit)
+    if NextRoomInit=obj_server{
+        with(_o){
+            var _inst=instance_create(100,100,obj_player_con);
+            _inst.name="Raid Boss"
+            _inst.IsLocal=false
+            _inst.mysocket=-ds_list_size(socketlist) - 1
+            _inst.Team=0
+            _inst.IsBot=true
+            ds_list_shuffle(_inst.DeckList)
+            _inst.PlayerHeroID=global.PlayerHero
+            socket_to_instanceid[? _inst.mysocket]=_inst
+            ds_list_add(socketlist,_inst.mysocket)
+        }
+    }
     instance_destroy()
 }
 </string>

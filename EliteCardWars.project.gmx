@@ -139,6 +139,7 @@
     <sprite>sprites\spr_EndgameAnnouncement</sprite>
     <sprite>sprites\spr_MenuButton</sprite>
     <sprite>sprites\spr_statuseffect</sprite>
+    <sprite>sprites\spr_cards_raid</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_background</background>
@@ -274,6 +275,7 @@
       <script>scripts\scr_spells_init_func.gml</script>
       <script>scripts\scr_heroes_init_all.gml</script>
       <script>scripts\scr_hero_init_func.gml</script>
+      <script>scripts\scr_units_init_raidunits.gml</script>
     </scripts>
     <scripts name="grp_setup_battlefield">
       <script>scripts\update_json_TeamMap.gml</script>

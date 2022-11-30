@@ -90,8 +90,11 @@ enum UnitID{
     
     //Vesteria
     Vesteria_Crabby,
-    
     UnitID_MAX,
+    
+    //raid bosses
+    Raid_VaultOfGlass_AtheonTimesConflux,
+    Raid_VaultOfGlass_Oracle,
 }
 enum HeroID{
     Unturned_CaptainSydney=1,
@@ -111,6 +114,7 @@ enum WorldType{
     TowerBattles,
     Unturned,
     Vesteria,
+    RaidExclusive,
 }
 enum UnitAttackType{
     CrossAtk,
@@ -157,6 +161,7 @@ global.WorldTypeName[WorldType.SouthPark]="South Park"
 global.WorldTypeName[WorldType.TowerBattles]="Tower Battles"
 global.WorldTypeName[WorldType.Unturned]="Unturned"
 global.WorldTypeName[WorldType.Vesteria]="Vesteria"
+global.WorldTypeName[WorldType.RaidExclusive]="Raid Bosses"
 
 //how many points at a turn
 global.TurnPointArray[0]=1000

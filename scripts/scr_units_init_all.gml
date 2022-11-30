@@ -351,3 +351,4 @@ var _wt=WorldType.Vesteria
 var Cur=UnitID.Vesteria_Crabby
 scr_units_init_func(Cur,"Crabby",_wt,8,2,2,spr_cards,Cur-1);
 
+scr_units_init_raidunits()
