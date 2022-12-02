@@ -18,6 +18,7 @@ if _readable{
     var _sock=string_copy(_s,_Identifier+1,(_at-_Identifier)-1)
     var _pos=string_copy(_s,_at+1,string_length(_s)-(_at))
     var _r=global.NetworkObj.socket_to_instanceid[? real(_sock)].Cardholderlist[| real(_pos)]
+    if is_undefined(_r){_r=noone}
 }else{
     _r=noone
 }

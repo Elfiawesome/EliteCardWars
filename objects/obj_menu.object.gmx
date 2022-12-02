@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>//game variables
 NextRoomInit=0
-//repeat(1){ExecuteShellOpenwindow()}
+repeat(1){ExecuteShellOpenwindow()}
 randomize()
 draw_set_font(ft_number)
 global.PlayerOnlineName=choose(
@@ -150,7 +150,12 @@ MenuButtonOverlay[2]=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if keyboard_check_pressed(ord("S")) || MenuButtonPressed[1]{
+            <string>if MenuButtonPressed[0]{
+    //Go to campaign page
+    NextRoomInit=con_campaign
+    room_goto(rm_campaign_selection)
+}
+if keyboard_check_pressed(ord("S")) || MenuButtonPressed[1]{
     //server
     NextRoomInit=obj_server
     room_goto(rm_online)
@@ -235,20 +240,6 @@ file_text_close(file);
             <kind>1</kind>
             <string>if NextRoomInit!=0{
     var _o=instance_create(0,0,NextRoomInit)
-    if NextRoomInit=obj_server{
-        with(_o){
-            var _inst=instance_create(100,100,obj_player_con);
-            _inst.name="Raid Boss"
-            _inst.IsLocal=false
-            _inst.mysocket=-ds_list_size(socketlist) - 1
-            _inst.Team=0
-            _inst.IsBot=true
-            ds_list_shuffle(_inst.DeckList)
-            _inst.PlayerHeroID=global.PlayerHero
-            socket_to_instanceid[? _inst.mysocket]=_inst
-            ds_list_add(socketlist,_inst.mysocket)
-        }
-    }
     instance_destroy()
 }
 </string>

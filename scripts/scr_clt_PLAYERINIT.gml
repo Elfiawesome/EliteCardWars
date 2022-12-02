@@ -7,7 +7,7 @@ mysocket=socket
 //Convert Player Init Data into a map; similar to scr_Player_Init_Data_Get
 var map=ds_map_create();
 map[? "Name"]=global.PlayerOnlineName
-map[? "Team"]=1
+map[? "Team"]=0
 map[? "Deck"]=ds_list_write(global.PlayerDeck)
 map[? "Spell"]=ds_list_write(global.PlayerSpells)
 map[? "Hero"]=global.PlayerHero

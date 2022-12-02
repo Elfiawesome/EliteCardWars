@@ -140,6 +140,7 @@
     <sprite>sprites\spr_MenuButton</sprite>
     <sprite>sprites\spr_statuseffect</sprite>
     <sprite>sprites\spr_cards_raid</sprite>
+    <sprite>sprites\spr_heroes_raid</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_background</background>
@@ -399,6 +400,12 @@
             <script>scripts\scr_ability_Unturned_AcidZombie_Damaging.gml</script>
             <script>scripts\scr_ability_Unturned_BurnerZombie_Deathwish.gml</script>
           </scripts>
+          <scripts name="grp_raids">
+            <scripts name="grp_VaultOfGlass">
+              <script>scripts\scr_ability_Raid_VaultOfGlass_Oracle_Intrinsic.gml</script>
+              <script>scripts\scr_ability_Raid_VaultOfGlass_Oracle_AfterDamaged.gml</script>
+            </scripts>
+          </scripts>
         </scripts>
         <script>scripts\scr_ability_SPImmune.gml</script>
         <script>scripts\scr_ability_StatusEffectSpellsImmune.gml</script>
@@ -453,6 +460,7 @@
       <scripts name="grp_heroability_scr">
         <scripts name="grp_ActivateAbility">
           <script>scripts\Activate_Intrinsic_HeroAbility.gml</script>
+          <script>scripts\Activate_Warcry_HeroAbility.gml</script>
         </scripts>
         <scripts name="grp_Abilities">
           <script>scripts\scr_heroability_Unturned_CaptainSydney_Intrinsic.gml</script>
@@ -460,6 +468,10 @@
           <script>scripts\scr_heroability_RA3_PremierAnatolyIlychCherdenko_Activate.gml</script>
           <script>scripts\scr_heroability_AttackTargetExample.gml</script>
           <script>scripts\scr_heroability_D2_Zavala_Activate.gml</script>
+          <scripts name="grp_raid">
+            <script>scripts\scr_heroability_Raid_VaultOfGlass_Hero_Warcry.gml</script>
+            <script>scripts\scr_heroability_Raid_VaultOfGlass_Hero_Intrinsic.gml</script>
+          </scripts>
         </scripts>
       </scripts>
       <scripts name="grp_cardholders_event">
@@ -497,6 +509,8 @@
         <scripts name="grp_AI">
           <script>scripts\AISelectVictims_Default.gml</script>
           <script>scripts\AISelectVictim_Easy.gml</script>
+          <script>scripts\AIPlaceDownUnits_Easy.gml</script>
+          <script>scripts\AIPlaceDownUnits_Raid_VaultOfGlass_Hero.gml</script>
         </scripts>
       </scripts>
       <scripts name="grp_menu">
@@ -524,6 +538,7 @@
       <script>scripts\draw_battlefield_teamcolor.gml</script>
     </scripts>
     <script>scripts\script290.gml</script>
+    <script>scripts\script300.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_number</font>
@@ -560,10 +575,14 @@
         <object>objects\obj_handcardselector_control</object>
       </objects>
     </objects>
+    <objects name="grp_campaign">
+      <object>objects\con_campaign</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_menu</room>
     <room>rooms\rm_online</room>
+    <room>rooms\rm_campaign_selection</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

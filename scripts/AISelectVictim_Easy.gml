@@ -45,6 +45,7 @@ while(!ds_priority_empty(_socketpriority)){//list through all sockets by priorit
             var _l=ds_list_create()
             var _TempHp=_ch.Stats[? "Finalized_Hp"]
             for(var i3=0;i3<ds_list_size(Cardholderlist);i3++){
+            if Cardholderlist[| i3].Stats[? "Finalized_Atk"]>0{//make game not very long and boring
             if Cardholderlist[| i3].CardID!=0 && Cardholderlist[| i3].Stats[? "AtkAlrdy"]=false && !Cardholderlist[| i3].Stats[? "IsFrozen"] && ds_list_find_index(_AlreadyAttackedCardsList,Cardholderlist[| i3])=-1{
                 if scr_OverallValidAttackSpot(_ch,Cardholderlist[| i3]){
                     ds_list_add(_l,Cardholderlist[| i3])
@@ -54,6 +55,7 @@ while(!ds_priority_empty(_socketpriority)){//list through all sockets by priorit
                     BotSpeed=0
                     if _TempHp<0{break;}
                 }
+            }
             }
             }
             ds_map_add_list(_MapStrategyHolders,_ch,_l)//adding it to the map
@@ -66,11 +68,13 @@ while(!ds_priority_empty(_socketpriority)){//list through all sockets by priorit
         //OPEN FIRE ON THE HERO!
         var _l=ds_list_create()
         for(var i3=0;i3<ds_list_size(Cardholderlist);i3++){
+        if Cardholderlist[| i3].Stats[? "Finalized_Atk"]>0{
         if Cardholderlist[| i3].CardID!=0 && Cardholderlist[| i3].Stats[? "AtkAlrdy"]=false && ds_list_find_index(_AlreadyAttackedCardsList,Cardholderlist[| i3])=-1{
                 ds_list_add(_l,Cardholderlist[| i3])
                 ds_list_add(_AlreadyAttackedCardsList,Cardholderlist[| i3])
                 //reset bot speed
                 BotSpeed=0
+        }
         }
         }
         ds_map_add_list(_MapStrategyHeroes,_con.Hero,_l)//adding it to the map

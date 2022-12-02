@@ -49,11 +49,18 @@ for (var k=ds_map_find_first(TeamMap);!is_undefined(k);k=ds_map_find_next(TeamMa
                 Hero=_hero
                 SummonHero(Hero,PlayerHeroID)
             }
-            with(Hero){
-                //Activate Intrinsic Hero Ability
-                Activate_Intrinsic_HeroAbility()
-            }
         }
     }
     ds_list_destroy(_l)
+}
+//Activate Hero's ability
+for(var i=0;i<ds_list_size(socketlist);i++){
+    with(socket_to_instanceid[? socketlist[| i]]){
+        with(Hero){
+            //Activate Intrinsic Hero Ability
+            Activate_Intrinsic_HeroAbility()
+            //Activate Warcry Hero Ability
+            Activate_Warcry_HeroAbility()
+        }
+    }
 }

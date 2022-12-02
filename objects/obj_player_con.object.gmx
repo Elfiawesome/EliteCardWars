@@ -36,6 +36,10 @@ HasPinged=true
 name=""
 Team=-1
 IsBot=false
+IsRaidBoss=false
+AI_PlacingDownUnits=AIPlaceDownUnits_Easy
+AI_SelectingVictims=AISelectVictim_Easy
+RaidBotIdentifier=0
 
 BotSpeedMax=30
 BotSpeed=BotSpeedMax
@@ -159,9 +163,11 @@ if keyboard_check_pressed(vk_enter){
     //var _c1=GameEvent_draw_specific_card(SpellID.PlantVsZombies_SpringBean,1)
     //var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_ObservationPost,1)
     Points+=200
-    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_ZenCartman,0)
-    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_Henrietta,0)
-    var _c1=GameEvent_draw_specific_card(UnitID.RedAlert3_HammerTank,0)
+    var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_ObservationPost,1)
+    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_EnforcerJimmy,0)
+    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_DarkMageCraig,0)
+    //var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_Henrietta,0)
+    //var _c1=GameEvent_draw_specific_card(UnitID.RedAlert3_HammerTank,0)
     
     //GameEvent_cardholders_AfterDamaged(id)
 }
@@ -336,39 +342,45 @@ if IsBot &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
         DrawsLeft-=1
         }
         //see if theres a need to place cards
-        for(var ii=ds_list_size(HandCards)-1; ii&gt;=0; ii--){
-            var _cardCur=HandCards[| ii]
-            var _m=json_decode(_cardCur)
-            var _id=_m[? "ID"]
-            ds_map_destroy(_m)
-            for(var i=0;i&lt;ds_list_size(Cardholderlist);i++){
-                var _cardholder=Cardholderlist[| i]
-                if _cardholder.CardID=0 &amp;&amp; Points&gt;=GetPointDeductionValue(global.UnitDat_Pt[_id]){
-                Points-=GetPointDeductionValue(global.UnitDat_Pt[_id])
-                with(global.NetworkObj){
-                    if global.NetworkObj.object_index=obj_server{
-                    //summoning character
-                    svr_SummonCard(other.mysocket,i,_id)
-                    //remove card from hand
-                    var _m=ds_map_create();
+        var SummoningMap=script_execute(AI_PlacingDownUnits)
+        for (var k=ds_map_find_first(SummoningMap);!is_undefined(k);k=ds_map_find_next(SummoningMap,k)){
+            var _map=SummoningMap[? k]
+            var _cardholder=_map[? "CardholderObj"]
+            var _CardID=_map[? "CardID"]
+            var _CardVal=_map[? "CardVal"]
+            var _IsFreeSummon=_map[? "SummonForFree"]
+            
+            //point calculation
+            var _ptdeduct=GetPointDeductionValue(global.UnitDat_Pt[_CardID])
+            if !is_undefined(_IsFreeSummon) &amp;&amp; _IsFreeSummon=true{
+                _ptdeduct=0
+            }
+            
+            if _cardholder.CardID=0 &amp;&amp; Points&gt;=_ptdeduct{
+            Points-=_ptdeduct
+            with(global.NetworkObj){
+                if global.NetworkObj.object_index=obj_server{
+                //summoning character
+                svr_SummonCard(other.mysocket,_cardholder.Pos,_CardID)
+                //remove card from hand
+                if !is_undefined(_CardVal){//if we want to remove something
+                var _m=ds_map_create();
                     _m[? "socket"]=other.mysocket;
-                    _m[? "pos"]=ii
-                    _m[? "value"]=_cardCur
+                    _m[? "value"]=_CardVal
                     var _str=json_encode_destroy(_m);
                     svr_RemoveCardFromHand(_str,other.mysocket)
-                    }
-                    BotSpeed=0
                 }
-                break;
                 }
+                BotSpeed=0
+            }
             }
         }
-        //next turn
+        ds_map_destroy(SummoningMap)
     }
     //Deciding who to attack
     if global.GameStage=GAMESTAGE.ATTACKINGTURN &amp;&amp; BotSpeed=BotSpeedMax{
         //who to attack?
-        var _MapStrategy=AISelectVictim_Easy()//AISelectVictims_Default()
+        var _MapStrategy=script_execute(AI_SelectingVictims)//AISelectVictims_Default()
         
         //Attack Cardholders
         var HoldersStrat=_MapStrategy[? "Holders"]
@@ -778,7 +790,7 @@ for(var i=0;i&lt;ds_list_size(sl);i++){
     //selection/deselection
     var msx=device_mouse_x_to_gui(0)
     var msy=device_mouse_y_to_gui(0)
-    if point_in_rectangle(msx,msy,_x,_y,_x+100,_y+_namehei){
+    if point_in_rectangle(msx,msy,_x,_y,_x+100,_y+_namehei) &amp;&amp; !global.NetworkObj.IsMission{
         if mouse_wheel_up(){
             stid[? sl[| i]].Team++;NeedToUpdateTeamMap=true
         }

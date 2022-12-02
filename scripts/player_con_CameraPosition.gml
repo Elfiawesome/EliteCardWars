@@ -37,7 +37,8 @@ with(global.NetworkObj){
     
     //camera dragging
     if global.SelectedCard=noone
-    && global.HoveredCard=noone{
+    //&& global.HoveredCard=noone
+    {
         var _mxoff=(mouse_x-CameraFocus.Homex)*2.5
         var _myoff=(mouse_y-CameraFocus.Homey)*2.5
         if mouse_check_button_pressed(mb_left){

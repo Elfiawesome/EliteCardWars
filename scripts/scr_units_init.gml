@@ -101,6 +101,7 @@ enum HeroID{
     RA3_PremierAnatolyIlychCherdenko,
     D2_Zavala,
     HeroID_MAX,
+    Raid_VaultOfGlass_Hero,
 }
 enum WorldType{
     Destiny2,
