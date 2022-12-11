@@ -7,10 +7,4 @@ var Map=json_decode(_TeamMap)
 ds_map_copy(TeamMap,Map)
 ds_map_destroy(Map)
 
-create_AllCardHolders(TeamMap)
-update_Turnstage(TeamMap)
-
-GameEvent_Con_ReimbursePoints()
-GameEvent_Con_CardDrawed()
-global.IsGame=true
-CameraFocusNo=Turn
+SetupStartGame(TeamMap)

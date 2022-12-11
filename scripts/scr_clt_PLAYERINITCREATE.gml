@@ -11,4 +11,3 @@ _inst.mysocket=socket
 ds_list_add(socketlist,socket)
 //set the Player Init Data values into the newly created player object
 scr_Player_Init_Data_Set(_inst,str)
-

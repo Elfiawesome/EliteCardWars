@@ -129,7 +129,7 @@ image_xscale=0.2
 image_yscale=0.2
 image_speed=0
 Visual_CooldownY=0
-
+SinWaveTimeModifier=random_range(0.5,1)
 </string>
           </argument>
         </arguments>
@@ -356,9 +356,31 @@ if CardID=0{
 }
 
 if CardID=0{exit;}
-//draw Card
 var alpha=1;
-if Stats[? "AtkAlrdy"]{alpha=0.8}
+if Stats[? "AtkAlrdy"]{alpha=0.6}
+
+//draw background card
+draw_primitive_begin(pr_trianglestrip);
+draw_set_alpha(alpha/2)
+var _ext=6
+var _extm=_ext/3
+var _w=sprite_get_width(sprite_index)/2*image_xscale + (_ext+_extm);
+var _h=sprite_get_height(sprite_index)/2*image_yscale + (_ext+_extm);
+draw_set_color(TeamColorOf(global.NetworkObj.socket_to_instanceid[? mysocket].Team))
+var _swm=SinWaveTimeModifier
+var _sf1=sin(current_time/200*_swm) * _ext
+var _sf2=sin(current_time/800*_swm) * _ext
+var _sf3=sin(current_time/500*_swm) * _ext
+var _sf4=sin(current_time/600*_swm) * _ext
+var _a=-degtorad(image_angle);
+var _cw=_w + _sf1; var _ch=_h + _sf2;draw_vertex(x+_cw*cos(_a)-_ch*sin(_a) ,  y+_ch*cos(_a)+_cw*sin(_a))
+var _cw=_w + _sf2; var _ch=_h + _sf1;draw_vertex(x-_cw*cos(_a)-_ch*sin(_a) ,  y+_ch*cos(_a)-_cw*sin(_a))
+var _cw=_w + _sf3; var _ch=_h + _sf4;draw_vertex(x+_cw*cos(_a)+_ch*sin(_a) ,  y-_ch*cos(_a)+_cw*sin(_a))
+var _cw=_w + _sf4; var _ch=_h + _sf3;draw_vertex(x-_cw*cos(_a)+_ch*sin(_a) ,  y-_ch*cos(_a)-_cw*sin(_a))
+draw_set_color(c_white)
+draw_set_alpha(1)
+draw_primitive_end()
+//draw Card
 draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,alpha)
 /*for(var i=0;i&lt;ds_list_size(Stats[? "Spells"]);i++){
     var spell=Stats[? "Spells"]
@@ -373,15 +395,26 @@ var hei=sprite_get_height(sprite_index)*image_yscale
 var _cooldownmax=Stats[? "AbilityCooldownMax"]//+MultiStats_GetSum(Stats[? "Multi_AbilityCooldownMaxAmt"],Stats[? "Multi_AbilityCooldownMaxDuration"])
 var _Maxamt=clamp(Stats[? "AbilityCooldown"],0,_cooldownmax)
 var proportion = (_Maxamt/_cooldownmax)
+var _bsize=hei/_cooldownmax
 var newhei=hei*proportion
 Visual_CooldownY = lerp(Visual_CooldownY,newhei,0.15)
+
+for(var i=0;i&lt;_cooldownmax;i++){
+    draw_line_width(
+        x+wid/2+10,
+        y+hei/2 - i*_bsize,
+        x+wid/2+20,
+        y+hei/2 - i*_bsize,
+        2
+        )
+}
 
 draw_set_alpha(0.2)
 draw_set_color(c_white)
 draw_rectangle(//back rectangle
     x+wid/2+10,
     y+hei/2,
-    x+wid/2+11,
+    x+wid/2+15,
     y-hei/2,
 false)
 draw_set_alpha(0.4)
@@ -450,6 +483,12 @@ if Stats[? "IsBAImmune"]&gt;0{
 }
 if global.NetworkObj.socket_to_instanceid[? mysocket].Hero.Stats[? "ForceAttackHolder"]=Pos{
     draw_sprite_ext(spr_statuseffect,6,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+}
+if Stats[? "DamageIntakeMultiplier"]!=1{
+    draw_sprite_ext(spr_statuseffect,7,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+}
+if Stats[? "DamageOutputMultiplier"]!=1{
+    draw_sprite_ext(spr_statuseffect,8,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
 }
 
 </string>

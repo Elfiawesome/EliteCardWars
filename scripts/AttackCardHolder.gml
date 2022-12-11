@@ -6,7 +6,6 @@ var Victim_Map=AttackMap[? "Victim"]
 var VictimCon=socket_to_instanceid[? real(Victim_Map[? "Socket"])]
 var VictimObj=VictimCon.Cardholderlist[| real(Victim_Map[? "Pos"])]
 
-
 //going through all the attackers
 var AttackingList=ds_list_create()
 ds_list_read(AttackingList,AttackMap[? "AttackingList"])

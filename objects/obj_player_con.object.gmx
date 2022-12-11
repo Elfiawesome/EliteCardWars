@@ -37,9 +37,10 @@ name=""
 Team=-1
 IsBot=false
 IsRaidBoss=false
+RaidBotIdentifier=0
 AI_PlacingDownUnits=AIPlaceDownUnits_Easy
 AI_SelectingVictims=AISelectVictim_Easy
-RaidBotIdentifier=0
+
 
 BotSpeedMax=30
 BotSpeed=BotSpeedMax
@@ -245,13 +246,8 @@ if keyboard_check_pressed(ord("Q")){
     //only if server
     if global.NetworkObj.object_index=obj_server{
         with(global.NetworkObj){
-            //setting up Team Map
-            update_json_TeamMap()
-            //create card holders
-            create_AllCardHolders(TeamMap)
-            //set up turnstage
-            update_Turnstage(TeamMap)
-            //send server an example packet
+            SetupStartGame(TeamMap)
+            //send clients the map data
             for(var i=0;i&lt;ds_list_size(socketlist);i++){
                 buffer=buffer_create(2048,buffer_fixed,1)
                 buffer_write(buffer,buffer_s16,NETWORKPKT.STARTGAME)
@@ -259,17 +255,9 @@ if keyboard_check_pressed(ord("Q")){
                 network_send_packet(socketlist[| i],buffer,buffer_tell(buffer))
                 buffer_delete(buffer)
             }
-            //reimburse points
-            GameEvent_Con_ReimbursePoints()
-            GameEvent_Con_CardDrawed()
-            //set the game to ready
-            global.IsGame=true
-            CameraFocus=socket_to_instanceid[? Turnstage[Turn]];
-            CameraFocusNo=Turn
         }
     }
 }
-
 }
 
 

@@ -1,7 +1,10 @@
 ///scr_heroability_Raid_VaultOfGlass_Hero_Warcry()
 var _Maincon=global.NetworkObj.socket_to_instanceid[? mysocket]
 var _ri=_Maincon.RaidBotIdentifier;
+
 if _ri=2{
+        Stats[? "AIOracleRespawnCooldown"]=1
+        
         //Spawn Raid Boss
         //My battlefeild [ie atheon's]
         with(_Maincon){
@@ -24,6 +27,7 @@ if _ri=2{
         var _con=global.NetworkObj.socket_to_instanceid[? global.NetworkObj.socketlist[| ii]]
         if _con.IsRaidBoss && !_con.IsSpectating{
         with(_con){
+            //if global.NetworkObj.object_index=obj_client{show_message(string(mysocket)+": Ability Warcry Activated")}
             for(var i=0;i<ds_list_size(Cardholderlist);i++){
                 var _ch=Cardholderlist[| i]
                 if _ch.CardID=0{

@@ -6,6 +6,13 @@ _m[? "Team"]=inst.Team
 _m[? "Deck"]=ds_list_write(inst.DeckList)
 //_m[? "Spell"]=ds_list_write(inst.SpellList)
 _m[? "Hero"]=inst.PlayerHeroID
+
+_m[? "IsBot"]=inst.IsBot
+_m[? "IsRaidBoss"]=inst.IsRaidBoss
+_m[? "RaidBotIdentifier"]=inst.RaidBotIdentifier
+_m[? "AI_PlacingDownUnits"]=inst.AI_PlacingDownUnits
+_m[? "AI_SelectingVictims"]=inst.AI_SelectingVictims
+
 var str=json_encode_destroy(_m);
 return str
 

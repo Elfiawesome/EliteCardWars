@@ -14,7 +14,7 @@ for(var i=0;i<ds_list_size(socketlist);i++){
 //tell 'connecting socket' everyone else's Player Init Data
 for(var i=0;i<ds_list_size(socketlist);i++){
     var sock=socketlist[| i]
-    buffer=buffer_create(1024,buffer_fixed,1)
+    buffer=buffer_create(4096,buffer_fixed,1)
     buffer_write(buffer,buffer_s16,NETWORKPKT.PLAYERINITCREATE)
     buffer_write(buffer,buffer_s16,sock)
     buffer_write(buffer,buffer_string,scr_Player_Init_Data_Get(socket_to_instanceid[? sock]))

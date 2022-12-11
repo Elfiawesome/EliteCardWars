@@ -20,7 +20,6 @@ with(vict){
 with(atkr){
     Stats[? "AbilityConstantTarget"]=GetMultiStatsString(vict)
 }
-show_debug_message("Immunint right now!")
 //clear battlefield
 if Stats[? "AbilityCooldown"]=0{
     for(var i=0;i<ds_list_size(global.NetworkObj.socketlist);i++){

@@ -8,7 +8,8 @@ if global.NetworkObj.object_index=obj_server{
         ds_list_read(_l,TeamMap[? k])
         var cntr=0
         for(var i=0;i<ds_list_size(_l);i++){
-            if socket_to_instanceid[? real(_l[| i])].Hero.Stats[? "Hp"]<=0{
+            var _con=socket_to_instanceid[? real(_l[| i])]
+            if script_execute(global.HeroDat_AI_LoseStateScript[_con.Hero.CardID],_con){//finding if lose state
                 cntr+=1
             }
         }
@@ -46,7 +47,7 @@ if global.NetworkObj.object_index=obj_server{
     for(var k=ds_map_find_first(socket_to_instanceid);!is_undefined(k);k=ds_map_find_next(socket_to_instanceid,k)){
         var con = socket_to_instanceid[? k];
         if con.Hero!=-1{
-        if con.Hero.Stats[? "Hp"]<=0{
+        if script_execute(global.HeroDat_AI_LoseStateScript[con.Hero.CardID],con){//finding if lose state
             with(con){GameEvent_Con_HeroDeath();}
             if con.mysocket=mysocket{
                 var gea=instance_create(0,0,obj_GameEndAnnouncement);
