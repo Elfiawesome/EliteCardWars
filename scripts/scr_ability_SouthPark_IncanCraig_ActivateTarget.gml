@@ -3,11 +3,12 @@ var MapStr=argument0;
 var vict=MapStr[? "Victim"]
 var atkr=MapStr[? "Attacker"]
 
-//run animation of ability
+//create victim list
 var victimList=ds_list_create()
+var VictListwDmgNo=ds_list_create()
 ds_list_add(victimList,global.NetworkObj.socket_to_instanceid[? vict.mysocket].Cardholderlist[| 1])
 ds_list_add(victimList,global.NetworkObj.socket_to_instanceid[? vict.mysocket].Cardholderlist[| 3])
-ani_AttackSet_basic(atkr,victimList)
+
 //damage those cards
 for(var i=0;i<ds_list_size(victimList);i+=1){
     with(victimList[| i]){
@@ -15,8 +16,19 @@ for(var i=0;i<ds_list_size(victimList);i+=1){
         GameEvent_cardholders_DealDamageAmt(victimList[| i],atkr,20)
         //execute Damaged Event
         GameEvent_cardholders_Damaged(atkr)
+        //damage numbers
+        var _m=ds_map_create();
+        _m[? "Object"]=id
+        _m[? "DamageNumber"]=FindDamageAmount(20,atkr,id)
+        ds_list_add(VictListwDmgNo,_m)
+        ds_list_mark_as_map(VictListwDmgNo,ds_list_size(VictListwDmgNo)-1)
     }
 }
+
+//run animation of ability
+ani_AttackSet_basic(atkr,VictListwDmgNo)
+
+
 //damage those cards
 for(var i=0;i<ds_list_size(victimList);i+=1){
     with(victimList[| i]){

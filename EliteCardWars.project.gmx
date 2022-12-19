@@ -290,8 +290,10 @@
       <script>scripts\ani_rotate_lerp.gml</script>
       <script>scripts\ani_depth.gml</script>
       <script>scripts\ani_shake.gml</script>
+      <script>scripts\ani_damagenumber.gml</script>
       <scripts name="animation sets">
         <script>scripts\ani_AttackSet_basic.gml</script>
+        <script>scripts\ani_GoToEnemyAndAttackSet_basic.gml</script>
       </scripts>
     </scripts>
     <scripts name="grp_game">
@@ -531,6 +533,8 @@
       <script>scripts\scr_ListVictimsByAttackersSPAtkTypes.gml</script>
       <script>scripts\IsForceAttackHolder.gml</script>
       <script>scripts\HasForceAttack.gml</script>
+      <script>scripts\FindDamageAmount.gml</script>
+      <script>scripts\FindDamageState.gml</script>
       <script>scripts\GetMultiStatsString.gml</script>
       <script>scripts\GetMultiStatsObject.gml</script>
       <script>scripts\MultiStats_GetSum.gml</script>
@@ -578,6 +582,7 @@
         <object>objects\obj_cardholder_inspector</object>
         <object>objects\obj_spell_animation</object>
         <object>objects\obj_handcardselector_control</object>
+        <object>objects\obj_damagenumbers</object>
       </objects>
     </objects>
     <objects name="grp_campaign">

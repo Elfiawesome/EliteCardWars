@@ -1,7 +1,7 @@
-///ani_AttackSet_basic(attacker,victimlist)
+///ani_GoToEnemyAndAttackSet_basic(attacker,victimlist(without damage no) )
 var Attacker=argument0
 var VictimList=argument1
-var Victim=ds_map_find_value(VictimList[| 0],"Object")
+var Victim=VictimList[| 0]
 var animator=instance_create(0,0,obj_animator)
 with(animator){
     var n=0;
@@ -22,14 +22,8 @@ with(animator){
     for(var i=0;i<ds_list_size(VictimList);i++){
     AnimatingOrderList[| n]=ani_shake
     var tempMap=ds_map_create();
-    tempMap[? "Object"]=ds_map_find_value(VictimList[| i],"Object")
+    tempMap[? "Object"]=VictimList[| i]
     tempMap[? "Amt"]=10
-    AnimatingOrderListMap[| n]=json_encode_destroy(tempMap);n++
-    
-    AnimatingOrderList[| n]=ani_damagenumber
-    var tempMap=ds_map_create();
-    tempMap[? "Object"]=ds_map_find_value(VictimList[| i],"Object")
-    tempMap[? "DamageNumber"]=ds_map_find_value(VictimList[| i],"DamageNumber")
     AnimatingOrderListMap[| n]=json_encode_destroy(tempMap);n++
     }
     

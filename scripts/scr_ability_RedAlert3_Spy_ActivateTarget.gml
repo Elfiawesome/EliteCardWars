@@ -6,7 +6,7 @@ var stid=global.NetworkObj.socket_to_instanceid
 //run animation of ability
 var victimList=ds_list_create()
 ds_list_add(victimList,global.NetworkObj.socket_to_instanceid[? vict.mysocket].Cardholderlist[| vict.Pos])
-ani_AttackSet_basic(atkr,victimList)
+ani_GoToEnemyAndAttackSet_basic(atkr,victimList)
 
 //Get the card
 if atkr.mysocket=global.NetworkObj.mysocket{

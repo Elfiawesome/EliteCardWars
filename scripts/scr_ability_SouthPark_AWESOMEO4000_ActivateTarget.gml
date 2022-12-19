@@ -6,7 +6,7 @@ var atkr=MapStr[? "Attacker"]
 //run animation of ability
 var victimList=ds_list_create()
 ds_list_add(victimList,vict)
-ani_AttackSet_basic(atkr,victimList)
+ani_GoToEnemyAndAttackSet_basic(atkr,victimList)
 ds_list_destroy(victimList)
 //Freeze those cards
 with(vict){

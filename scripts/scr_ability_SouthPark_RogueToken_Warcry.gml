@@ -17,13 +17,23 @@ for(var i=0;i<ds_list_size(global.NetworkObj.socketlist);i++){
                 GameEvent_cardholders_DealDamageAmt(id,_atkr,8)
                 GameEvent_cardholders_Damaged(_atkr)
                 GameEvent_cardholders_AfterDamaged(id)
+                //damage numbers
+                var _m=ds_map_create();
+                _m[? "Object"]=id
+                _m[? "DamageNumber"]=FindDamageAmount(8,_atkr,id)
+                ds_list_add(victimList,_m)
+                ds_list_mark_as_map(victimList,ds_list_size(victimList)-1)
             }
-            ds_list_add(victimList,_cardholder)
             }
         }
     }
     }
 }
 //run animation of ability
-if !ds_list_empty(victimList){ani_AttackSet_basic(id,victimList)}
+
+if !ds_list_empty(victimList){
+    ani_AttackSet_basic(id,victimList)
+}
+
+
 ds_list_destroy(victimList)

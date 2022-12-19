@@ -14,6 +14,7 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
     var AttackObj=socket_to_instanceid[? real(_m[? "Socket"])].Cardholderlist[| real(_m[? "Pos"])];
     //Listing out of victims
     var _list=scr_ListVictimsByAttackersSPAtkTypes(VictimObj,AttackObj)
+    var _VictList=ds_list_create()
     //deduction of health
     for(var ii=0;ii<ds_list_size(_list);ii+=1){
         with(_list[| ii]){
@@ -21,6 +22,12 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
             GameEvent_cardholders_DealDamage(id,AttackObj)
             //execute Damaged Event
             GameEvent_cardholders_Damaged(AttackObj)
+            //damage numbers
+            var _m=ds_map_create();
+            _m[? "Object"]=id
+            _m[? "DamageNumber"]=FindDamageAmount(AttackObj.Stats[? "Finalized_Atk"],AttackObj,id)//(AttackObj.Stats[? "Finalized_Atk"]*GetIntakeMultiplier(AttackObj,id)-id.Stats[? "Def"])
+            ds_list_add(_VictList,_m)
+            ds_list_mark_as_map(_VictList,ds_list_size(_VictList)-1)
         }
     }
     //Splash Damage
@@ -32,11 +39,19 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
                 GameEvent_cardholders_DealSplashDamage(id,AttackObj)
                 //execute Damaged Event
                 GameEvent_cardholders_Damaged(AttackObj)
-                ds_list_add(_list,id)//probably need change :|
+                ds_list_add(_list,id)
+                //damage numbers
+                var _m=ds_map_create();
+                _m[? "Object"]=id
+                _m[? "DamageNumber"]=FindDamageAmount(AttackObj.Stats[? "SplashAtk"],AttackObj,id)//(AttackObj.Stats[? "SplashAtk"]*GetIntakeMultiplier(AttackObj,id)-id.Stats[? "Def"])
+                ds_list_add(_VictList,_m);ds_list_mark_as_map(_VictList,ds_list_size(_VictList)-1)
                 }
             }
         }
     }
+    //animation
+    ani_AttackSet_basic(AttackObj,_VictList)//VictimObj)
+    
     //activate after damaged ability
     for(var ii=0;ii<ds_list_size(_list);ii+=1){
         with(_list[| ii]){
@@ -49,9 +64,9 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
             with(AttackObj){Activate_Kill_Ability(_list[| ii])}
         }
     }
-    //animation
-    ani_AttackSet_basic(AttackObj,_list)//VictimObj)
+    //delete lists
     ds_list_destroy(_list)
+    ds_list_destroy(_VictList)
     
     //remove atkalrdy
     AttackObj.Stats[? "AtkAlrdy"]=true

@@ -8,7 +8,7 @@ if scr_ability_Checks_OnlyAllies_NoImmuneCapable(vict,atkr){
     //run animation of ability
     var victimList=ds_list_create()
     ds_list_add(victimList,vict)
-    ani_AttackSet_basic(atkr,victimList)
+    ani_GoToEnemyAndAttackSet_basic(atkr,victimList)
     ds_list_destroy(victimList)
     //Immune that card
     with(vict){
