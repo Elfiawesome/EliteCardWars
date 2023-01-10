@@ -167,7 +167,7 @@ if keyboard_check_pressed(vk_enter){
     var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_ObservationPost,1)
     var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_EnforcerJimmy,0)
     var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_DarkMageCraig,0)
-    //var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_Henrietta,0)
+    var _c1=GameEvent_draw_specific_card(SpellID.PlantVsZombies_SpringBean,1)
     //var _c1=GameEvent_draw_specific_card(UnitID.RedAlert3_HammerTank,0)
     
     //GameEvent_cardholders_AfterDamaged(id)
