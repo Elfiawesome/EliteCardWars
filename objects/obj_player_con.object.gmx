@@ -184,15 +184,24 @@ if global.SelectedCard=noone{
 }
 if global.SelectedCard!=noone{
     if mouse_check_button_released(mb_left){
-        //Placing UNIT card down
-        player_con_PlacingUnitCardDown()
-        //Activating UnitCardOnMe
-        player_con_PlacingUnitCardDown_For_UnitCardOnMe()
-        //Placing Spell card down
-        if !Hero.Stats[? "DisableSpells"]{
-            player_con_PlacingSpellCardDown()
+        var _canusecard=true
+        var _cardpos=ds_list_find_index(cardList,global.SelectedCard);
+        var _cardmap=json_decode(HandCards[| _cardpos]);
+        if ds_map_exists(_cardmap,"Locked") &amp;&amp; _cardmap[? "Locked"]=true{
+            _canusecard=false
         }
+        ds_map_destroy(_cardmap)
         
+        if _canusecard{
+            //Placing UNIT card down
+            player_con_PlacingUnitCardDown()
+            //Activating UnitCardOnMe
+            player_con_PlacingUnitCardDown_For_UnitCardOnMe()
+            //Placing Spell card down
+            if !Hero.Stats[? "DisableSpells"]{
+                player_con_PlacingSpellCardDown()
+            }
+        }
         global.SelectedCard=noone
     }
 }
@@ -746,6 +755,10 @@ if global.IsGame &amp;&amp; IsLocal &amp;&amp; !IsSpectating &amp;&amp; global.N
           <argument>
             <kind>1</kind>
             <string>///drawing Teams before game
+for(var i=0;i&lt;ds_list_size(HandCards);i++){
+    draw_text(Homex,Homey+i*20,HandCards[| i])
+}
+draw_text(mouse_x,mouse_y,global.CardsIdentifier)
 if IsLocal &amp;&amp; !global.IsGame{
 var sl=global.NetworkObj.socketlist
 var stid=global.NetworkObj.socket_to_instanceid

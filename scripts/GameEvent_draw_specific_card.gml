@@ -16,7 +16,6 @@ for(var i=0;i<ds_list_size(cardList);i+=1){
     cardList[| i].HomeDepth=-1-1/i
 }
 //tell server I drawed a card
-var _m=ds_map_create();_m[? "ID"]=argument0;_m[? "Type"]=argument1;ds_list_add(HandCards,json_encode_destroy(_m))
 var _m=ds_map_create();
 _m[? "socket"]=global.NetworkObj.mysocket;
 _m[? "ID"]=_card.CardID;

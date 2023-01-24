@@ -12,6 +12,7 @@ global.SpellSys=instance_create(0,0,obj_spells_sys)
 global.IsGame=false
 global.SpellsIdentifier=0
 global.UnitsIdentifier=0
+global.CardsIdentifier=0
 GameWinner=-1
 enum GAMESTAGE{
     PLAYERTURNS,
