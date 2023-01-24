@@ -34,7 +34,9 @@ while(!ds_priority_empty(_socketpriority)){//list through all sockets by priorit
         var _val=(
             _ch.Stats[? "Hp"]*clamp(sign(_ch.Stats[? "Hp"]),0,1)+
             _ch.Stats[? "Atk"]*clamp(sign(_ch.Stats[? "Atk"]),0,1))
+        if _ch.Stats[? "IsImmune"]{_val=0}
         ds_priority_add(_cardholderpriority,ii,_val)
+        
     }
     
     while(!ds_priority_empty(_cardholderpriority)){//ATTACKING UNITS

@@ -66,6 +66,7 @@ for(var i=0;i<ds_list_size(socketlist);i++){
                 ds_list_destroy(_l)
                 player_con_CardholdersUpdateMultiStats()
                 
+                //reduce cooldown
                 if Stats[? "AbilityCooldown"]!=0{Stats[? "AbilityCooldown"]-=1}
                 if Stats[? "Finalized_Hp"]<1{GameEvent_cardholders_Death()}
             }

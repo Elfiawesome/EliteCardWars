@@ -16,8 +16,8 @@ if !Stats[? "AbilityAlrdy"]{
                 if socket_to_instanceid[? socketlist[| i]].IsRaidBoss{
                     //count oracles
                     with(socket_to_instanceid[? socketlist[| i]]){
-                    for(var i=0;i<ds_list_size(Cardholderlist);i++){
-                        if Cardholderlist[| i].CardID=UnitID.Raid_VaultOfGlass_Oracle{
+                    for(var ii=0;ii<ds_list_size(Cardholderlist);ii++){
+                        if Cardholderlist[| ii].CardID=UnitID.Raid_VaultOfGlass_Oracle{
                             _oraclecount++
                         }
                     }
@@ -25,7 +25,6 @@ if !Stats[? "AbilityAlrdy"]{
                 }
             }
             }
-            
             //respawn oracles if needed
             if _oraclecount>0{exit;}
             //My battlefeild [ie atheon's]

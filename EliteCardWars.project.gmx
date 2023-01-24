@@ -543,11 +543,14 @@
       <script>scripts\GetIntakeMultiplier.gml</script>
       <script>scripts\IsMouseOverBattlefield.gml</script>
       <script>scripts\TeamColorOf.gml</script>
-      <script>scripts\draw_BasicHealthbar.gml</script>
-      <script>scripts\draw_battlefield_teamcolor.gml</script>
+      <scripts name="grp_unused">
+        <script>scripts\top_place_meeting.gml</script>
+        <script>scripts\draw_BasicHealthbar.gml</script>
+        <script>scripts\draw_battlefield_teamcolor.gml</script>
+        <script>scripts\script290.gml</script>
+        <script>scripts\script300.gml</script>
+      </scripts>
     </scripts>
-    <script>scripts\script290.gml</script>
-    <script>scripts\script300.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_number</font>

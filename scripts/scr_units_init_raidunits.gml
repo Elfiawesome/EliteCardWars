@@ -3,7 +3,7 @@ var _wt=WorldType.RaidExclusive
 var Cur=UnitID.Raid_VaultOfGlass_AtheonTimesConflux
 scr_units_init_func(Cur,"Atheon Time's Conflux",_wt,395,30,65,spr_cards_raid,0)
 //
-var Cur=UnitID.Raid_VaultOfGlass_Oracle//
+var Cur=UnitID.Raid_VaultOfGlass_Oracle//75
 scr_units_init_func(Cur,"Oracle",_wt,75,0,10,spr_cards_raid,1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_Raid_VaultOfGlass_Oracle_Intrinsic

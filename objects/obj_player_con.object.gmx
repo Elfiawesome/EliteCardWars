@@ -174,7 +174,7 @@ if keyboard_check_pressed(vk_enter){
 }
 if global.SelectedCard=noone{
     if position_meeting(mouse_x,mouse_y,obj_card){
-        var _card=instance_position(mouse_x,mouse_y,obj_card)
+        var _card=instance_position(mouse_x,mouse_y,obj_card)//top_place_meeting
         global.HoveredCard=_card
         if mouse_check_button_pressed(mb_left){
             global.SelectedCard=_card
