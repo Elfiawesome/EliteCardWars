@@ -748,10 +748,6 @@ if global.IsGame &amp;&amp; IsLocal &amp;&amp; !IsSpectating &amp;&amp; global.N
           <argument>
             <kind>1</kind>
             <string>///drawing Teams before game
-for(var i=0;i&lt;ds_list_size(HandCards);i++){
-    draw_text(Homex,Homey+i*20,HandCards[| i])
-}
-draw_text(mouse_x,mouse_y,global.CardsIdentifier)
 if IsLocal &amp;&amp; !global.IsGame{
 var sl=global.NetworkObj.socketlist
 var stid=global.NetworkObj.socket_to_instanceid
