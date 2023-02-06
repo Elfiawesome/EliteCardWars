@@ -546,6 +546,7 @@
       <script>scripts\GetPointDeductionValue.gml</script>
       <script>scripts\GetIntakeMultiplier.gml</script>
       <script>scripts\IsMouseOverBattlefield.gml</script>
+      <script>scripts\CanUseCardInHand.gml</script>
       <script>scripts\TeamColorOf.gml</script>
       <scripts name="grp_unused">
         <script>scripts\top_place_meeting.gml</script>

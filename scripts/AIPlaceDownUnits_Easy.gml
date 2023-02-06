@@ -9,12 +9,15 @@ for(var ii=ds_list_size(HandCards)-1; ii>=0; ii--){
     var _id=_m[? "ID"]
     ds_map_destroy(_m)
     
+    var _canuse=CanUseCardInHand(_cardCur)
+    if _canuse{
     var _val=(
         global.UnitDat_Hp[ _id]+
         global.UnitDat_Atk[ _id]
     )
     ds_priority_add(_priority,_cardCur,_val)
     show_debug_message("Priority Added for [Pr:"+string(_val)+","+"'"+string(_cardCur)+"']")
+    }
 }
 
 var _projectedcardholder=ds_list_create()

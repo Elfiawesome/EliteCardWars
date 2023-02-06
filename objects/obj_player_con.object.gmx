@@ -169,8 +169,6 @@ if keyboard_check_pressed(vk_enter){
     var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_DarkMageCraig,0)
     var _c1=GameEvent_draw_specific_card(SpellID.PlantVsZombies_SpringBean,1)
     //var _c1=GameEvent_draw_specific_card(UnitID.RedAlert3_HammerTank,0)
-    
-    //GameEvent_cardholders_AfterDamaged(id)
 }
 if global.SelectedCard=noone{
     if position_meeting(mouse_x,mouse_y,obj_card){
@@ -184,13 +182,8 @@ if global.SelectedCard=noone{
 }
 if global.SelectedCard!=noone{
     if mouse_check_button_released(mb_left){
-        var _canusecard=true
         var _cardpos=ds_list_find_index(cardList,global.SelectedCard);
-        var _cardmap=json_decode(HandCards[| _cardpos]);
-        if ds_map_exists(_cardmap,"Locked") &amp;&amp; _cardmap[? "Locked"]!=0{
-            _canusecard=false
-        }
-        ds_map_destroy(_cardmap)
+        var _canusecard=CanUseCardInHand(HandCards[| _cardpos])
         
         if _canusecard{
             //Placing UNIT card down
