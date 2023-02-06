@@ -42,6 +42,7 @@ Tgty=0
 Tgtxscale=0.4
 Tgtyscale=0.4
 CardIdentifier=0
+Locked=false
 
 </string>
           </argument>
@@ -154,7 +155,9 @@ if EntranceAnimation=0{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self()
+            <string>if Locked{image_blend=c_gray}
+if !Locked{image_blend=c_white}
+draw_self()
 //draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
 </string>
           </argument>

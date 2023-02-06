@@ -84,7 +84,15 @@ for(var i=0;i<ds_list_size(socketlist);i++){
             if Stats[? "AbilityCooldown"]!=0{Stats[? "AbilityCooldown"]-=1}
             player_con_HeroUpdateMultiStats()
         }
+        //cards in hand
+        for(var ii=0;ii<ds_list_size(HandCards);ii++){
+            var _map=json_decode(HandCards[| ii]);
+            if ds_map_exists(_map,"Locked"){if _map[? "Locked"]>0{_map[? "Locked"]-=1}}
+            HandCards[| ii]=json_encode(_map)
+            ds_map_destroy(_map)
+        }
     }
     }
 }
 CheckingForVictoryOrEliminations()//psssible problem here
+CheckingLocalCards()

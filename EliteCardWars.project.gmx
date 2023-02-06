@@ -157,6 +157,7 @@
           <script>scripts\EndOfTurnAbilities.gml</script>
           <script>scripts\EndOfTurnSpellsCheck.gml</script>
           <script>scripts\CheckingForVictoryOrEliminations.gml</script>
+          <script>scripts\CheckingLocalCards.gml</script>
         </scripts>
         <script>scripts\SetupStartGame.gml</script>
         <script>scripts\SummonCard.gml</script>
@@ -339,6 +340,8 @@
           <scripts name="grp_D2">
             <script>scripts\scr_ability_D2_Hobgoblin.gml</script>
             <script>scripts\scr_ability_D2_Psion.gml</script>
+            <script>scripts\scr_ability_D2_AtheonTimesConflux_ActivateTarget.gml</script>
+            <script>scripts\scr_ability_D2_AtheonTimesConflux_Intrinsic.gml</script>
             <script>scripts\scr_ability_D2_Servitor_ActivateTarget.gml</script>
             <script>scripts\scr_ability_D2_Servitor_Intrinsic.gml</script>
             <script>scripts\scr_ability_D2_Servitor_AfterDamaged.gml</script>
@@ -492,6 +495,7 @@
         <script>scripts\GameEvent_cardholders_Death.gml</script>
         <script>scripts\GameEvent_cardholders_Clear.gml</script>
         <script>scripts\GameEvent_cardholders_Transform.gml</script>
+        <script>scripts\GameEvent_create_card.gml</script>
         <script>scripts\GameEvent_draw_specific_card.gml</script>
         <script>scripts\GameEvent_Con_CardDrawed.gml</script>
         <script>scripts\GameEvent_cardholders_ReceiveImmunity.gml</script>

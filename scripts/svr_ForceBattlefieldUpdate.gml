@@ -33,6 +33,7 @@ ds_map_add_map(_Mainmap,"Players",_map)
 //add identifiers
 _Mainmap[? "SpellsIdentifier"]=global.SpellsIdentifier
 _Mainmap[? "UnitsIdentifier"]=global.UnitsIdentifier
+_Mainmap[? "CardsIdentifier"]=global.CardsIdentifier
 
 var _mapstr=json_encode_destroy(_Mainmap)
 

@@ -154,7 +154,7 @@ if BattlefieldUpdateTimer&gt;0{
     BattlefieldUpdateTimer--
 }else{
     BattlefieldUpdateTimer=BattlefieldUpdateTimerMax
-    //svr_ForceBattlefieldUpdate()
+    svr_ForceBattlefieldUpdate()
 }
 
 //bot problems:

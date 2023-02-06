@@ -2,6 +2,14 @@
 var _wt=WorldType.Destiny2
 var Cur=UnitID.D2_AtheonTimesConflux//**Ability not yet done!
 scr_units_init_func(Cur,"Atheon Time's Conflux",_wt,45,25,24,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
+global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_PlayerTurn
+global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_OnlyEnemy
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_D2_AtheonTimesConflux_ActivateTarget
+
+global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,1]=scr_ability_D2_AtheonTimesConflux_Intrinsic
+
 var Cur=UnitID.D2_Goblin
 scr_units_init_func(Cur,"Goblin",_wt,10,6,3,spr_cards,Cur-1)
 var Cur=UnitID.D2_Harpy

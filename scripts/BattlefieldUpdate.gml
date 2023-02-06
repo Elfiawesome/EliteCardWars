@@ -25,4 +25,5 @@ for(var k=ds_map_find_first(_map);!is_undefined(k);k=ds_map_find_next(_map,k)){
 //update Identifiers
 global.SpellsIdentifier=_Mainmap[? "SpellsIdentifier"]
 global.UnitsIdentifier=_Mainmap[? "UnitsIdentifier"]
+global.CardsIdentifier=_Mainmap[? "CardsIdentifier"]
 ds_map_destroy(_Mainmap)
