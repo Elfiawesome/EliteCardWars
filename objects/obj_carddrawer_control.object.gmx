@@ -77,6 +77,7 @@ if ControlParent.GUIObjectOrder[| 0]=id{
             if keyboard_check_pressed(vk_escape){
                 AnimationStage=3
                 ds_list_delete(ControlParent.GUIObjectOrder,0)
+                ControlParent.Hero.Stats[? "DrawsLeft"]=Draws
             }
             if ds_list_size(ControlParent.cardList)&gt;=(10+ControlParent.Hero.Stats[? "ExtraHandCards"]){
                 Draws=0
@@ -195,6 +196,7 @@ for(var i=0;i&lt;array_length_1d(DeckSprite);i++){
                 if Draws&lt;1{
                     AnimationStage=3
                     ds_list_delete(ControlParent.GUIObjectOrder,0)
+                    ControlParent.Hero.Stats[? "DrawsLeft"]=Draws
                 }
             }
         }
@@ -212,6 +214,7 @@ if point_in_rectangle(msx, msy, _x, _y, _x+_w, _y+_h,){
     if mouse_check_button_pressed(mb_left){
         AnimationStage=3
         ds_list_delete(ControlParent.GUIObjectOrder,0)
+        ControlParent.Hero.Stats[? "DrawsLeft"]=Draws
     }
 }
 draw_line_width(_x,_y,_x+_w,_y+_h,3)

@@ -87,7 +87,6 @@ CameraFocusNo=0
 GUIObjectOrder=ds_list_create()
 GUIHeroHpWidth=0
 GUIHeroPtWidth=0
-DrawsLeft=2
 IsHeroActivateButton=false
 CardDrawerControl=noone
 global.HoveredCard=noone
@@ -303,6 +302,12 @@ player_con_CardSelectorControl()
 if IsLocal &amp;&amp; global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
     player_con_CameraPosition()
 }
+//reopening draw card
+if IsLocal &amp;&amp; global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
+    if keyboard_check_pressed(ord("A")){
+        with(global.NetworkObj){GameEvent_Con_CardDrawed()}
+    }
+}
 
 //bot
 if IsBot &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
@@ -315,7 +320,7 @@ if IsBot &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
 
     if global.GameStage=GAMESTAGE.PLAYERTURNS &amp;&amp; BotSpeed=BotSpeedMax{
         //first draw cards
-        if DrawsLeft&gt;0 &amp;&amp; !ds_list_empty(DeckList) &amp;&amp; ds_list_size(cardList)&lt;(10+Hero.Stats[? "ExtraHandCards"]){
+        if Hero.Stats[? "DrawsLeft"]&gt;0 &amp;&amp; !ds_list_empty(DeckList) &amp;&amp; ds_list_size(cardList)&lt;(10+Hero.Stats[? "ExtraHandCards"]){
         CardID=DeckList[| 0]
         ds_list_delete(DeckList,0)
         //tell server I drawed a card
@@ -329,7 +334,7 @@ if IsBot &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
                 svr_AddCardIntoHand(_str,other.mysocket)
             }
         }
-        DrawsLeft-=1
+        Hero.Stats[? "DrawsLeft"]-=1
         }
         //see if theres a need to place cards
         var SummoningMap=script_execute(AI_PlacingDownUnits)

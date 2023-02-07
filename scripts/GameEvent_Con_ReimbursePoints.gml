@@ -10,10 +10,9 @@ for(var i=0;i<ds_list_size(socketlist);i++){
         Points=newAmt
         with(Hero){
             Stats[? "TotaledReimbursedPoints"]=Inc
+            //reset draws
+            Stats[? "DrawsLeft"]=Stats[? "DrawsMax"]
         }
         }
-        
-        //reset draws
-        DrawsLeft=2
     }
 }
