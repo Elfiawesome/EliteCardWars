@@ -34,6 +34,8 @@ EntranceAnimation=1
 CardType=0
 CardID=-1
 CardPos=0
+relx=x
+rely=y
 Homex=x
 Homey=y
 HomeDepth=depth
@@ -101,7 +103,7 @@ if EntranceAnimation&gt;0{
         break;
     }
     x=lerp(x,Homex*_xsc + view_xview[0],0.09)
-    y=lerp(y,Homey*_xsc + view_yview[0],0.09)
+    y=lerp(y,Homey*_ysc + view_yview[0],0.09)
 }
 if EntranceAnimation=0{
     if global.HoveredCard=id{
@@ -124,13 +126,16 @@ if EntranceAnimation=0{
         exit;
     }
     if !global.ShowHands{
-        y=lerp(y,(Homey+400)*_xsc + view_yview[0],0.09)
+        y=lerp(y,(Homey+400)*_ysc + view_yview[0],0.09)
     }
     image_angle=0
     image_xscale=lerp(image_xscale,0.4*_xsc,0.05)
     image_yscale=lerp(image_yscale,0.4*_ysc,0.05)
-    x=lerp(x,(Homex*_xsc + view_xview[0]),0.09)
-    y=lerp(y,(Homey*_ysc + view_yview[0]),0.09)
+    //relx=lerp(relx,(Homex*_xsc),0.09) If i wanted stiff card movements
+    //rely=lerp(rely,(Homey*_ysc),0.09)
+    x=lerp(x,(Homex*_xsc) + view_xview[0],0.09)
+    y=lerp(y,(Homey*_ysc) + view_yview[0],0.09)
+    
     depth=HomeDepth
 }
 </string>
