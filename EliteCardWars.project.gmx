@@ -502,6 +502,7 @@
         <script>scripts\GameEvent_Con_ReimbursePoints.gml</script>
         <script>scripts\GameEvent_Con_HeroDeath.gml</script>
         <script>scripts\GameEvent_cardholders_heal.gml</script>
+        <script>scripts\GameEvent_refundCard.gml</script>
         <script>scripts\GameEvent_cardholders_ClearDebuff.gml</script>
       </scripts>
       <scripts name="grp_con_scripts">

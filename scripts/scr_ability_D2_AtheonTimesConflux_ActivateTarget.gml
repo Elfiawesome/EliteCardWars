@@ -12,19 +12,13 @@ if scr_ability_Checks_OnlyEnemy(vict,atkr){
     ds_list_destroy(victimList)
     
     //refund the card if you are the victim
-    var _cardID=vict.CardID
-    if vict.mysocket=global.NetworkObj.mysocket{
-        with(stid[? vict.mysocket]){
-            var _card=GameEvent_create_card(_cardID,0)
-        }
-    }
     var _m=ds_map_create();
     _m[? "socket"]=vict.mysocket;
-    _m[? "ID"]=_cardID
+    _m[? "ID"]=vict.CardID
     _m[? "Type"]=0
     _m[? "Locked"]=1
     var _str=json_encode_destroy(_m);
-    AddCardIntoHand(_str)
+    GameEvent_refundCard(vict.mysocket, vict.CardID, _str)
     
     if ds_map_exists(Stats,"AtheonTargetedHandCardSock"){
     if ds_map_exists(Stats,"AtheonTargetedHandCardIdentifier"){

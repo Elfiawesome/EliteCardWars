@@ -13,11 +13,8 @@ if scr_ability_Checks_OnlyEnemy(vict,atkr){
     ds_list_destroy(victimList)
     
     //refund the card if you are the victim
-    if vict.mysocket=global.NetworkObj.mysocket{
-        with(stid[? vict.mysocket]){
-            GameEvent_draw_specific_card(vict.CardID,0)
-        }
-    }
+    GameEvent_refundCard(vict.mysocket, vict.CardID, "")
+    
     //clear that card
     with(vict){
         Stats[? "Finalized_Hp"]=0//for servitors
