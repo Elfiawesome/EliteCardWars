@@ -207,10 +207,12 @@ if global.SelectedCard=noone{
 if mouse_check_button_pressed(mb_right){
     if position_meeting(mouse_x,mouse_y,obj_cardholder){
         var _o=instance_position(mouse_x,mouse_y,obj_cardholder)
-        var _inspector=instance_create(0,0,obj_cardholder_inspector);
-        _inspector.ControlParent=id
-        _inspector.Cardholder=_o
-        ds_list_add(global.NetworkObj.socket_to_instanceid[? mysocket].GUIObjectOrder,_inspector)
+        if _o.CardID!=0{
+            var _inspector=instance_create(0,0,obj_cardholder_inspector);
+            _inspector.ControlParent=id
+            _inspector.Cardholder=_o
+            ds_list_add(global.NetworkObj.socket_to_instanceid[? mysocket].GUIObjectOrder,_inspector)
+        }
     }
 }
 
@@ -300,7 +302,7 @@ if IsLocal &amp;&amp; global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
 }
 //reopening draw card
 if IsLocal &amp;&amp; global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder){
-    if keyboard_check_pressed(ord("A")){
+    if keyboard_check_pressed(vk_lshift){
         with(global.NetworkObj){GameEvent_Con_CardDrawed()}
     }
 }
@@ -762,8 +764,8 @@ for(var i=0;i&lt;ds_list_size(sl);i++){
     var _namehei=string_height(_name)
     var _x=100
     var _y=100+i*60
-    draw_set_color(c_white)
     draw_set_alpha(1)
+    draw_set_color(c_white)
     draw_text(_x,_y,_name)
     draw_set_alpha(0.2)
     draw_rectangle(_x,_y,_x+_namewid,_y+_namehei,false)
@@ -791,6 +793,37 @@ for(var i=0;i&lt;ds_list_size(sl);i++){
     }
     draw_set_color(TeamColorOf(stid[? sl[| i]].Team))
     draw_rectangle(_x+50,_y,_x+100,_y+_namehei,false)
+    
+    _x+=110
+    var UpBoxy1=0
+    var UpBoxy2=_namehei/2-2.5
+    draw_set_color(TeamColorOf(stid[? sl[| i]].Team))
+    draw_rectangle(_x,_y+UpBoxy1,_x+50,_y+UpBoxy2,false)
+    var DwnBoxy1=_namehei/2+2.5
+    var DwnBoxy2=_namehei-0
+    draw_set_color(TeamColorOf(stid[? sl[| i]].Team)+5)
+    draw_rectangle(_x,_y+DwnBoxy1,_x+50,_y+DwnBoxy2,false)
+    if mouse_check_button_pressed(mb_left) &amp;&amp; !global.NetworkObj.IsMission{
+        if point_in_rectangle(msx,msy,_x,_y+UpBoxy1,_x+50,_y+UpBoxy2){
+            stid[? sl[| i]].Team++;NeedToUpdateTeamMap=true
+        }
+        if point_in_rectangle(msx,msy,_x,_y+DwnBoxy1,_x+50,_y+DwnBoxy2){
+            stid[? sl[| i]].Team--;NeedToUpdateTeamMap=true
+        }
+    }
+    
+    _x+=60
+    draw_set_color(c_red)
+    draw_set_alpha(0.5)
+    draw_rectangle(_x,_y,_x+50,_y+_namehei,false)
+    draw_line_width(_x,_y,_x+50,_y+_namehei,3)
+    draw_line_width(_x,_y+_namehei,_x+50,_y,3)
+    if mouse_check_button_pressed(mb_left) &amp;&amp; !global.NetworkObj.IsMission{
+        if point_in_rectangle(msx,msy,_x,_y,_x+50,_y+_namehei){
+            //remove player
+        }
+    }
+    
 }
 draw_set_font(ft_number)
 /*var _map=global.NetworkObj.TeamMap

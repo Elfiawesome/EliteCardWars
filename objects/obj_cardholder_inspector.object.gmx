@@ -169,6 +169,7 @@ if !is_undefined(Cardholder){
         _x,
         _y+_h/2+_b,
         _sc,_sc,0,c_white,1)
+    
     var _wordx=_x-_w/2
     var _wordy=_y+_h+_b+_b
     

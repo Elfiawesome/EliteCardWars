@@ -150,6 +150,7 @@ alarm[0]=60
           <argument>
             <kind>1</kind>
             <string>///Battlefield Update Timer
+if !global.IsGame{
 if BattlefieldUpdateTimer&gt;0{
     BattlefieldUpdateTimer--
 }else{
@@ -206,6 +207,8 @@ for(var i=0;i&lt;ds_list_size(socketlist);i++){
     buffer_write(buffer,buffer_string,scr_Player_Init_Data_Get(_inst))
     network_send_packet(socketlist[| i],buffer,buffer_tell(buffer))
     buffer_delete(buffer)
+}
+
 }
 
 }
