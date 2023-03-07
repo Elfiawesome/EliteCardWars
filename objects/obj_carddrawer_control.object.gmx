@@ -32,6 +32,7 @@ y=0
 backtgtx=0
 ControlParent=0
 Draws=0
+IsHandFull=false
 //selectable decks
 DeckBaseScale=0.4
 DeckSprite[0]=spr_cardsback
@@ -80,7 +81,9 @@ if ControlParent.GUIObjectOrder[| 0]=id{
                 ControlParent.Hero.Stats[? "DrawsLeft"]=Draws
             }
             if ds_list_size(ControlParent.cardList)&gt;=(10+ControlParent.Hero.Stats[? "ExtraHandCards"]){
-                Draws=0
+                IsHandFull=true
+            }else{
+                IsHandFull=false
             }
         break;
     }
@@ -148,7 +151,7 @@ for(var i=0;i&lt;array_length_1d(DeckSprite);i++){
     var canDraw=true
     if i=0 &amp;&amp; ds_list_empty(ControlParent.DeckList){canDraw=false}//if unit deck is empty
     if i=1 &amp;&amp; ds_list_empty(ControlParent.SpellList){canDraw=false}//if spell deck is empty [Not implemented]
-    if Draws&lt;1{canDraw=false}
+    if Draws&lt;1 || IsHandFull=true{canDraw=false}
     
     //draw sprite
     var _clr=c_white
