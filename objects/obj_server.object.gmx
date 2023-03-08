@@ -73,6 +73,8 @@ alarm[0]=60
 //Battlefield Update Timer
 BattlefieldUpdateTimer=160
 BattlefieldUpdateTimerMax=160
+//Bot Counter for adding them
+BotCounterSocket=-1
 
 //create myself -&gt; (server player object)
 var _inst=instance_create(100,100,obj_player_con);
@@ -193,9 +195,9 @@ if BattlefieldUpdateTimer&gt;0{
 //adding another 'bot player' into the game
 if keyboard_check_pressed(vk_control) &amp;&amp; !(mouse_wheel_down() || mouse_wheel_up()){
 var _inst=instance_create(100,100,obj_player_con);
-_inst.name="Bot "+string(ds_list_size(socketlist))
+_inst.name="Bot "+string(abs(BotCounterSocket))
 _inst.IsLocal=false
-_inst.mysocket=-ds_list_size(socketlist) - 1
+_inst.mysocket=BotCounterSocket; BotCounterSocket-- //-ds_list_size(socketlist) - 1
 _inst.Team=0
 _inst.IsBot=true
 ds_list_add(_inst.DeckList,
@@ -269,19 +271,25 @@ switch(type){
     case network_type_connect:
         //connecting player
         var socket=async_load[? "socket"]
-        scr_svr_connect(socket)
+        if !global.IsGame{
+            scr_svr_connect(socket)
+        }
     break;
     case network_type_disconnect:
         //disconnecting player
         var socket=async_load[? "socket"]
-        scr_svr_disconnect(socket)
+        if ds_list_find_index(socketlist,socket)!=-1{
+            scr_svr_disconnect(socket)
+        }
     break;
     case network_type_data:
         //receive packet
         var buffer=async_load[? "buffer"]
         var socket=async_load[? "id"]
-        buffer_seek(buffer,buffer_seek_start,0)
-        scr_svr_rp(socket,buffer)
+        if ds_list_find_index(socketlist,socket)!=-1{
+            buffer_seek(buffer,buffer_seek_start,0)
+            scr_svr_rp(socket,buffer)
+        }
     break;
 }
 </string>

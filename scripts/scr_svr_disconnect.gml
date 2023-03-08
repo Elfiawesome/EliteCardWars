@@ -21,4 +21,4 @@ ds_map_delete(socket_to_instanceid,socket)
 //update team maps
 update_json_TeamMap()
 update_Turnstage(TeamMap)
-if Turn>=0{TurnstageMoveOn()}
+if global.IsGame && Turn>=0{TurnstageMoveOn()}
