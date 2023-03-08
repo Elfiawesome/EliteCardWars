@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -51,7 +51,7 @@ global.IsFullScreen=false
           <argument>
             <kind>1</kind>
             <string>if keyboard_check_pressed(vk_escape){
-    global.IsSettingsOpen=!global.IsSettingsOpen
+    //global.IsSettingsOpen=!global.IsSettingsOpen
 }
 </string>
           </argument>
@@ -75,12 +75,12 @@ global.IsFullScreen=false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if global.IsSettingsOpen{
+            <string>/*if global.IsSettingsOpen{
     draw_set_color(c_black)
     draw_set_alpha(0.4)
     draw_rectangle(0,0,view_wport[0],view_hport[0],false)
     draw_set_color(c_white)
-}
+}*/
 
 if keyboard_check_pressed(vk_f2){
     //need add some kind of scalling feature

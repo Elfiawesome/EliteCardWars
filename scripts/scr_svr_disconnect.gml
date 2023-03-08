@@ -22,3 +22,13 @@ ds_map_delete(socket_to_instanceid,socket)
 update_json_TeamMap()
 update_Turnstage(TeamMap)
 if global.IsGame && Turn>=0{TurnstageMoveOn()}
+
+//if I am the one disconected (technically useless here but sure)
+if socket=global.NetworkObj.mysocket{
+    if global.NetworkObj.object_index=obj_client{
+        network_destroy(global.NetworkObj.client)
+    }
+    instance_destroy(global.NetworkObj)
+    instance_destroy(obj_player_con)
+    room_goto(rm_menu)
+}

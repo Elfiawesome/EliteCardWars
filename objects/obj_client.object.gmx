@@ -61,8 +61,16 @@ if !global.IsSpeedrun{
     var _url=get_string("Enter Host's IP","127.0.0.1")
 }
 client=network_connect(socket,_url,port)
-if client&lt;0{
+/*if client&lt;0{
     show_message("Failed to connect")
+}*/
+while(client &lt; 0){
+    if port &gt;= 65535{
+        show_message("Failed to connect!")
+        break;
+    }
+    port++
+    client=network_connect(socket,_url,port)
 }
 
 //my player object is only created when I receive PLAYERINIT from the server
