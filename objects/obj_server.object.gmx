@@ -58,8 +58,13 @@ var type=network_socket_tcp
 var port=3115
 var maxclients=20
 var server=network_create_server(type,port,maxclients)
-if server&lt;0{
-    show_message("Server Failed!")
+while(server &lt; 0){
+    if port &gt;= 65535{
+        show_message("Server Failed!")
+        break;
+    }
+    port++
+    server=network_create_server(type,port,maxclients)
 }
 //start pinging clients
 LastServerPinged=current_time
@@ -82,6 +87,30 @@ ds_list_shuffle(_inst.SpellList)
 _inst.PlayerHeroID=global.PlayerHero
 socket_to_instanceid[? 0]=_inst
 ds_list_add(socketlist,0)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>ds_list_destroy(socketlist)
+ds_map_destroy(socket_to_instanceid)
 </string>
           </argument>
         </arguments>

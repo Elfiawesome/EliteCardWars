@@ -1,5 +1,5 @@
 ///player_con_CardSelectorControl()
-if !ds_list_empty(GUIObjectOrder){
+if !ds_list_empty(GUIObjectOrder) && !global.IsSettingsOpen{
 if GUIObjectOrder[| 0].object_index=obj_cardselector_control{
     var CardSelectorControl=GUIObjectOrder[| 0]
     if CardSelectorControl.SelectedCardID>0{//if card is selected

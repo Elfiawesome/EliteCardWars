@@ -43,7 +43,6 @@ global.PlayerOnlineName=choose(
 //settings
 global.IsSpeedrun=false//false
 global.Version="0.0.1"
-global.IsFullScreen=false
 scr_units_init()
 //Player data
 global.PlayerDeck=ds_list_create()
@@ -264,31 +263,7 @@ file_text_close(file);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///scalling
-//need add some kind of scalling feature
-if keyboard_check_pressed(ord("Z")){
-switch(global.IsFullScreen){
-    case false://becoming fullscreen
-        screen_width = display_get_width();
-        screen_height = display_get_height();
-        surface_resize(application_surface, screen_width, screen_height)
-        display_set_gui_size(screen_width, screen_height)
-        window_set_size(screen_width, screen_height);
-        window_set_fullscreen(true);
-        global.IsFullScreen=true
-    break;
-    case true://exiting form fullscreen
-        screen_width = 1920;
-        screen_height = 1080;
-        surface_resize(application_surface, screen_width, screen_height)
-        display_set_gui_size(screen_width, screen_height)
-        window_set_size(screen_width, screen_height);
-        window_set_fullscreen(false);
-        global.IsFullScreen=false
-    break;
-}
-}
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>

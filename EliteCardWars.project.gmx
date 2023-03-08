@@ -568,6 +568,7 @@
       <object>objects\obj_menu_DeckSelector</object>
       <object>objects\obj_menu_SpellsSelector</object>
       <object>objects\obj_menu_HeroSelector</object>
+      <object>objects\obj_settings_control</object>
     </objects>
     <objects name="grp_network">
       <object>objects\obj_server</object>
