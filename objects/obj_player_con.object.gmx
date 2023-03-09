@@ -802,6 +802,7 @@ for(var i=0;i&lt;ds_list_size(sl);i++){
     var DwnBoxy2=_namehei-0
     draw_set_color(TeamColorOf(stid[? sl[| i]].Team)+5)
     draw_rectangle(_x,_y+DwnBoxy1,_x+50,_y+DwnBoxy2,false)
+    draw_set_color(c_white)
     if mouse_check_button_pressed(mb_left) &amp;&amp; !global.NetworkObj.IsMission{
         if point_in_rectangle(msx,msy,_x,_y+UpBoxy1,_x+50,_y+UpBoxy2){
             stid[? sl[| i]].Team++;NeedToUpdateTeamMap=true
@@ -811,6 +812,8 @@ for(var i=0;i&lt;ds_list_size(sl);i++){
         }
     }
     
+    
+    // 'x' button
     _x+=60
     if global.NetworkObj.mysocket!=sl[| i]{
     if global.NetworkObj.object_index=obj_server{

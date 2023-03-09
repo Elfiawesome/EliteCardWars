@@ -54,23 +54,15 @@ inherit_svrclt_create()
 global.NetworkObj=id
 //create client socket
 var type=network_socket_tcp
-var port=3115
+var port=3115//port number may vary
 var socket=network_create_socket(type)
 var _url="127.0.0.1"
 if !global.IsSpeedrun{
     var _url=get_string("Enter Host's IP","127.0.0.1")
 }
 client=network_connect(socket,_url,port)
-/*if client&lt;0{
+if client&lt;0{
     show_message("Failed to connect")
-}*/
-while(client &lt; 0){
-    if port &gt;= 65535{
-        show_message("Failed to connect!")
-        break;
-    }
-    port++
-    client=network_connect(socket,_url,port)
 }
 
 //my player object is only created when I receive PLAYERINIT from the server
