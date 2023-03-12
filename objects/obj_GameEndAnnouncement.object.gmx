@@ -106,14 +106,16 @@ switch(AnimationStage){
         y=lerp(y,tgty,0.2)
     break;
     case 4:
+        if image_index!=1{
         if global.NetworkObj.object_index=obj_client{
             network_destroy(global.NetworkObj.client)
         }
-        
         instance_destroy(global.NetworkObj)
         instance_destroy(obj_player_con)
-        instance_destroy()
         room_goto(rm_menu)
+        }
+        
+        instance_destroy()
     break;
 }
 draw_self()
