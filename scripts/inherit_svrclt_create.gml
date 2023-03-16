@@ -29,6 +29,12 @@ CameraXoffsetStart=0
 CameraYoffsetStart=0
 CameraXoffset=0
 CameraYoffset=0
+TgtViewWidth=view_wview[0]
+TgtViewHeight=view_hview[0]
+MinCamX=0
+MaxCamX=0
+MinCamY=0
+MaxCamY=0
 //units
 scr_units_init()
 IsDebug=false

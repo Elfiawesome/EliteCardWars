@@ -34,11 +34,15 @@ with(global.NetworkObj){
     }
     view_xview[0]=lerp(view_xview[0],CameraFocus.Homex-view_wview[0]/2+CameraXoffset,0.07)
     view_yview[0]=lerp(view_yview[0],CameraFocus.Homey-view_hview[0]/2+CameraYoffset,0.07)
+    var RelMinCamX=MinCamX-view_wview[0]/2;
+    var RelMaxCamX=MaxCamX-view_wview[0]/2;
+    var RelMinCamY=MinCamY;//-view_hview[0]/2;
+    var RelMaxCamY=MaxCamY;//-view_hview[0]/2;
+    view_xview[0]=clamp(view_xview[0],RelMinCamX,RelMaxCamX)
+    view_yview[0]=clamp(view_yview[0],RelMinCamX,RelMaxCamY)
     
     //camera dragging
-    if global.SelectedCard=noone
-    //&& global.HoveredCard=noone
-    {
+    if global.SelectedCard=noone{
         var _mxoff=(mouse_x-CameraFocus.Homex)*2.5
         var _myoff=(mouse_y-CameraFocus.Homey)*2.5
         if mouse_check_button_pressed(mb_left){
@@ -47,20 +51,35 @@ with(global.NetworkObj){
             CameraIsDrag=true
         }
         if CameraIsDrag && mouse_check_button(mb_left){
-            CameraXoffset=(CameraXoffsetStart-_mxoff)
-            CameraYoffset=(CameraYoffsetStart-_myoff)
+            CameraXoffset=clamp( 
+                (CameraXoffsetStart-_mxoff),
+                RelMinCamX-CameraFocus.Homex+view_wview[0]/2, 
+                RelMaxCamX-CameraFocus.Homex+view_wview[0]/2
+            )
+            CameraYoffset=clamp(
+                (CameraYoffsetStart-_myoff),
+                RelMinCamX-CameraFocus.Homey+view_hview[0]/2, 
+                RelMaxCamY-CameraFocus.Homey+view_hview[0]/2
+            )
         }
     }
     if mouse_check_button_released(mb_left){
         CameraIsDrag=false
     }
+    //zooming in and out
     var _amt=10
-    if mouse_wheel_down(){
-        view_wview[0]+=16*_amt
-        view_hview[0]+=9*_amt
+    if TgtViewWidth < (MaxCamX-MinCamX)*1.5 || TgtViewHeight < (MaxCamY-MinCamY)*1.5{
+        if mouse_wheel_down(){
+            TgtViewWidth+=16*_amt
+            TgtViewHeight+=9*_amt
+        }
     }
-    if mouse_wheel_up(){
-        view_wview[0]-=16*_amt
-        view_hview[0]-=9*_amt
+    if TgtViewWidth > 500{
+        if mouse_wheel_up(){
+            TgtViewWidth-=16*_amt
+            TgtViewHeight-=9*_amt
+        }
     }
+    view_wview[0]=lerp(view_wview[0],TgtViewWidth,0.07)
+    view_hview[0]=lerp(view_hview[0],TgtViewHeight,0.07)
 }

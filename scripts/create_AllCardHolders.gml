@@ -20,7 +20,10 @@ for (var k=ds_map_find_first(TeamMap);!is_undefined(k);k=ds_map_find_next(TeamMa
     }
     ds_list_destroy(_l)
 }
-
+MinCamX=view_wview[0]
+MaxCamX=view_wview[0]/2
+MinCamY=view_hview[0]
+MaxCamY=view_hview[0]/2
 //create card holders
 for (var k=ds_map_find_first(TeamMap);!is_undefined(k);k=ds_map_find_next(TeamMap, k)){
     _l=ds_list_create()
@@ -50,6 +53,11 @@ for (var k=ds_map_find_first(TeamMap);!is_undefined(k);k=ds_map_find_next(TeamMa
                 SummonHero(Hero,PlayerHeroID)
             }
         }
+        //set camera max [Still does not work perfectly]
+        if (_con.Homex-500)<MinCamX{MinCamX=_con.Homex-500}
+        if (_con.Homex+500)>MaxCamX{MaxCamX=_con.Homex+500}
+        if (_con.Homey-400)<MinCamY{MinCamY=_con.Homey-400}
+        if (_con.Homey+400)>MaxCamY{MaxCamY=_con.Homey+400}
     }
     ds_list_destroy(_l)
 }

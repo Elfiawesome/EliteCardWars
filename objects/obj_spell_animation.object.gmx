@@ -80,7 +80,7 @@ timer=0
     break;
     case 2:
         timer+=0.05
-        if timer&gt;3{
+        if timer&gt;6{
             AnimationStage=3
         }
     break;
