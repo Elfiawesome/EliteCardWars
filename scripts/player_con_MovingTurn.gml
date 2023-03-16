@@ -2,7 +2,7 @@
 with(global.NetworkObj){
     //if my turn
     if Turnstage[Turn]=mysocket{
-        if keyboard_check_pressed(vk_space){
+        if keyboard_check_pressed(vk_space) || other.IsEndTurnButton{
             if global.NetworkObj.object_index=obj_server{
                 svr_TurnstageMoveOn()
             }
