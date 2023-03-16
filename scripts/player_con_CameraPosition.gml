@@ -34,12 +34,12 @@ with(global.NetworkObj){
     }
     view_xview[0]=lerp(view_xview[0],CameraFocus.Homex-view_wview[0]/2+CameraXoffset,0.07)
     view_yview[0]=lerp(view_yview[0],CameraFocus.Homey-view_hview[0]/2+CameraYoffset,0.07)
-    var RelMinCamX=MinCamX-view_wview[0]/2;
+    var RelMinCamX=MinCamX-view_wview[0]/2;//we do this so that we can adjust when there is zoom in/out
     var RelMaxCamX=MaxCamX-view_wview[0]/2;
-    var RelMinCamY=MinCamY;//-view_hview[0]/2;
-    var RelMaxCamY=MaxCamY;//-view_hview[0]/2;
+    var RelMinCamY=MinCamY-view_hview[0]/2;
+    var RelMaxCamY=MaxCamY-view_hview[0]/2;
     view_xview[0]=clamp(view_xview[0],RelMinCamX,RelMaxCamX)
-    view_yview[0]=clamp(view_yview[0],RelMinCamX,RelMaxCamY)
+    view_yview[0]=clamp(view_yview[0],RelMinCamY,RelMaxCamY)
     
     //camera dragging
     if global.SelectedCard=noone{
@@ -58,7 +58,7 @@ with(global.NetworkObj){
             )
             CameraYoffset=clamp(
                 (CameraYoffsetStart-_myoff),
-                RelMinCamX-CameraFocus.Homey+view_hview[0]/2, 
+                RelMinCamY-CameraFocus.Homey+view_hview[0]/2, 
                 RelMaxCamY-CameraFocus.Homey+view_hview[0]/2
             )
         }
