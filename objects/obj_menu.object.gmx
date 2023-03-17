@@ -263,26 +263,6 @@ file_text_close(file);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>MenuButtonPressed[0]=false
 MenuButtonPressed[1]=false
 MenuButtonPressed[2]=false
@@ -318,8 +298,27 @@ for(i=0;i&lt;3;i++){
         _x+sprite_get_width(_sp)/2*_sc,
         _y+sprite_get_height(_sp)/2*_sc,false
         )
-    draw_set_alpha(c_white)
+    draw_set_color(c_white)
     draw_set_alpha(1)
+    
+    
+    /*draw_set_color($d3c79d)
+    var _tx=_x-sprite_get_width(_sp)/2*_sc
+    var _ty=_y+sprite_get_height(_sp)/2*_sc+40
+    draw_rectangle(_tx,_ty,_tx+sprite_get_height(_sp)*_sc,_ty+40,false)
+    draw_set_color(c_black)
+    switch(i){
+        case 0:
+            draw_text(_tx,_ty,"Unit Deck")
+        break;
+        case 1:
+            draw_text(_tx,_ty,"Spell Deck")
+        break;
+        case 2:
+            draw_text(_tx,_ty,"Hero")
+        break;
+    }
+    draw_set_color(c_white)*/
 }
 </string>
           </argument>
@@ -345,10 +344,7 @@ for(i=0;i&lt;3;i++){
             <kind>1</kind>
             <string>draw_set_font(ft_number)
 draw_text_transformed(0,0,"Elite Card Wars Demo",5,5,0)
-draw_text_transformed(0,120,"S:Server/C:Client",3,3,0)
-draw_text_transformed(0,280,"Press 'D,F' to edit deck",3,3,0)
-draw_text_transformed(0,360,"Press 'z' to fullscreen",3,3,0)
-
+//draw_text_transformed(0,280,"Press 'D,F' to edit deck",3,3,0)
 </string>
           </argument>
         </arguments>
