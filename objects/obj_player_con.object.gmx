@@ -395,7 +395,7 @@ if IsBot &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
         
     }
     //moving on to the next turn
-    if BotSpeed=BotSpeedMax &amp;&amp; ds_list_empty(global.AnimatorSys[0].AnimatingOrderList){
+    if BotSpeed=BotSpeedMax &amp;&amp; global.AnimatorSys[0].IsAnimatorEmpty{
     with(global.NetworkObj){
         if global.NetworkObj.object_index=obj_server{
             svr_TurnstageMoveOn()

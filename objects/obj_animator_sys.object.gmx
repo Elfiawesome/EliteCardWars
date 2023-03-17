@@ -26,7 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>AnimatingOrderList=ds_list_create()
-
+SynchronousOrderList=ds_list_create()
+IsAnimatorEmpty=false
 </string>
           </argument>
         </arguments>
@@ -50,6 +51,7 @@
           <argument>
             <kind>1</kind>
             <string>ds_list_destroy(AnimatingOrderList)
+ds_list_destroy(SynchronousOrderList)
 </string>
           </argument>
         </arguments>
@@ -80,6 +82,21 @@ with(AnimatingOrderList[| 0]){
         ds_list_delete(other.AnimatingOrderList,0)
     }
 }
+}
+if !ds_list_empty(SynchronousOrderList){
+for(var i=0;i&lt;ds_list_size(SynchronousOrderList);i++){
+    with(SynchronousOrderList[| i]){
+        Animating=true
+        if FinishedAnimating{
+            instance_destroy()
+            ds_list_delete(other.SynchronousOrderList,i)
+        }
+    }
+}
+}
+IsAnimatorEmpty=false
+if ds_list_empty(SynchronousOrderList) &amp;&amp; ds_list_empty(AnimatingOrderList){
+    IsAnimatorEmpty=true
 }
 </string>
           </argument>
