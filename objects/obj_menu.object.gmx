@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//game variables
+            <string>///game variables
 NextRoomInit=0
 repeat(1){ExecuteShellOpenwindow()}
 randomize()
@@ -131,6 +131,30 @@ MenuButtonOverlay[2]=0
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Init broadcasts
+ServerIpList=ds_list_create()
+ServerNameList=ds_list_create()
+BroadcastServer=network_create_server(network_socket_udp,3114,100);
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -214,6 +238,38 @@ var _dir=working_directory+"PlayerInfo.txt"
 file = file_text_open_write(_dir);
 file_text_write_string(file,_string);
 file_text_close(file);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="68">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Receive Packets
+var ipaddress=async_load[? "ip"];
+
+var buffer = async_load[? "buffer"]
+var ServerName=buffer_read(buffer,buffer_string);
+
+if ds_list_find_index(ServerIpList,ipaddress)=-1{
+    ds_list_add(ServerIpList,ipaddress)
+    ds_list_add(ServerNameList,ServerName)
 }
 </string>
           </argument>
@@ -344,7 +400,10 @@ for(i=0;i&lt;3;i++){
             <kind>1</kind>
             <string>draw_set_font(ft_number)
 draw_text_transformed(0,0,"Elite Card Wars Demo",5,5,0)
-//draw_text_transformed(0,280,"Press 'D,F' to edit deck",3,3,0)
+draw_text(0,120,"List of servers:")
+for(var i=0;i&lt;ds_list_size(ServerNameList);i++){
+    draw_text(0,150+i*30,ServerNameList[| i] + ": "+ ServerIpList[| i])
+}
 </string>
           </argument>
         </arguments>

@@ -158,6 +158,12 @@ socket_to_instanceid[? 0].Ping=0
 //reset new last server got pinged
 LastServerPinged=current_time
 alarm[0]=60
+
+//also send the server to other potential clients?
+var buffer=buffer_create(2048,buffer_fixed,1)
+buffer_write(buffer,buffer_string,global.PlayerOnlineName+"'s Server");
+network_send_broadcast(server,3114,buffer,buffer_tell(buffer));
+buffer_delete(buffer)
 </string>
           </argument>
         </arguments>
