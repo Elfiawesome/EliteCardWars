@@ -2,8 +2,9 @@
 var MapStr=argument0;
 
 var _id=GetMultiStatsString(id)
-if Stats[? "LastAttackedBy"]!=noone{
-with(Stats[? "LastAttackedBy"]){
+var _atkr=GetMultiStatsObject(Stats[? "LastAttackedBy"])
+if _atkr!=noone{
+with(_atkr){
     if CardID!=0{
     var _ota=Stats[? "Multi_OtherAtkAmt"];
     var _otd=Stats[? "Multi_OtherAtkDuration"];

@@ -25,9 +25,75 @@
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///visual variables
+MenuButtonPressed[0]=false
+MenuButtonPressed[1]=false
+MenuButtonPressed[2]=false
+MenuButtonPressed[3]=false
+MenuButtonPressed[4]=false
+MenuButtonPressed[6]=false
+MenuButtonPressed[7]=false
+
+//Deck editor variables
+DeckButtonPressed[0]=false
+DeckButtonPressed[1]=false
+DeckButtonPressed[2]=false
+DeckHover=-1
+DeckUnderline[0]=0;DeckUnderline[1]=0;DeckUnderline[2]=0
+DeckEditorPage=noone
+DeckEditorScrollAmt[0]=0;DeckEditorScrollAmt[1]=0;DeckEditorScrollAmt[2]=0;
+
+
+var _c=0;
+MenuButtonOverlay[_c,0]=0;MenuButtonOverlay[_c,1]=0;_c++
+MenuButtonOverlay[_c,0]=0;MenuButtonOverlay[_c,1]=0;_c++
+MenuButtonOverlay[_c,0]=0;MenuButtonOverlay[_c,1]=0;_c++
+MenuButtonOverlay[_c,0]=0;MenuButtonOverlay[_c,1]=0;_c++
+MenuButtonOverlay[_c,0]=0;MenuButtonOverlay[_c,1]=0;_c++
+MenuButtonOverlay[_c,0]=0;MenuButtonOverlay[_c,1]=0;_c++
+MenuButtonOverlay[_c,0]=0;MenuButtonOverlay[_c,1]=0;_c++
+MenuButtonOverlay[_c,0]=0;MenuButtonOverlay[_c,1]=0;_c++
+MenuButtonOverlay[_c,0]=0;MenuButtonOverlay[_c,1]=0;_c++
+
+//pages
+CurrentPage=0
+Page_x=0
+IsoverlayOn=false
+
+//room transitions
+TransitionCase=-1
+RmTransition=-1
+
+//card display pos
+carddisplayx=view_wport[0]*3/4
+carddisplayy=view_hport[0]/2
+carddisplayspr=spr_cards
+carddisplayimg=irandom_range(1,UnitID.UnitID_MAX)
+carddisplaytype=0
+carddisplaystage=0
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///game variables
 NextRoomInit=0
-repeat(1){ExecuteShellOpenwindow()}
+repeat(0){ExecuteShellOpenwindow()}
 randomize()
 draw_set_font(ft_number)
 global.PlayerOnlineName=choose(
@@ -44,13 +110,14 @@ global.PlayerOnlineName=choose(
 global.IsSpeedrun=false//false
 global.Version="0.0.1"
 scr_units_init()
+//network settings
+global.TargetNetworkType=network_socket_tcp
+global.TargetNetworkPort=3115
+global.TargetNetworkIP="127.0.0.1"
 //Player data
 global.PlayerDeck=ds_list_create()
 global.PlayerSpells=ds_list_create()
 global.PlayerHero=1
-//Deck editor variables
-DeckEditorPage=noone
-DeckEditorScrollAmt[0]=0;DeckEditorScrollAmt[1]=0;DeckEditorScrollAmt[2]=0;
 
 //initializing deck
 if global.IsSpeedrun{
@@ -96,61 +163,26 @@ if !global.IsSpeedrun{
         if !is_undefined(_v){global.PlayerOnlineName=_v}
         ds_map_destroy(_m)
     }
+    //Writing Campaign Save file
+    var _dir=working_directory+"CampaignSaves.txt"
+    global.CampaignSavesDir=_dir
+    if !file_exists(_dir){
+        var _m=ds_map_create()
+        for(i=1;i&lt;MissionID.MAX;i++){
+            if i!=1{
+                _m[? i]=false
+            }else{
+                _m[? i]=true
+            }
+        }
+        var _str=json_beautify(json_encode_destroy(_m))
+        file = file_text_open_write(_dir);
+        file_text_write_string(file,_str);
+        file_text_close(file);
+    }
 }
 
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///visual variables
-MenuButtonPressed[0]=false
-MenuButtonPressed[1]=false
-MenuButtonPressed[2]=false
-
-MenuButtonOverlay[0]=0
-MenuButtonOverlay[1]=0
-MenuButtonOverlay[2]=0
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Init broadcasts
-ServerIpList=ds_list_create()
-ServerNameList=ds_list_create()
-BroadcastServer=network_create_server(network_socket_udp,3114,100);
 </string>
           </argument>
         </arguments>
@@ -173,57 +205,65 @@ BroadcastServer=network_create_server(network_socket_udp,3114,100);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if MenuButtonPressed[0]{
-    //Go to campaign page
-    NextRoomInit=con_campaign
-    room_goto(rm_campaign_selection)
+            <string>if MenuButtonPressed[0]{//campaign
+    TransitionCase=0
+    RmTransition=instance_create(0,0,obj_room_transition)
 }
-if keyboard_check_pressed(ord("S")) || MenuButtonPressed[1]{
-    //server
-    NextRoomInit=obj_server
-    room_goto(rm_online)
+if MenuButtonPressed[1]{//server
+    TransitionCase=1
+    RmTransition=instance_create(0,0,obj_room_transition)
 }
-if keyboard_check_pressed(ord("C")) || MenuButtonPressed[2]{
-    //Connect to server as client
-    NextRoomInit=obj_client
-    room_goto(rm_online)
+if MenuButtonPressed[2]{//client
+    TransitionCase=2
+    RmTransition=instance_create(0,0,obj_room_transition)
 }
+if RmTransition!=-1 &amp;&amp; RmTransition.MovedRoom{
+    switch(TransitionCase){
+        case 0://campaign selected
+            room_goto(rm_campaign_selection)
+        break;
+        case 1://server create
+            room_goto(rm_online)
+        break;
+        case 2://join game
+            room_goto(rm_online)
+        break;
+    }
+}
+
+if MenuButtonPressed[6]{//Home Tab
+    CurrentPage=0
+}
+if MenuButtonPressed[7]{//Deck Tab
+    CurrentPage=1
+}
+Page_x=lerp(Page_x,CurrentPage,0.07)
+
 if keyboard_check_pressed(vk_f1){
     //open new window
     ExecuteShellOpenwindow()
 }
-if keyboard_check_pressed(ord("D")){
-    if !instance_exists(DeckEditorPage){
+
+if !IsoverlayOn{
+    if DeckButtonPressed[0]{
         DeckEditorPage=instance_create(0,0,obj_menu_DeckSelector)
         DeckEditorPage.Menu=id
         DeckEditorPage.scrolamt=DeckEditorScrollAmt[0]
-    }else{
-        DeckEditorPage.Exit=true
-        scr_menu_update_deckfile()
+        IsoverlayOn=true
     }
-}
-if keyboard_check_pressed(ord("F")){
-    if !instance_exists(DeckEditorPage){
+    if DeckButtonPressed[1]{
         DeckEditorPage=instance_create(0,0,obj_menu_SpellsSelector)
         DeckEditorPage.Menu=id
         DeckEditorPage.scrolamt=DeckEditorScrollAmt[2]
-    }else{
-        DeckEditorPage.Exit=true
-        scr_menu_update_deckfile()
+        IsoverlayOn=true
     }
-}
-if keyboard_check_pressed(ord("G")){
-    if !instance_exists(DeckEditorPage){
+    if DeckButtonPressed[2]{
         DeckEditorPage=instance_create(0,0,obj_menu_HeroSelector)
         DeckEditorPage.Menu=id
         DeckEditorPage.scrolamt=DeckEditorScrollAmt[1]
-    }else{
-        DeckEditorPage.Exit=true
-        scr_menu_update_deckfile()
+        IsoverlayOn=true
     }
 }
-
-
 if keyboard_check_pressed(ord("M")){
 global.PlayerOnlineName=get_string("Enter Name","")
 //getting string to write
@@ -238,38 +278,6 @@ var _dir=working_directory+"PlayerInfo.txt"
 file = file_text_open_write(_dir);
 file_text_write_string(file,_string);
 file_text_close(file);
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="68">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Receive Packets
-var ipaddress=async_load[? "ip"];
-
-var buffer = async_load[? "buffer"]
-var ServerName=buffer_read(buffer,buffer_string);
-
-if ds_list_find_index(ServerIpList,ipaddress)=-1{
-    ds_list_add(ServerIpList,ipaddress)
-    ds_list_add(ServerNameList,ServerName)
 }
 </string>
           </argument>
@@ -293,10 +301,24 @@ if ds_list_find_index(ServerIpList,ipaddress)=-1{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if NextRoomInit!=0{
-    var _o=instance_create(0,0,NextRoomInit)
+            <string>if RmTransition!=-1{
+    switch(TransitionCase){
+        case 0://campaign selected
+            //var _m=instance_create(300,300,con_campaign);
+            //_m.Mission_ID=MissionID.Tutorial1
+            //var _m=instance_create(450,103,con_campaign);
+            //_m.Mission_ID=MissionID.VaultOfGlass
+        break;
+        case 1://server create
+            instance_create(0,0,obj_server)
+        break;
+        case 2://join game
+            instance_create(0,0,obj_menu_JoinGame)
+        break;
+    }
     instance_destroy()
 }
+
 </string>
           </argument>
         </arguments>
@@ -322,12 +344,247 @@ if ds_list_find_index(ServerIpList,ipaddress)=-1{
             <string>MenuButtonPressed[0]=false
 MenuButtonPressed[1]=false
 MenuButtonPressed[2]=false
+MenuButtonPressed[3]=false
+MenuButtonPressed[4]=false
+MenuButtonPressed[5]=false
+MenuButtonPressed[6]=false
+MenuButtonPressed[7]=false
+var msx=device_mouse_x_to_gui(0)
+var msy=device_mouse_y_to_gui(0)
+
+var buttonid=0
+var _xoff=160
+var _yoff=170
+var _pagexoff=0
+var _curx=_xoff
+var _cury=_yoff
+
+
+if CurrentPage=0 || (CurrentPage!=0 &amp;&amp; abs(Page_x-CurrentPage)&gt;0.1){
+_pagexoff=-Page_x*view_wport[0]
+_curx=_xoff+_pagexoff
+
+//init button size variables
+var _butwid=524
+var _buthei=135
+var _butout=3
+var _butbotline=7.5
+var _butsep=18
+
+//set all text align
+draw_set_valign(fa_middle)
+draw_set_halign(fa_center)
+draw_set_font(ft_Ebrima_Standard_Bold)
+
+//Campaign
+buttonid=0
+draw_set_color($c07000)
+draw_rectangle(_curx-_butout,_cury-_butout,_curx+_butwid+_butout,_cury+_buthei+_butout,false)
+draw_set_color($404040)
+draw_rectangle(_curx,_cury,_curx+_butwid,_cury+_buthei,false)
+scr_menu_button_draw_highlight(msx,msy,_curx,_cury,_butwid,_buthei,buttonid)
+draw_set_color(c_white)
+draw_text_transformed(_curx+_butwid/2,_cury+_buthei/2,"Campaign",1,1,0)
+
+//Host game
+buttonid=1
+_cury+=_buthei+_butsep;
+draw_set_color($c07000)
+draw_rectangle(_curx-_butout,_cury-_butout,_curx+_butwid/2+_butout-_butsep/2,_cury+_buthei+_butout,false)
+draw_set_color($404040)
+draw_rectangle(_curx,_cury,_curx+_butwid/2-_butsep/2,_cury+_buthei,false)
+scr_menu_button_draw_highlight(msx,msy,_curx,_cury,_butwid/2-_butsep/2,_buthei,buttonid)
+draw_set_color(c_white)
+draw_text_transformed(_curx+_butwid/4,_cury+_buthei/2,"Host",1,1,0)
+//Join game
+buttonid=2
+_curx+=_butwid/2+_butsep;
+draw_set_color($c07000)
+draw_rectangle(_curx-_butout,_cury-_butout,_curx+_butwid/2+_butout-_butsep,_cury+_buthei+_butout,false)
+draw_set_color($404040)
+draw_rectangle(_curx,_cury,_curx+_butwid/2-_butsep,_cury+_buthei,false)
+scr_menu_button_draw_highlight(msx,msy,_curx,_cury,_butwid/2-_butsep,_buthei,buttonid)
+draw_set_color(c_white)
+draw_text_transformed(_curx+_butwid/4,_cury+_buthei/2,"Join Game",1,1,0)
+
+//Acheivements game
+buttonid=3
+_cury+=_buthei+_butsep;
+_curx=_xoff+_pagexoff
+draw_set_color($c07000)
+draw_rectangle(_curx-_butout,_cury-_butout,_curx+_butwid*3/4+_butout-_butsep/2,_cury+_buthei+_butout,false)
+draw_set_color($404040)
+draw_rectangle(_curx,_cury,_curx+_butwid*3/4-_butsep/2,_cury+_buthei,false)
+scr_menu_button_draw_highlight(msx,msy,_curx,_cury,_butwid*3/4-_butsep/2,_buthei,buttonid)
+draw_set_color(c_white)
+draw_text_transformed(_curx+_butwid*3/4/2,_cury+_buthei/2,"Achievements(WIP)",1,1,0)
+
+//Settings
+buttonid=4
+_curx+=_butwid*3/4+_butsep;
+draw_set_color($c07000)
+draw_rectangle(_curx-_butout,_cury-_butout,_curx+_butwid*1/4+_butout-_butsep,_cury+_buthei+_butout,false)
+draw_set_color($404040)
+draw_rectangle(_curx,_cury,_curx+_butwid*1/4-_butsep,_cury+_buthei,false)
+scr_menu_button_draw_highlight(msx,msy,_curx,_cury,_butwid*1/4-_butsep,_buthei,buttonid)
+//News
+buttonid=5
+_cury+=_buthei+_butsep;
+_curx=_xoff+_pagexoff
+draw_set_color($c07000)
+draw_rectangle(_curx-_butout,_cury-_butout,_curx+_butwid+_butout,_cury+325.5+_butout,false)
+draw_set_color($404040)
+draw_rectangle(_curx,_cury,_curx+_butwid,_cury+325.5,false)
+scr_menu_button_draw_highlight(msx,msy,_curx,_cury,_butwid,325.5,buttonid)
+draw_set_color(c_white)
+draw_text_transformed(_curx+_butwid/2,_cury+_buthei/2,"News#UI update v1.0.5",1,1,0)
+
+//reset all text align
+draw_set_valign(fa_top)
+draw_set_halign(fa_left)
+
+//draw card display
+var angle=-10
+var _sc=0.8
+var _xs=sin(current_time/1000)
+var _ys=sin(current_time/700)
+switch(carddisplaystage){
+    case 0:
+        if (abs(_xs))&lt;0.05{
+            carddisplayspr=spr_cardsback
+            if carddisplaytype=0{carddisplayimg=0}else{carddisplayimg=1}
+            carddisplaystage=1
+        }
+    break;
+    case 1:
+        if (1-abs(_xs))&lt;0.05{
+            carddisplaystage=2
+        }
+    break;
+    case 2:
+        if (abs(_xs))&lt;0.05{
+            if carddisplaytype=0{
+                carddisplayspr=spr_cards
+                carddisplayimg=irandom_range(1,UnitID.UnitID_MAX)
+            }else{
+                carddisplayspr=spr_spells
+                carddisplayimg=irandom_range(1,SpellID.SpellID_MAX)
+            }
+            carddisplaystage=3
+        }
+    break;
+    case 3:
+        if (1-abs(_xs))&lt;0.05{
+            carddisplaystage=0
+            if carddisplaytype=0{carddisplaytype=1}else{carddisplaytype=0}
+        }
+    break;
+}
+draw_sprite_ext(carddisplayspr,carddisplayimg,carddisplayx+_pagexoff,carddisplayy-_ys*30,_sc*abs(_xs),_sc,angle,c_white,1)
+
+}
+
+DeckButtonPressed[0]=false
+DeckButtonPressed[1]=false
+DeckButtonPressed[2]=false
+if CurrentPage=1 || (CurrentPage!=1 &amp;&amp; abs(Page_x-CurrentPage)&gt;0.1){
+    _pagexoff=(1-Page_x)*view_wport[0]
+    for(i=0;i&lt;3;i++){
+        var _sp=spr_cardsback
+        var _sc=0.440023753
+        var _offset=266.5*1.5
+        var sep=(view_wport[0]-_offset*2)/2
+        var _x=_pagexoff + _offset + (i)*sep
+        var _y=view_hport[0]/2
+        //draw sprite itself
+        draw_sprite_ext(_sp,i,_x,_y,_sc,_sc,0,c_white,1)
+        
+        if !IsoverlayOn{//animating the underline/clicking it also
+            if point_in_rectangle(msx,msy,_x-sprite_get_width(_sp)*_sc/2,_y-sprite_get_height(_sp)*_sc/2,_x+sprite_get_width(_sp)*_sc/2,_y+sprite_get_height(_sp)*_sc/2){
+                if mouse_check_button_pressed(mb_left){
+                    DeckButtonPressed[i]=true
+                }
+                DeckUnderline[i]=lerp(DeckUnderline[i],1,0.2)
+            }else{
+                DeckUnderline[i]=lerp(DeckUnderline[i],0,0.2)
+            }
+        }
+        if DeckUnderline[i]&gt;0.01{//draw underline
+            var underlinecolor=c_white
+            switch(i){
+                case 0:underlinecolor=$C47244;break;
+                case 1:underlinecolor=$12B800;break;
+                case 2:underlinecolor=$0000EE;break;
+            }
+            draw_set_color(underlinecolor)
+            draw_rectangle(
+                _x-sprite_get_width(_sp)*_sc/2*DeckUnderline[i],
+                _y+sprite_get_height(_sp)*_sc/2+20,
+                _x+sprite_get_width(_sp)*_sc/2*DeckUnderline[i],
+                _y+sprite_get_height(_sp)*_sc/2+50,
+                false
+            )
+        }
+    }
+}
+
+
+
+//Tabs
+//Home
+//draw_rectangle_grad()
+draw_set_font(ft_Ebrima_Standard)
+buttonid=6
+var _w=2
+_cury=26
+_curx=_xoff
+var bw=87*1.5
+var bh=30*1.5
+draw_set_valign(fa_middle)
+draw_set_halign(fa_center)
+draw_set_color(c_black)
+draw_set_alpha(0.5)
+draw_rectangle(_curx,_cury,_curx+bw,_cury+bh,false)//draw base back
+draw_set_alpha(1)
+if !IsoverlayOn{scr_menu_button_draw_highlight_tabstyle(msx,msy,_curx,_cury,bw,bh,buttonid)}
+draw_set_color(c_white)
+draw_line_width(_curx,_cury,_curx+bw,_cury,_w)//draw outline
+draw_line_width(_curx+bw,_cury,_curx+bw,_cury+bh,_w)
+draw_line_width(_curx,_cury+bh,_curx+bw,_cury+bh,_w)
+draw_line_width(_curx,_cury,_curx,_cury+bh,_w)
+draw_text_transformed(_curx+bw/2,_cury+bh/2,"Home",7/9,7/9,0)
+
+//Deck
+buttonid=7
+_curx+=116*1.5
+draw_set_color(c_black)
+draw_set_alpha(0.5)
+draw_rectangle(_curx,_cury,_curx+bw,_cury+bh,false)//draw base back
+draw_set_alpha(1)
+if !IsoverlayOn{scr_menu_button_draw_highlight_tabstyle(msx,msy,_curx,_cury,bw,bh,buttonid)}
+draw_set_color(c_white)
+draw_line_width(_curx,_cury,_curx+bw,_cury,_w)//draw outline
+draw_line_width(_curx+bw,_cury,_curx+bw,_cury+bh,_w)
+draw_line_width(_curx,_cury+bh,_curx+bw,_cury+bh,_w)
+draw_line_width(_curx,_cury,_curx,_cury+bh,_w)
+draw_text_transformed(_curx+bw/2,_cury+bh/2,"Deck",7/9,7/9,0)
+
+draw_set_valign(fa_bottom)
+draw_set_halign(fa_right)
+draw_text(view_wport[0],view_hport[0],"v1.0.5")
+draw_set_valign(fa_top)
+draw_set_halign(fa_left)
+/*
+draw_set_color($c07000)//box outline
+draw_set_color($404040)//not selected
+draw_set_color($e7c7b4)//selected
+
 for(i=0;i&lt;3;i++){
     var _x=view_wport[0]/(3+1)*(i+1)
     var _y=view_hport[0]/2
     var _sp=spr_MenuButton
     var _sc=0.2
-    draw_sprite_ext(_sp,i,_x,_y,_sc,_sc,1,c_white,1)
+        draw_sprite_ext(_sp,i,_x,_y,_sc,_sc,1,c_white,1)
     
     var msx=device_mouse_x_to_gui(0)
     var msy=device_mouse_y_to_gui(0)
@@ -356,53 +613,6 @@ for(i=0;i&lt;3;i++){
         )
     draw_set_color(c_white)
     draw_set_alpha(1)
-    
-    
-    /*draw_set_color($d3c79d)
-    var _tx=_x-sprite_get_width(_sp)/2*_sc
-    var _ty=_y+sprite_get_height(_sp)/2*_sc+40
-    draw_rectangle(_tx,_ty,_tx+sprite_get_height(_sp)*_sc,_ty+40,false)
-    draw_set_color(c_black)
-    switch(i){
-        case 0:
-            draw_text(_tx,_ty,"Unit Deck")
-        break;
-        case 1:
-            draw_text(_tx,_ty,"Spell Deck")
-        break;
-        case 2:
-            draw_text(_tx,_ty,"Hero")
-        break;
-    }
-    draw_set_color(c_white)*/
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_set_font(ft_number)
-draw_text_transformed(0,0,"Elite Card Wars Demo",5,5,0)
-draw_text(0,120,"List of servers:")
-for(var i=0;i&lt;ds_list_size(ServerNameList);i++){
-    draw_text(0,150+i*30,ServerNameList[| i] + ": "+ ServerIpList[| i])
 }
 </string>
           </argument>

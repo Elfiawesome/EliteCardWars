@@ -113,11 +113,30 @@ switch(AnimationStage){
         if global.NetworkObj.object_index=obj_server{
             network_destroy(global.NetworkObj.server)
         }
+        //give rewards
+        with(global.NetworkObj){
+            if GameSettings[? "IsMission"]{
+                //Reading Save File
+                var _dir=global.CampaignSavesDir
+                var buffer=buffer_load(_dir)
+                var _str=buffer_read(buffer,buffer_string)
+                buffer_delete(buffer)
+                _m=json_decode(_str)
+                for(i=0;i&lt;array_length_2d(global.MissionDat_MissionUnlocks,GameSettings[? "MissionID"]);i++){
+                    var missionunlock=global.MissionDat_MissionUnlocks[GameSettings[? "MissionID"],i];
+                    _m[? string(missionunlock)]=true
+                }
+                _str=json_beautify(json_encode_destroy(_m))
+                file = file_text_open_write(_dir);
+                file_text_write_string(file,_str);
+                file_text_close(file);
+            }
+            }
+        }
+        
         instance_destroy(global.NetworkObj)
         instance_destroy(obj_player_con)
         room_goto(rm_menu)
-        }
-        
         instance_destroy()
     break;
 }

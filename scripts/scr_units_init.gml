@@ -101,6 +101,7 @@ enum HeroID{
     RA3_PremierAnatolyIlychCherdenko,
     D2_Zavala,
     HeroID_MAX,
+    Tutorial_Herald,
     Raid_VaultOfGlass_Hero,
 }
 enum WorldType{
@@ -150,6 +151,7 @@ ds_map_destroy(global.UnitDataMap)
 scr_units_init_all()
 scr_spells_init_all()
 scr_heroes_init_all()
+scr_MissionSetupScript_init()
 
 global.WorldTypeName[WorldType.Destiny2]="Destiny 2"
 global.WorldTypeName[WorldType.FantasticFrontier]="Fantastic Frontier"
@@ -180,7 +182,27 @@ global.TurnPointArray[9]=50
 }
 
 var _c=0
-global.TeamColor[_c]=c_blue;_c++
+
+global.TeamColor[_c]=$3627D8;_c++
+global.TeamColor[_c]=$EA8815;_c++//$C9D827;_c++
+global.TeamColor[_c]=$27D88F;_c++
+global.TeamColor[_c]=$D82770;_c++
+global.TeamColor[_c]=$BD00FF;_c++
+global.TeamColor[_c]=$FF3D00;_c++
+global.TeamColor[_c]=$42FF00;_c++
+global.TeamColor[_c]=$00C2FF;_c++
+global.TeamColor[_c]=$AE5155;_c++
+global.TeamColor[_c]=$84AE51;_c++
+global.TeamColor[_c]=$51AEAA;_c++
+global.TeamColor[_c]=$7B51AE;_c++
+/*global.TeamColor[_c]=$;_c++
+global.TeamColor[_c]=$;_c++
+global.TeamColor[_c]=$;_c++
+global.TeamColor[_c]=$;_c++
+global.TeamColor[_c]=$;_c++
+global.TeamColor[_c]=$;_c++
+
+/*global.TeamColor[_c]=c_blue;_c++
 global.TeamColor[_c]=c_red;_c++
 global.TeamColor[_c]=c_yellow;_c++
 global.TeamColor[_c]=c_green;_c++

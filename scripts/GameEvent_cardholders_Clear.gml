@@ -70,7 +70,7 @@ Stats[? "AbilityCooldownMax"]=0
 ds_list_clear(Stats[? "AbilitiesScript"])
 
 Stats[? "AbilityConstantTarget"]=noone
-Stats[? "LastAttackedBy"]=noone
+Stats[? "LastAttackedBy"]=""
 Stats[? "Lifespan"]=0
 
 

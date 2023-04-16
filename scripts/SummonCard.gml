@@ -1,6 +1,5 @@
 ///SummonCard(obj,cardID)
 with(argument0){
-    //UnitsIdentifierDetails[? global.UnitsIdentifier]
     global.UnitsIdentifier++
     Stats[? "UnitsIdentifier"]=global.UnitsIdentifier
     

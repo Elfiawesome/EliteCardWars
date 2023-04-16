@@ -78,7 +78,7 @@ Stats[? "AbilityLifespan"]=0
 Stats[? "AbilityCooldown"]=0//how many rounds till ability can be used again
 Stats[? "AbilityCooldownMax"]=0
 Stats[? "AbilityConstantTarget"]=noone
-Stats[? "LastAttackedBy"]=noone
+Stats[? "LastAttackedBy"]=noone//Just why?
 
 //hero's only stats
 Stats[? "AdditionalPoints"]=0
@@ -169,7 +169,7 @@ if ShakeAmt&gt;0{
             <string>///debug
 if keyboard_check_pressed(ord("I")){
     if position_meeting(mouse_x,mouse_y,id){
-        show_message(json_encode(Stats))
+        show_ingame_message(json_encode(Stats))
     }
 }
 </string>
@@ -282,17 +282,29 @@ draw_set_color(c_white)
 }
 
 //draw health
+draw_set_font(ft_Ebrima_Standard_Bold)
+draw_set_alpha(1)
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
+var _t=Stats[? "Hp"]
 var _x=x-sprite_get_width(sprite_index)*image_xscale/2
 var _y=y-sprite_get_height(sprite_index)*image_yscale/2
-draw_quad_vector(sprite_get_texture(spr_cardholder,0),
-    _x-25,_y,
-    _x,_y-25,
-    _x,_y+25,
-    _x+25,_y,
+var _rad=30
+draw_quad_vector(sprite_get_texture(spr_CardValBackground,0),
+    _x-_rad-5,_y,
+    _x,_y-_rad-5,
+    _x,_y+_rad+5,
+    _x+_rad+5,_y,
     )
-draw_text(_x,_y,Stats[? "Hp"])
+draw_quad_vector(sprite_get_texture(spr_CardValBackground,0),
+    _x-_rad,_y,
+    _x,_y-_rad,
+    _x,_y+_rad,
+    _x+_rad,_y,
+    )
+draw_set_color(c_white)
+draw_text(_x,_y,_t)
+draw_set_font(ft_Ebrima_Standard)
 draw_set_halign(fa_left)
 draw_set_valign(fa_top)
 

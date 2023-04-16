@@ -119,8 +119,9 @@ var m=ds_map_create();ds_map_add_map(Stats,"Multi_AbilityCooldownMaxDuration",m)
 var _l=ds_list_create();
 ds_map_add_list(Stats,"AbilitiesScript",_l)
 
+Stats[? "IsCheezable"]=true
 Stats[? "AbilityConstantTarget"]=noone
-Stats[? "LastAttackedBy"]=noone
+Stats[? "LastAttackedBy"]=""
 Stats[? "Lifespan"]=0
 
 
@@ -180,7 +181,7 @@ SinWaveTimeModifier=random_range(0.5,1)
 //debug
 if keyboard_check_pressed(ord("I")){
     if position_meeting(mouse_x,mouse_y,id){
-        show_message(json_encode(Stats))
+        show_ingame_message(json_encode(Stats))
     }
 }
 </string>
@@ -382,11 +383,6 @@ draw_set_alpha(1)
 draw_primitive_end()
 //draw Card
 draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,alpha)
-/*for(var i=0;i&lt;ds_list_size(Stats[? "Spells"]);i++){
-    var spell=Stats[? "Spells"]
-    draw_text(x,y-100+i*30,json_encode(spell[| i]))
-}*/
-//if Stats[? "IsImmune"]{draw_text(x,y,"IMMUNITY")}
 //drawing cooldown
 if Stats[? "AbilityCooldownMax"]&gt;0{
 var wid=sprite_get_width(sprite_index)*image_xscale
@@ -430,30 +426,50 @@ draw_set_color(c_white)
 }
 
 //draw details
+draw_set_font(ft_Ebrima_Standard_Bold)
 draw_set_alpha(1)
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
+var _t=Stats[? "Finalized_Hp"]
 var _x=x-sprite_get_width(sprite_index)*image_xscale/2
 var _y=y-sprite_get_height(sprite_index)*image_yscale/2
+var _rad=30//max(string_height(_t),string_width(_t))/2*1.33
 draw_quad_vector(sprite_get_texture(spr_CardValBackground,0),
-    _x-25,_y,
-    _x,_y-25,
-    _x,_y+25,
-    _x+25,_y,
+    _x-_rad-5,_y,
+    _x,_y-_rad-5,
+    _x,_y+_rad+5,
+    _x+_rad+5,_y,
     )
-draw_text(_x,_y,Stats[? "Finalized_Hp"])
+draw_quad_vector(sprite_get_texture(spr_CardValBackground,0),
+    _x-_rad,_y,
+    _x,_y-_rad,
+    _x,_y+_rad,
+    _x+_rad,_y,
+    )
+draw_set_color(c_white)
+draw_text(_x,_y,_t)
 
-var _x=x-sprite_get_width(sprite_index)*image_xscale/4
-var _y=y-sprite_get_height(sprite_index)*image_yscale/2
+_t=Stats[? "Finalized_Atk"]
+_x+=_rad*2
+var _rad=30//max(string_height(_t),string_width(_t))/2*1.33
 draw_quad_vector(sprite_get_texture(spr_CardValBackground,1),
-    _x-25,_y,
-    _x,_y-25,
-    _x,_y+25,
-    _x+25,_y,
+    _x-_rad-5,_y,
+    _x,_y-_rad-5,
+    _x,_y+_rad+5,
+    _x+_rad+5,_y,
     )
-draw_text(_x,_y,Stats[? "Finalized_Atk"])
+draw_quad_vector(sprite_get_texture(spr_CardValBackground,1),
+    _x-_rad,_y,
+    _x,_y-_rad,
+    _x,_y+_rad,
+    _x+_rad,_y,
+    )
+draw_set_color(c_white)
+draw_text(_x,_y,_t)
 draw_set_halign(fa_left)
 draw_set_valign(fa_top)
+
+
 
 //drawing side effects
 var _offset=0

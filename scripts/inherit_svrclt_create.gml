@@ -4,9 +4,7 @@ ReadySocket=ds_list_create()
 SelectedCardHolders=ds_list_create()
 IsHeroSelected=false
 SelectedCardHolders_Ability=ds_list_create()
-IsMission=false
 global.GameMoveLog=ds_list_create()
-UnitsIdentifierDetails=ds_map_create()
 global.AnimatorSys[0]=instance_create(0,0,obj_animator_sys)
 global.SpellSys=instance_create(0,0,obj_spells_sys)
 global.IsGame=false
@@ -23,6 +21,11 @@ global.GameStage=GAMESTAGE.PLAYERTURNS
 Turn=0
 Turnstage[0]=0
 GameLifespan=0
+//Game settings
+GameSettings=ds_map_create();
+GameSettings[? "Name"]=global.PlayerOnlineName+string("'s Server")
+GameSettings[? "IsMission"]=false
+GameSettings[? "MaxPlayers"]=10
 //camera dragging
 CameraIsDrag=false
 CameraXoffsetStart=0

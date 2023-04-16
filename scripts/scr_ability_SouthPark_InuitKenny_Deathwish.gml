@@ -1,8 +1,8 @@
 ///scr_ability_SouthPark_InuitKenny_Deathwish()
 var MapStr=argument0;
-
-if Stats[? "LastAttackedBy"]!=noone{
-    with(Stats[? "LastAttackedBy"]){
+var _atkr=GetMultiStatsObject(Stats[? "LastAttackedBy"])
+if _atkr!=noone{
+    with(_atkr){
         Stats[? "Hp"]=-1
         player_con_CardholdersUpdateMultiStats()
     }

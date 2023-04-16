@@ -63,7 +63,7 @@ var _ylevel=0
 var _xlevel=0
 var _ygap=270
 //draw background
-draw_set_alpha(0.2)
+draw_set_alpha(0.5)
 draw_set_color(c_black)
 draw_rectangle(x,y,x+view_wport[0],y+view_hport[0],false)
 draw_set_alpha(1)
@@ -159,6 +159,24 @@ if mouse_wheel_up(){
     }
 }
 scrolamt=clamp(scrolamt,-(_ylevel*_ygap)/100,0)
+
+//exit button
+var _x=view_wport[0]-100+x
+var _y=50+y
+var _w=50
+var _h=50
+draw_set_color(c_red)
+draw_set_alpha(0.5)
+draw_rectangle(_x,_y,_x+_w,_y+_h,false)
+if mouse_check_button_pressed(mb_left){
+    if point_in_rectangle(msx, msy, _x, _y, _x+_w, _y+_h,){
+        Exit=true;Menu.IsoverlayOn=false;with(Menu){scr_menu_update_deckfile()};
+    }
+}
+draw_line_width(_x,_y,_x+_w,_y+_h,3)
+draw_line_width(_x,_y+_h,_x+_w,_y,3)
+draw_set_alpha(1)
+if Menu.DeckEditorPage!=id{Exit=true}
 
 //exit animation
 if !Exit{

@@ -27,6 +27,12 @@
             <kind>1</kind>
             <string>SpellsQueue[SpellType.Weather]=ds_list_create()
 SpellsIsRun[SpellType.Weather]=false
+
+OpeningAnimation=0
+SeperationAnimation=0
+HighlightAnimation[0]=0
+HighlightCardPos=-1
+TotalHeight=0
 </string>
           </argument>
         </arguments>
@@ -114,18 +120,154 @@ if SpellsIsRun[SpellType.Weather]{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var SQ=SpellsQueue[SpellType.Weather]
-if ds_list_empty(SQ){exit;}
-var midy=view_hport[0]/2;
-var midx=150;
-draw_set_halign(fa_center)
-draw_text(midx,midy-170,"Weather Spells ["+string(ds_list_size(SQ))+"]")
-draw_set_halign(fa_left)
-for(var i=0;i&lt;ds_list_size(SQ);i++){
-    var _m=SQ[| i]
-    var sprite=global.SpellDat_Sprite[_m[? "ID"]];
-    var image=global.SpellDat_Image[_m[? "ID"]];
-    draw_sprite_ext(sprite,image,midx,midy+i*50,0.2,0.2,0,c_white,1)
+            <string>if global.IsGame &amp;&amp; ds_list_empty(global.NetworkObj.socket_to_instanceid[? global.NetworkObj.mysocket].GUIObjectOrder){
+var SQ=SpellsQueue[SpellType.Weather]
+var msx=device_mouse_x_to_gui(0)
+var msy=device_mouse_y_to_gui(0)
+var _cardsep=40+60*SeperationAnimation
+var _sc=0.2
+var _midx=sprite_get_width(spr_cards)*_sc
+var _midy=clamp(view_hport[0]/2-TotalHeight/2,140+20+170,view_wport[0]/2)
+draw_set_color(c_black)
+draw_set_alpha(0.1)
+for(var i=0;i&lt;3;i++){
+    draw_rectangle(0,0,_midx*2*OpeningAnimation-i*20,view_hport[0],false)
+}
+draw_set_alpha(1)
+draw_set_color(c_white)
+
+if !ds_list_empty(SQ){
+    //check if array value even exists
+    for(var i=0;i&lt;ds_list_size(SQ);i++){
+        if i&gt;(array_length_1d(HighlightAnimation)-1){
+            HighlightAnimation[i]=0
+        }
+    }
+    TotalHeight=_midy
+    var _cury=_midy
+    for(var i=0;i&lt;ds_list_size(SQ);i++){
+        //draw
+        var _m=SQ[| i];
+        var _con=_m[? "Con"]
+        var _tgtcon=_m[? "TgtCon"]
+        var _pos=_m[? "Pos"]
+        var sprite=global.SpellDat_Sprite[_m[? "ID"]];
+        var image=global.SpellDat_Image[_m[? "ID"]];
+        //scale
+        var _curx=_midx
+        var _csc=_sc+0.3*HighlightAnimation[i];
+        
+        _cury+=sprite_get_height(sprite)*(_sc+0.3)/5*HighlightAnimation[i]
+        _curx+=sprite_get_width(sprite)*_csc/4*HighlightAnimation[i]
+        
+        if !is_undefined(_con) &amp;&amp; instance_exists(_con) &amp;&amp; !is_undefined(_tgtcon) &amp;&amp; instance_exists(_tgtcon){
+            draw_set_alpha(0.5)
+            draw_set_color(TeamColorOf(_con.Team))
+            draw_rectangle(
+                _curx-sprite_get_width(sprite)*_csc/2-5,
+                _cury-sprite_get_height(sprite)*_csc/2-5,
+                _curx+sprite_get_width(sprite)*_csc/2+5,
+                _cury+sprite_get_height(sprite)*_csc/2+5,
+            false
+            )
+            if HighlightCardPos=i &amp;&amp; !is_undefined(_tgtcon){
+                if is_undefined(_pos){
+                    var tgtx1=_tgtcon.Homex-350
+                    var tgty1=_tgtcon.Homey-300
+                    var tgtx2=_tgtcon.Homex+350
+                    var tgty2=_tgtcon.Homey+300
+                    var tgtcl=TeamColorOf(_tgtcon.Team)
+                }else{
+                    var _ch=_tgtcon.Cardholderlist[| _pos]
+                    var tgtx1=_ch.x-sprite_get_width(_ch.sprite_index)*_ch.image_xscale/2
+                    var tgty1=_ch.y-sprite_get_height(_ch.sprite_index)*_ch.image_yscale/2
+                    var tgtx2=_ch.x+sprite_get_width(_ch.sprite_index)*_ch.image_xscale/2
+                    var tgty2=_ch.y+sprite_get_height(_ch.sprite_index)*_ch.image_yscale/2
+                    var tgtcl=TeamColorOf(_tgtcon.Team)
+                }
+                var xscale=view_wport[0]/view_wview[0];
+                var yscale=view_hport[0]/view_hview[0];
+                var _bbx=4
+                //convert the values
+                var tgtx1=(tgtx1-view_xview[0])*xscale
+                var tgty1=(tgty1-view_yview[0])*yscale
+                var tgtx2=(tgtx2-view_xview[0])*xscale
+                var tgty2=(tgty2-view_yview[0])*yscale
+                var _obbx=sin(current_time/100)*7
+                draw_line_width(
+                    _curx+sprite_get_width(sprite)*_csc/2,
+                    _cury,
+                    tgtx1-_obbx,
+                    tgty1-_obbx,
+                    _bbx
+                )
+                draw_set_color(tgtcl)
+                draw_set_alpha(0.6)
+                draw_line_width(tgtx1-_obbx,tgty1-_obbx,tgtx2+_obbx,tgty1-_obbx,_bbx)
+                draw_line_width(tgtx2+_obbx,tgty1-_obbx,tgtx2+_obbx,tgty2+_obbx,_bbx)
+                draw_line_width(tgtx2+_obbx,tgty2+_obbx,tgtx1-_obbx,tgty2+_obbx,_bbx)
+                draw_line_width(tgtx1-_obbx,tgty2+_obbx,tgtx1-_obbx,tgty1-_obbx,_bbx)
+                draw_set_alpha(0.2)
+                draw_rectangle(tgtx1-_obbx,tgty1-_obbx,tgtx2+_obbx,tgty2+_obbx,false)
+    
+            }
+        }
+        draw_set_color(c_white)
+        draw_set_alpha(1)
+        draw_sprite_ext(sprite,image,_curx,_cury,_csc,_csc,0,c_white,1)
+        
+        //Height/Width
+        var _by=_cury-sprite_get_height(sprite)*_csc/2
+        var _bh=sprite_get_height(sprite)*_csc
+        var _bx=_curx-sprite_get_width(sprite)*_csc/2
+        var _bw=sprite_get_width(sprite)*_csc
+        //check if hover
+        if point_in_rectangle(msx,msy,_bx,_by,_bx+_bw,_by+_bh){
+            if i&gt;HighlightCardPos{
+                if HighlightCardPos!=i{
+                    HighlightCardPos=i
+                }
+            }
+        }else{
+            if HighlightCardPos=i{
+                HighlightCardPos=-1
+            }
+        }
+        //draw text
+        if i=0{
+            draw_set_valign(fa_bottom)
+            draw_set_halign(fa_center)
+            draw_set_font(ft_Ebrima_Standard)
+            draw_text(_midx,_cury-_bh/2,"Weather Spells")
+            draw_set_valign(fa_top)
+            draw_set_halign(fa_left)
+        }
+        //add for next card
+        _cury+=_cardsep
+        _cury+=_bh*HighlightAnimation[i]/2
+    }
+    TotalHeight=_cury-TotalHeight
+    
+    
+    //card zoom animation
+    for(var i=0;i&lt;ds_list_size(SQ);i++){
+        if HighlightCardPos=i{
+            HighlightAnimation[i]=lerp(HighlightAnimation[i],1,0.1)
+        }else{
+            HighlightAnimation[i]=lerp(HighlightAnimation[i],0,0.1)
+        }
+    }
+    //Card Between Seperation Animation
+    if msx&lt;_midx*2{
+        SeperationAnimation=lerp(SeperationAnimation,1,0.1)
+    }else{
+        SeperationAnimation=lerp(SeperationAnimation,0,0.1)
+    }
+    //background animation
+    OpeningAnimation=lerp(OpeningAnimation,1,0.07)
+}else{
+    OpeningAnimation=lerp(OpeningAnimation,0,0.07)
+}
 }
 </string>
           </argument>

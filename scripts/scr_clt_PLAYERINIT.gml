@@ -20,7 +20,6 @@ buffer_write(buffer,buffer_string,str)
 network_send_packet(client,buffer,buffer_tell(buffer))
 buffer_delete(buffer)
 
-
 //create my player object
 var _inst=instance_create(100,100,obj_player_con);
 scr_Player_Init_Data_Set(_inst,str)

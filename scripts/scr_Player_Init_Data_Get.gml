@@ -12,6 +12,7 @@ _m[? "IsRaidBoss"]=inst.IsRaidBoss
 _m[? "RaidBotIdentifier"]=inst.RaidBotIdentifier
 _m[? "AI_PlacingDownUnits"]=inst.AI_PlacingDownUnits
 _m[? "AI_SelectingVictims"]=inst.AI_SelectingVictims
+_m[? "NonRemovableBot"]=inst.NonRemovableBot
 
 var str=json_encode_destroy(_m);
 return str

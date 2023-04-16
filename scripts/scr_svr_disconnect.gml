@@ -28,6 +28,9 @@ if socket=global.NetworkObj.mysocket{
     if global.NetworkObj.object_index=obj_client{
         network_destroy(global.NetworkObj.client)
     }
+    if global.NetworkObj.object_index=obj_server{
+        network_destroy(global.NetworkObj.server)
+    }
     instance_destroy(global.NetworkObj)
     instance_destroy(obj_player_con)
     room_goto(rm_menu)

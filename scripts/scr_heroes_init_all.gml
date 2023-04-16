@@ -22,3 +22,6 @@ global.HeroDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_NotBattlef
 global.HeroDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_OnlyEnemy
 global.HeroDat_AbilityScript[Cur,0]=scr_heroability_D2_Zavala_Activate
 global.HeroDat_CooldownMax[Cur]=3
+
+var Cur=HeroID.Tutorial_Herald
+scr_hero_init_func(Cur,"Herald",2,0,spr_Heroes,HeroID.D2_Zavala-1)

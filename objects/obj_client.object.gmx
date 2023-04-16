@@ -50,19 +50,15 @@ inherit_svrclt_create()
             <kind>1</kind>
             <string>scr_init_network()
 
-
 global.NetworkObj=id
 //create client socket
-var type=network_socket_tcp
-var port=3115//port number may vary
+var type=global.TargetNetworkType
+var port=global.TargetNetworkPort
 var socket=network_create_socket(type)
-var _url="127.0.0.1"
-if !global.IsSpeedrun{
-    var _url=get_string("Enter Host's IP","127.0.0.1")
-}
+var _url=global.TargetNetworkIP
 client=network_connect(socket,_url,port)
 if client&lt;0{
-    show_message("Failed to connect")
+    show_ingame_message("Failed to connect")
 }
 
 //my player object is only created when I receive PLAYERINIT from the server
@@ -90,6 +86,7 @@ if client&lt;0{
             <kind>1</kind>
             <string>ds_list_destroy(socketlist)
 ds_map_destroy(socket_to_instanceid)
+inherit_svrclt_destroy()
 </string>
           </argument>
         </arguments>

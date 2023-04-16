@@ -62,8 +62,9 @@ var len=9
 var _ylevel=0
 var _xlevel=0
 var _ygap=270
+var topboxh=0
 //draw background
-draw_set_alpha(0.2)
+draw_set_alpha(0.5)
 draw_set_color(c_black)
 draw_rectangle(x,y,x+view_wport[0],y+view_hport[0],false)
 draw_set_alpha(1)
@@ -78,6 +79,13 @@ for(var i=1;i&lt;(UnitID.UnitID_MAX);i++){
         _curWorld=global.UnitDat_WorldType[i]
         _StartOfNewWorld=true
     }
+    
+    //moving to a next line
+    if i&gt;1 &amp;&amp; _xlevel=len &amp;&amp; !_StartOfNewWorld{
+        _ylevel++
+        _xlevel=0
+    }
+    
     var IsSelected=false
     var IsFull=false
     var _sp=global.UnitDat_Sprite[i]
@@ -108,12 +116,6 @@ for(var i=1;i&lt;(UnitID.UnitID_MAX);i++){
         draw_set_color(c_white)
     }
     
-    //moving to a next line
-    if _xlevel=len{
-        _ylevel++
-        _xlevel=0
-    }
-    
     //selection/deselection
     var msx=device_mouse_x_to_gui(0)
     var msy=device_mouse_y_to_gui(0)
@@ -136,22 +138,16 @@ for(var i=1;i&lt;(UnitID.UnitID_MAX);i++){
     var _StartOfNewWorld=false
 }
 
-//drawing header
-draw_set_halign(fa_center)
-draw_set_color(c_black)
-draw_text(x+view_wport[0]/2,y+10,string(ds_list_size(global.PlayerDeck))+"/20 Cards")
-draw_set_halign(fa_left)
-draw_set_color(c_white)
 //scrollbar
 var _ratio=abs((scrolamt*100)/(_ylevel*_ygap))
 var ScrollbarUI_he=100
 var ScrollbarUI_x1=view_wport[0]-30
 var ScrollbarUI_x2=view_wport[0]
-var ScrollbarUI_y1=_ratio*(view_hport[0]-ScrollbarUI_he)+0
-var ScrollbarUI_y2=_ratio*(view_hport[0]-ScrollbarUI_he)+ScrollbarUI_he
+var ScrollbarUI_y1=_ratio*(view_hport[0]-ScrollbarUI_he-topboxh)+topboxh
+var ScrollbarUI_y2=_ratio*(view_hport[0]-ScrollbarUI_he-topboxh)+ScrollbarUI_he+topboxh
 draw_set_alpha(0.2)
 draw_set_color(c_black)
-draw_rectangle(x+ScrollbarUI_x1,y,x+ScrollbarUI_x2,y+view_hport[0],false)
+draw_rectangle(x+ScrollbarUI_x1,y+topboxh,x+ScrollbarUI_x2,y+view_hport[0],false)
 draw_rectangle(x+ScrollbarUI_x1,y+ScrollbarUI_y1,x+ScrollbarUI_x2,y+ScrollbarUI_y2,false)
 draw_set_alpha(1)
 draw_set_color(c_white)
@@ -170,7 +166,7 @@ if IsScrollbarPress{
     }
 }
 if IsScrollbarPress{
-    scrolamt=-((device_mouse_y_to_gui(0)/view_hport[0])*(_ylevel*_ygap))/100
+    scrolamt=-(((device_mouse_y_to_gui(0)-topboxh)/view_hport[0])*(_ylevel*_ygap))/100
 }
 //scrolling
 var amt=5
@@ -188,6 +184,34 @@ if mouse_wheel_up(){
 }
 scrolamt=clamp(scrolamt,-(_ylevel*_ygap)/100,0)
 
+//draw top bar
+//draw_set_color(c_white)
+//draw_rectangle(x,y,x+view_wport[0],y+topboxh,false)
+//drawing header
+draw_set_halign(fa_center)
+draw_set_color(c_black)
+draw_text(x+view_wport[0]/2,y+10,string(ds_list_size(global.PlayerDeck))+"/20 Cards")
+draw_set_halign(fa_left)
+draw_set_color(c_white)
+
+//exit button
+var _x=view_wport[0]-100+x
+var _y=50+y
+var _w=50
+var _h=50
+draw_set_color(c_red)
+draw_set_alpha(0.5)
+draw_rectangle(_x,_y,_x+_w,_y+_h,false)
+if mouse_check_button_pressed(mb_left){
+    if point_in_rectangle(msx, msy, _x, _y, _x+_w, _y+_h,){
+        Exit=true;Menu.IsoverlayOn=false;with(Menu){scr_menu_update_deckfile()};
+    }
+}
+draw_line_width(_x,_y,_x+_w,_y+_h,3)
+draw_line_width(_x,_y+_h,_x+_w,_y,3)
+draw_set_alpha(1)
+if Menu.DeckEditorPage!=id{Exit=true}
+
 //exit animation
 if !Exit{
     x=lerp(x,0,0.1)
@@ -198,7 +222,6 @@ if !Exit{
         instance_destroy()
     }
 }
-
 </string>
           </argument>
         </arguments>

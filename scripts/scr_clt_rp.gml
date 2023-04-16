@@ -24,6 +24,9 @@ switch(type){
     case NETWORKPKT.UPDATETEAMS:
         scr_clt_UPDATETEAMS(buffer)
     break;
+    case NETWORKPKT.UPDATEGAMESETTINGS:
+        scr_clt_UPDATEGAMESETTINGS(buffer)
+    break;
     case NETWORKPKT.TURNMOVEON:
         scr_clt_TURNMOVEON(buffer)
     break;

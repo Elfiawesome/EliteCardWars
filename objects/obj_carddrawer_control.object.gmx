@@ -214,7 +214,7 @@ var _h=50
 draw_set_color(c_red)
 draw_rectangle(_x,_y,_x+_w,_y+_h,false)
 if point_in_rectangle(msx, msy, _x, _y, _x+_w, _y+_h,){
-    if mouse_check_button_pressed(mb_left){
+    if ControlParent.GUIObjectOrder[| 0]=id &amp;&amp; mouse_check_button_pressed(mb_left){
         AnimationStage=3
         ds_list_delete(ControlParent.GUIObjectOrder,0)
         ControlParent.Hero.Stats[? "DrawsLeft"]=Draws

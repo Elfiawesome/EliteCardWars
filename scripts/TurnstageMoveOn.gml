@@ -15,7 +15,6 @@ if Turn>=0{
     ds_list_clear(global.NetworkObj.SelectedCardHolders_Ability)
     ds_list_clear(global.NetworkObj.SelectedCardHolders)
     
-    
     //switching turn types
     if Turn<(array_length_1d(Turnstage)-1){
         Turn++
@@ -40,7 +39,19 @@ if Turn>=0{
             break;
         }
     }
-    GameEvent_Con_CardDrawed()
+    if !instance_exists(obj_GameEndAnnouncement){
+    var _con=socket_to_instanceid[? mysocket]
+    if !(ds_list_empty(_con.DeckList) && ds_list_empty(_con.SpellList)){//check there is a reason to draw
+        GameEvent_Con_CardDrawed()
+    }
+    if Turn<(array_length_1d(Turnstage)) && Turnstage[Turn]=mysocket{
+        var _t=""
+        if global.GameStage=GAMESTAGE.PLAYERTURNS{_t="Player"}
+        if global.GameStage=GAMESTAGE.ATTACKINGTURN{_t="Attacking"}
+        scr_CreateEndOfTurnAnnouncment("Your "+_t+" Turn",c_white,c_black,TeamColorOf(socket_to_instanceid[? mysocket].Team))
+    }
+    }
 }
+CameraIsDrag=false
 CameraXoffset=0
 CameraYoffset=0

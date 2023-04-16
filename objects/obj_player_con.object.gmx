@@ -40,6 +40,7 @@ IsRaidBoss=false
 RaidBotIdentifier=0
 AI_PlacingDownUnits=AIPlaceDownUnits_Easy
 AI_SelectingVictims=AISelectVictim_Easy
+NonRemovableBot=false
 
 
 BotSpeedMax=30
@@ -90,6 +91,10 @@ GUIHeroPtWidth=0
 //Draw Pressing
 IsHeroActivateButton=false
 IsEndTurnButton=false
+IsEndTurnButtonOverlay=0
+IsEndTurnButtonDelay=0
+
+CanEndTurn=true//specifically used for tutorials
 
 CardDrawerControl=noone
 global.HoveredCard=noone
@@ -98,6 +103,54 @@ global.SelectedCard=noone
 Homex=x
 Homey=y
 Hero=-1
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///visual variables for before game
+TeamDropDownSelect=-1
+TeamDropDownAlpha=0
+
+MenuButtonPressed[0]=false
+MenuButtonPressed[1]=false
+MenuButtonPressed[2]=false
+
+MenuButtonOverlay[0]=0
+MenuButtonOverlay[1]=0
+MenuButtonOverlay[2]=0
+
+PlayerSelectOverlayAmt=0
+
+//Player deck viewer
+PlayerDeckViewer=-1
+PlayerDeckViewerIsScrollbarPress=false
+PlayerDeckViewerScrollY=0
+PlayerDeckViewerScrollamt=0
+PlayerDeckViewerAlpha=0
+PlayerDeckSurface=-1
+//card highlight from deck viewer
+PlayerDeckHighlightId=-1
+PlayerDeckHighlightType=-1
+//scrollbar
+scrollbarY=0
+scrolamt=0
+IsScrollbarPress=false
 </string>
           </argument>
         </arguments>
@@ -162,10 +215,11 @@ if keyboard_check_pressed(vk_enter){
     //GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
     //var _c1=GameEvent_draw_specific_card(real(get_string("Enter the unit ID","0")),1)
     Points+=200
-    var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_ObservationPost,1)
-    var _c1=GameEvent_draw_specific_card(UnitID.D2_AtheonTimesConflux,0)
-    var _c1=GameEvent_draw_specific_card(UnitID.D2_Psion,0)
-    var _c1=GameEvent_draw_specific_card(SpellID.PlantVsZombies_SpringBean,1)
+    //var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_ObservationPost,1)
+    //var _c1=GameEvent_draw_specific_card(UnitID.D2_AtheonTimesConflux,0)
+    var _c1=GameEvent_draw_specific_card(SpellID.Vesteria_Regeneration,1)
+    var _c1=GameEvent_draw_specific_card(SpellID.Vesteria_Flare,1)
+    var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_OrbitalDownpour,1)
 }
 if global.SelectedCard=noone{
     if position_meeting(mouse_x,mouse_y,obj_card){
@@ -196,8 +250,12 @@ if global.SelectedCard!=noone{
     }
 }
 if global.SelectedCard=noone{
-    if (mouse_y-view_yview[0]) &gt; (view_hview[0]*7/10){
-        global.ShowHands=true
+    if global.GameStage=GAMESTAGE.PLAYERTURNS{
+        if (mouse_y-view_yview[0]) &gt; (view_hview[0]*7/10){
+            global.ShowHands=true
+        }else{
+            global.ShowHands=false
+        }
     }else{
         global.ShowHands=false
     }
@@ -240,10 +298,9 @@ if mouse_check_button_pressed(mb_right){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Pressing Q to start game
+            <string>///Before Game Starts
 if IsLocal &amp;&amp; !global.IsGame{
-
-if keyboard_check_pressed(ord("Q")){
+if keyboard_check_pressed(ord("Q")) || MenuButtonPressed[0]{
     //only if server
     if global.NetworkObj.object_index=obj_server{
         with(global.NetworkObj){
@@ -259,9 +316,32 @@ if keyboard_check_pressed(ord("Q")){
         }
     }
 }
+if MenuButtonPressed[1]{
+    switch(global.NetworkObj.object_index){
+        case obj_server:
+            with(global.NetworkObj){
+                for(var i=ds_list_size(socketlist)-1;i&gt;=0;i--){
+                    if socketlist[| i]!=mysocket{
+                        scr_svr_disconnect(socketlist[| i])
+                    }
+                }
+                scr_svr_disconnect(mysocket)
+            }
+        break;
+        case obj_client:
+            with(global.NetworkObj){scr_svr_disconnect(mysocket)}
+        break;
+    }
 }
-
-
+if MenuButtonPressed[2]{
+    if global.NetworkObj.object_index=obj_server{
+        with(global.NetworkObj){ButtonAddBot=true}
+    }
+}
+MenuButtonPressed[0]=false
+MenuButtonPressed[1]=false
+MenuButtonPressed[2]=false
+}
 </string>
           </argument>
         </arguments>
@@ -507,311 +587,470 @@ if global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder) &amp;&amp; !global.IsS
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw Hero Stats
-if IsLocal &amp;&amp; global.IsGame  &amp;&amp; !IsSpectating &amp;&amp; ds_list_empty(GUIObjectOrder){
-//Current Turns
-/*draw_set_font(ft_Ebrima_s12)
-draw_set_halign(fa_center)
-var _x=view_wport[0]*3/4;var _y=30;
-var _str=""
-if global.GameStage=GAMESTAGE.PLAYERTURNS{_str="Player Turns"}
-if global.GameStage=GAMESTAGE.ATTACKINGTURN{_str="Attacking Turns"}
-draw_text(_x,_y,_str)
-with(global.NetworkObj){_str=socket_to_instanceid[? Turnstage[Turn]].name}
-draw_text(_x,_y*2,_str)
-draw_set_halign(fa_left)
-draw_set_font(ft_number)*/
+            <string>///drawing Teams before game
+var NeedToUpdateTeamMap=false;
+if IsLocal &amp;&amp; !global.IsGame{
+draw_set_color($CECED0)
+draw_rectangle(0,0,view_wport[0],view_hport[0],false)
+var msx=device_mouse_x_to_gui(0)
+var msy=device_mouse_y_to_gui(0)
 
-//Hero Health GUI
-var _x=30;var _y=30;
-var _wid=view_wport[0]/2 - _x
-var _bwid=_wid/Hero.Stats[? "Base_Hp"]
-var _hei=40
-var _tgtwidth=_bwid*Hero.Stats[? "Hp"]
-GUIHeroHpWidth=lerp(GUIHeroHpWidth,_tgtwidth,0.7)
-//set main color
-draw_set_color(3618734)
-draw_set_font(ft_Ebrima_s12);draw_text(_x,_y-2,"Hearts: "+string(Hero.Stats[? "Hp"]));draw_set_font(ft_number)
-//health bar
-draw_set_alpha(0.6)
-draw_rectangle(_x,_y,_x+GUIHeroHpWidth,_y+_hei,false)
-//background
-draw_set_alpha(0.1)
-draw_rectangle(_x,_y,_x+_wid,_y+_hei,false)
-//health lines
-draw_set_alpha(1)
-draw_set_color(c_white)
-for(i=1;i&lt;Hero.Stats[? "Hp"];i++){
-    draw_line_width(_x+_bwid*i,_y+_hei-15,_x+_bwid*i,_y+_hei,3)
+//Left Side [Global Game Settings]
+draw_set_font(ft_Ebrima_Standard_Bold)
+var lbx=105*1.5;
+var lby=54*1.5;
+var lbw=view_wport[0]*0.3953125;
+var lbh=612*1.5;
+draw_set_color($ABABAF)
+draw_rectangle(lbx,lby,lbx+lbw,lby+lbh,false)
+var lhbh=39*1.5
+draw_set_color($717176)
+draw_rectangle(lbx,lby,lbx+lbw,lby+lhbh,false)
+draw_set_color(c_black)
+var lbheadertext="Global Game Settings"
+
+if PlayerDeckViewer=-1{//settings
+    var _off=50
+    var _curx=lbx+_off
+    var _cury=lby+lhbh+_off
+    draw_set_font(ft_Ebrima_Standard)
+    draw_set_valign(fa_left)
+    draw_set_halign(fa_top)
+    draw_text(_curx,_cury,"Server Name: "+string(global.NetworkObj.GameSettings[? "Name"]));_cury+=30
 }
-//bottom line
-draw_set_color(c_red)
-draw_rectangle(_x,_y+_hei-5,_x+_wid,_y+_hei,false)
-draw_set_color(c_white)
 
-
-//Hero Points GUI
-var _x=30;var _y=80;
-var _wid=view_wport[0]/2 - _x
-var _bwid=_wid/50
-var _hei=40
-var _tgtwidth=_bwid*Points
-GUIHeroPtWidth=lerp(GUIHeroPtWidth,_tgtwidth,0.7)
-//set main color
-draw_set_color(11759175)
-draw_set_font(ft_Ebrima_s12);draw_text(_x,_y-2,"Points: "+string(Points));draw_set_font(ft_number)
-//health bar
-draw_set_alpha(0.6)
-draw_rectangle(_x,_y,_x+GUIHeroPtWidth,_y+_hei,false)
-//background
-draw_set_alpha(0.1)
-draw_rectangle(_x,_y,_x+_wid,_y+_hei,false)
-//health lines
-draw_set_alpha(1)
-draw_set_color(c_white)
-for(i=1;i&lt;Points;i++){
-    draw_line_width(_x+_bwid*i,_y+_hei-15,_x+_bwid*i,_y+_hei,3)
-}
-//bottom line
-draw_set_color(12535040)
-draw_rectangle(_x,_y+_hei-5,_x+_wid,_y+_hei,false)
-draw_set_color(c_white)
-
-
-var offsety=0
-var _dist=5
-//draw other people's healthbar
-for(var i=0;i&lt;array_length_1d(global.NetworkObj.Turnstage);i++){
-    var _sock = global.NetworkObj.Turnstage[i]
-    var _con = global.NetworkObj.socket_to_instanceid[? _sock]
-    if _sock!=mysocket{
-        var _off=30
-        var _wo=view_wport[0]/4
-        var _w=_wo
-        var _h=40
-        var _x=view_wport[0]-_w-_off
-        var _y=_off+(_h+10)*offsety
-        var _vl=_con.Hero.Stats[? "Hp"]
-        var _mx=_con.Hero.Stats[? "Base_Hp"]
-        var _prop=_vl/_mx;
-        _con.GUIHeroHpWidth=lerp(_con.GUIHeroHpWidth,_prop,0.7)
-        draw_set_color(TeamColorOf(_con.Team))
-        //background
-        draw_set_alpha(0.1)
-        draw_rectangle(_x,_y,_x+_w,_y+_h,false)
-        //health
-        draw_set_alpha(0.5)
-        draw_rectangle(_x+_w*(1-_con.GUIHeroHpWidth),_y,_x+_w,_y+_h,false)
-        
-        draw_set_alpha(1)
-        draw_set_color(c_white)
-        var _bwid=_w/_mx
-        for(var ii=0;ii&lt;_con.Hero.Stats[? "Hp"];ii+=1){
-            draw_line_width(_x+_w-_bwid*ii,_y+_h, _x+_w-_bwid*ii,_y+_h-_h/4, 3)
+//player deck viewer
+var _sl=global.NetworkObj.socketlist
+var _stid=global.NetworkObj.socket_to_instanceid
+if is_undefined(_sl[| PlayerDeckViewer]){PlayerDeckViewer=-1}//cancel preview if player doesnt exists
+if PlayerDeckViewer!=-1{
+    //reset highlight
+    PlayerDeckHighlightId=-1
+    PlayerDeckHighlightType=-1
+    //declare basic variables
+    var _con=_stid[? _sl[| PlayerDeckViewer]]
+    var _heroid=_con.PlayerHeroID
+    var deck=_con.DeckList
+    var spell=_con.SpellList
+    lbheadertext=_con.name+"'s Deck"//set header name
+    
+    //set surface
+    var surfaceoffsetx=lbx
+    var surfaceoffsety=lby+lhbh
+    if !surface_exists(PlayerDeckSurface){PlayerDeckSurface=surface_create(lbw,lbh-lhbh)}
+    surface_set_target(PlayerDeckSurface)
+    draw_clear_alpha(c_black,0);
+    var _scrlamt=45//45
+    
+    var _y=100+PlayerDeckViewerScrollY*_scrlamt
+    var _x=0
+    var cury=0
+    var curx=0
+    var _spr=global.HeroDat_Sprite[_heroid]
+    var _img=global.HeroDat_Image[_heroid]
+    var _sc=223.5/sprite_get_width(spr_Heroes)
+    draw_sprite_ext(_spr,_img,_x+lbw/2,_y,_sc,_sc,0,c_white,1)
+    if point_in_rectangle(msx-surfaceoffsetx,msy-surfaceoffsety,
+        _x+lbw/2-sprite_get_width(_spr)*_sc/2,
+        _y-sprite_get_height(_spr)*_sc/2,
+        _x+lbw/2+sprite_get_width(_spr)*_sc/2,
+        _y+sprite_get_height(_spr)*_sc/2
+    ){
+        PlayerDeckHighlightType=2
+        PlayerDeckHighlightId=_heroid
+    }
+    cury+=0.5
+    
+    var maxcard=4
+    var _wbuf=42*1.5
+    var _wid=lbw-_wbuf*2
+    var _sep=_wid/maxcard
+    var _sprh=0
+    for(var i=0;i&lt;ds_list_size(deck);i++){
+        var _spr=global.UnitDat_Sprite[deck[| i]]
+        var _img=global.UnitDat_Image[deck[| i]]
+        var _sprw=sprite_get_width(_spr)*_sc
+        var _sprh=sprite_get_height(_spr)*_sc
+        var _sx=_x+_wbuf+curx*_sep
+        var _sy=_y+cury*(_sprh+8)
+        draw_sprite_ext(_spr,_img,_sx+_sprw/2,_sy+_sprh/2,_sc,_sc,0,c_white,1)
+        if point_in_rectangle(msx-surfaceoffsetx,msy-surfaceoffsety,_sx,_sy,_sx+_sprw,_sy+_sprh){
+            PlayerDeckHighlightType=0
+            PlayerDeckHighlightId=i
         }
         
-        draw_text(_x,_y,_con.name+": "+string(_con.Hero.Stats[? "Hp"]))
-        
-        draw_set_color(TeamColorOf(_con.Team))
-        draw_set_alpha(1)
-        //draw bottom line
-        draw_rectangle(_x,_y+_h-_h/10,_x+_w,_y+_h,false)
-        
-        
-        //draw if its this guys turn
-        if global.NetworkObj.Turnstage[global.NetworkObj.Turn]=_con.mysocket{
-            draw_rectangle(_x-30,_y,_x-5,_y+_h,false)
+        //move counter up
+        curx++
+        if curx=(maxcard) &amp;&amp; i&lt;(ds_list_size(deck)-1){
+            cury++
+            curx=0
         }
-        draw_set_color(c_white)
+    }
+    cury+=(0.2+1)
+    curx=0
+    for(var i=0;i&lt;ds_list_size(spell);i++){
+        var _spr=global.SpellDat_Sprite[spell[| i]]
+        var _img=global.SpellDat_Image[spell[| i]]
+        var _sprw=sprite_get_width(_spr)*_sc
+        var _sprh=sprite_get_height(_spr)*_sc
+        var _sx=_x+_wbuf+curx*_sep
+        var _sy=_y+cury*(_sprh+8)
+        draw_sprite_ext(_spr,_img,_sx+_sprw/2,_sy+_sprh/2,_sc,_sc,0,c_white,1)
+        if point_in_rectangle(msx-surfaceoffsetx,msy-surfaceoffsety,_sx,_sy,_sx+_sprw,_sy+_sprh){
+            PlayerDeckHighlightType=1
+            PlayerDeckHighlightId=i
+        }
         
-
-        var msx=device_mouse_x_to_gui(0)
-        var msy=device_mouse_y_to_gui(0)
-        if mouse_check_button_pressed(mb_left) &amp;&amp; point_in_rectangle(msx,msy,_x,_y,_x+_w,_y+_h){
-            with(global.NetworkObj){
-            CameraFocusNo=i
-            CameraFocus=socket_to_instanceid[? Turnstage[CameraFocusNo]];
+        //move counter up
+        curx++
+        if curx=(maxcard){
+            cury++
+            curx=0
+        }
+    }
+    //reset surface
+    surface_reset_target()
+    //draw surface
+    draw_set_alpha(PlayerDeckViewerAlpha)
+    draw_surface(PlayerDeckSurface,surfaceoffsetx,surfaceoffsety)
+    draw_set_alpha(1)
+    
+    //scrollbar
+    draw_set_color(c_black)
+    draw_set_alpha(0.3)
+    var sbw=40
+    var sbx=lbx+lbw-sbw
+    var sby=lby+lhbh+1
+    if global.NetworkObj.object_index=obj_server{
+        var sbh=586*1.5-sby
+    }else{
+        var sbh=lbh-lhbh
+    }
+    var ratio=-(PlayerDeckViewerScrollamt)/(cury*_sprh/_scrlamt)
+    var scrlhe=100
+    var scrly1=sby+(sbh-scrlhe)*ratio
+    var scrly2=sby+(sbh-scrlhe)*ratio+scrlhe
+    draw_rectangle(sbx,sby,sbx+sbw,sby+sbh,false)
+    draw_rectangle(sbx,scrly1,sbx+sbw,scrly2,false)
+    draw_set_alpha(1)
+    if point_in_rectangle(msx,msy,sbx,sby,sbx+sbw,sby+sbh){
+        if !PlayerDeckViewerIsScrollbarPress{
+            if mouse_check_button_pressed(mb_left){
+                PlayerDeckViewerIsScrollbarPress=true
             }
         }
-        offsety+=1
     }
-}
-//drawing text
-var _str=""
-if global.GameStage=GAMESTAGE.PLAYERTURNS{_str="Player Turns"}
-if global.GameStage=GAMESTAGE.ATTACKINGTURN{_str="Attacking Turns"}
-draw_text(_x,_y+50,_str)
-
-//press tab to see all players
-if keyboard_check(vk_tab){
-    with(global.NetworkObj){
-    var _x=view_wport[0]/2
-    var _y=100
-    var _wid=300
-    var _hei=40
-    
-    for(i=0;i&lt;ds_list_size(socketlist);i++){
-        draw_set_color(c_white)
-        draw_set_alpha(0.4)
-        draw_rectangle(_x-_wid/2,_y+_hei*(i),_x+_wid/2,_y+_hei*(i+1),false)
-        draw_set_alpha(1)
-        var _o=socket_to_instanceid[? socketlist[| i]]
-        var _s="PLAYER NOT FOUND"
-        if _o!=undefined{_s=socket_to_instanceid[? socketlist[| i]].name}
-        draw_text(_x-_wid/2,_y+_hei*(i),_s)
-        draw_set_color(c_white)
-    }
-    }
-}
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Draw Hero's Ability &amp;&amp; Check for button pressed
-IsHeroActivateButton=false
-if global.IsGame &amp;&amp; IsLocal &amp;&amp; !IsSpectating &amp;&amp; global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket &amp;&amp; ds_list_empty(GUIObjectOrder){
-    if IsHeroAbilityTrigger(Hero.CardID,AbilityTrigger.ActivateTarget)!=-1 || IsHeroAbilityTrigger(Hero.CardID,AbilityTrigger.Activate)!=-1{
-    if Hero.Stats[? "AbilityAlrdy"]=false{
-    
-    //transperancy
-    var op_sc=1
-    if Hero.Stats[? "AbilityCooldown"]!=0 || !script_execute(global.HeroDat_AbilityTargetSelectCheck[Hero.CardID],Hero){
-        op_sc=0.5
-    }
-    draw_set_font(ft_Ebrima_s12)
-    var _t="Hero's Ability"
-    var _w=string_width(_t)
-    var _h=string_height(_t)
-    var _x=30
-    var _y=140
-    draw_set_alpha(0.2*op_sc)
-    draw_set_color(c_purple)
-    draw_rectangle(_x,_y,_x+_w,_y+_h,false)
-    draw_rectangle(_x-5,_y-5,_x+_w+5,_y+_h+5,false)
-    draw_set_alpha(1*op_sc)
-    draw_set_color(c_white)
-    draw_text(_x,_y,_t)
-    draw_set_font(ft_number)
-    //cooldown bar below
-    var _p = clamp((1-Hero.Stats[? "AbilityCooldown"]/Hero.Stats[? "AbilityCooldownMax"]),0,1)
-    draw_set_alpha(0.1)
-    draw_rectangle(_x,_y+_h+10,_x+_w,_y+_h+15,false)
-    draw_set_alpha(1)
-    draw_rectangle(_x,_y+_h+10,_x+_w*_p,_y+_h+15,false)
-    
-    if script_execute(global.HeroDat_AbilityTargetSelectCheck[Hero.CardID],Hero) &amp;&amp; Hero.Stats[? "AbilityCooldown"]=0{
-    //Is Hero Button Pressed
-    var msx=device_mouse_x_to_gui(0)
-    var msy=device_mouse_y_to_gui(0)
-    if mouse_check_button_pressed(mb_left) &amp;&amp; point_in_rectangle(msx,msy,_x-5,_y-5,_x+_w+5,_y+_h+5){
-        IsHeroActivateButton=true
-    }
-    if keyboard_check_pressed(ord("A")) &amp;&amp; position_meeting(mouse_x,mouse_y,Hero){
-        IsHeroActivateButton=true
-    }
-    }
-    }
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///End Turn
-IsEndTurnButton=false
-if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
-if ds_list_empty(GUIObjectOrder) &amp;&amp; !global.IsSettingsOpen{
-with(global.NetworkObj){
-    if Turnstage[Turn]=mysocket{
-        //init variables for rectanlge
-        var _bb=40
-        var _t="End Turn"
-        var _w=string_width(_t)
-        var _h=string_height(_t)
-        var _x=view_wport[0]-_bb-_w
-        var _y=view_hport[0]-_bb-_h
-        
-        //draw rectangle
-        draw_set_alpha(0.6)
-        draw_set_color($60ff74)
-        draw_rectangle(_x,_y,_x+_w,_y+_h,false)
-        draw_set_alpha(1)
-        draw_set_color(c_white)
-        draw_text(_x,_y,_t)
-        
-        //checking if pressed
-        var msx=device_mouse_x_to_gui(0)
-        var msy=device_mouse_y_to_gui(0)
-        if mouse_check_button_pressed(mb_left) &amp;&amp; point_in_rectangle(msx,msy,_x,_y,_x+_w,_y+_h){
-            other.IsEndTurnButton=true
+    if PlayerDeckViewerIsScrollbarPress{
+        if mouse_check_button_released(mb_left){
+            PlayerDeckViewerIsScrollbarPress=false
         }
-    } 
+    }
+    if PlayerDeckViewerIsScrollbarPress{
+        PlayerDeckViewerScrollamt=-(msy-sby)/sbh * (cury*_sprh/_scrlamt)
+    }
+
+    if mouse_wheel_up(){
+        if PlayerDeckViewerScrollamt&lt;0{
+            PlayerDeckViewerScrollamt+=3
+        }
+    }
+    if mouse_wheel_down(){
+        if PlayerDeckViewerScrollamt&gt;-cury*_sprh/_scrlamt
+        PlayerDeckViewerScrollamt-=3
+    }
+    PlayerDeckViewerScrollamt=clamp(PlayerDeckViewerScrollamt,-(cury*_sprh/_scrlamt),0)
+    PlayerDeckViewerScrollY=lerp(PlayerDeckViewerScrollY,PlayerDeckViewerScrollamt,0.1)
 }
+//header
+draw_set_color(c_black)
+draw_set_valign(fa_middle)
+draw_set_halign(fa_center)
+draw_set_font(ft_Ebrima_Standard_Bold)
+draw_text(lbx+lbw/2,lby+lhbh/2,lbheadertext)
+
+
+//Right side [People]
+var JustClickDeckviewer=false
+var JustClickTeamDropdown=false
+draw_set_font(ft_Ebrima_Standard_Bold)
+var rbw=view_wport[0]*0.3953125;
+var rbh=54*1.5;
+var rbx=view_wport[0]-105-rbw;
+var rby=54*1.5;
+
+var namepos=0.025
+var teampos=1-0.25
+var tbxpos1=teampos-0.05
+var tbxpos2=teampos-0.025
+draw_set_color($ABABAF)
+draw_rectangle(rbx,rby,rbx+rbw,rby+rbh,false)
+draw_set_color(c_black)
+draw_set_valign(fa_middle)
+draw_set_halign(fa_left)
+draw_text(rbx+rbw*namepos,lby+rbh/2,"Players")
+draw_text(rbx+rbw*teampos,lby+rbh/2,"Team No.")
+var sl=global.NetworkObj.socketlist
+var stid=global.NetworkObj.socket_to_instanceid
+draw_set_font(ft_Ebrima_Standard)
+for(var i=0;i&lt;ds_list_size(sl);i++){
+    var _vsep=8*1.5
+    var _w=rbw
+    var _h=35*1.5
+    var _x=rbx
+    var _y=rby+rbh+_vsep + i*(_h+_vsep)
+    
+    var _name=stid[? sl[| i]].name
+    var _team=stid[? sl[| i]].Team
+    
+    draw_set_color(TeamColorOf(stid[? sl[| i]].Team))
+    draw_rectangle(_x,_y,_x+_w*tbxpos1,_y+_h,false)
+    if PlayerDeckViewer=i{
+        draw_set_color(c_black)
+        draw_set_alpha(0.2)
+        draw_rectangle(_x,_y,_x+_w*tbxpos1*PlayerSelectOverlayAmt,_y+_h,false)
+        draw_set_alpha(1)
+        PlayerSelectOverlayAmt=lerp(PlayerSelectOverlayAmt,1,0.1)
+        PlayerDeckViewerAlpha=lerp(PlayerDeckViewerAlpha,1,0.1)
+    }
+    draw_set_color(c_black)
+    draw_text(_x+rbw*namepos,_y+_h/2,_name)
+    if mouse_check_button_pressed(mb_left){
+        if point_in_rectangle(msx,msy,_x,_y,_x+_w*tbxpos1,_y+_h){
+            if PlayerDeckViewer!=i{
+                PlayerDeckViewer=i
+                JustClickDeckviewer=true
+                PlayerSelectOverlayAmt=0
+                PlayerDeckViewerAlpha=0
+                PlayerDeckViewerScrollamt=0
+                PlayerDeckViewerScrollY=0
+            }else{
+                PlayerDeckViewer=-1
+            }
+        }
+    }
+    
+    draw_set_color(TeamColorOf(stid[? sl[| i]].Team))
+    draw_rectangle(_x+_w*tbxpos2,_y,_x+_w,_y+_h,false)
+    draw_set_color(c_black)
+    draw_text(_x+rbw*teampos,_y+_h/2,_team)
+    
+    //dropdown menu
+    var _dw=39
+    var _dh=_h
+    var _dx=_x+_w-_dw
+    var _dy=_y
+    var _dtsh=3*1.5
+    var _dtsv=9*1.5
+    if !global.NetworkObj.GameSettings[? "IsMission"]{
+    draw_set_alpha(0.49)
+    draw_set_color(c_black)
+    draw_rectangle(_dx,_dy,_dx+_dw,_dy+_dh,false)
+    draw_set_alpha(1)
+    draw_set_color(c_white)
+    draw_triangle(
+        _dx+_dtsh,_dy+_dtsv,
+        _dx+_dw/2,_dy+_dh-_dtsv,
+        _dx+_dw-_dtsh,_dy+_dtsv,
+    false)
+    if TeamDropDownSelect=-1 || TeamDropDownSelect=i{
+        if point_in_rectangle(msx,msy,_x+_w*tbxpos2,_y,_x+_w,_y+_h){
+            if mouse_wheel_up(){
+                stid[? sl[| i]].Team++;NeedToUpdateTeamMap=true
+            }
+            if mouse_wheel_down(){
+                stid[? sl[| i]].Team--;NeedToUpdateTeamMap=true
+            }
+        }
+    }
+    if mouse_check_button_pressed(mb_left){
+        if point_in_rectangle(msx,msy,_dx,_dy,_dx+_dw,_dy+_dh){
+            if TeamDropDownSelect=-1{
+                TeamDropDownSelect=i
+                JustClickTeamDropdown=true
+                TeamDropDownAlpha=0
+            }else{
+                TeamDropDownSelect=-1
+            }
+        }
+    }
+    }
+    
+    // 'x' button
+    if global.NetworkObj.mysocket!=sl[| i]{
+    var _canremove=true
+    if stid[? sl[| i]].NonRemovableBot{_canremove=false}
+    if global.NetworkObj.object_index=obj_client{_canremove=false}
+    
+    if _canremove{draw_set_color(c_red)}else{draw_set_color(c_gray)}
+    draw_set_alpha(0.5)
+    draw_rectangle(_x+_w+5,_y,_x+_w+5+_h,_y+_h,false)
+    draw_line_width(_x+_w+5,_y,_x+_w+5+_h,_y+_h,3)
+    draw_line_width(_x+_w+5,_y+_h,_x+_w+5+_h,_y,3)
+    draw_set_color(c_white)
+    draw_set_alpha(1)
+    if _canremove &amp;&amp; mouse_check_button_pressed(mb_left){
+        if point_in_rectangle(msx,msy,_x+_w+5,_y,_x+_w+5+_h,_y+_h){
+            //remove player
+            with(global.NetworkObj){scr_svr_disconnect(sl[| i])}
+            break;//can remove this by having a seperate button variable, then execute the disconnect at the end
+        }
+    }
+    }
 }
+//draw add bot
+if global.NetworkObj.object_index=obj_server{
+    var canadd=false
+    if ds_list_size(global.NetworkObj.socketlist)&lt;global.NetworkObj.GameSettings[? "MaxPlayers"]{
+        canadd=true
+    }
+    _y+=_h+_vsep
+    if canadd{draw_set_alpha(1)}else{draw_set_alpha(0.5)}
+    draw_set_color($818187)
+    draw_rectangle(_x,_y,_x+_w,_y+_h,false)
+    if MenuButtonOverlay[2]&gt;0.01{
+        draw_set_color($E7C7B4);draw_rectangle(_x,_y,_x+_w*MenuButtonOverlay[2],_y+_h,false)
+    }
+    draw_set_valign(fa_middle)
+    draw_set_halign(fa_center)
+    draw_set_font(ft_Ebrima_Standard_Bold)
+    draw_set_color(c_black)
+    draw_text(_x+_w/2,_y+_h/2,"Add Bot")
+    if canadd &amp;&amp; point_in_rectangle(msx,msy,_x,_y,_x+_w,_y+_h){
+        if TeamDropDownSelect=-1{
+            MenuButtonOverlay[2]=lerp(MenuButtonOverlay[2],1,0.1)
+            if mouse_check_button_pressed(mb_left){
+                MenuButtonPressed[2]=true
+            }
+        }
+    }else{
+        MenuButtonOverlay[2]=lerp(MenuButtonOverlay[2],0,0.1)
+    }
+    draw_set_alpha(1)
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///drawing Teams before game
-if IsLocal &amp;&amp; !global.IsGame{
+
+//start game &amp; Exit Game button
+var sgby=586*1.5
+var sgby2=lby+lbh
+var sgbh=lby+lbh-sgby
+draw_set_valign(fa_middle)
+draw_set_halign(fa_center)
+draw_set_font(ft_Ebrima_Standard_Bold)
+if global.NetworkObj.object_index=obj_server{
+    //start game button
+    sgby2=sgby
+    draw_set_color($818187)
+    draw_rectangle(lbx,sgby,lbx+lbw,sgby+sgbh,false)
+    if MenuButtonOverlay[0]&gt;0.01{
+        draw_set_color($E7C7B4);draw_rectangle(lbx,sgby+sgbh-sgbh*MenuButtonOverlay[0],lbx+lbw,sgby+sgbh,false)
+    }
+    draw_set_color(c_black)
+    draw_text(lbx+lbw/2,sgby+sgbh/2,"Start Game")
+    if point_in_rectangle(msx,msy,lbx,sgby,lbx+lbw,sgby+sgbh){
+        MenuButtonOverlay[0]=lerp(MenuButtonOverlay[0],1,0.2)
+        if mouse_check_button_pressed(mb_left){
+            MenuButtonPressed[0]=true
+        }
+    }else{
+        MenuButtonOverlay[0]=lerp(MenuButtonOverlay[0],0,0.2)
+    }
+}
+//exit button
+draw_set_color($818187)
+draw_rectangle(rbx,sgby,rbx+rbw,sgby+sgbh,false)
+if MenuButtonOverlay[1]&gt;0.01{
+    draw_set_color($0000AC);draw_rectangle(rbx,sgby+sgbh-sgbh*MenuButtonOverlay[1],rbx+rbw,sgby+sgbh,false)
+}
+draw_set_color(c_black)
+var _t="Shutdown Server";if global.NetworkObj.object_index=obj_client{_t="Leave Server"}
+draw_text(rbx+rbw/2,sgby+sgbh/2,_t)
+if point_in_rectangle(msx,msy,rbx,sgby,rbx+rbw,sgby+sgbh){
+    MenuButtonOverlay[1]=lerp(MenuButtonOverlay[1],1,0.2)
+    if mouse_check_button_pressed(mb_left){
+        MenuButtonPressed[1]=true
+    }
+}else{
+    MenuButtonOverlay[1]=lerp(MenuButtonOverlay[1],0,0.2)
+}
+
+
+if TeamDropDownSelect!=-1{
+    var _vsep=8*1.5
+    var _w=rbw
+    var _h=35*1.5
+    var _x=rbx
+    var _y=rby+rbh+_vsep + TeamDropDownSelect*(_h+_vsep)
+    var _dw=39
+    var _dh=_h
+    var _dx=_x+_w-_dw
+    var _dy=_y
+    var _dtsh=3*1.5
+    var _dtsv=9*1.5
+    var _total=5
+    TeamDropDownAlpha=lerp(TeamDropDownAlpha,1,0.1)
+    draw_set_color(c_black)
+    draw_set_alpha(0.8*TeamDropDownAlpha)
+    draw_rectangle(_x+_w*tbxpos2,_dy+_dh,_dx,_dy+_dh+_dh*_total,false)
+    draw_set_alpha(1*TeamDropDownAlpha)
+    draw_rectangle(_dx,_dy+_dh,_dx+_dw,_dy+_dh+_dh*_total,false)
+    for(ii=0;ii&lt;_total;ii++){
+        draw_set_color(TeamColorOf(ii))
+        draw_rectangle(_x+_w*tbxpos2,_dy+_dh+(_dh*ii)+2,_dx,_dy+_dh+(_dh*(ii+1))-2,false)
+        if mouse_check_button_pressed(mb_left){//This is so inneficient AAAAAAAA
+            if point_in_rectangle(msx,msy,_x+_w*tbxpos2,_dy+_dh+(_dh*ii)+2,_dx,_dy+_dh+(_dh*(ii+1))-2){
+                stid[? sl[| TeamDropDownSelect]].Team=ii;NeedToUpdateTeamMap=true
+                TeamDropDownSelect=-1
+            }
+        }
+    }
+    draw_set_alpha(1)
+}
+
+//draw card overlay
+if PlayerDeckViewer!=-1 &amp;&amp; PlayerDeckHighlightId!=-1 &amp;&amp; PlayerDeckHighlightType!=-1{
+    if point_in_rectangle(msx,msy,lbx,lby+lhbh,lbx+lbw,sgby2){
+    var _sc=0.6
+    switch(PlayerDeckHighlightType){
+        case 0://unit
+            var _spr=global.UnitDat_Sprite[deck[| PlayerDeckHighlightId]]
+            var _img=global.UnitDat_Image[deck[| PlayerDeckHighlightId]]
+        break;
+        case 1://spells
+            var _spr=global.SpellDat_Sprite[spell[| PlayerDeckHighlightId]]
+            var _img=global.SpellDat_Image[spell[| PlayerDeckHighlightId]]
+        break;
+        case 2://heroes
+            var _spr=global.HeroDat_Sprite[PlayerDeckHighlightId]
+            var _img=global.HeroDat_Image[PlayerDeckHighlightId]
+        break;
+    }
+    var _x=msx+sprite_get_width(_spr)*_sc/2
+    var _y=msy+sprite_get_height(_spr)*_sc/2
+    _x=clamp(_x,0,view_wport[0]-sprite_get_width(_spr)*_sc/2)
+    _y=clamp(_y,0,view_hport[0]-sprite_get_height(_spr)*_sc/2)
+    draw_sprite_ext(_spr,_img,_x,_y,_sc,_sc,0,c_white,1)
+    }
+}
+
+//deselect dropdowns etc...
+if mouse_check_button_pressed(mb_left){
+    if !JustClickDeckviewer &amp;&amp; !PlayerDeckViewerIsScrollbarPress{
+        PlayerDeckViewer=-1
+    }
+    if !JustClickTeamDropdown{
+        TeamDropDownSelect=-1
+    }
+}
+
+}
+
+
+/*if IsLocal &amp;&amp; !global.IsGame{
 var sl=global.NetworkObj.socketlist
 var stid=global.NetworkObj.socket_to_instanceid
 
 with(global.NetworkObj){update_json_TeamMap()}
 var NeedToUpdateTeamMap=false
-draw_set_font(ft_Ebrima_s12)
+draw_set_font(ft_Ebrima_s12)Font no longer in Use
 for(var i=0;i&lt;ds_list_size(sl);i++){
     var _name=stid[? sl[| i]].name
     var _namewid=string_width(_name)
@@ -895,7 +1134,7 @@ for(var i=0;i&lt;ds_list_size(sl);i++){
     }
 }
 draw_set_font(ft_number)
-
+*/
 if NeedToUpdateTeamMap{
 with(global.NetworkObj){
 update_json_TeamMap()
@@ -912,7 +1151,7 @@ if global.NetworkObj.object_index=obj_server{
     svr_UpdateTeams(_str)
 }
 }
-}
+//}
 
 
 }
@@ -920,6 +1159,326 @@ if global.NetworkObj.object_index=obj_server{
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw Hero Stats
+if IsLocal &amp;&amp; global.IsGame  &amp;&amp; !IsSpectating &amp;&amp; ds_list_empty(GUIObjectOrder){
+//Hero Health GUI
+var _x=30;var _y=30;
+var _wid=view_wport[0]/2 - _x
+var _bwid=_wid/Hero.Stats[? "Base_Hp"]
+var _hei=40
+var _tgtwidth=_bwid*Hero.Stats[? "Hp"]
+GUIHeroHpWidth=lerp(GUIHeroHpWidth,_tgtwidth,0.7)
+//set main color
+draw_set_color(3618734)
+draw_set_font(ft_Ebrima_Standard_Bold);draw_text(_x,_y-2,"Hearts: "+string(Hero.Stats[? "Hp"]))
+//health bar
+draw_set_alpha(0.6)
+draw_rectangle(_x,_y,_x+GUIHeroHpWidth,_y+_hei,false)
+//background
+draw_set_alpha(0.1)
+draw_rectangle(_x,_y,_x+_wid,_y+_hei,false)
+//health lines
+draw_set_alpha(1)
+draw_set_color(c_white)
+for(i=1;i&lt;Hero.Stats[? "Hp"];i++){
+    draw_line_width(_x+_bwid*i,_y+_hei-15,_x+_bwid*i,_y+_hei,3)
+}
+//bottom line
+draw_set_color(c_red)
+draw_rectangle(_x,_y+_hei-5,_x+_wid,_y+_hei,false)
+draw_set_color(c_white)
+
+
+//Hero Points GUI
+_x=30;
+_y+=50;
+var _wid=view_wport[0]/2 - _x
+var _bwid=_wid/50
+var _hei=40
+var _tgtwidth=_bwid*Points
+GUIHeroPtWidth=lerp(GUIHeroPtWidth,_tgtwidth,0.7)
+//set main color
+draw_set_color(11759175)
+draw_set_font(ft_Ebrima_Standard_Bold);draw_text(_x,_y-2,"Points: "+string(Points))
+//health bar
+draw_set_alpha(0.6)
+draw_rectangle(_x,_y,_x+GUIHeroPtWidth,_y+_hei,false)
+//background
+draw_set_alpha(0.1)
+draw_rectangle(_x,_y,_x+_wid,_y+_hei,false)
+//health lines
+draw_set_alpha(1)
+draw_set_color(c_white)
+for(i=1;i&lt;Points;i++){
+    draw_line_width(_x+_bwid*i,_y+_hei-15,_x+_bwid*i,_y+_hei,3)
+}
+//bottom line
+draw_set_color(12535040)
+draw_rectangle(_x,_y+_hei-5,_x+_wid,_y+_hei,false)
+draw_set_color(c_white)
+
+
+var offsety=0
+var _dist=5
+//draw other people's healthbar
+draw_set_font(ft_Ebrima_Standard)
+for(var i=0;i&lt;array_length_1d(global.NetworkObj.Turnstage);i++){
+    var _sock = global.NetworkObj.Turnstage[i]
+    var _con = global.NetworkObj.socket_to_instanceid[? _sock]
+    if _sock!=mysocket{
+        var _off=30
+        var _wo=view_wport[0]/4
+        var _w=_wo
+        var _h=40
+        var _x=view_wport[0]-_w-_off
+        var _y=_off+(_h+10)*offsety
+        var _vl=_con.Hero.Stats[? "Hp"]
+        var _mx=_con.Hero.Stats[? "Base_Hp"]
+        var _prop=_vl/_mx;
+        _con.GUIHeroHpWidth=lerp(_con.GUIHeroHpWidth,_prop,0.7)
+        draw_set_color(TeamColorOf(_con.Team))
+        //background
+        draw_set_alpha(0.1)
+        draw_rectangle(_x,_y,_x+_w,_y+_h,false)
+        //health
+        draw_set_alpha(0.5)
+        draw_rectangle(_x+_w*(1-_con.GUIHeroHpWidth),_y,_x+_w,_y+_h,false)
+        
+        draw_set_alpha(1)
+        draw_set_color(c_white)
+        var _bwid=_w/_mx
+        for(var ii=0;ii&lt;_con.Hero.Stats[? "Hp"];ii+=1){
+            draw_line_width(_x+_w-_bwid*ii,_y+_h, _x+_w-_bwid*ii,_y+_h-_h/4, 3)
+        }
+        
+        draw_text(_x,_y-5,_con.name+": "+string(_con.Hero.Stats[? "Hp"]))
+        
+        draw_set_color(TeamColorOf(_con.Team))
+        draw_set_alpha(1)
+        //draw bottom line
+        draw_rectangle(_x,_y+_h-_h/10,_x+_w,_y+_h,false)
+        
+        
+        //draw if its this guys turn
+        if global.NetworkObj.Turnstage[global.NetworkObj.Turn]=_con.mysocket{
+            draw_rectangle(_x-30,_y,_x-5,_y+_h,false)
+        }
+        draw_set_color(c_white)
+        
+
+        var msx=device_mouse_x_to_gui(0)
+        var msy=device_mouse_y_to_gui(0)
+        if mouse_check_button_pressed(mb_left) &amp;&amp; point_in_rectangle(msx,msy,_x,_y,_x+_w,_y+_h){
+            with(global.NetworkObj){
+            CameraFocusNo=i
+            CameraFocus=socket_to_instanceid[? Turnstage[CameraFocusNo]];
+            }
+        }
+        offsety+=1
+    }
+}
+//drawing text
+var _str=""
+var CurPlyrName=global.NetworkObj.socket_to_instanceid[? global.NetworkObj.Turnstage[global.NetworkObj.Turn]].name
+if global.GameStage=GAMESTAGE.PLAYERTURNS{_str=CurPlyrName+"'s Player Turn"}
+if global.GameStage=GAMESTAGE.ATTACKINGTURN{_str=CurPlyrName+ "'s Attacking Turn"}
+draw_text(_x,_y+50,_str)
+
+//press tab to see all players
+if keyboard_check(vk_tab){
+    with(global.NetworkObj){
+    var _x=view_wport[0]/2
+    var _y=100
+    var _wid=300
+    var _hei=40
+    
+    for(i=0;i&lt;ds_list_size(socketlist);i++){
+        draw_set_color(c_white)
+        draw_set_alpha(0.4)
+        draw_rectangle(_x-_wid/2,_y+_hei*(i),_x+_wid/2,_y+_hei*(i+1),false)
+        draw_set_alpha(1)
+        var _o=socket_to_instanceid[? socketlist[| i]]
+        var _s="PLAYER NOT FOUND"
+        if _o!=undefined{_s=socket_to_instanceid[? socketlist[| i]].name}
+        draw_set_color(c_black)
+        draw_text(_x-_wid/2,_y+_hei*(i),_s)
+        draw_set_color(c_white)
+    }
+    }
+}
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw Hero's Ability &amp;&amp; Check for button pressed
+IsHeroActivateButton=false
+if global.IsGame &amp;&amp; IsLocal &amp;&amp; !IsSpectating &amp;&amp; global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket &amp;&amp; ds_list_empty(GUIObjectOrder){
+    if IsHeroAbilityTrigger(Hero.CardID,AbilityTrigger.ActivateTarget)!=-1 || IsHeroAbilityTrigger(Hero.CardID,AbilityTrigger.Activate)!=-1{
+    if Hero.Stats[? "AbilityAlrdy"]=false{
+    
+    //transperancy
+    var op_sc=1
+    if Hero.Stats[? "AbilityCooldown"]!=0 || !script_execute(global.HeroDat_AbilityTargetSelectCheck[Hero.CardID],Hero){
+        op_sc=0.5
+    }
+    draw_set_font(ft_Ebrima_Standard)
+    var _t="Hero's Ability"
+    var _w=string_width(_t)
+    var _h=string_height(_t)
+    var _x=30
+    var _y=140
+    draw_set_alpha(0.2*op_sc)
+    draw_set_color(c_purple)
+    draw_rectangle(_x,_y,_x+_w,_y+_h,false)
+    draw_rectangle(_x-5,_y-5,_x+_w+5,_y+_h+5,false)
+    draw_set_alpha(1*op_sc)
+    draw_set_color(c_white)
+    draw_text(_x,_y,_t)
+    draw_set_font(ft_number)
+    //cooldown bar below
+    var _p = clamp((1-Hero.Stats[? "AbilityCooldown"]/Hero.Stats[? "AbilityCooldownMax"]),0,1)
+    draw_set_alpha(0.1)
+    draw_rectangle(_x,_y+_h+10,_x+_w,_y+_h+15,false)
+    draw_set_alpha(1)
+    draw_rectangle(_x,_y+_h+10,_x+_w*_p,_y+_h+15,false)
+    
+    if script_execute(global.HeroDat_AbilityTargetSelectCheck[Hero.CardID],Hero) &amp;&amp; Hero.Stats[? "AbilityCooldown"]=0{
+    //Is Hero Button Pressed
+    var msx=device_mouse_x_to_gui(0)
+    var msy=device_mouse_y_to_gui(0)
+    if mouse_check_button_pressed(mb_left) &amp;&amp; point_in_rectangle(msx,msy,_x-5,_y-5,_x+_w+5,_y+_h+5){
+        IsHeroActivateButton=true
+    }
+    if keyboard_check_pressed(ord("A")) &amp;&amp; position_meeting(mouse_x,mouse_y,Hero){
+        IsHeroActivateButton=true
+    }
+    }
+    }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///End Turn
+IsEndTurnButton=false
+if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
+if ds_list_empty(GUIObjectOrder) &amp;&amp; !global.IsSettingsOpen{
+if global.NetworkObj.Turnstage[global.NetworkObj.Turn]=global.NetworkObj.mysocket{
+    //init variables for rectanlge
+    draw_set_font(ft_Ebrima_Standard_Bold)
+    var _p=""
+    if global.GameStage=GAMESTAGE.PLAYERTURNS{_p="Summoning"}
+    if global.GameStage=GAMESTAGE.ATTACKINGTURN{_p="Attacking"}
+    var _t="End "+_p+"Turn"
+    var _w=string_width(_t)+50*2
+    var _h=string_height(_t)+25*2
+    var _x=view_wport[0]-_w
+    var _y=view_hport[0]*3/4
+    var canpress=CanEndTurn
+    
+    //draw rectangle
+    if canpress{draw_set_alpha(1)}else{draw_set_alpha(0.2)}
+    draw_set_color($768C73)
+    draw_rectangle(_x,_y,_x+_w,_y+_h,false)
+    draw_set_color($586b52)
+    draw_rectangle(_x,_y+_h-_h*0.05,_x+_w,_y+_h,false)
+    
+    if IsEndTurnButtonOverlay&gt;0.01{
+        draw_set_color($57c9a7)
+        draw_set_alpha(1/6)
+        for(var i=0;i&lt;6;i++){
+            draw_rectangle(_x,_y,_x+_w*IsEndTurnButtonOverlay*(1-i/40),_y+_h,false)
+        }
+        draw_set_alpha(1)
+        draw_set_color($586b52)
+        draw_rectangle(_x,_y+_h-_h*0.1,_x+_w*IsEndTurnButtonOverlay,_y+_h,false)
+    }
+    draw_set_alpha(1)
+    draw_set_color(c_black)
+    draw_set_valign(fa_middle)
+    draw_set_halign(fa_left)
+    draw_text(_x+5,_y+_h/2,_t)
+    
+    //checking if pressed
+    var msx=device_mouse_x_to_gui(0)
+    var msy=device_mouse_y_to_gui(0)
+    
+    
+    if point_in_rectangle(msx,msy,_x,_y,_x+_w,_y+_h){
+        if canpress{
+            if mouse_check_button_pressed(mb_left){
+                IsEndTurnButtonDelay=15
+            }
+            if mouse_check_button_released(mb_left){
+                if IsEndTurnButtonDelay&gt;0{
+                    IsEndTurnButton=true
+                }
+            }
+        IsEndTurnButtonOverlay=lerp(IsEndTurnButtonOverlay,1,0.1)
+        }
+    }else{IsEndTurnButtonOverlay=lerp(IsEndTurnButtonOverlay,0,0.1)}
+
+}
+}
+}
+
+if IsEndTurnButtonDelay&gt;0{IsEndTurnButtonDelay--}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>

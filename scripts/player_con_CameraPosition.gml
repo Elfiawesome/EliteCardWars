@@ -51,7 +51,7 @@ with(global.NetworkObj){
             CameraIsDrag=true
         }
         if CameraIsDrag && mouse_check_button(mb_left){
-            CameraXoffset=clamp( 
+            CameraXoffset=clamp(
                 (CameraXoffsetStart-_mxoff),
                 RelMinCamX-CameraFocus.Homex+view_wview[0]/2, 
                 RelMaxCamX-CameraFocus.Homex+view_wview[0]/2

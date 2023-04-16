@@ -40,7 +40,7 @@ if global.NetworkObj.object_index=obj_server{
     }
     //if draw
     if Tcntr = ds_map_size(TeamMap){
-        show_message("A Draw has insured")
+        show_ingame_message("A Draw has insured")
         exit;
     }
     //declare eliminated && Victory

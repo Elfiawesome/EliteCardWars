@@ -36,3 +36,10 @@ _o.mysocket=socket
 with(_o){Team=irandom_range(1,5)}
 socket_to_instanceid[? socket] = _o
 
+//tell 'connecting socket' the current game settings
+buffer=buffer_create(2048,buffer_fixed,1)
+buffer_write(buffer,buffer_s16,NETWORKPKT.UPDATEGAMESETTINGS)
+buffer_write(buffer,buffer_string,json_encode(GameSettings))
+network_send_packet(socket,buffer,buffer_tell(buffer))
+buffer_delete(buffer)
+

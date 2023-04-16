@@ -60,7 +60,7 @@ var maxclients=20
 server=network_create_server(type,port,maxclients)
 while(server &lt; 0){
     if port &gt;= 65535{
-        show_message("Server Failed!")
+        show_ingame_message("Server Failed!")
         break;
     }
     port++
@@ -75,17 +75,17 @@ BattlefieldUpdateTimer=160
 BattlefieldUpdateTimerMax=160
 //Bot Counter for adding them
 BotCounterSocket=-1
+//menu NEED REMOVE LATER
+ButtonAddBot=false
 
 //create myself -&gt; (server player object)
 var _inst=instance_create(100,100,obj_player_con);
-_inst.name="SERVER OWNER"
+_inst.name=global.PlayerOnlineName//"SERVER OWNER"
 _inst.IsLocal=true
 _inst.mysocket=0
 _inst.Team=0
 ds_list_copy(_inst.DeckList,global.PlayerDeck)
-ds_list_shuffle(_inst.DeckList)
 ds_list_copy(_inst.SpellList,global.PlayerSpells)
-ds_list_shuffle(_inst.SpellList)
 _inst.PlayerHeroID=global.PlayerHero
 socket_to_instanceid[? 0]=_inst
 ds_list_add(socketlist,0)
@@ -113,6 +113,7 @@ ds_list_add(socketlist,0)
             <kind>1</kind>
             <string>ds_list_destroy(socketlist)
 ds_map_destroy(socket_to_instanceid)
+inherit_svrclt_destroy()
 </string>
           </argument>
         </arguments>
@@ -160,8 +161,21 @@ LastServerPinged=current_time
 alarm[0]=60
 
 //also send the server to other potential clients?
-var buffer=buffer_create(2048,buffer_fixed,1)
-buffer_write(buffer,buffer_string,global.PlayerOnlineName+"'s Server");
+var _m=ds_map_create();
+_m[? "OwnerName"]=global.PlayerOnlineName
+_m[? "ServerName"]=GameSettings[? "Name"]
+_m[? "TotalPlayers"]=ds_list_size(socketlist)
+
+var _l=ds_list_create()
+for(i=0;i&lt;ds_list_size(socketlist);i++){
+    ds_list_add(_l,socket_to_instanceid[? socketlist[| i]].name)
+}
+ds_map_add_list(_m,"PlayerList",_l)
+var _mapstr=json_encode_destroy(_m)
+
+var buffer=buffer_create(4096,buffer_fixed,1)
+buffer_write(buffer,buffer_s32,port);
+buffer_write(buffer,buffer_string,_mapstr);
 network_send_broadcast(server,3114,buffer,buffer_tell(buffer));
 buffer_delete(buffer)
 </string>
@@ -198,12 +212,12 @@ if BattlefieldUpdateTimer&gt;0{
 //  -Some Spells dont work on bots eg SpringBean
 //
 //adding another 'bot player' into the game
-if global.IsGame{
-if keyboard_check_pressed(vk_control) &amp;&amp; !(mouse_wheel_down() || mouse_wheel_up()){
+if !global.IsGame{
+if ButtonAddBot &amp;&amp; ds_list_size(socketlist)&lt;GameSettings[? "MaxPlayers"]{
 var _inst=instance_create(100,100,obj_player_con);
 _inst.name="Bot "+string(abs(BotCounterSocket))
 _inst.IsLocal=false
-_inst.mysocket=BotCounterSocket; BotCounterSocket-- //-ds_list_size(socketlist) - 1
+_inst.mysocket=BotCounterSocket; BotCounterSocket--
 _inst.Team=0
 _inst.IsBot=true
 ds_list_add(_inst.DeckList,
@@ -247,7 +261,7 @@ for(var i=0;i&lt;ds_list_size(socketlist);i++){
 }
 
 }
-
+ButtonAddBot=false
 }
 </string>
           </argument>
@@ -331,6 +345,7 @@ draw_set_color(c_green)
 draw_set_alpha(1)
 
 var CurY=0
+draw_set_font(ft_Ebrima_Standard)
 draw_text(0,CurY,"FPS: "+string(fps));CurY+=30
 draw_text(0,CurY,"Currently Running on:");CurY+=30
 draw_text(30,CurY,"Port : "+string(port));CurY+=30

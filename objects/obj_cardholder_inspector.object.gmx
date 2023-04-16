@@ -174,7 +174,7 @@ if !is_undefined(Cardholder){
     var _wordy=_y+_h+_b+_b
     
     draw_set_color(c_black)
-    draw_set_font(ft_Ebrima_s12)
+    draw_set_font(ft_Ebrima_Standard)
     var _t="Hp: "+string(_Stats[? "Finalized_Hp"])+"/"+string(_Stats[? "Base_Hp"])
     draw_text(_wordx,_wordy,_t);_wordy+=string_height(_t)
     var _t="Atk: "+string(_Stats[? "Finalized_Atk"])+"/"+string(_Stats[? "Base_Atk"])

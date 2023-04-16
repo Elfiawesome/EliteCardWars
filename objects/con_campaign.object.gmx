@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>Mission_ID=0//MissionID.Tutorial1
+IsPressed=false
+</string>
           </argument>
         </arguments>
       </action>
@@ -47,38 +49,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//
-var _s=instance_create(0,0,obj_server)
-with(_s){
-IsMission=true
-var _conter=1
-repeat(3){
-var _inst=instance_create(100,100,obj_player_con);
-_inst.name="Vault Of Glass"
-_inst.IsLocal=false
-_inst.mysocket=BotCounterSocket;BotCounterSocket--
-_inst.Team=2
-_inst.IsBot=true
-_inst.IsRaidBoss=true
-_inst.RaidBotIdentifier=_conter;_conter++
-repeat(7){
-ds_list_add(_inst.DeckList,
-    UnitID.D2_Hobgoblin,
-    UnitID.D2_Harpy,
-    UnitID.D2_Goblin,UnitID.D2_Goblin,
-    UnitID.D2_Wyvern,
-)
-}
-ds_list_shuffle(_inst.DeckList)
-
-_inst.AI_PlacingDownUnits=AIPlaceDownUnits_Raid_VaultOfGlass_Hero
-_inst.AI_SelectingVictims=AISelectVictim_Easy
-
-_inst.PlayerHeroID=HeroID.Raid_VaultOfGlass_Hero
-socket_to_instanceid[? _inst.mysocket]=_inst
-ds_list_add(socketlist,_inst.mysocket)
-
-}
+            <string>if IsPressed{
+    script_execute(global.MissionDat_Script[Mission_ID])
 }
 instance_destroy()
 </string>
@@ -103,16 +75,17 @@ instance_destroy()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var _x=300
-var _y=300
+            <string>var _x=x
+var _y=y
 var _s=10
 draw_rectangle(_x-_s,_y-_s,_x+_s,_y+_s,false)
-draw_text(_x,_y,"Raid Mission")
+draw_text(_x,_y,global.MissionDat_Name[Mission_ID])
 
 if mouse_check_button_pressed(mb_left){
 if point_in_rectangle(mouse_x,mouse_y,_x-_s,_y-_s,_x+_s,_y+_s){
     //con_campaign
     room_goto(rm_online)
+    IsPressed=true
 }
 }
 </string>

@@ -150,6 +150,7 @@
     <scripts name="grp_network">
       <script>scripts\scr_init_network.gml</script>
       <script>scripts\inherit_svrclt_create.gml</script>
+      <script>scripts\inherit_svrclt_destroy.gml</script>
       <scripts name="grp_ClientServer_scripts">
         <scripts name="grp_TurnstageMoveon">
           <script>scripts\TurnstageMoveOn.gml</script>
@@ -233,6 +234,7 @@
         <script>scripts\scr_clt_PLAYERDISCONNECT.gml</script>
         <script>scripts\scr_clt_PING.gml</script>
         <script>scripts\scr_clt_STARTGAME.gml</script>
+        <script>scripts\scr_clt_UPDATEGAMESETTINGS.gml</script>
         <scripts name="grp_tfr [Useless scripts]">
           <script>scripts\scr_clt_TURNMOVEON.gml</script>
           <script>scripts\scr_clt_ATTACKINGPHASEISREADY.gml</script>
@@ -259,11 +261,21 @@
       </scripts>
       <scripts name="functions">
         <script>scripts\scr_init_player.gml</script>
+        <script>scripts\show_ingame_message.gml</script>
         <script>scripts\json_encode_destroy.gml</script>
         <script>scripts\scr_Player_Init_Data_Get.gml</script>
         <script>scripts\scr_Player_Init_Data_Set.gml</script>
         <script>scripts\buffer_write_slice.gml</script>
         <script>scripts\json_beautify.gml</script>
+      </scripts>
+      <scripts name="grp_Mission">
+        <script>scripts\scr_MissionScript_VaultOfGlass.gml</script>
+        <script>scripts\scr_MissionScript_Tutorial1.gml</script>
+        <script>scripts\scr_MissionScript_Tutorial2.gml</script>
+        <scripts name="grp_campaign_tutorial_scripts">
+          <script>scripts\scr_campaign_con_tutorial_1.gml</script>
+          <script>scripts\scr_campaign_con_tutorial_2.gml</script>
+        </scripts>
       </scripts>
     </scripts>
     <scripts name="ExecuteShell">
@@ -279,6 +291,7 @@
       <script>scripts\scr_heroes_init_all.gml</script>
       <script>scripts\scr_hero_init_func.gml</script>
       <script>scripts\scr_units_init_raidunits.gml</script>
+      <script>scripts\scr_MissionSetupScript_init.gml</script>
     </scripts>
     <scripts name="grp_setup_battlefield">
       <script>scripts\update_json_TeamMap.gml</script>
@@ -527,6 +540,8 @@
       </scripts>
       <scripts name="grp_menu">
         <script>scripts\scr_menu_update_deckfile.gml</script>
+        <script>scripts\scr_menu_button_draw_highlight.gml</script>
+        <script>scripts\scr_menu_button_draw_highlight_tabstyle.gml</script>
       </scripts>
       <script>scripts\scr_ValidAttackSpot.gml</script>
       <script>scripts\scr_OverallValidAttackSpot.gml</script>
@@ -557,10 +572,14 @@
         <script>scripts\script300.gml</script>
       </scripts>
     </scripts>
+    <script>scripts\draw_text_apollo.gml</script>
+    <script>scripts\scr_CreateEndOfTurnAnnouncment.gml</script>
+    <script>scripts\script325.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_number</font>
-    <font>fonts\ft_Ebrima_s12</font>
+    <font>fonts\ft_Ebrima_Standard</font>
+    <font>fonts\ft_Ebrima_Standard_Bold</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_menu</object>
@@ -569,6 +588,9 @@
       <object>objects\obj_menu_SpellsSelector</object>
       <object>objects\obj_menu_HeroSelector</object>
       <object>objects\obj_settings_control</object>
+      <object>objects\obj_room_transition</object>
+      <object>objects\obj_menu_JoinGame</object>
+      <object>objects\obj_campaign_menu</object>
     </objects>
     <objects name="grp_network">
       <object>objects\obj_server</object>
@@ -593,10 +615,13 @@
         <object>objects\obj_spell_animation</object>
         <object>objects\obj_handcardselector_control</object>
         <object>objects\obj_damagenumbers</object>
+        <object>objects\obj_error_popup</object>
+        <object>objects\obj_EndOfTurnAnnouncment</object>
       </objects>
     </objects>
     <objects name="grp_campaign">
       <object>objects\con_campaign</object>
+      <object>objects\obj_campaign_tutorial_con</object>
     </objects>
   </objects>
   <rooms name="rooms">
