@@ -3,7 +3,8 @@ var objAttacker=argument0
 var objVictim=argument1
 var valid=true
 
-if objVictim.Pos=3 && scr_ConBattlefieldSize(global.NetworkObj.socket_to_instanceid[? objVictim.mysocket])>1{
+var _vchl=global.NetworkObj.socket_to_instanceid[? objVictim.mysocket].Cardholderlist
+if IsBackUnit(objVictim.Pos,_vchl) && scr_ConBattlefieldSize(global.NetworkObj.socket_to_instanceid[? objVictim.mysocket])>1{
     valid=false
     if objAttacker.Stats[? "Sp_Atk"] || 
     objAttacker.Stats[? "CrossAtk"] || 

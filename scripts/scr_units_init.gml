@@ -7,9 +7,29 @@ enum UnitID{
     D2_Servitor,
     D2_Wyvern,
     
+    //FanFron
     FanFron_AppleBat,
     FanFron_FantasticDragon,
     FanFron_ForestWalker,
+    
+    //Genshin Impact
+    GenshinImpact_AnemoboxerVanguard,
+    GenshinImpact_AnemoSlime,
+    GenshinImpact_Ayaka,
+    GenshinImpact_Barbara,
+    GenshinImpact_Bennett,
+    GenshinImpact_CryoHypostasis,
+    GenshinImpact_ElectrohammerVanguard,
+    GenshinImpact_ElectroSlime,
+    GenshinImpact_GeoHypostasis,
+    GenshinImpact_Hutao,
+    GenshinImpact_HydrogunnerLegionnaire,
+    GenshinImpact_PyroSlime,
+    GenshinImpact_PyroslingerBracer,
+    GenshinImpact_RaidenShogun,
+    GenshinImpact_Scaramouche,
+    GenshinImpact_Venti,
+    GenshinImpact_Zhongli,
     
     //Hexeria
     Hexeria_EliteBandit,
@@ -67,11 +87,13 @@ enum UnitID{
     SouthPark_Nathan,
     SouthPark_PaladinButters,
     SouthPark_PrincessKenny,
+    SouthPark_RobinTweek,
     SouthPark_Robobebe,
     SouthPark_RogueToken,
     SouthPark_ShamanToken,
     SouthPark_SheildmaidenWendy,
     SouthPark_StanofManyMoonos,
+    SouthPark_TheMasterNinjew,
     SouthPark_Tupperware,
     SouthPark_WoodlandCritters,
     SouthPark_YouthPastorCraig,
@@ -95,9 +117,19 @@ enum UnitID{
     //raid bosses
     Raid_VaultOfGlass_AtheonTimesConflux,
     Raid_VaultOfGlass_Oracle,
+    
+    //unobtainables
+    GenshinImpact_Shouki_no_Kami_the_Prodigal,
 }
 enum HeroID{
-    Unturned_CaptainSydney=1,
+    FarCry6_AntonCastillo=1,
+    Unturned_CaptainSydney,
+    CardWars_KillerElfiyan,
+    CardWars_KingElfiyan,
+    CardWars_UniversalElfiyan,
+    CardWars_EngineerPatrick,
+    CardWars_HackerPatrick,
+    CardWars_SargeantPatrick,
     RA3_PremierAnatolyIlychCherdenko,
     D2_Zavala,
     HeroID_MAX,
@@ -107,6 +139,7 @@ enum HeroID{
 enum WorldType{
     Destiny2,
     FantasticFrontier,
+    GenshinImpact,
     Hexeria,
     MadnessCombat,
     Payday2,
@@ -128,7 +161,7 @@ enum UnitAttackType{
 }
 enum AbilityTrigger{
     Default,//default not used
-    Passive,//not sure what this supposed to do
+    Passive,//activated after every turn (Not end of attacking turn)
     Activate,//activated when pressed "A" on unit
     ActivateTarget,//activated when pressed then pressed another on another unit
     Intrinsic,//activated when summoned and updated on every start of the round
@@ -143,18 +176,22 @@ enum AbilityTrigger{
     AfterCardSelection,//activated after con has finished selecting a card
     AfterCardSelectionCancel,//activated after cancelation of selection
     UnitCardOnMe,//activated when a unit card is placed on the cardholder
+    UnitSummoned,//When any unit is summoned
+    AllySummoned,//When Ally is summoned
 }
 
 
 global.UnitDataMap=ds_map_create()
 ds_map_destroy(global.UnitDataMap)
 scr_units_init_all()
+scr_units_init_AI()
 scr_spells_init_all()
 scr_heroes_init_all()
 scr_MissionSetupScript_init()
 
 global.WorldTypeName[WorldType.Destiny2]="Destiny 2"
 global.WorldTypeName[WorldType.FantasticFrontier]="Fantastic Frontier"
+global.WorldTypeName[WorldType.GenshinImpact]="Genshin Impact"
 global.WorldTypeName[WorldType.Hexeria]="Hexeria"
 global.WorldTypeName[WorldType.MadnessCombat]="Madness Combat"
 global.WorldTypeName[WorldType.Payday2]="Payday 2"

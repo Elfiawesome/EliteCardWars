@@ -19,8 +19,10 @@ ds_map_clear(Stats[? "Multi_DefDuration"])
 Stats[? "Def"]=0
 Stats[? "SplashAtk"]=0
 Stats[? "Pt"]=0
-Stats[? "AtkAlrdy"]=false
+Stats[? "AtkMax"]=1
+Stats[? "AtkLeft"]=Stats[? "AtkMax"]
 Stats[? "AbilityAlrdy"]=false
+Stats[? "ActivateAbilityAlrdy"]=false
 //attack types
 ds_map_clear(Stats[? "Multi_CrossAtk"])
 ds_map_clear(Stats[? "Multi_SpreadAtk"])
@@ -45,6 +47,8 @@ ds_map_clear(Stats[? "Multi_IsStatusEffectImmune"])
 Stats[? "IsStatusEffectImmune"]=0
 ds_map_clear(Stats[? "Multi_IsSpellsImmune"])
 Stats[? "IsSpellsImmune"]=0
+ds_map_clear(Stats[? "Multi_IsAbilityImmune"])
+Stats[? "IsAbilityImmune"]=0
 //status effects
 ds_map_clear(Stats[? "Multi_BurnDmg"])
 ds_map_clear(Stats[? "Multi_BurnDuration"])
@@ -73,6 +77,8 @@ Stats[? "AbilityConstantTarget"]=noone
 Stats[? "LastAttackedBy"]=""
 Stats[? "Lifespan"]=0
 
+ds_map_delete(Stats,"AtheonTargetedHandCardSock")
+ds_map_delete(Stats,"AtheonTargetedHandCardIdentifier")
 
 
 //if selected, remove selected

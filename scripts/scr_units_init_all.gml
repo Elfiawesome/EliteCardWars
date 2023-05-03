@@ -1,6 +1,6 @@
 //Destiny 2
 var _wt=WorldType.Destiny2
-var Cur=UnitID.D2_AtheonTimesConflux//**Ability not yet done!
+var Cur=UnitID.D2_AtheonTimesConflux
 scr_units_init_func(Cur,"Atheon Time's Conflux",_wt,45,25,24,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
 global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_PlayerTurn
@@ -220,7 +220,7 @@ global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_DoctorTimothy_Activate
 global.UnitDat_CooldownMax[Cur]=1
 var Cur=UnitID.SouthPark_EnforcerJimmy
 scr_units_init_func(Cur,"Enforcer Jimmy",_wt,10,5,8,spr_cards,Cur-1)
-global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Passive
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_EnforcerJimmy_Intrinsic
 var Cur=UnitID.SouthPark_Fastpass
 scr_units_init_func(Cur,"Fastpsas",_wt,15,10,10,spr_cards,Cur-1)
@@ -277,6 +277,14 @@ var Cur=UnitID.SouthPark_PrincessKenny
 scr_units_init_func(Cur,"Princess Kenny",_wt,4,7,4,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.Deathwish
 global.UnitDat_AbilityScript[Cur,1]=scr_ability_SouthPark_PrincessKenny_Deathwish
+var Cur=UnitID.SouthPark_RobinTweek
+scr_units_init_func(Cur,"Princess Kenny",_wt,12,11,12,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.ActivateTarget
+global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_PlayerTurn
+global.UnitDat_AbilityTargetCheck[Cur,0]=scr_ability_Checks_OnlyAllies
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_RobinTweek_ActivateTarget
+global.UnitDat_AbilityTrigger[Cur,2]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,2]=scr_ability_SouthPark_DarkAngelRed_Intrinsic
 var Cur=UnitID.SouthPark_Robobebe//legacy
 scr_units_init_func(Cur,"Robo Bebe",_wt,10,10,9,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Kill
@@ -299,11 +307,14 @@ var Cur=UnitID.SouthPark_StanofManyMoonos
 scr_units_init_func(Cur,"Stan of Many Moons",_wt,10,15,15,spr_cards,Cur-1)
 global.UnitDat_AttackType[Cur,UnitAttackType.Splash_Atk]=true
 global.UnitDat_AttackType_SplashDmg[Cur]=10
+var Cur=UnitID.SouthPark_TheMasterNinjew
+scr_units_init_func(Cur,"The Master Ninjew",_wt,26,11,18,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Warcry
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_TheMasterNinjew_Warcry
 var Cur=UnitID.SouthPark_Tupperware
 scr_units_init_func(Cur,"Tupperware",_wt,15,10,10,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_StatusEffectSpellsImmune
-
 var Cur=UnitID.SouthPark_WoodlandCritters
 scr_units_init_func(Cur,"Woodland Critters",_wt,16,6,12,spr_cards,Cur-1)
 global.UnitDat_AbilityTargetSelectCheck[Cur]=scr_ability_SelectChecks_PlayerTurn
@@ -358,5 +369,97 @@ scr_units_init_func(Cur,"Zombie",_wt,5,1,1,spr_cards,Cur-1);
 var _wt=WorldType.Vesteria
 var Cur=UnitID.Vesteria_Crabby
 scr_units_init_func(Cur,"Crabby",_wt,8,2,2,spr_cards,Cur-1);
+
+//Genshin Impact
+var _wt=WorldType.GenshinImpact
+var Cur=UnitID.GenshinImpact_AnemoboxerVanguard
+scr_units_init_func(Cur,"Anemoboxer Vanguard",_wt,10,5,9,spr_cards,Cur-1);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_GenshinImpact_AnemoboxerVanguard_Intrinsic
+
+var Cur=UnitID.GenshinImpact_AnemoSlime
+scr_units_init_func(Cur,"Anemo Slime",_wt,11,5,3,spr_cards,Cur-1);
+
+var Cur=UnitID.GenshinImpact_Ayaka
+scr_units_init_func(Cur,"Ayaka",_wt,15,4,12,spr_cards,Cur-1);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Warcry
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_GenshinImpact_Ayaka_Warcry
+
+var Cur=UnitID.GenshinImpact_Barbara
+scr_units_init_func(Cur,"Barbara",_wt,20,5,14,spr_cards,Cur-1);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_GenshinImpact_Barbara_Intrinsic
+
+var Cur=UnitID.GenshinImpact_Bennett
+scr_units_init_func(Cur,"Bennett",_wt,19,10,10,spr_cards,Cur-1);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Activate
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_GenshinImpact_Bennett_Activate
+global.UnitDat_CooldownMax[Cur]=3
+
+var Cur=UnitID.GenshinImpact_CryoHypostasis
+scr_units_init_func(Cur,"Cryo Hypostasis",_wt,24,15,18,spr_cards,Cur-1);
+global.UnitDat_AttackType[Cur,UnitAttackType.Pierce_Atk]=true
+
+var Cur=UnitID.GenshinImpact_ElectrohammerVanguard
+scr_units_init_func(Cur,"Electrohammer Vanguard",_wt,15,10,12,spr_cards,Cur-1);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Damaging
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_GenshinImpact_ElectrohammerVanguard_Damaging
+global.UnitDat_CooldownMax[Cur]=2
+
+var Cur=UnitID.GenshinImpact_ElectroSlime
+scr_units_init_func(Cur,"Electro Slime",_wt,11,3,5,spr_cards,Cur-1);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_GenshinImpact_ElectroSlime_Intrinsic
+
+var Cur=UnitID.GenshinImpact_GeoHypostasis
+scr_units_init_func(Cur,"Geo Hypostasis",_wt,24,15,19,spr_cards,Cur-1);
+global.UnitDat_AttackType[Cur,UnitAttackType.Splash_Atk]=true
+global.UnitDat_AttackType_SplashDmg[Cur]=13
+
+var Cur=UnitID.GenshinImpact_Hutao
+scr_units_init_func(Cur,"Hutao",_wt,22,15,13,spr_cards,Cur-1);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Damaged
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_GenshinImpact_Hutao_Damaged
+
+var Cur=UnitID.GenshinImpact_HydrogunnerLegionnaire
+scr_units_init_func(Cur,"Hydrogunner Legionnaire",_wt,30,5,15,spr_cards,Cur-1);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_GenshinImpact_HydrogunnerLegionnaire_Intrinsic
+
+var Cur=UnitID.GenshinImpact_PyroSlime
+scr_units_init_func(Cur,"Pyro Slime",_wt,10,4,5,spr_cards,Cur-1);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Deathwish
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_GenshinImpact_PyroSlime_Deathwish
+
+var Cur=UnitID.GenshinImpact_PyroslingerBracer
+scr_units_init_func(Cur,"Pyroslinger Bracer",_wt,13,18,13,spr_cards,Cur-1);
+global.UnitDat_AttackType[Cur,UnitAttackType.CrossAtk]=true
+
+var Cur=UnitID.GenshinImpact_RaidenShogun
+scr_units_init_func(Cur,"Raiden Shogun",_wt,45,20,22,spr_cards,Cur-1);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_GenshinImpact_RaidenShogun_Intrinsic
+
+var Cur=UnitID.GenshinImpact_Scaramouche
+scr_units_init_func(Cur,"Scaramouche",_wt,16,8,16,spr_cards,Cur-1);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Damaging
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_GenshinImpact_Scaramouche_Damaging
+
+var Cur=UnitID.GenshinImpact_Shouki_no_Kami_the_Prodigal
+scr_units_init_func(Cur,"Shouki no Kami the Prodigal",_wt,40,13,19,spr_cards_special,0);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Damaging
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_GenshinImpact_Shouki_no_Kami_the_Prodigal_Damaging
+global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.Activate
+global.UnitDat_AbilityScript[Cur,1]=scr_ability_GenshinImpact_Shouki_no_Kami_the_Prodigal_Activate
+global.UnitDat_CooldownMax[Cur]=10
+
+var Cur=UnitID.GenshinImpact_Venti//Need
+scr_units_init_func(Cur,"Venti",_wt,15,10,14,spr_cards,Cur-1);
+
+var Cur=UnitID.GenshinImpact_Zhongli
+scr_units_init_func(Cur,"Zhongli",_wt,40,18,22,spr_cards,Cur-1);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_GenshinImpact_Zhongli_Intrinsic
+global.UnitDat_CooldownMax[Cur]=5
 
 scr_units_init_raidunits()

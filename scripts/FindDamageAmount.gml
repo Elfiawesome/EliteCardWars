@@ -6,7 +6,7 @@ var _Immune=FindDamageState(Atkr,Vict)
 
 switch(_Immune){
     case 0:
-        return (argument0*GetIntakeMultiplier(argument1,argument2)-argument2.Stats[? "Def"])
+        return max((argument0*GetIntakeMultiplier(argument1,argument2)-argument2.Stats[? "Def"]),0)
     break;
     case 1:
         return 0

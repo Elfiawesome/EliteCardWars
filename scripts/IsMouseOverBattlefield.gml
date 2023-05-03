@@ -6,7 +6,11 @@ with(global.NetworkObj){
         if _con.IsSpectating=false{
             var _x=_con.Homex
             var _y=_con.Homey
-            if point_in_rectangle(mouse_x,mouse_y,_x-350,_y-300,_x+350,_y+300){
+            if point_in_rectangle(mouse_x,mouse_y,
+                _x-_con.BattlefieldWidth/2,
+                _y-_con.BattlefieldHeight/2,
+                _x+_con.BattlefieldWidth/2,
+                _y+_con.BattlefieldHeight/2){
                 _r=_con
             }
         }

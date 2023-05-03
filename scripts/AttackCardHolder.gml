@@ -69,7 +69,7 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
     ds_list_destroy(_VictList)
     
     //remove atkalrdy
-    AttackObj.Stats[? "AtkAlrdy"]=true
+    AttackObj.Stats[? "AtkLeft"]-=1
     ds_map_destroy(_m)
     if VictimObj.Stats[? "Finalized_Hp"]<1{break;}
 }

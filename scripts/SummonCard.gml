@@ -28,3 +28,13 @@ with(argument0){
     
     player_con_CardholdersUpdateMultiStats()
 }
+//Activate Hero's Ability
+for(var i=0;i<ds_list_size(global.NetworkObj.socketlist);i++){
+    with(global.NetworkObj.socket_to_instanceid[? global.NetworkObj.socketlist[| i]]){
+        if IsSpectating=false{
+            with(Hero){
+                Activate_UnitSummon_HeroAbility(argument0)
+            }
+        }
+    }
+}

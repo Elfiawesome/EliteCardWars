@@ -11,16 +11,19 @@ if Atkr.Stats[? "SpreadAtk"]{
     }
 }
 if Atkr.Stats[? "Sweep_Atk"]{
-    if (Vict.Pos<3){
-        for(var i=0;i<3;i++){
+    if !IsBackUnit(Vict.Pos,battlefield){
+        for(var i=0;i<(ds_list_size(battlefield)-1);i++){
             if ds_list_find_index(_l,battlefield[| i])=-1{ds_list_add(_l,battlefield[| i])}
         }
     }
 }
 if Atkr.Stats[? "Pierce_Atk"]{
-    if (Vict.Pos=1) || (Vict.Pos=3){
-        if ds_list_find_index(_l,battlefield[| 3])=-1{ds_list_add(_l,battlefield[| 3])}
-        if ds_list_find_index(_l,battlefield[| 1])=-1{ds_list_add(_l,battlefield[| 1])}
+    if IsBackUnit(Vict.Pos,battlefield) || IsMiddleUnit(Vict.Pos,battlefield){
+        for(var i=0;i<(ds_list_size(battlefield));i++){
+            if IsBackUnit(i,battlefield) || IsMiddleUnit(i,battlefield){
+                if ds_list_find_index(_l,battlefield[| i])=-1{ds_list_add(_l,battlefield[| i])}
+            }
+        }
     }
 }
 

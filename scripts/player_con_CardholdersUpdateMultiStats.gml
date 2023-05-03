@@ -24,6 +24,8 @@ _m=Stats[? "Multi_IsStatusEffectImmune"]
 if !ds_map_empty(_m){Stats[? "IsStatusEffectImmune"]=1}else{Stats[? "IsStatusEffectImmune"]=0}
 _m=Stats[? "Multi_IsSpellsImmune"]
 if !ds_map_empty(_m){Stats[? "IsSpellsImmune"]=1}else{Stats[? "IsSpellsImmune"]=0}
+_m=Stats[? "Multi_IsAbilityImmune"]
+if !ds_map_empty(_m){Stats[? "IsAbilityImmune"]=1}else{Stats[? "IsAbilityImmune"]=0}
 
 //Burn & Poison Dmg
 var dmg=0;

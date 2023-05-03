@@ -1,5 +1,7 @@
 enum SpellID{
-    Hexeria_BlueElixir=1,
+    GenshinImpact_ElectroGnosis=1,
+    GenshinImpact_MusouNoHitachi,
+    Hexeria_BlueElixir,
     Hexeria_Purify,
     MadnessCombat_SaviorsHalo,
     Payday2_HostageTaker,
@@ -43,6 +45,18 @@ enum SpellTrigger{
     AfterCardSelection,
     AfterCardSelectionCancel,
 }
+var _wt=WorldType.GenshinImpact
+var Cur=SpellID.GenshinImpact_ElectroGnosis//Consumable
+scr_spells_init_func(Cur,"Electro Gnosis",_wt,16,spr_spells,Cur-1,SpellType.Consumable,SpellCastType.UnitTarget)
+global.SpellDat_CastCheck[Cur]=scr_spells_Checks_OnlyAllies
+global.SpellDat_SpellTrigger[Cur,0]=SpellTrigger.WhenCasted
+global.SpellDat_SpellScript[Cur,0]=scr_spell_GenshinImpact_ElectroGnosis_WhenCasted
+var Cur=SpellID.GenshinImpact_MusouNoHitachi//Consumable
+scr_spells_init_func(Cur,"Musou No Hitachi",_wt,16,spr_spells,Cur-1,SpellType.Consumable,SpellCastType.UnitTarget)
+global.SpellDat_CastCheck[Cur]=scr_spells_Checks_OnlyAllies
+global.SpellDat_SpellTrigger[Cur,0]=SpellTrigger.WhenCasted
+global.SpellDat_SpellScript[Cur,0]=scr_spell_GenshinImpact_MusouNoHitachi_WhenCasted
+
 
 var _wt=WorldType.Hexeria
 var Cur=SpellID.Hexeria_BlueElixir//Consumable

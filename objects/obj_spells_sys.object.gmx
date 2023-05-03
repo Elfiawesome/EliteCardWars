@@ -172,10 +172,10 @@ if !ds_list_empty(SQ){
             )
             if HighlightCardPos=i &amp;&amp; !is_undefined(_tgtcon){
                 if is_undefined(_pos){
-                    var tgtx1=_tgtcon.Homex-350
-                    var tgty1=_tgtcon.Homey-300
-                    var tgtx2=_tgtcon.Homex+350
-                    var tgty2=_tgtcon.Homey+300
+                    var tgtx1=_tgtcon.Homex-_tgtcon.BattlefieldWidth/2
+                    var tgty1=_tgtcon.Homey-_tgtcon.BattlefieldHeight/2
+                    var tgtx2=_tgtcon.Homex+_tgtcon.BattlefieldWidth/2
+                    var tgty2=_tgtcon.Homey+_tgtcon.BattlefieldHeight/2
                     var tgtcl=TeamColorOf(_tgtcon.Team)
                 }else{
                     var _ch=_tgtcon.Cardholderlist[| _pos]

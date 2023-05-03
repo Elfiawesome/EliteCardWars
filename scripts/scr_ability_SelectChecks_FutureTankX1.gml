@@ -3,7 +3,7 @@ var _c=argument0
 var _r=false
 
 if global.GameStage=GAMESTAGE.ATTACKINGTURN{
-    if _c.Stats[? "AtkAlrdy"]=false{
+    if _c.Stats[? "AtkLeft"]>0{
         _r=true
     }
 }

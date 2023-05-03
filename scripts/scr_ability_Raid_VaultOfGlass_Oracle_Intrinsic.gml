@@ -31,7 +31,7 @@ if Stats[? "AbilityCooldown"]=0{
         with(global.NetworkObj.socket_to_instanceid[? global.NetworkObj.socketlist[| i]]){
             for(var ii=0;ii<ds_list_size(Cardholderlist);ii++){
                 var _cardholder=Cardholderlist[| ii]
-                if _cardholder.CardID!=0{
+                if _cardholder.CardID!=0 && !_cardholder.Stats[? "IsAbilityImmune"]{
                 with(_cardholder){
                     Stats[? "Finalized_Hp"]=0//for servitors
                     GameEvent_cardholders_AfterDamaged(id)

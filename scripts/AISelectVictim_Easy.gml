@@ -4,23 +4,44 @@ var _MapStrategyHolders=ds_map_create()
 var _MapStrategyHeroes=ds_map_create()
 var _AlreadyAttackedCardsList=ds_list_create()
 //set priority on which socket to attack
-var _socketpriority=ds_priority_create()
+var _socketval=ds_map_create()
 for(var i=0;i<ds_list_size(global.NetworkObj.socketlist);i++){
     var _con=global.NetworkObj.socket_to_instanceid[? global.NetworkObj.socketlist[| i]]
     if _con.IsSpectating=false && _con.Team!=Team{
     var _val=0
         for(var ii=0;ii<ds_list_size(_con.Cardholderlist);ii++){
             var _ch=_con.Cardholderlist[| ii];
-            _val+=(
-                _ch.Stats[? "Hp"]*clamp(sign(_ch.Stats[? "Hp"]),0,1)+
-                _ch.Stats[? "Atk"]*clamp(sign(_ch.Stats[? "Atk"]),0,1))
+            var _curval=(
+                    _ch.Stats[? "Hp"]*clamp(sign(_ch.Stats[? "Hp"]),0,1)+
+                    _ch.Stats[? "Atk"]*clamp(sign(_ch.Stats[? "Atk"]),0,1)
+            );
+            _val+=_curval
+            if !_ch.Stats[? "IsImmune"]{
+                _val+=_curval
+            }else{
+                var _mii=_ch.Stats[? "Multi_IsImmune"]
+                if !ds_map_empty(_mii){
+                    var _immuner=GetMultiStatsObject(ds_map_find_first(_mii))
+                    if _immuner!=noone{
+                        if ds_map_exists(_socketval,_immuner.mysocket){_socketval[? _immuner.mysocket]+=_curval}else{_socketval[? _immuner.mysocket]=_curval}
+                    }
+                }
+            }
         }
-    if scr_ConBattlefieldSize(_con)=0{
-        _val=_con.Hero.Stats[? "Hp"]*10
-    }
-    ds_priority_add(_socketpriority,global.NetworkObj.socketlist[| i],_val)
+        if scr_ConBattlefieldSize(_con)=0{
+            _val=_con.Hero.Stats[? "Hp"]*10
+        }
+        if ds_map_exists(_socketval,_con.mysocket){_socketval[? _con.mysocket]+=_val}else{_socketval[? _con.mysocket]=_val}
     }
 }
+
+var _socketpriority=ds_priority_create()
+for(var k=ds_map_find_first(_socketval);!is_undefined(k);k=ds_map_find_next(_socketval,k)) {
+    var _s = real(k)
+    var _v = _socketval[? k];
+    ds_priority_add(_socketpriority,_s,_v)
+}
+ds_map_destroy(_socketval)
 
 while(!ds_priority_empty(_socketpriority)){//list through all sockets by priority
     var _con=global.NetworkObj.socket_to_instanceid[? ds_priority_find_max(_socketpriority)]
@@ -48,7 +69,7 @@ while(!ds_priority_empty(_socketpriority)){//list through all sockets by priorit
             var _TempHp=_ch.Stats[? "Finalized_Hp"]
             for(var i3=0;i3<ds_list_size(Cardholderlist);i3++){
             if Cardholderlist[| i3].Stats[? "Finalized_Atk"]>0{//make game not very long and boring
-            if Cardholderlist[| i3].CardID!=0 && Cardholderlist[| i3].Stats[? "AtkAlrdy"]=false && !Cardholderlist[| i3].Stats[? "IsFrozen"] && ds_list_find_index(_AlreadyAttackedCardsList,Cardholderlist[| i3])=-1{
+            if Cardholderlist[| i3].CardID!=0 && Cardholderlist[| i3].Stats[? "AtkLeft"]>0 && !IsUnitFrozen(Cardholderlist[| i3]) && ds_list_find_index(_AlreadyAttackedCardsList,Cardholderlist[| i3])=-1{
                 if scr_OverallValidAttackSpot(_ch,Cardholderlist[| i3]){
                     ds_list_add(_l,Cardholderlist[| i3])
                     ds_list_add(_AlreadyAttackedCardsList,Cardholderlist[| i3])
@@ -71,7 +92,7 @@ while(!ds_priority_empty(_socketpriority)){//list through all sockets by priorit
         var _l=ds_list_create()
         for(var i3=0;i3<ds_list_size(Cardholderlist);i3++){
         if Cardholderlist[| i3].Stats[? "Finalized_Atk"]>0{
-        if Cardholderlist[| i3].CardID!=0 && Cardholderlist[| i3].Stats[? "AtkAlrdy"]=false && !Cardholderlist[| i3].Stats[? "IsFrozen"] && ds_list_find_index(_AlreadyAttackedCardsList,Cardholderlist[| i3])=-1{
+        if Cardholderlist[| i3].CardID!=0 && Cardholderlist[| i3].Stats[? "AtkLeft"]>0 && !IsUnitFrozen(Cardholderlist[| i3]) && ds_list_find_index(_AlreadyAttackedCardsList,Cardholderlist[| i3])=-1{
                 ds_list_add(_l,Cardholderlist[| i3])
                 ds_list_add(_AlreadyAttackedCardsList,Cardholderlist[| i3])
                 //reset bot speed

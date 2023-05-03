@@ -71,6 +71,8 @@ carddisplayspr=spr_cards
 carddisplayimg=irandom_range(1,UnitID.UnitID_MAX)
 carddisplaytype=0
 carddisplaystage=0
+
+NewsText="News#Genshin &amp; Hero update v1.0.6#View PatchNotes"
 </string>
           </argument>
         </arguments>
@@ -279,6 +281,8 @@ file = file_text_open_write(_dir);
 file_text_write_string(file,_string);
 file_text_close(file);
 }
+
+
 </string>
           </argument>
         </arguments>
@@ -437,7 +441,7 @@ draw_set_color($404040)
 draw_rectangle(_curx,_cury,_curx+_butwid,_cury+325.5,false)
 scr_menu_button_draw_highlight(msx,msy,_curx,_cury,_butwid,325.5,buttonid)
 draw_set_color(c_white)
-draw_text_transformed(_curx+_butwid/2,_cury+_buthei/2,"News#UI update v1.0.5",1,1,0)
+draw_text_transformed(_curx+_butwid/2,_cury+_buthei/2,NewsText,1,1,0)
 
 //reset all text align
 draw_set_valign(fa_top)
@@ -571,7 +575,7 @@ draw_text_transformed(_curx+bw/2,_cury+bh/2,"Deck",7/9,7/9,0)
 
 draw_set_valign(fa_bottom)
 draw_set_halign(fa_right)
-draw_text(view_wport[0],view_hport[0],"v1.0.5")
+draw_text(view_wport[0],view_hport[0],"v1.0.6")
 draw_set_valign(fa_top)
 draw_set_halign(fa_left)
 /*

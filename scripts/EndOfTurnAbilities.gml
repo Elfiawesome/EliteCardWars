@@ -10,7 +10,7 @@ for(var i=0;i<ds_list_size(socketlist);i++){
                 //increasing lifespan
                 Stats[? "Lifespan"]++
                 //reset atk already
-                Stats[? "AtkAlrdy"]=false
+                Stats[? "AtkLeft"]=Stats[? "AtkMax"]
                 //reset ability already
                 Stats[? "AbilityAlrdy"]=false
             }
@@ -18,6 +18,7 @@ for(var i=0;i<ds_list_size(socketlist);i++){
         }
         with(Hero){
             Stats[? "AbilityAlrdy"]=false
+            Stats[? "ActivateAbilityAlrdy"]=false
             Stats[? "ForceAttackHolder"]=-1
         }
         }

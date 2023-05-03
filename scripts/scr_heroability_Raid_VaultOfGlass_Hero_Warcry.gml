@@ -13,6 +13,7 @@ if _ri=2{
                 if _ch.CardID=0{
                     if i=1{
                         SummonCard(_ch,UnitID.Raid_VaultOfGlass_AtheonTimesConflux)
+                        _ch.Stats[? "IsCheezable"]=false
                     }
                     if i=0 || i=2{
                         SummonCard(_ch,UnitID.Raid_VaultOfGlass_Oracle)

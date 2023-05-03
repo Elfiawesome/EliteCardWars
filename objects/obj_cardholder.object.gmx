@@ -37,6 +37,8 @@ IsSelected_Ability=false
 ShakeAmt=0
 Shakex=x
 Shakey=y
+Homex=x
+Homey=y
 RollADieNumber=0
 Stats=ds_map_create()
 Stats[? "UnitsIdentifier"]=0
@@ -60,7 +62,9 @@ Stats[? "Finalized_Atk"]=0
 
 Stats[? "SplashAtk"]=0
 Stats[? "Pt"]=0
-Stats[? "AtkAlrdy"]=false
+//Stats[? "AtkAlrdy"]=false
+Stats[? "AtkMax"]=1
+Stats[? "AtkLeft"]=Stats[? "AtkMax"]
 Stats[? "AbilityAlrdy"]=false
 //attack types
 var m=ds_map_create();ds_map_add_map(Stats,"Multi_CrossAtk",m);
@@ -87,6 +91,8 @@ var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsStatusEffectImmune",m);
 Stats[? "IsStatusEffectImmune"]=0
 var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsSpellsImmune",m);
 Stats[? "IsSpellsImmune"]=0
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsAbilityImmune",m);
+Stats[? "IsAbilityImmune"]=0
 //status effects
 var m=ds_map_create();ds_map_add_map(Stats,"Multi_BurnDmg",m);
 Stats[? "BurnDmg"]=0
@@ -358,7 +364,7 @@ if CardID=0{
 
 if CardID=0{exit;}
 var alpha=1;
-if Stats[? "AtkAlrdy"]{alpha=0.6}
+if Stats[? "AtkLeft"]=0{alpha=0.6}
 
 //draw background card
 draw_primitive_begin(pr_trianglestrip);
@@ -543,7 +549,7 @@ if Stats[? "Sweep_Atk"]{
     var _y=y+sprite_get_height(sprite_index)*image_yscale/2
     draw_sprite_ext(spr_AttackType,2,_x,_y,0.03,0.03,0,c_white,1)
 }
-if Stats[? "SpreadAtk"]{
+if Stats[? "SpreadAtk"] || Stats[? "Splash_Atk"]{
     var _x=x-sprite_get_width(sprite_index)*image_xscale/2+150
     var _y=y+sprite_get_height(sprite_index)*image_yscale/2
     draw_sprite_ext(spr_AttackType,3,_x,_y,0.03,0.03,0,c_white,1)

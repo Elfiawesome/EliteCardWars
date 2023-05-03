@@ -6,7 +6,7 @@ if global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
         
         //Activate Target Ability
         if IsHeroAbilityTrigger(_heroholder.CardID,AbilityTrigger.ActivateTarget)!=-1 && _heroholder.Stats[? "AbilityCooldown"]=0 && script_execute(global.HeroDat_AbilityTargetSelectCheck[_heroholder.CardID],_heroholder){
-            if _heroholder.CardID!=0 && _heroholder.Stats[? "AbilityAlrdy"]=false{
+            if _heroholder.CardID!=0 && _heroholder.Stats[? "ActivateAbilityAlrdy"]=false{
                 if !global.NetworkObj.IsHeroSelected{
                     global.NetworkObj.IsHeroSelected=true
                 }else{
@@ -16,7 +16,7 @@ if global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket{
         }
         //Activate non Target Ability [AbilityActivate]
         if IsHeroAbilityTrigger(_heroholder.CardID,AbilityTrigger.Activate)!=-1 && _heroholder.Stats[? "AbilityCooldown"]=0 && script_execute(global.HeroDat_AbilityTargetSelectCheck[_heroholder.CardID],_heroholder){
-            if _heroholder.CardID!=0 && _heroholder.Stats[? "AbilityAlrdy"]=false{
+            if _heroholder.CardID!=0 && _heroholder.Stats[? "ActivateAbilityAlrdy"]=false{
                 var _map=ds_map_create();
                 _map[? "AttackerSock"]=_heroholder.mysocket
                 var _mapstr=json_encode_destroy(_map)

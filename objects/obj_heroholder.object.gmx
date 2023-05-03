@@ -54,6 +54,7 @@ Stats[? "Atk"]=10
 Stats[? "Pt"]=0
 Stats[? "AtkAlrdy"]=false
 Stats[? "AbilityAlrdy"]=false
+Stats[? "ActivateAbilityAlrdy"]=false
 //attack types
 Stats[? "CrossAtk"]=false
 Stats[? "SpreadAtk"]=false
@@ -68,6 +69,7 @@ Stats[? "IsSPImmune"]=0
 Stats[? "IsBAImmune"]=0
 Stats[? "DrawsLeft"]=2
 Stats[? "DrawsMax"]=2
+Stats[? "DrawsExtra"]=0
 //Spells lists
 var EquipedSpellsList=ds_list_create()
 ds_map_add_list(Stats,"Spells",EquipedSpellsList)
@@ -170,6 +172,12 @@ if ShakeAmt&gt;0{
 if keyboard_check_pressed(ord("I")){
     if position_meeting(mouse_x,mouse_y,id){
         show_ingame_message(json_encode(Stats))
+    }
+}
+/*if keyboard_check_pressed(ord("E")){
+    if position_meeting(mouse_x,mouse_y,id){
+        var _stat=get_string("What stats?","Hp");
+        Stats[? _stat]=real(get_string("What value",0))
     }
 }
 </string>

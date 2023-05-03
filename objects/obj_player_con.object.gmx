@@ -93,6 +93,11 @@ IsHeroActivateButton=false
 IsEndTurnButton=false
 IsEndTurnButtonOverlay=0
 IsEndTurnButtonDelay=0
+//Battlefield size
+BattlefieldWidth=0
+BattlefieldHeight=0
+
+CommandOverlay=false
 
 CanEndTurn=true//specifically used for tutorials
 
@@ -215,11 +220,12 @@ if keyboard_check_pressed(vk_enter){
     //GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
     //var _c1=GameEvent_draw_specific_card(real(get_string("Enter the unit ID","0")),1)
     Points+=200
-    //var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_ObservationPost,1)
-    //var _c1=GameEvent_draw_specific_card(UnitID.D2_AtheonTimesConflux,0)
-    var _c1=GameEvent_draw_specific_card(SpellID.Vesteria_Regeneration,1)
-    var _c1=GameEvent_draw_specific_card(SpellID.Vesteria_Flare,1)
-    var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_OrbitalDownpour,1)
+    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_BountyHunterKyle,0)
+    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_EnforcerJimmy,0)
+    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_MrHankey,0)
+    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_ChaosHamsters,0)
+    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_Tupperware,0)//CHECK THIS?
+    var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_DesolatorAirstrike,1)
 }
 if global.SelectedCard=noone{
     if position_meeting(mouse_x,mouse_y,obj_card){
@@ -400,21 +406,21 @@ if IsBot &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
 
     if global.GameStage=GAMESTAGE.PLAYERTURNS &amp;&amp; BotSpeed=BotSpeedMax{
         //first draw cards
-        if Hero.Stats[? "DrawsLeft"]&gt;0 &amp;&amp; !ds_list_empty(DeckList) &amp;&amp; ds_list_size(cardList)&lt;(10+Hero.Stats[? "ExtraHandCards"]){
-        CardID=DeckList[| 0]
-        ds_list_delete(DeckList,0)
-        //tell server I drawed a card
-        var _m=ds_map_create();
-        _m[? "socket"]=mysocket;
-        _m[? "ID"]=CardID;
-        _m[? "Type"]=0
-        var _str=json_encode_destroy(_m);
-        with(global.NetworkObj){
-            if global.NetworkObj.object_index=obj_server{
-                svr_AddCardIntoHand(_str,other.mysocket)
+        while (Hero.Stats[? "DrawsLeft"]&gt;0 &amp;&amp; !ds_list_empty(DeckList) &amp;&amp; ds_list_size(cardList)&lt;(10+Hero.Stats[? "ExtraHandCards"])){
+            CardID=DeckList[| 0]
+            ds_list_delete(DeckList,0)
+            //tell server I drawed a card
+            var _m=ds_map_create();
+            _m[? "socket"]=mysocket;
+            _m[? "ID"]=CardID;
+            _m[? "Type"]=0
+            var _str=json_encode_destroy(_m);
+            with(global.NetworkObj){
+                if global.NetworkObj.object_index=obj_server{
+                    svr_AddCardIntoHand(_str,other.mysocket)
+                }
             }
-        }
-        Hero.Stats[? "DrawsLeft"]-=1
+            Hero.Stats[? "DrawsLeft"]-=1
         }
         //see if theres a need to place cards
         var SummoningMap=script_execute(AI_PlacingDownUnits)
@@ -522,7 +528,7 @@ if global.IsGame &amp;&amp; ds_list_empty(GUIObjectOrder) &amp;&amp; !global.IsS
                 if ds_list_find_index(global.NetworkObj.SelectedCardHolders_Ability,_cardholder)!=-1{exit;}
                 //Selecting MY unit
                 if _cardholder.CardID!=0{
-                if _cardholder.mysocket=mysocket &amp;&amp; !_cardholder.Stats[? "AtkAlrdy"] &amp;&amp; !_cardholder.Stats[? "IsFrozen"]{
+                if _cardholder.mysocket=mysocket &amp;&amp; _cardholder.Stats[? "AtkLeft"]&gt;0 &amp;&amp; !IsUnitFrozen(_cardholder){
                     if ds_list_find_index(Cardholderlist,_cardholder)!=-1{
                     if ds_list_find_index(global.NetworkObj.SelectedCardHolders,_cardholder)=-1{
                         ds_list_add(global.NetworkObj.SelectedCardHolders,_cardholder)
@@ -1347,7 +1353,7 @@ if keyboard_check(vk_tab){
 IsHeroActivateButton=false
 if global.IsGame &amp;&amp; IsLocal &amp;&amp; !IsSpectating &amp;&amp; global.NetworkObj.Turnstage[global.NetworkObj.Turn]=mysocket &amp;&amp; ds_list_empty(GUIObjectOrder){
     if IsHeroAbilityTrigger(Hero.CardID,AbilityTrigger.ActivateTarget)!=-1 || IsHeroAbilityTrigger(Hero.CardID,AbilityTrigger.Activate)!=-1{
-    if Hero.Stats[? "AbilityAlrdy"]=false{
+    if Hero.Stats[? "ActivateAbilityAlrdy"]=false{
     
     //transperancy
     var op_sc=1
@@ -1497,13 +1503,30 @@ if IsEndTurnButtonDelay&gt;0{IsEndTurnButtonDelay--}
             <kind>1</kind>
             <string>///Drawing Battlefield highlight
 if global.IsGame{
+var _rx1=Homex-BattlefieldWidth/2
+var _rx2=Homex+BattlefieldWidth/2
+var _x1=_rx1+2
+var _y1=Homey-BattlefieldHeight/2
+var _x2=_rx2-2
+var _y2=Homey+BattlefieldHeight/2
+draw_set_color(TeamColorOf(global.NetworkObj.socket_to_instanceid[? mysocket].Team))
+draw_set_alpha(0.2)
+var _w=5
+draw_line_width(_x1,_y1,_x1,_y2,5)
+draw_line_width(_x2,_y1,_x2,_y2,5)
+draw_set_color(c_black)
+draw_set_alpha(1)
+draw_line_width(_rx1,_y1,_rx1,_y2,1)
+draw_line_width(_rx2,_y1,_rx2,_y2,1)
+
 if global.SelectedCard!=noone &amp;&amp; global.SelectedCard.CardType=1 &amp;&amp; global.SpellDat_SpellCastType[global.SelectedCard.CardID]=SpellCastType.BattlefieldTarget{
     draw_set_color(TeamColorOf(global.NetworkObj.socket_to_instanceid[? mysocket].Team))
     draw_set_alpha((sin(current_time/100)+1)/4)
-    draw_rectangle(Homex-350,Homey-300,Homex+350,Homey+300,false)
+    draw_rectangle(_x1,_y1,_x2,_y2,false)
     draw_set_alpha(1)
     draw_set_color(c_white)
 }
+
 draw_set_halign(fa_middle)
 draw_set_halign(fa_left)
 }

@@ -29,6 +29,13 @@
 AnimatingOrderListMap=ds_list_create()
 Animating=false
 FinishedAnimating=false
+Timer=0
+
+
+ParticleSys=part_system_create()
+part_system_depth(ParticleSys,-12)
+ParticleParts=ds_map_create()
+
 </string>
           </argument>
         </arguments>
@@ -53,6 +60,16 @@ FinishedAnimating=false
             <kind>1</kind>
             <string>ds_list_destroy(AnimatingOrderList)
 ds_list_destroy(AnimatingOrderListMap)
+
+
+part_system_destroy(ParticleSys)
+for (var k = ds_map_find_first(ParticleParts); !is_undefined(k); k = ds_map_find_next(ParticleParts, k)){
+    var v=ParticleParts[? k]
+    if part_type_exists(v){
+        part_type_destroy(v)
+    }
+}
+ds_map_destroy(ParticleParts)
 </string>
           </argument>
         </arguments>

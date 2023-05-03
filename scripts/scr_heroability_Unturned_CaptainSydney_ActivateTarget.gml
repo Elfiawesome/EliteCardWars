@@ -28,7 +28,7 @@ var stid=global.NetworkObj.socket_to_instanceid
     }
     
     //Ability alrdy done
-    //atkr.Stats[? "AbilityAlrdy"]=true
+    //atkr.Stats[? "ActivateAbilityAlrdy"]=true
     
     //remove from selected
     global.NetworkObj.IsHeroSelected=false

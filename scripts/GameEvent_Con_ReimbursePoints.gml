@@ -11,7 +11,7 @@ for(var i=0;i<ds_list_size(socketlist);i++){
         with(Hero){
             Stats[? "TotaledReimbursedPoints"]=Inc
             //reset draws
-            Stats[? "DrawsLeft"]=Stats[? "DrawsMax"]
+            Stats[? "DrawsLeft"]=Stats[? "DrawsMax"]+Stats[? "DrawsExtra"]
         }
         }
     }

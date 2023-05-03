@@ -141,6 +141,7 @@
     <sprite>sprites\spr_statuseffect</sprite>
     <sprite>sprites\spr_cards_raid</sprite>
     <sprite>sprites\spr_heroes_raid</sprite>
+    <sprite>sprites\spr_cards_special</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_background</background>
@@ -159,6 +160,7 @@
           <script>scripts\EndOfTurnSpellsCheck.gml</script>
           <script>scripts\CheckingForVictoryOrEliminations.gml</script>
           <script>scripts\CheckingLocalCards.gml</script>
+          <script>scripts\EndOfTurnPassives.gml</script>
         </scripts>
         <script>scripts\SetupStartGame.gml</script>
         <script>scripts\SummonCard.gml</script>
@@ -292,6 +294,7 @@
       <script>scripts\scr_hero_init_func.gml</script>
       <script>scripts\scr_units_init_raidunits.gml</script>
       <script>scripts\scr_MissionSetupScript_init.gml</script>
+      <script>scripts\scr_units_init_AI.gml</script>
     </scripts>
     <scripts name="grp_setup_battlefield">
       <script>scripts\update_json_TeamMap.gml</script>
@@ -305,9 +308,19 @@
       <script>scripts\ani_depth.gml</script>
       <script>scripts\ani_shake.gml</script>
       <script>scripts\ani_damagenumber.gml</script>
+      <script>scripts\ani_wait.gml</script>
+      <script>scripts\ani_create_PartType.gml</script>
+      <script>scripts\ani_create_particles.gml</script>
+      <script>scripts\ani_destroy_PartType.gml</script>
       <scripts name="animation sets">
         <script>scripts\ani_AttackSet_basic.gml</script>
         <script>scripts\ani_GoToEnemyAndAttackSet_basic.gml</script>
+        <script>scripts\ani_AttackSet_ShoukinoKami.gml</script>
+      </scripts>
+      <scripts name="grp_PartTypeSetup">
+        <script>scripts\PartTypeSetup_ShoukiNoKamiBall.gml</script>
+        <script>scripts\PartTypeSetup_HaloBall.gml</script>
+        <script>scripts\PartTypeSetup_BlueLaser.gml</script>
       </scripts>
     </scripts>
     <scripts name="grp_game">
@@ -340,6 +353,7 @@
         </scripts>
         <scripts name="grp_ActivateAbility">
           <script>scripts\Activate_Intrinsic_Ability.gml</script>
+          <script>scripts\Activate_Passive_Ability.gml</script>
           <script>scripts\Activate_Warcry_Ability.gml</script>
           <script>scripts\Activate_Deathwish_Ability.gml</script>
           <script>scripts\Activate_Damaged_Ability.gml</script>
@@ -404,10 +418,12 @@
             <script>scripts\scr_ability_SouthPark_MrHankey_Warcry.gml</script>
             <script>scripts\scr_ability_SouthPark_PaladinButters_Deathwish.gml</script>
             <script>scripts\scr_ability_SouthPark_PrincessKenny_Deathwish.gml</script>
+            <script>scripts\scr_ability_SouthPark_RobinTweek_ActivateTarget.gml</script>
             <script>scripts\scr_ability_SouthPark_RogueToken_Warcry.gml</script>
             <script>scripts\scr_ability_SouthPark_ShamanToken_Intrinsic.gml</script>
             <script>scripts\scr_ability_SouthPark_WoodlandCritters_UnitCardOnMe.gml</script>
             <script>scripts\scr_ability_SouthPark_SheildmaidenWendy_Activate.gml</script>
+            <script>scripts\scr_ability_SouthPark_TheMasterNinjew_Warcry.gml</script>
             <script>scripts\scr_ability_SouthPark_YouthPastorCraig_Warcry.gml</script>
             <script>scripts\scr_ability_SouthPark_ZenCartman_Intrinsic.gml</script>
             <script>scripts\scr_ability_SouthPark_ZenCartman_AfterDamaged.gml</script>
@@ -418,6 +434,22 @@
           <scripts name="grp_Unturned">
             <script>scripts\scr_ability_Unturned_AcidZombie_Damaging.gml</script>
             <script>scripts\scr_ability_Unturned_BurnerZombie_Deathwish.gml</script>
+          </scripts>
+          <scripts name="grp_genshin">
+            <script>scripts\scr_ability_GenshinImpact_AnemoboxerVanguard_Intrinsic.gml</script>
+            <script>scripts\scr_ability_GenshinImpact_Ayaka_Warcry.gml</script>
+            <script>scripts\scr_ability_GenshinImpact_Barbara_Intrinsic.gml</script>
+            <script>scripts\scr_ability_GenshinImpact_Bennett_Activate.gml</script>
+            <script>scripts\scr_ability_GenshinImpact_ElectrohammerVanguard_Damaging.gml</script>
+            <script>scripts\scr_ability_GenshinImpact_ElectroSlime_Intrinsic.gml</script>
+            <script>scripts\scr_ability_GenshinImpact_Hutao_Damaged.gml</script>
+            <script>scripts\scr_ability_GenshinImpact_HydrogunnerLegionnaire_Intrinsic.gml</script>
+            <script>scripts\scr_ability_GenshinImpact_PyroSlime_Deathwish.gml</script>
+            <script>scripts\scr_ability_GenshinImpact_RaidenShogun_Intrinsic.gml</script>
+            <script>scripts\scr_ability_GenshinImpact_Scaramouche_Damaging.gml</script>
+            <script>scripts\scr_ability_GenshinImpact_Shouki_no_Kami_the_Prodigal_Damaging.gml</script>
+            <script>scripts\scr_ability_GenshinImpact_Shouki_no_Kami_the_Prodigal_Activate.gml</script>
+            <script>scripts\scr_ability_GenshinImpact_Zhongli_Intrinsic.gml</script>
           </scripts>
           <scripts name="grp_raids">
             <scripts name="grp_VaultOfGlass">
@@ -448,6 +480,8 @@
         <scripts name="grp_spells">
           <script>scripts\Activate_WhenCasted_Spell.gml</script>
         </scripts>
+        <script>scripts\scr_spell_GenshinImpact_MusouNoHitachi_WhenCasted.gml</script>
+        <script>scripts\scr_spell_GenshinImpact_ElectroGnosis_WhenCasted.gml</script>
         <script>scripts\scr_spell_Hexeria_BlueElixir_WhenCasted.gml</script>
         <script>scripts\scr_spell_Hexeria_Purify_WhenCasted.gml</script>
         <script>scripts\scr_spell_MadnessCombat_SaviorsHalo_StartAndEndOfTurn.gml</script>
@@ -480,8 +514,19 @@
         <scripts name="grp_ActivateAbility">
           <script>scripts\Activate_Intrinsic_HeroAbility.gml</script>
           <script>scripts\Activate_Warcry_HeroAbility.gml</script>
+          <script>scripts\Activate_AllySummon_HeroAbility.gml</script>
+          <script>scripts\Activate_UnitSummon_HeroAbility.gml</script>
         </scripts>
         <scripts name="grp_Abilities">
+          <script>scripts\scr_heroability_FarCry6_AntonCastillo_Intrinsic.gml</script>
+          <script>scripts\scr_heroability_FarCry6_AntonCastillo_UnitSummoned.gml</script>
+          <script>scripts\scr_heroability_CardWars_KillerElfiyan_Intrinsic.gml</script>
+          <script>scripts\scr_heroability_CardWars_KillerElfiyan_Activate.gml</script>
+          <script>scripts\scr_heroability_CardWars_KingElfiyan_Intrinsic.gml</script>
+          <script>scripts\scr_heroability_CardWars_KingElfiyan_UnitSummoned.gml</script>
+          <script>scripts\scr_heroability_CardWars_UniversalElfiyan_Intrinsic.gml</script>
+          <script>scripts\scr_heroability_CardWars_HackerPatrick_UnitSummoned.gml</script>
+          <script>scripts\scr_heroability_CardWars_CardWars_SargeantPatrick_UnitSummoned.gml</script>
           <script>scripts\scr_heroability_Unturned_CaptainSydney_Intrinsic.gml</script>
           <script>scripts\scr_heroability_Unturned_CaptainSydney_ActivateTarget.gml</script>
           <script>scripts\scr_heroability_RA3_PremierAnatolyIlychCherdenko_Activate.gml</script>
@@ -546,30 +591,35 @@
       <script>scripts\scr_ValidAttackSpot.gml</script>
       <script>scripts\scr_OverallValidAttackSpot.gml</script>
       <script>scripts\IsSPAtk.gml</script>
+      <script>scripts\IsBackUnit.gml</script>
+      <script>scripts\IsMiddleUnit.gml</script>
       <script>scripts\IsAbilityTrigger.gml</script>
       <script>scripts\IsHeroAbilityTrigger.gml</script>
       <script>scripts\IsSpellTrigger.gml</script>
+      <script>scripts\IsUnitFrozen.gml</script>
       <script>scripts\scr_ConBattlefieldSize.gml</script>
       <script>scripts\scr_ListVictimsByAttackersSPAtkTypes.gml</script>
       <script>scripts\IsForceAttackHolder.gml</script>
       <script>scripts\HasForceAttack.gml</script>
       <script>scripts\FindDamageAmount.gml</script>
       <script>scripts\FindDamageState.gml</script>
-      <script>scripts\GetMultiStatsString.gml</script>
-      <script>scripts\GetMultiStatsObject.gml</script>
-      <script>scripts\MultiStats_GetSum.gml</script>
-      <script>scripts\GetMultiStatsString_Spells.gml</script>
       <script>scripts\GetPointDeductionValue.gml</script>
       <script>scripts\GetIntakeMultiplier.gml</script>
       <script>scripts\IsMouseOverBattlefield.gml</script>
       <script>scripts\CanUseCardInHand.gml</script>
       <script>scripts\TeamColorOf.gml</script>
+      <scripts name="grp_multistats">
+        <script>scripts\GetMultiStatsString.gml</script>
+        <script>scripts\GetMultiStatsObject.gml</script>
+        <script>scripts\GetMultiStatsString_Spells.gml</script>
+        <script>scripts\MultiStats_GetSum.gml</script>
+        <script>scripts\HeroGetMultiStatsString.gml</script>
+      </scripts>
       <scripts name="grp_unused">
         <script>scripts\top_place_meeting.gml</script>
         <script>scripts\draw_BasicHealthbar.gml</script>
         <script>scripts\draw_battlefield_teamcolor.gml</script>
-        <script>scripts\script290.gml</script>
-        <script>scripts\script300.gml</script>
+        <script>scripts\scr_add_randomcards.gml</script>
       </scripts>
     </scripts>
     <script>scripts\draw_text_apollo.gml</script>

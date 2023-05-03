@@ -22,3 +22,5 @@ global.UnitDat_AbilityTrigger[argument0,0]=AbilityTrigger.Default
 global.UnitDat_AbilityTargetSelectCheck[argument0]=scr_ability_Checks_none
 global.UnitDat_AbilityTargetCheck[argument0,0]=scr_ability_Checks_none
 global.UnitDat_AbilityScript[argument0,0]=scr_ability_none
+
+global.UnitDat_UnitPreference[argument0]=UnitPreference.None

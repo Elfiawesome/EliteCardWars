@@ -52,6 +52,7 @@ IsAnimatorEmpty=false
             <kind>1</kind>
             <string>ds_list_destroy(AnimatingOrderList)
 ds_list_destroy(SynchronousOrderList)
+
 </string>
           </argument>
         </arguments>

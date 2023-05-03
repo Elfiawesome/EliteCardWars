@@ -9,7 +9,8 @@ for(var i=0;i<ds_list_size(global.NetworkObj.socketlist);i++){
     with(_con){
         for(var ii=0;ii<ds_list_size(Cardholderlist);ii++){
             with(Cardholderlist[| ii]){
-                if Pos!=3{
+            if !Stats[? "IsAbilityImmune"]{
+                if !IsBackUnit(Pos,other.Cardholderlist){
                     var msDmg=Stats[? "Multi_BurnDmg"];
                     var msDur=Stats[? "Multi_BurnDuration"];
                     msDmg[? _id]=5
@@ -17,6 +18,8 @@ for(var i=0;i<ds_list_size(global.NetworkObj.socketlist);i++){
                     player_con_CardholdersUpdateMultiStats()
                 }
                 GameEvent_cardholders_DealDamageAmt(id,atkr,5)
+                GameEvent_cardholders_AfterDamaged(id)
+            }
             }
         }
     }

@@ -15,6 +15,7 @@ if Turn>=0{
     ds_list_clear(global.NetworkObj.SelectedCardHolders_Ability)
     ds_list_clear(global.NetworkObj.SelectedCardHolders)
     
+    EndOfTurnPassives()
     //switching turn types
     if Turn<(array_length_1d(Turnstage)-1){
         Turn++
@@ -39,6 +40,7 @@ if Turn>=0{
             break;
         }
     }
+    //end of Game
     if !instance_exists(obj_GameEndAnnouncement){
     var _con=socket_to_instanceid[? mysocket]
     if !(ds_list_empty(_con.DeckList) && ds_list_empty(_con.SpellList)){//check there is a reason to draw

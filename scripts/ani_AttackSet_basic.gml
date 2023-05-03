@@ -50,8 +50,8 @@ with(animator){
     AnimatingOrderList[| n]=ani_move_lerp
     var tempMap=ds_map_create();
     tempMap[? "Object"]=Attacker.id
-    tempMap[? "x"]=Attacker.x
-    tempMap[? "y"]=Attacker.y
+    tempMap[? "x"]=Attacker.Homex
+    tempMap[? "y"]=Attacker.Homey
     tempMap[? "Amt"]=0.3
     AnimatingOrderListMap[| n]=json_encode_destroy(tempMap);n++
     

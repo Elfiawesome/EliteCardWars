@@ -8,7 +8,7 @@ for(var i=0;i<ds_list_size(global.NetworkObj.socketlist);i++){//list through all
             if _ch.CardID!=0 && _ch.Stats[? "Finalized_Hp"]>0{
                 var _l=ds_list_create()
                 for(var i3=0;i3<ds_list_size(Cardholderlist);i3++){
-                if Cardholderlist[| i3].CardID!=0 && Cardholderlist[| i3].Stats[? "AtkAlrdy"]=false && ds_list_find_index(_AlreadyAttackedCardsList,Cardholderlist[| i3])=-1{
+                if Cardholderlist[| i3].CardID!=0 && Cardholderlist[| i3].Stats[? "AtkLeft"]>0 && ds_list_find_index(_AlreadyAttackedCardsList,Cardholderlist[| i3])=-1{
                     //if (!HasForceAttack(_ch) && scr_ValidAttackSpot(Cardholderlist[| i3],_ch)) || (HasForceAttack(_ch) && IsForceAttackHolder(_ch)){
                     if scr_OverallValidAttackSpot(_ch,Cardholderlist[| i3]){
                         ds_list_add(_l,Cardholderlist[| i3])

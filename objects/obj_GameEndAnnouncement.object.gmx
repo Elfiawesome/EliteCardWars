@@ -132,11 +132,11 @@ switch(AnimationStage){
                 file_text_close(file);
             }
             }
-        }
         
         instance_destroy(global.NetworkObj)
         instance_destroy(obj_player_con)
         room_goto(rm_menu)
+        }
         instance_destroy()
     break;
 }

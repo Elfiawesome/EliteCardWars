@@ -255,6 +255,11 @@ for(var i=1;i&lt;(UnitID.UnitID_MAX);i++){
         _xlevel=0
         _curWorld=global.UnitDat_WorldType[i]
     }
+    //moving to a next line
+    if _xlevel=len{
+        _ylevel++
+        _xlevel=0
+    }
     var _sp=global.UnitDat_Sprite[i]
     var _im=global.UnitDat_Image[i]
     
@@ -262,11 +267,6 @@ for(var i=1;i&lt;(UnitID.UnitID_MAX);i++){
     var _y=y+150+_ygap*_ylevel+scrollbarY*100;
     _xlevel++
     
-    //moving to a next line
-    if _xlevel=len{
-        _ylevel++
-        _xlevel=0
-    }
     
     //selection/deselection
     var msx=device_mouse_x_to_gui(0)

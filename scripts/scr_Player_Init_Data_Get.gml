@@ -4,7 +4,7 @@ var _m = ds_map_create();
 _m[? "Name"]=inst.name
 _m[? "Team"]=inst.Team
 _m[? "Deck"]=ds_list_write(inst.DeckList)
-//_m[? "Spell"]=ds_list_write(inst.SpellList)
+_m[? "Spell"]=ds_list_write(inst.SpellList)
 _m[? "Hero"]=inst.PlayerHeroID
 
 _m[? "IsBot"]=inst.IsBot

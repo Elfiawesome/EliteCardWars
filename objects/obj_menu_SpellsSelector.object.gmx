@@ -69,7 +69,7 @@ draw_rectangle(x,y,x+view_wport[0],y+view_hport[0],false)
 draw_set_alpha(1)
 draw_set_color(c_white)
 
-var _curWorld=WorldType.Hexeria
+var _curWorld=WorldType.GenshinImpact
 var _StartOfNewWorld=true
 for(var i=1;i&lt;(SpellID.SpellID_MAX);i++){
     if global.SpellDat_WorldType[i]!=_curWorld{
@@ -242,7 +242,7 @@ var _ylevel=0
 var _xlevel=0
 var _ygap=270
 
-var _curWorld=WorldType.Hexeria
+var _curWorld=WorldType.GenshinImpact
 for(var i=1;i&lt;(SpellID.SpellID_MAX);i++){
     if global.SpellDat_WorldType[i]!=_curWorld{
         _ylevel+=1.2

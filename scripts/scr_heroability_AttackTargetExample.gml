@@ -17,7 +17,7 @@ if scr_ability_Checks_OnlyEnemy(vict,atkr){
     
     
     //Ability alrdy done
-    atkr.Stats[? "AbilityAlrdy"]=true
+    atkr.Stats[? "ActivateAbilityAlrdy"]=true
     atkr.Stats[? "AbilityCooldown"]=atkr.Stats[? "AbilityCooldownMax"]+1
     
     //remove from selected

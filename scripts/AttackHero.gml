@@ -35,7 +35,7 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
 
     
     //remove atkalrdy
-    AttackObj.Stats[? "AtkAlrdy"]=true
+    AttackObj.Stats[? "AtkLeft"]-=1
     ds_map_destroy(_m)
 }
 

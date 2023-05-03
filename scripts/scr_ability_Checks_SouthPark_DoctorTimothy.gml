@@ -7,7 +7,7 @@ var _r=false
 if atkr.Stats[? "AbilityCooldown"]=0 && atkr.Stats[? "AbilityAlrdy"]=false{
 if global.GameStage=GAMESTAGE.ATTACKINGTURN{
 if vict.CardID!=0 && vict.mysocket!=atkr.mysocket && stid[? vict.mysocket].Team!=stid[? atkr.mysocket].Team{
-    if vict.Pos=3{
+    if IsBackUnit(vict.Pos,stid[? vict.mysocket].Cardholderlist){
         _r=true
     }
 }

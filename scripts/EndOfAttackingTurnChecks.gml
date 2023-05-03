@@ -44,6 +44,8 @@ for(var i=0;i<ds_list_size(socketlist);i++){
                 for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;if _m[? k]=0{ds_list_add(_l,k);}}else{ds_list_add(_l,k);}};for(var _i=0;_i<ds_list_size(_l);_i++){ds_map_delete(_m,_l[| _i])};ds_list_clear(_l)
                 var _m=Stats[? "Multi_IsSpellsImmune"];
                 for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;if _m[? k]=0{ds_list_add(_l,k);}}else{ds_list_add(_l,k);}};for(var _i=0;_i<ds_list_size(_l);_i++){ds_map_delete(_m,_l[| _i])};ds_list_clear(_l)
+                var _m=Stats[? "Multi_IsAbilityImmune"];
+                for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;if _m[? k]=0{ds_list_add(_l,k);}}else{ds_list_add(_l,k);}};for(var _i=0;_i<ds_list_size(_l);_i++){ds_map_delete(_m,_l[| _i])};ds_list_clear(_l)
                 //reduce timer on burn and poison
                 var _m=Stats[? "Multi_BurnDuration"];var _n=Stats[? "Multi_BurnDmg"];
                 for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){if _m[? k]!=0{_m[? k]-=1;if _m[? k]=0{ds_list_add(_l,k);}}else{ds_list_add(_l,k);}};for(var _i=0;_i<ds_list_size(_l);_i++){ds_map_delete(_m,_l[| _i]);ds_map_delete(_n,_l[| _i])};ds_list_clear(_l)

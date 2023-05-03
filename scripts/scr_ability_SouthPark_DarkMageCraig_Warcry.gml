@@ -11,16 +11,18 @@ for(var i=0;i<ds_list_size(global.NetworkObj.socketlist);i++){
         for(var ii=0;ii<ds_list_size(Cardholderlist);ii++){
             var _cardholder=Cardholderlist[| ii]
             with(_cardholder){
-                var _ota=Stats[? "Multi_OtherAtkAmt"];
-                var _otd=Stats[? "Multi_OtherAtkDuration"];
-                if ds_map_exists(_ota,_id){
-                    _ota[? _id]+=-floor(Stats[? "Finalized_Atk"]/2)
-                    _otd[? _id]=2
-                }else{
-                    _ota[? _id]=-floor(Stats[? "Finalized_Atk"]/2)
-                    _otd[? _id]=2
+                if !Stats[? "IsAbilityImmune"]{
+                    var _ota=Stats[? "Multi_OtherAtkAmt"];
+                    var _otd=Stats[? "Multi_OtherAtkDuration"];
+                    if ds_map_exists(_ota,_id){
+                        _ota[? _id]+=-floor(Stats[? "Finalized_Atk"]/2)
+                        _otd[? _id]=2
+                    }else{
+                        _ota[? _id]=-floor(Stats[? "Finalized_Atk"]/2)
+                        _otd[? _id]=2
+                    }
+                    player_con_CardholdersUpdateMultiStats()
                 }
-                player_con_CardholdersUpdateMultiStats()
             }
         }
     }

@@ -466,7 +466,7 @@ switch(TutorialStage){
         var allatk=true
         var cardholder=con.Cardholderlist
         for(var i=0;i<ds_list_size(cardholder);i++){
-        if cardholder[| i].CardID!=0 && !cardholder[| i].Stats[? "AtkAlrdy"]{allatk=false;break;}
+        if cardholder[| i].CardID!=0 && cardholder[| i].Stats[? "AtkLeft"]>0{allatk=false;break;}
         }
         if !ds_list_empty(Server.SelectedCardHolders) || allatk{
             TutorialStage=15
@@ -513,7 +513,7 @@ switch(TutorialStage){
         var allatk=true
         var cardholder=con.Cardholderlist
         for(var i=0;i<ds_list_size(cardholder);i++){
-            if cardholder[| i].CardID!=0 && !cardholder[| i].Stats[? "AtkAlrdy"]{allatk=false;break;}
+            if cardholder[| i].CardID!=0 && cardholder[| i].Stats[? "AtkLeft"]>0{allatk=false;break;}
         }
         if allatk{
             TutorialStage=16
@@ -717,7 +717,7 @@ switch(TutorialStage){
         
         var cardholder=con.Cardholderlist
         var pos=0
-        for(var i=0;i<ds_list_size(cardholder);i++){if cardholder[| i].CardID!=0 && !cardholder[| i].Stats[? "AtkAlrdy"]{pos=i;break;}}
+        for(var i=0;i<ds_list_size(cardholder);i++){if cardholder[| i].CardID!=0 && cardholder[| i].Stats[? "AtkLeft"]>0{pos=i;break;}}
         var card=cardholder[| pos]
         var xscale=view_wport[0]/view_wview[0];
         var yscale=view_hport[0]/view_hview[0];
@@ -762,7 +762,7 @@ switch(TutorialStage){
         var atkcount=0//no of cards not yet attack
         var cardholder=con.Cardholderlist
         for(var i=0;i<ds_list_size(cardholder);i++){
-            if cardholder[| i].CardID!=0 && !cardholder[| i].Stats[? "AtkAlrdy"]{atkcount++}
+            if cardholder[| i].CardID!=0 && cardholder[| i].Stats[? "AtkLeft"]>0{atkcount++}
         }
         if atkcount=1{
             TutorialStage=27
@@ -836,7 +836,7 @@ switch(TutorialStage){
         var allatk=true
         var cardholder=con.Cardholderlist
         for(var i=0;i<ds_list_size(cardholder);i++){
-            if cardholder[| i].CardID!=0 && !cardholder[| i].Stats[? "AtkAlrdy"]{allatk=false;break;}
+            if cardholder[| i].CardID!=0 && cardholder[| i].Stats[? "AtkLeft"]>0{allatk=false;break;}
         }
         if botcon.Hero!=-1{
             if allatk && botcon.Hero.Stats[? "Hp"]<botcon.Hero.Stats[? "Base_Hp"]{
@@ -949,7 +949,7 @@ switch(TutorialStage){
     case 33:
         var cardholder=botcon.Cardholderlist
         var pos=0
-        for(var i=0;i<ds_list_size(cardholder);i++){if cardholder[| i].CardID!=0 && !cardholder[| i].Stats[? "AtkAlrdy"]{pos=i;break;}}
+        for(var i=0;i<ds_list_size(cardholder);i++){if cardholder[| i].CardID!=0 && cardholder[| i].Stats[? "AtkLeft"]>0{pos=i;break;}}
         var card=cardholder[| pos]
         var xscale=view_wport[0]/view_wview[0];
         var yscale=view_hport[0]/view_hview[0];
@@ -963,7 +963,7 @@ switch(TutorialStage){
         var atkcount=0
         var cardholder=con.Cardholderlist
         for(var i=0;i<ds_list_size(cardholder);i++){
-            if cardholder[| i].CardID!=0 && cardholder[| i].Stats[? "AtkAlrdy"]{atkcount++}
+            if cardholder[| i].CardID!=0 && cardholder[| i].Stats[? "AtkLeft"]=0{atkcount++}
         }
         if atkcount=1{
             TutorialStage=35
@@ -996,8 +996,8 @@ switch(TutorialStage){
             var cardholder=con.Cardholderlist
             for(var i=0;i<ds_list_size(cardholder);i++){
                 var _ch=cardholder[| i]
-                if _ch.CardID!=0 && _ch.Stats[? "AtkAlrdy"]{
-                    _ch.Stats[? "AtkAlrdy"]=false
+                if _ch.CardID!=0 && _ch.Stats[? "AtkLeft"]=0{
+                    _ch.Stats[? "AtkLeft"]=_ch.Stats[? "AtkMax"]
                 }
             }
         }
@@ -1017,7 +1017,7 @@ switch(TutorialStage){
         var allatk=true
         var cardholder=con.Cardholderlist
         for(var i=0;i<ds_list_size(cardholder);i++){
-            if cardholder[| i].CardID!=0 && !cardholder[| i].Stats[? "AtkAlrdy"]{allatk=false;break;}
+            if cardholder[| i].CardID!=0 && cardholder[| i].Stats[? "AtkLeft"]>0{allatk=false;break;}
         }
         if allatk{
             if BotHero!=-1 && BotHero.Stats[? "Hp"]<=0{
