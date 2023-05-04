@@ -484,33 +484,50 @@ var _height=sprite_get_height(spr_statuseffect)*_sc
 var _width=sprite_get_width(spr_statuseffect)*_sc
 var _x=x-sprite_get_width(sprite_index)*image_xscale/2-_width-5
 var _y=y-sprite_get_height(sprite_index)*image_yscale/2+20
-
-if Stats[? "IsFrozen"]&gt;0{
-    draw_sprite_ext(spr_statuseffect,0,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
-}
-if Stats[? "BurnDmg"]!=0{
-    draw_sprite_ext(spr_statuseffect,1,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
-}
-if Stats[? "PoisonDmg"]!=0{
-    draw_sprite_ext(spr_statuseffect,2,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+enum StatusEffectID{
+    Frozen=0,
+    Burn,
+    Poison,
+    Immune,
+    SPImmune,
+    BAImmune,
+    ForceAttack,
+    DamageIntakeMultiplier,
+    DamageOutputMultiplier,
 }
 if Stats[? "IsImmune"]&gt;0{
-    draw_sprite_ext(spr_statuseffect,3,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+    draw_sprite_ext(spr_statuseffect,StatusEffectID.Immune,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
 }
 if Stats[? "IsSPImmune"]&gt;0{
-    draw_sprite_ext(spr_statuseffect,4,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+    draw_sprite_ext(spr_statuseffect,StatusEffectID.SPImmune,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
 }
 if Stats[? "IsBAImmune"]&gt;0{
-    draw_sprite_ext(spr_statuseffect,5,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+    draw_sprite_ext(spr_statuseffect,StatusEffectID.BAImmune,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+}
+if Stats[? "IsFrozen"]&gt;0{
+    draw_sprite_ext(spr_statuseffect,StatusEffectID.Frozen,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+
+}
+if Stats[? "BurnDmg"]!=0{
+    _mii=Stats[? "Multi_BurnDmg"]
+    for(var k=ds_map_find_first(_mii);!is_undefined(k);k=ds_map_find_next(_mii,k)){
+    draw_sprite_ext(spr_statuseffect,StatusEffectID.Burn,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+    }
+}
+if Stats[? "PoisonDmg"]!=0{
+    _mii=Stats[? "Multi_PoisonDmg"]
+    for(var k=ds_map_find_first(_mii);!is_undefined(k);k=ds_map_find_next(_mii,k)){
+    draw_sprite_ext(spr_statuseffect,StatusEffectID.Poison,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+    }
 }
 if global.NetworkObj.socket_to_instanceid[? mysocket].Hero.Stats[? "ForceAttackHolder"]=Pos{
-    draw_sprite_ext(spr_statuseffect,6,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+    draw_sprite_ext(spr_statuseffect,StatusEffectID.ForceAttack,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
 }
 if Stats[? "DamageIntakeMultiplier"]!=1{
-    draw_sprite_ext(spr_statuseffect,7,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+    draw_sprite_ext(spr_statuseffect,StatusEffectID.DamageIntakeMultiplier,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
 }
 if Stats[? "DamageOutputMultiplier"]!=1{
-    draw_sprite_ext(spr_statuseffect,8,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+    draw_sprite_ext(spr_statuseffect,StatusEffectID.DamageOutputMultiplier,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
 }
 
 </string>

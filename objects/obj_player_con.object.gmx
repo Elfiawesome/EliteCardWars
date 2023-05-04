@@ -98,6 +98,7 @@ BattlefieldWidth=0
 BattlefieldHeight=0
 
 CommandOverlay=false
+CommandText=""
 
 CanEndTurn=true//specifically used for tutorials
 
@@ -215,17 +216,16 @@ if Hero!=-1{with(Hero){instance_destroy()}}
           <argument>
             <kind>1</kind>
             <string>///Managing of Hand Cards
-if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating &amp;&amp; ds_list_empty(GUIObjectOrder) &amp;&amp; !global.IsSettingsOpen{
+if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating &amp;&amp; ds_list_empty(GUIObjectOrder) &amp;&amp; !global.IsSettingsOpen &amp;&amp; !CommandOverlay{
 if keyboard_check_pressed(vk_enter){
     //GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
     //var _c1=GameEvent_draw_specific_card(real(get_string("Enter the unit ID","0")),1)
     Points+=200
-    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_BountyHunterKyle,0)
-    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_EnforcerJimmy,0)
-    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_MrHankey,0)
-    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_ChaosHamsters,0)
-    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_Tupperware,0)//CHECK THIS?
-    var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_DesolatorAirstrike,1)
+    var _c1=GameEvent_draw_specific_card(UnitID.RedAlert3_MirageTank,0)
+    //var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_EnforcerJimmy,0)
+    //var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_MrHankey,0)
+    //var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_ChaosHamsters,0)
+    var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_Cryogeddon,1)
 }
 if global.SelectedCard=noone{
     if position_meeting(mouse_x,mouse_y,obj_card){
@@ -369,7 +369,7 @@ MenuButtonPressed[2]=false
           <argument>
             <kind>1</kind>
             <string>///When Your Turn
-if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating{
+if IsLocal &amp;&amp; global.IsGame &amp;&amp; !IsSpectating &amp;&amp; !CommandOverlay{
 if ds_list_empty(GUIObjectOrder) &amp;&amp; !global.IsSettingsOpen{
     //Moving on
     player_con_MovingTurn()
@@ -1479,6 +1479,48 @@ if global.NetworkObj.Turnstage[global.NetworkObj.Turn]=global.NetworkObj.mysocke
 }
 
 if IsEndTurnButtonDelay&gt;0{IsEndTurnButtonDelay--}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if IsLocal{
+if CommandOverlay{
+    draw_set_alpha(0.5)
+    draw_set_color(c_black)
+    draw_rectangle(0,0,view_wport[0],view_hport[0],false)
+    draw_set_alpha(1)
+    CommandText=keyboard_string
+    draw_set_color(c_white)
+    draw_text(20,20,CommandText)
+    if keyboard_check_pressed(vk_enter){
+        with(global.NetworkObj){
+            CommandSubmit(other.CommandText)
+        }
+        CommandOverlay=false
+    }
+}
+if keyboard_check_pressed(191){
+    CommandOverlay=!CommandOverlay
+    CommandText=""
+    keyboard_string = ""
+}
+}
 </string>
           </argument>
         </arguments>

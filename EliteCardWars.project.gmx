@@ -322,6 +322,7 @@
         <script>scripts\PartTypeSetup_HaloBall.gml</script>
         <script>scripts\PartTypeSetup_BlueLaser.gml</script>
       </scripts>
+      <script>scripts\draw_lightning.gml</script>
     </scripts>
     <scripts name="grp_game">
       <scripts name="grp_draw_functions">
@@ -620,6 +621,7 @@
         <script>scripts\draw_BasicHealthbar.gml</script>
         <script>scripts\draw_battlefield_teamcolor.gml</script>
         <script>scripts\scr_add_randomcards.gml</script>
+        <script>scripts\CommandSubmit.gml</script>
       </scripts>
     </scripts>
     <script>scripts\draw_text_apollo.gml</script>
