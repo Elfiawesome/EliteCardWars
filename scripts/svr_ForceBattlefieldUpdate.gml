@@ -35,6 +35,9 @@ _Mainmap[? "SpellsIdentifier"]=global.SpellsIdentifier
 _Mainmap[? "UnitsIdentifier"]=global.UnitsIdentifier
 _Mainmap[? "CardsIdentifier"]=global.CardsIdentifier
 
+//set current turn
+_Mainmap[? "Turn"]=Turn
+
 var _mapstr=json_encode_destroy(_Mainmap)
 
 for(var i=0;i<ds_list_size(socketlist);i++){

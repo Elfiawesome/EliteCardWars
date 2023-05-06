@@ -3,7 +3,7 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="7" name="datafiles">
+  <datafiles number="9" name="datafiles">
     <datafile>
       <name>ExecuteShell.dll</name>
       <exists>-1</exists>

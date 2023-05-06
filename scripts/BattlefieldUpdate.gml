@@ -26,4 +26,6 @@ for(var k=ds_map_find_first(_map);!is_undefined(k);k=ds_map_find_next(_map,k)){
 global.SpellsIdentifier=_Mainmap[? "SpellsIdentifier"]
 global.UnitsIdentifier=_Mainmap[? "UnitsIdentifier"]
 global.CardsIdentifier=_Mainmap[? "CardsIdentifier"]
+//set turns
+if Turn<array_length_1d(Turnstage){Turn=_Mainmap[? "Turn"]}
 ds_map_destroy(_Mainmap)
