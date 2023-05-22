@@ -221,11 +221,11 @@ if keyboard_check_pressed(vk_enter){
     //GameEvent_draw_specific_card(irandom_range(1,UnitID.UnitID_MAX-1))
     //var _c1=GameEvent_draw_specific_card(real(get_string("Enter the unit ID","0")),1)
     Points+=200
-    var _c1=GameEvent_draw_specific_card(UnitID.RedAlert3_MirageTank,0)
-    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_EnforcerJimmy,0)
+    var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_FrontierBradely,0)
+    //var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_EnforcerJimmy,0)
     //var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_MrHankey,0)
     //var _c1=GameEvent_draw_specific_card(UnitID.SouthPark_ChaosHamsters,0)
-    var _c1=GameEvent_draw_specific_card(SpellID.RedAlert3_Cryogeddon,1)
+    var _c1=GameEvent_draw_specific_card(SpellID.SouthPark_MintberryCrunchCereal,1)
 }
 if global.SelectedCard=noone{
     if position_meeting(mouse_x,mouse_y,obj_card){

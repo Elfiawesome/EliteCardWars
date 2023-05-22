@@ -410,6 +410,10 @@
             <script>scripts\scr_ability_SouthPark_EnforcerJimmy_Intrinsic.gml</script>
             <script>scripts\scr_ability_SouthPark_Fastpass_Damaging.gml</script>
             <script>scripts\scr_ability_SouthPark_Firkle_Deathwish.gml</script>
+            <script>scripts\scr_ability_SouthPark_FrontierBradely_Warcry.gml</script>
+            <script>scripts\scr_ability_SouthPark_MintberryCrunch_Warcry.gml</script>
+            <script>scripts\scr_ability_SouthPark_MintberryCrunch_AfterDamaged.gml</script>
+            <script>scripts\scr_ability_SouthPark_MintberryCrunch_Intrinsic.gml</script>
             <script>scripts\scr_ability_SouthPark_Henrietta_FriendDeath.gml</script>
             <script>scripts\scr_ability_SouthPark_HermesKenny_Deathwish.gml</script>
             <script>scripts\scr_ability_SouthPark_InuitKenny_Deathwish.gml</script>
@@ -498,6 +502,7 @@
         <script>scripts\scr_spell_RedAlert3_ObservationPost_WhenCasted.gml</script>
         <script>scripts\scr_spell_RedAlert3_OrbitalDownpour_StartAndEndOfTurn.gml</script>
         <script>scripts\scr_spell_RedAlert3_PointDefenseDrones_WhenCasted.gml</script>
+        <script>scripts\scr_spell_SouthPark_MintberryCrunchCereal_WhenCasted.gml</script>
         <script>scripts\scr_spell_SouthPark_UnholyCombustion_StartOfBattle.gml</script>
         <script>scripts\scr_spell_Unturned_Bandage_WhenCasted.gml</script>
         <script>scripts\scr_spell_Unturned_FullMoon_WhenCasted.gml</script>

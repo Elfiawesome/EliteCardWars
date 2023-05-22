@@ -231,6 +231,21 @@ var Cur=UnitID.SouthPark_Firkle
 scr_units_init_func(Cur,"Firkle",_wt,10,5,6,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Deathwish
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_Firkle_Deathwish
+
+var Cur=UnitID.SouthPark_FrontierBradely
+scr_units_init_func(Cur,"Frontier Bradely",_wt,14,10,19,spr_cards,Cur-1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Warcry
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_FrontierBradely_Warcry
+
+var Cur=UnitID.SouthPark_MintberryCrunch
+scr_units_init_func(Cur,"Frontier Bradely",_wt,40,15,29,spr_cards_special,1)
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Warcry
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_SouthPark_MintberryCrunch_Warcry
+global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.AfterDamaged
+global.UnitDat_AbilityScript[Cur,1]=scr_ability_SouthPark_MintberryCrunch_AfterDamaged
+global.UnitDat_AbilityTrigger[Cur,2]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,2]=scr_ability_SouthPark_MintberryCrunch_Intrinsic
+
 var Cur=UnitID.SouthPark_Henrietta//when cards die, they respawn but the card is still in the dead card deck
 scr_units_init_func(Cur,"Henrietta",_wt,16,10,14,spr_cards,Cur-1)
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.FriendDeath

@@ -14,6 +14,7 @@ enum SpellID{
     RedAlert3_ObservationPost,
     RedAlert3_OrbitalDownpour,
     RedAlert3_PointDefenseDrones,
+    SouthPark_MintberryCrunchCereal,
     SouthPark_UnholyCombustion,
     Unturned_Bandage,
     Unturned_FullMoon,
@@ -134,6 +135,12 @@ scr_spells_init_func(Cur,"Observation Post",_wt,4,spr_spells,Cur-1,SpellType.Con
 global.SpellDat_CastCheck[Cur]=scr_spells_Checks_OnlyAllies
 global.SpellDat_SpellTrigger[Cur,0]=SpellTrigger.WhenCasted
 global.SpellDat_SpellScript[Cur,0]=scr_spell_RedAlert3_PointDefenseDrones_WhenCasted
+
+var Cur=SpellID.SouthPark_MintberryCrunchCereal//Consumable
+scr_spells_init_func(Cur,"Mintberry Crunch Cereal",_wt,11,spr_spells,Cur-1,SpellType.Consumable,SpellCastType.UnitTarget)
+global.SpellDat_CastCheck[Cur]=scr_spells_Checks_OnlyAllies
+global.SpellDat_SpellTrigger[Cur,0]=SpellTrigger.WhenCasted
+global.SpellDat_SpellScript[Cur,0]=scr_spell_SouthPark_MintberryCrunchCereal_WhenCasted
 
 var _wt=WorldType.SouthPark
 var Cur=SpellID.SouthPark_UnholyCombustion//Weather

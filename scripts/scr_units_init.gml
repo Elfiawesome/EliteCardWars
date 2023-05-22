@@ -77,6 +77,7 @@ enum UnitID{
     SouthPark_EnforcerJimmy,
     SouthPark_Fastpass,
     SouthPark_Firkle,
+    SouthPark_FrontierBradely,
     SouthPark_Henrietta,
     SouthPark_HermesKenny,
     SouthPark_IncanCraig,
@@ -120,6 +121,7 @@ enum UnitID{
     
     //unobtainables
     GenshinImpact_Shouki_no_Kami_the_Prodigal,
+    SouthPark_MintberryCrunch,
 }
 enum HeroID{
     FarCry6_AntonCastillo=1,

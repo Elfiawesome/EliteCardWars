@@ -93,7 +93,7 @@ if mouse_wheel_up(){
 
 //exiting button
 if AnimationStage!=0{
-if keyboard_check_pressed(vk_escape) || mouse_check_button_pressed(mb_right) || mouse_check_button_pressed(mb_left) || is_undefined(Cardholder){
+if keyboard_check_pressed(vk_escape) || mouse_check_button_pressed(mb_right) || mouse_check_button_pressed(mb_left) || is_undefined(Cardholder) || !instance_exists(Cardholder){
     ds_list_delete(ControlParent.GUIObjectOrder,0)
     AnimationStage=10
 }
