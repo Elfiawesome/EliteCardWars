@@ -111,7 +111,7 @@ global.PlayerOnlineName=choose(
 )
 //settings
 global.IsSpeedrun=false//false
-global.Version="0.0.1"
+global.Version="0.0.2"
 scr_units_init()
 //network settings
 global.TargetNetworkType=network_socket_tcp
@@ -140,18 +140,22 @@ if !global.IsSpeedrun{
         buffer_delete(buffer)
         //correct file?
         var _m=json_decode(_string)
-        
-        //reading Decklist
-        _h=_m[? "Hero"]
-        if !is_undefined(_h){global.PlayerHero=_h}
-        //reading Decklist
-        _l=_m[? "DeckList"]
-        if !is_undefined(_l){ds_list_copy(global.PlayerDeck,_l)}
-        //reading SpellList
-        _l=_m[? "SpellsList"]
-        if !is_undefined(_l){ds_list_copy(global.PlayerSpells,_l)}
-        
-        ds_map_destroy(_m)
+        if _m[? "Version"]=global.Version{
+            //immediately load in the file
+            scr_menu_load_deckfile_v002(_m)
+            ds_map_destroy(_m)
+        }else{
+            //convert version till the version is the same
+            scr_menu_convert_001_to_002(_m)
+            ds_map_destroy(_m)
+            //Read the new file
+            var buffer=buffer_load(_dir)
+            var _string=buffer_read(buffer,buffer_string)
+            buffer_delete(buffer)
+            var _m=json_decode(_string)
+            scr_menu_load_deckfile_v002(_m)
+            ds_map_destroy(_m)
+        }
     }
     
     var _dir=working_directory+"PlayerInfo.txt"

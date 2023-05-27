@@ -24,7 +24,7 @@ global.HeroDat_AbilityTrigger[Cur,1]=AbilityTrigger.UnitSummoned
 global.HeroDat_AbilityScript[Cur,1]=scr_heroability_CardWars_KingElfiyan_UnitSummoned
 
 var Cur=HeroID.CardWars_UniversalElfiyan
-scr_hero_init_func(Cur,"Universal Elfiyan",10,0,spr_Heroes,Cur-1)
+scr_hero_init_func(Cur,"Universal Elfiyan",14,0,spr_Heroes,Cur-1)
 global.HeroDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
 global.HeroDat_AbilityScript[Cur,0]=scr_heroability_CardWars_UniversalElfiyan_Intrinsic
 

@@ -590,7 +590,15 @@
         </scripts>
       </scripts>
       <scripts name="grp_menu">
-        <script>scripts\scr_menu_update_deckfile.gml</script>
+        <scripts name="grp_v001">
+          <script>scripts\scr_menu_update_deckfile_v001.gml</script>
+          <script>scripts\scr_menu_load_deckfile_v001.gml</script>
+        </scripts>
+        <scripts name="grp_v002">
+          <script>scripts\scr_menu_convert_001_to_002.gml</script>
+          <script>scripts\scr_menu_update_deckfile_v002.gml</script>
+          <script>scripts\scr_menu_load_deckfile_v002.gml</script>
+        </scripts>
         <script>scripts\scr_menu_button_draw_highlight.gml</script>
         <script>scripts\scr_menu_button_draw_highlight_tabstyle.gml</script>
       </scripts>
