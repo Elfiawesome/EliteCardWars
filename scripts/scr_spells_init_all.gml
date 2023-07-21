@@ -136,13 +136,13 @@ global.SpellDat_CastCheck[Cur]=scr_spells_Checks_OnlyAllies
 global.SpellDat_SpellTrigger[Cur,0]=SpellTrigger.WhenCasted
 global.SpellDat_SpellScript[Cur,0]=scr_spell_RedAlert3_PointDefenseDrones_WhenCasted
 
+var _wt=WorldType.SouthPark
 var Cur=SpellID.SouthPark_MintberryCrunchCereal//Consumable
 scr_spells_init_func(Cur,"Mintberry Crunch Cereal",_wt,11,spr_spells,Cur-1,SpellType.Consumable,SpellCastType.UnitTarget)
 global.SpellDat_CastCheck[Cur]=scr_spells_Checks_OnlyAllies
 global.SpellDat_SpellTrigger[Cur,0]=SpellTrigger.WhenCasted
 global.SpellDat_SpellScript[Cur,0]=scr_spell_SouthPark_MintberryCrunchCereal_WhenCasted
 
-var _wt=WorldType.SouthPark
 var Cur=SpellID.SouthPark_UnholyCombustion//Weather
 scr_spells_init_func(Cur,"Unholy Combustion",_wt,20,spr_spells,Cur-1,SpellType.Weather,SpellCastType.UnitTarget)
 global.SpellDat_CastCheck[Cur]=scr_spells_Checks_OnlyEnemies
@@ -157,7 +157,7 @@ global.SpellDat_CastCheck[Cur]=scr_spells_Checks_OnlyAllies
 global.SpellDat_SpellTrigger[Cur,0]=SpellTrigger.WhenCasted
 global.SpellDat_SpellScript[Cur,0]=scr_spell_Unturned_Bandage_WhenCasted
 var Cur=SpellID.Unturned_FullMoon//Consumable
-scr_spells_init_func(Cur,"Bandage",_wt,5,spr_spells,Cur-1,SpellType.Consumable,SpellCastType.BattlefieldTarget)
+scr_spells_init_func(Cur,"Full Moon",_wt,5,spr_spells,Cur-1,SpellType.Consumable,SpellCastType.BattlefieldTarget)
 global.SpellDat_CastCheck[Cur]=scr_spellls_Check_AlliesTeam
 global.SpellDat_SpellTrigger[Cur,0]=SpellTrigger.WhenCasted
 global.SpellDat_SpellScript[Cur,0]=scr_spell_Unturned_FullMoon_WhenCasted

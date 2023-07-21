@@ -72,7 +72,7 @@ carddisplayimg=irandom_range(1,UnitID.UnitID_MAX)
 carddisplaytype=0
 carddisplaystage=0
 
-NewsText="News#Genshin &amp; Hero update v1.0.6#View PatchNotes"
+NewsText="News#The Spells update v1.0.7#View PatchNotes"
 
 </string>
           </argument>
@@ -580,7 +580,7 @@ draw_text_transformed(_curx+bw/2,_cury+bh/2,"Deck",7/9,7/9,0)
 
 draw_set_valign(fa_bottom)
 draw_set_halign(fa_right)
-draw_text(view_wport[0],view_hport[0],"v1.0.6")
+draw_text(view_wport[0],view_hport[0],"v1.0.7 Beta")
 draw_set_valign(fa_top)
 draw_set_halign(fa_left)
 /*

@@ -29,7 +29,7 @@ global.HeroDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
 global.HeroDat_AbilityScript[Cur,0]=scr_heroability_CardWars_UniversalElfiyan_Intrinsic
 
 var Cur=HeroID.CardWars_EngineerPatrick
-scr_hero_init_func(Cur,"Engineer Patrick",10,0,spr_Heroes,Cur-1)
+scr_hero_init_func(Cur,"Engineer Patrick",14,0,spr_Heroes,Cur-1)
 global.HeroDat_Slots[Cur]=6
 
 var Cur=HeroID.CardWars_HackerPatrick

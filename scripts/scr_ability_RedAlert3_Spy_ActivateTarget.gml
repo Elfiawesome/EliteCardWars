@@ -3,7 +3,7 @@ var MapStr=argument0;
 var vict=MapStr[? "Victim"]
 var atkr=MapStr[? "Attacker"]
 var stid=global.NetworkObj.socket_to_instanceid
-if !vict.Stats[? "IsAbilityImmune"]{
+if !vict.Stats[? "IsAbilityImmune"] && vict.Stats[? "IsCheezable"]{
     //run animation of ability
     var victimList=ds_list_create()
     ds_list_add(victimList,global.NetworkObj.socket_to_instanceid[? vict.mysocket].Cardholderlist[| vict.Pos])

@@ -7,8 +7,14 @@ if _con.Team != _mycon.Team{
     with(MapStr){
         var _ota=Stats[? "Multi_OtherAtkAmt"];
         var _otd=Stats[? "Multi_OtherAtkDuration"];
-        _ota[? _id]=-floor(Stats[? "Finalized_Atk"]/2)
+        _ota[? _id]=-floor(Stats[? "Finalized_Atk"]/5)
         _otd[? _id]=3
+        
+        var _ota=Stats[? "Multi_OtherHpAmt"];
+        var _otd=Stats[? "Multi_OtherHpDuration"];
+        _ota[? _id]=-floor(Stats[? "Finalized_Hp"]/5)
+        _otd[? _id]=3
+        
         player_con_CardholdersUpdateMultiStats()
     }
 }

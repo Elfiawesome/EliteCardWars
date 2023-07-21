@@ -17,5 +17,8 @@ switch(_Immune){
     case 3:
         return 0
     break;
+    case 4:
+        return 0
+    break;
 }
 

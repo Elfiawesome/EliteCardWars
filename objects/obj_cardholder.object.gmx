@@ -93,6 +93,11 @@ var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsSpellsImmune",m);
 Stats[? "IsSpellsImmune"]=0
 var m=ds_map_create();ds_map_add_map(Stats,"Multi_IsAbilityImmune",m);
 Stats[? "IsAbilityImmune"]=0
+//Dodge
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_DodgeAmt",m);
+var m=ds_map_create();ds_map_add_map(Stats,"Multi_DodgeDur",m);
+Stats[? "DodgeAmt"]=0
+
 //status effects
 var m=ds_map_create();ds_map_add_map(Stats,"Multi_BurnDmg",m);
 Stats[? "BurnDmg"]=0
@@ -494,6 +499,7 @@ enum StatusEffectID{
     ForceAttack,
     DamageIntakeMultiplier,
     DamageOutputMultiplier,
+    Dodge,
 }
 if Stats[? "IsImmune"]&gt;0{
     draw_sprite_ext(spr_statuseffect,StatusEffectID.Immune,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
@@ -528,6 +534,12 @@ if Stats[? "DamageIntakeMultiplier"]!=1{
 }
 if Stats[? "DamageOutputMultiplier"]!=1{
     draw_sprite_ext(spr_statuseffect,StatusEffectID.DamageOutputMultiplier,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+}
+
+if Stats[? "DodgeAmt"]&gt;0{
+    repeat(Stats[? "DodgeAmt"]){
+        draw_sprite_ext(spr_statuseffect,StatusEffectID.Dodge,_x,_y+_offset,_sc,_sc,0,c_white,1);_offset+=_height
+    }
 }
 
 </string>
@@ -572,8 +584,19 @@ if Stats[? "SpreadAtk"] || Stats[? "Splash_Atk"]{
     draw_sprite_ext(spr_AttackType,3,_x,_y,0.03,0.03,0,c_white,1)
 }
 
-
-
+/*
+var _m=Stats[? "Multi_DodgeDur"];var _n=Stats[? "Multi_DodgeAmt"];
+if !ds_map_empty(_m){
+    var i=0
+    draw_set_color(c_black)
+    draw_text(x,y-40,Stats[? "DodgeAmt"])
+    draw_text(x,y-20,"Dur: Amt")
+    for(var k=ds_map_find_first(_m);!is_undefined(k);k=ds_map_find_next(_m,k)){
+        draw_text(x,y+i*20,string(_m[? k]) + ": " + string(_n[? k]))
+        i+=1
+    }
+    draw_set_color(c_white)
+}
 </string>
           </argument>
         </arguments>

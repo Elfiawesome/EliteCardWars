@@ -26,6 +26,15 @@ _m=Stats[? "Multi_IsSpellsImmune"]
 if !ds_map_empty(_m){Stats[? "IsSpellsImmune"]=1}else{Stats[? "IsSpellsImmune"]=0}
 _m=Stats[? "Multi_IsAbilityImmune"]
 if !ds_map_empty(_m){Stats[? "IsAbilityImmune"]=1}else{Stats[? "IsAbilityImmune"]=0}
+//Dodge
+var dmg=0
+var _m=Stats[? "Multi_DodgeDur"];var _n=Stats[? "Multi_DodgeAmt"];
+if !ds_map_empty(_m){
+    for(var k=ds_map_find_last(_m);!is_undefined(k);k=ds_map_find_previous(_m,k)){
+        if _n[? k]>=1{dmg+=_n[? k]}else{ds_map_delete(_n,k);ds_map_delete(_m,k);}
+    }
+}
+Stats[? "DodgeAmt"]=dmg;
 
 //Burn & Poison Dmg
 var dmg=0;

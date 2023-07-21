@@ -18,16 +18,16 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
     //deduction of health
     for(var ii=0;ii<ds_list_size(_list);ii+=1){
         with(_list[| ii]){
+            //damage numbers
+            var _m=ds_map_create();
+            _m[? "Object"]=id
+            _m[? "DamageNumber"]=FindDamageAmount(AttackObj.Stats[? "Finalized_Atk"],AttackObj,id)
+            ds_list_add(_VictList,_m)
+            ds_list_mark_as_map(_VictList,ds_list_size(_VictList)-1)
             //execute Dealing Damage Event
             GameEvent_cardholders_DealDamage(id,AttackObj)
             //execute Damaged Event
             GameEvent_cardholders_Damaged(AttackObj)
-            //damage numbers
-            var _m=ds_map_create();
-            _m[? "Object"]=id
-            _m[? "DamageNumber"]=FindDamageAmount(AttackObj.Stats[? "Finalized_Atk"],AttackObj,id)//(AttackObj.Stats[? "Finalized_Atk"]*GetIntakeMultiplier(AttackObj,id)-id.Stats[? "Def"])
-            ds_list_add(_VictList,_m)
-            ds_list_mark_as_map(_VictList,ds_list_size(_VictList)-1)
         }
     }
     //Splash Damage
@@ -35,16 +35,16 @@ for(var i=0;i<ds_list_size(AttackingList);i++){
         for(var ii=0;ii<ds_list_size(VictimCon.Cardholderlist);ii++){
             if VictimObj!=VictimCon.Cardholderlist[| ii]{
                 with(VictimCon.Cardholderlist[| ii]){
-                //execute Dealing Damage Event
-                GameEvent_cardholders_DealSplashDamage(id,AttackObj)
-                //execute Damaged Event
-                GameEvent_cardholders_Damaged(AttackObj)
-                ds_list_add(_list,id)
                 //damage numbers
                 var _m=ds_map_create();
                 _m[? "Object"]=id
                 _m[? "DamageNumber"]=FindDamageAmount(AttackObj.Stats[? "SplashAtk"],AttackObj,id)//(AttackObj.Stats[? "SplashAtk"]*GetIntakeMultiplier(AttackObj,id)-id.Stats[? "Def"])
                 ds_list_add(_VictList,_m);ds_list_mark_as_map(_VictList,ds_list_size(_VictList)-1)
+                //execute Dealing Damage Event
+                GameEvent_cardholders_DealSplashDamage(id,AttackObj)
+                //execute Damaged Event
+                GameEvent_cardholders_Damaged(AttackObj)
+                ds_list_add(_list,id)
                 }
             }
         }

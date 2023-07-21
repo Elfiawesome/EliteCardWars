@@ -468,8 +468,11 @@ global.UnitDat_AbilityTrigger[Cur,1]=AbilityTrigger.Activate
 global.UnitDat_AbilityScript[Cur,1]=scr_ability_GenshinImpact_Shouki_no_Kami_the_Prodigal_Activate
 global.UnitDat_CooldownMax[Cur]=10
 
-var Cur=UnitID.GenshinImpact_Venti//Need
+var Cur=UnitID.GenshinImpact_Venti
 scr_units_init_func(Cur,"Venti",_wt,15,10,14,spr_cards,Cur-1);
+global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
+global.UnitDat_AbilityScript[Cur,0]=scr_ability_GenshinImpact_Venti_Intrinsic
+global.UnitDat_CooldownMax[Cur]=2
 
 var Cur=UnitID.GenshinImpact_Zhongli
 scr_units_init_func(Cur,"Zhongli",_wt,40,18,22,spr_cards,Cur-1);

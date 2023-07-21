@@ -455,6 +455,7 @@
             <script>scripts\scr_ability_GenshinImpact_Shouki_no_Kami_the_Prodigal_Damaging.gml</script>
             <script>scripts\scr_ability_GenshinImpact_Shouki_no_Kami_the_Prodigal_Activate.gml</script>
             <script>scripts\scr_ability_GenshinImpact_Zhongli_Intrinsic.gml</script>
+            <script>scripts\scr_ability_GenshinImpact_Venti_Intrinsic.gml</script>
           </scripts>
           <scripts name="grp_raids">
             <scripts name="grp_VaultOfGlass">
