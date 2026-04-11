@@ -1,5 +1,6 @@
 ///scr_ability_GenshinImpact_Venti_Intrinsic()
-if Stats[? "AbilityCooldown"]=0{
+//if Stats[? "AbilityCooldown"]=0
+{
     var _id=GetMultiStatsString(id) 
     var mDA=Stats[? "Multi_DodgeAmt"];
     var mDD=Stats[? "Multi_DodgeDur"];
@@ -10,6 +11,6 @@ if Stats[? "AbilityCooldown"]=0{
         mDA[? _id]=1
         mDD[? _id]=-1
     }
-    Stats[? "AbilityCooldown"]=Stats[? "AbilityCooldownMax"]
+    //Stats[? "AbilityCooldown"]=Stats[? "AbilityCooldownMax"]
     Stats[? "AbilityAlrdy"]=true
 }

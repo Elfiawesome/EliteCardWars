@@ -478,6 +478,6 @@ var Cur=UnitID.GenshinImpact_Zhongli
 scr_units_init_func(Cur,"Zhongli",_wt,40,18,22,spr_cards,Cur-1);
 global.UnitDat_AbilityTrigger[Cur,0]=AbilityTrigger.Intrinsic
 global.UnitDat_AbilityScript[Cur,0]=scr_ability_GenshinImpact_Zhongli_Intrinsic
-global.UnitDat_CooldownMax[Cur]=5
+global.UnitDat_CooldownMax[Cur]=3//5
 
 scr_units_init_raidunits()

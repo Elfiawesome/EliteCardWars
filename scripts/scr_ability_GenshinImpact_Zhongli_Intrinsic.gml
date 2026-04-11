@@ -7,7 +7,7 @@ if Stats[? "AbilityCooldown"]=0{
             with(Cardholderlist[| i]){
                 var mDA=Stats[? "Multi_DefAmt"];
                 var mDD=Stats[? "Multi_DefDuration"];
-                mDA[? _id]=15
+                mDA[? _id]=20//15
                 mDD[? _id]=2
             }
         }
